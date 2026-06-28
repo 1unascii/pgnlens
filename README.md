@@ -94,6 +94,19 @@ npm run dev
 
 React runs at http://localhost:5173
 
+### Frontend Production Build
+
+In production, there is no Vite dev server. Instead, build the
+frontend into static files and let Django/Apache serve them:
+
+```bash
+cd frontend
+npm run build
+```
+
+This compiles React into static HTML/CSS/JS in `frontend/dist/`.
+No hot reload, no dev server — just optimized files ready to deploy.
+
 ## Vite Proxy
 
 API requests from the frontend are proxied to Django.
