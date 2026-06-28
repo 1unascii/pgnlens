@@ -26,8 +26,6 @@ Django runs at http://localhost:8002
 
 ```bash
 npm create vite@latest frontend -- --template react-ts
-cd frontend
-npm run dev
 ```
 
 The dev server launches automatically after creation.
