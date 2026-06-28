@@ -1,0 +1,7 @@
+journal/
+SETUP.txt
+db.sqlite3
+*.pyc
+__pycache__/
+staticfiles/
+frontend/node_modules/
