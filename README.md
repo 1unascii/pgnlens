@@ -30,6 +30,14 @@ cd frontend
 npm run dev
 ```
 
+The dev server launches automatically after creation.
+To relaunch in a new terminal:
+
+```bash
+cd frontend
+npm run dev
+```
+
 React runs at http://localhost:5173
 
 ### Vite Proxy
