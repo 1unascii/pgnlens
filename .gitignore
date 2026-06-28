@@ -1,5 +1,5 @@
 journal/
-SETUP.txt
+.env
 db.sqlite3
 *.pyc
 __pycache__/
