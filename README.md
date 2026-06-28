@@ -25,8 +25,8 @@ Django runs at http://localhost:8002
 ### Frontend (React + TypeScript)
 
 ```bash
+npm create vite@latest frontend -- --template react-ts
 cd frontend
-npm install
 npm run dev
 ```
 
