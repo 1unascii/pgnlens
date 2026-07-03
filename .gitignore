@@ -1,4 +1,5 @@
 journal/
+DEVLOG.md
 .env
 db.sqlite3
 *.pyc
