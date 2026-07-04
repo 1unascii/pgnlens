@@ -41,14 +41,16 @@ npm run dev
 
 ### Production
 
+Terminal 1 — Backend:
+
 ```bash
 cd pgnlens
 pipenv shell
 cd backend
-python manage.py migrate
-python manage.py createsuperuser
 python serve.py
 ```
+
+Terminal 2 — Frontend:
 
 ```bash
 cd pgnlens/frontend
@@ -57,7 +59,7 @@ npm run build
 
 ### Environment
 
-Create `backend/.env`:
+Create `.env` in the project root (`pgnlens/`):
 
 ```
 DEBUG=True
@@ -72,7 +74,7 @@ pgnlens/
 ├── backend/
 │   ├── manage.py
 │   ├── backend/         ← settings
-│   └── games/           ← app
+│   └── game_analyzer/   ← app
 ├── frontend/
 │   └── src/             ← React + TypeScript
 └── wireframe/
