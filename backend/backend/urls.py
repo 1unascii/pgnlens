@@ -19,10 +19,12 @@ from django.urls import path, include
 from rest_framework import routers
 from game_analyzer.views import GameViewSet
 
+# DefaultRouter auto-generates URL routes for all registered viewsets
+# and provides a browsable API root at /api/
 router = routers.DefaultRouter()
-router.register(r'games', GameViewSet)
+router.register(r'games', GameViewSet)  # /api/games/
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('admin/', admin.site.urls),        # Django admin panel
+    path('api/', include(router.urls)),     # REST API endpoints
 ]

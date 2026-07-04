@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c559bda1bdecc6f1ebaeb8e3ecc3b9243b07b8d40e4cda106c2921590d532b02"
+            "sha256": "bbfcf491e90b616c0ffa1adf538e8e8bb79451241fdecce613f394596b869cbc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,13 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==3.11.1"
+        },
+        "chess": {
+            "hashes": [
+                "sha256:a8b43e5678fdb3000695bdaa573117ad683761e5ca38e591c4826eba6d25bb39"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==1.11.2"
         },
         "django": {
             "hashes": [
@@ -50,6 +57,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.10'",
             "version": "==3.17.1"
+        },
+        "python-chess": {
+            "hashes": [
+                "sha256:8cad0388c42242d890ac6368ad64def15cd0165db033df0ad479492e266e5e6c",
+                "sha256:93b562f8f1124cb7bf56fb095e18743758e69dc6a028ccda0badcaa5c59d88c8"
+            ],
+            "index": "pypi",
+            "version": "==1.999"
         },
         "sqlparse": {
             "hashes": [
