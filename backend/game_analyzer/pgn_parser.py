@@ -1,1 +1,107 @@
-from .models import Game 
+import chess.pgn  # PGN parsing from python-chess library
+import io          # TextIOWrapper converts binary file to text mode
+import json
+import os
+from .models import Game, Move
+
+# Load all ECO JSON files into one lookup dictionary keyed by FEN
+eco_directory = os.path.join(os.path.dirname(__file__), '..', 'eco')
+eco_lookup = {}
+for letter in 'ABCDE':
+    filepath = os.path.join(eco_directory, f'eco{letter}.json')
+    with open(filepath) as f:
+        eco_lookup.update(json.load(f))
+
+def parse_pgn(pgn_file):
+    """
+    Parse a PGN file and save each game and its moves to the database.
+    Accepts a file-like object (e.g. from request.FILES).
+    Returns a list of created Game objects.
+    """
+    games = []
+    
+    # Django's uploaded file is in binary mode, but chess.pgn needs text mode
+    pgn_io = io.TextIOWrapper(pgn_file, encoding='utf-8')
+
+    # A PGN file can contain multiple games — loop until there are none left
+    while True:
+        pgn_game = chess.pgn.read_game(pgn_io)
+        if pgn_game is None:
+            break  # No more games in the file
+
+        # Headers are the metadata between square brackets in PGN
+        headers = pgn_game.headers
+
+        # Save the game record to the database
+        game = Game.objects.create(
+            event=headers.get("Event", ""),
+            site=headers.get("Site", ""),
+            date=headers.get("Date", "").replace(".", "-"),  # PGN uses dots (2026.05.01), Django needs dashes (2026-05-01)
+            round=int(headers.get("Round", 0)) if headers.get("Round", 0).isdigit() else None, # Store unknown rounds as null.
+            white_player=headers.get("White", ""),
+            black_player=headers.get("Black", ""),
+            result=headers.get("Result", ""),
+            white_elo=int(headers.get("WhiteElo", 0)),
+            black_elo=int(headers.get("BlackElo", 0)),
+            time_control=headers.get("TimeControl", ""),
+            end_time=headers.get("EndTime", "").split(" ")[0] or None,  # Strip timezone, keep just the time (e.g. "12:34:12")
+            termination=headers.get("Termination", ""),
+        )
+
+        # Save each move as a separate record linked to this game
+        board = pgn_game.board()
+        move_number = 1
+        white_move = ""
+        eco_code = "" # Default to empty string if no opening is found
+        opening_line = "" # Default to empty string if no opening is found
+        opening_family = "" # Default to empty string if no opening is found
+        first_fen_match = "" # Default to empty string if no opening is found
+        second_fen_match = "" # Default to empty string if no opening is found
+
+        for move in pgn_game.mainline_moves():
+            if board.turn == chess.WHITE:
+                # White's turn — store the move and wait for black's response
+                white_move = str(move)
+            else:
+                # Black's turn — save the pair as one Move record
+                Move.objects.create(
+                    game=game,
+                    move_number=move_number,
+                    white_move=white_move,
+                    black_move=str(move),
+                )
+                move_number += 1
+                white_move = None
+
+            board.push(move)
+            fen = board.fen()
+            if fen in eco_lookup:
+                if not first_fen_match:
+                    first_fen_match = eco_lookup[fen]['name']
+                elif not second_fen_match:
+                    second_fen_match = eco_lookup[fen]['name']
+                eco_code = eco_lookup[fen]['eco']
+                opening_line = eco_lookup[fen]['name']
+                opening_family = opening_line.split(':')[0]
+            
+
+        # If the game ended on white's move (no black response)
+        if white_move is not None:
+            Move.objects.create(
+                game=game,
+                move_number=move_number,
+                white_move=white_move,
+                black_move="",
+            )
+        game.eco_code = eco_code
+        game.opening_line = opening_line
+        game.opening_family = opening_family
+        game.first_fen_match = first_fen_match
+        game.second_fen_match = second_fen_match
+        game.save()
+        games.append(game)
+        
+    return games         
+
+def calculate_opening(game):
+    pass

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGNLens Project Journal</title>
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .week-container {
+            background: white;
+            border: 1px solid #ccc;
+            margin-bottom: 30px;
+            padding: 20px;
+            max-width: 800px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            padding: 6px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .header-row td {
+            font-weight: bold;
+        }
+        .info-row td {
+            border: none;
+            padding: 2px 10px;
+        }
+        .info-row td:first-child {
+            font-weight: bold;
+            text-align: right;
+            width: 300px;
+        }
+        .duties td {
+            border-top: none;
+        }
+        td[contenteditable="true"]:focus {
+            outline: 2px solid #4a90d9;
+            background-color: #fffde7;
+        }
+        .btn {
+            margin: 5px 5px 5px 0;
+            padding: 8px 16px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .save-btn { background-color: #4a90d9; }
+        .save-btn:hover { background-color: #357abd; }
+        .add-day-btn { background-color: #5cb85c; }
+        .add-day-btn:hover { background-color: #449d44; }
+        .delete-day-btn { background-color: #d9534f; font-size: 12px; padding: 4px 10px; }
+        .delete-day-btn:hover { background-color: #c9302c; }
+        .add-week-btn { background-color: #5cb85c; }
+        .add-week-btn:hover { background-color: #449d44; }
+        .saved-msg {
+            color: green;
+            margin-left: 10px;
+            display: none;
+        }
+        .day-entry {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .day-entry .delete-day-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>PGNLens Project Journal</h1>
+
+<div class="week-container" id="week1">
+    <table class="info-table">
+        <tr class="info-row"><td>Your Name</td><td contenteditable="true">Joseph Earl Weiner</td></tr>
+        <tr class="info-row"><td>Project Subject</td><td contenteditable="true">PGNLens - Chess opening analysis tool</td></tr>
+        <tr class="info-row"><td>Total Hours this week</td><td contenteditable="true">30</td></tr>
+        <tr class="info-row"><td>Cumulative hours from last week</td><td contenteditable="true">0</td></tr>
+        <tr class="info-row"><td>Cumulative hours for semester (total)</td><td contenteditable="true">30</td></tr>
+    </table>
+    <br>
+    <div class="days-container">
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">6/27/2026</td><td contenteditable="true">8</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Set up Django project with pipenv. Installed Waitress for production serving on Windows. Configured Apache reverse proxy: pgnlens.com -> Waitress on port 8002. Static files served directly by Apache. Basic home page running. Explored wireframe files. Built full Todo app tutorial: Django REST backend + React frontend using Vite.</td></tr>
+            </table>
+        </div>
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">6/28/2026</td><td contenteditable="true">9</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Created journal folder and .gitignore. Created React + TypeScript frontend with Vite. Created superuser account. Installed PostgreSQL 17, created pgnlens database. Installed django-environ and psycopg2-binary. Created .env file for secrets. Updated settings.py to use django-environ. Ran migrations on PostgreSQL. Initial commit and push to GitHub. Created games app with Game and Report models. Finished Django + React tutorial.</td></tr>
+            </table>
+        </div>
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">7/3/2026</td><td contenteditable="true">3</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Learned about TextField vs CharField in Django. Learned about the __str__ method. Renamed the games model to Game (Django convention: singular PascalCase). Added a moves TextField. Discussed renaming database tables using Meta.db_table. Clarified Django's project vs app structure.</td></tr>
+            </table>
+        </div>
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">7/3/2026 (evening)</td><td contenteditable="true">3</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Renamed "games" app to "game_analyzer". Switched database from SQLite to PostgreSQL via django-environ. Fixed migration table naming. Built full REST API: serializer, viewset, URL routes. Registered Game model in admin panel. Got browsable API working at /api/.</td></tr>
+            </table>
+        </div>
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">7/4/2026</td><td contenteditable="true">2</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Added comments to urls.py. Added pgn/ to .gitignore. Fixed README. Set up React frontend with Vite (react-ts template). Learned about .tsx files, ESLint, Bootstrap. Updated DEVLOG with frontend setup and linting explanation.</td></tr>
+            </table>
+        </div>
+        <div class="day-entry">
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true">7/4/2026 (continued)</td><td contenteditable="true">5</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true">Planned PGN parser architecture. Discovered and installed python-chess library. Wrote parser (pgn_parser.py) and upload endpoint. Created Move model with ForeignKey to Game. Fixed PGN date format (dots to dashes), round field (nullable for unknown rounds), end_time (TimeField). Successfully uploaded and parsed 50 games with 1,218 moves to PostgreSQL. Added MoveSerializer and MoveViewSet to the API.</td></tr>
+            </table>
+        </div>
+    </div>
+    <button class="btn add-day-btn" onclick="addDay(this)">+ Add Day</button>
+    <br>
+    <button class="btn save-btn" onclick="saveWeek('week1')">Save Week 1</button>
+    <span class="saved-msg" id="week1-saved">Saved!</span>
+</div>
+
+<button class="btn add-week-btn" onclick="addWeek()">+ Add New Week</button>
+
+<script>
+    // Load saved data from localStorage on page load
+    window.addEventListener('load', function() {
+        const weeks = document.querySelectorAll('.week-container');
+        weeks.forEach(function(week) {
+            const saved = localStorage.getItem(week.id);
+            if (saved) {
+                week.innerHTML = saved;
+            }
+        });
+    });
+
+    // Save a week's content to localStorage
+    function saveWeek(weekId) {
+        const week = document.getElementById(weekId);
+        localStorage.setItem(weekId, week.innerHTML);
+        const msg = document.getElementById(weekId + '-saved');
+        msg.style.display = 'inline';
+        setTimeout(function() {
+            msg.style.display = 'none';
+        }, 2000);
+    }
+
+    // Delete a day entry
+    function deleteDay(button) {
+        if (confirm('Delete this day entry?')) {
+            button.closest('.day-entry').remove();
+        }
+    }
+
+    // Add a new day entry to a week
+    function addDay(button) {
+        const daysContainer = button.previousElementSibling;
+        const dayEntry = document.createElement('div');
+        dayEntry.className = 'day-entry';
+        dayEntry.innerHTML = `
+            <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+            <table>
+                <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                <tr><td contenteditable="true"></td><td contenteditable="true">0</td></tr>
+                <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                <tr class="duties"><td colspan="2" contenteditable="true"></td></tr>
+            </table>
+        `;
+        daysContainer.appendChild(dayEntry);
+    }
+
+    // Add a new empty week
+    function addWeek() {
+        const weeks = document.querySelectorAll('.week-container');
+        const newWeekNum = weeks.length + 1;
+        const weekId = 'week' + newWeekNum;
+
+        const div = document.createElement('div');
+        div.className = 'week-container';
+        div.id = weekId;
+        div.innerHTML = `
+            <table class="info-table">
+                <tr class="info-row"><td>Your Name</td><td contenteditable="true">Joseph Earl Weiner</td></tr>
+                <tr class="info-row"><td>Project Subject</td><td contenteditable="true">PGNLens - Chess opening analysis tool</td></tr>
+                <tr class="info-row"><td>Total Hours this week</td><td contenteditable="true">0</td></tr>
+                <tr class="info-row"><td>Cumulative hours from last week</td><td contenteditable="true">0</td></tr>
+                <tr class="info-row"><td>Cumulative hours for semester (total)</td><td contenteditable="true">0</td></tr>
+            </table>
+            <br>
+            <div class="days-container">
+                <div class="day-entry">
+                    <button class="btn delete-day-btn" onclick="deleteDay(this)">X Delete Day</button>
+                    <table>
+                        <tr class="header-row"><td>Date</td><td>Hours worked this Day</td></tr>
+                        <tr><td contenteditable="true"></td><td contenteditable="true">0</td></tr>
+                        <tr><td colspan="2"><strong>Duties/Projects</strong></td></tr>
+                        <tr class="duties"><td colspan="2" contenteditable="true"></td></tr>
+                    </table>
+                </div>
+            </div>
+            <button class="btn add-day-btn" onclick="addDay(this)">+ Add Day</button>
+            <br>
+            <button class="btn save-btn" onclick="saveWeek('${weekId}')">Save Week ${newWeekNum}</button>
+            <span class="saved-msg" id="${weekId}-saved">Saved!</span>
+        `;
+
+        const addBtn = document.querySelector('body > .btn.add-week-btn');
+        document.body.insertBefore(div, addBtn);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,911 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "ILHOM_CEEK_1"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "555"]
+[BlackElo "602"]
+[TimeControl "900+10"]
+[EndTime "12:34:12 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nxe5 Nc6 4. f4 Bc5 5. Nc3 d5 6. exd5 Nxe5 7. fxe5 Bf2+ 8.
+Kxf2 Ng4+ 9. Ke1 Nxe5 10. Qe2 Qe7 11. d4 Bg4 12. Qb5+ Nd7+ 13. Kd2 Qg5+ 14. Kd3
+Bf5+ 15. Kc4 Qe7 16. Bd3 a6 17. Qxb7 Nb6+ 18. Kb3 O-O 19. Bxf5 Rfd8 20. Bf4 Rab8
+21. Qxa6 Nxd5+ 22. Kc4 Qb4+ 23. Kd3 Nxf4+ 24. Ke3 Nxg2+ 25. Kf2 Qxd4+ 26. Kxg2
+Qd2+ 27. Kh3 Qe3+ 28. Kg2 Rd2+ 29. Ne2 Rxe2+ 30. Kf1 Qf2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "1una5cii"]
+[Black "ILHOM_CEEK_1"]
+[Result "1-0"]
+[WhiteElo "609"]
+[BlackElo "548"]
+[TimeControl "900+10"]
+[EndTime "12:36:35 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Qe7 3. d4 exd4 4. Bc4 Nf6 5. O-O Qxe4 6. Re1 Qxe1+ 7. Qxe1+ Kd8
+1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "DrMaths"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "618"]
+[BlackElo "601"]
+[TimeControl "900+10"]
+[EndTime "12:39:14 GMT+0000"]
+[Termination "DrMaths won by resignation"]
+
+1. e4 e5 2. Bc4 Nf6 3. Nc3 Bc5 4. h3 O-O 5. Nf3 Re8 6. Nd5 Bxf2+ 7. Kxf2 Nxe4+
+8. Kg1 Qh4 9. Nxh4 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "1una5cii"]
+[Black "oliviernemours"]
+[Result "0-1"]
+[WhiteElo "593"]
+[BlackElo "607"]
+[TimeControl "900+10"]
+[EndTime "13:05:10 GMT+0000"]
+[Termination "oliviernemours won by resignation"]
+
+1. e4 g6 2. Nf3 Bg7 3. d4 d5 4. e5 Nc6 5. Bb5 e6 6. c4 Ne7 7. c5 a6 8. Ba4 O-O
+9. O-O b5 10. Bc2 a5 11. Bf4 Nf5 12. Qd2 Nb4 13. Bxf5 exf5 14. Bh6 Nc6 15. Nc3
+Be6 16. Nxb5 f6 17. Bxg7 Kxg7 18. exf6+ Rxf6 19. Rae1 h6 20. Qf4 Rc8 21. Qd2 Rb8
+22. a4 Rf8 23. Re3 Bf7 24. Rfe1 Qd7 25. R1e2 f4 26. Rb3 Rbe8 27. Rxe8 Rxe8 28.
+Qxf4 Re4 29. Qxc7 Qf5 30. Nd6 Qf4 31. Nxe4 Qc1+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "DarkRed121"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "609"]
+[BlackElo "585"]
+[TimeControl "900+10"]
+[EndTime "13:09:58 GMT+0000"]
+[Termination "DarkRed121 won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nc3 Bc5 4. h3 d5 5. d3 dxe4 6. dxe4 Bxf2+ 7. Kxf2 Nxe4+
+8. Ke1 Nf2 9. Kxf2 Qxd1 10. Nxd1 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "1una5cii"]
+[Black "DarkRed121"]
+[Result "0-1"]
+[WhiteElo "578"]
+[BlackElo "616"]
+[TimeControl "900+10"]
+[EndTime "13:17:40 GMT+0000"]
+[Termination "DarkRed121 won by resignation"]
+
+1. e4 d5 2. d3 d4 3. c3 e5 4. cxd4 Qxd4 5. Nf3 Qb4+ 6. Bd2 Qxb2 7. Nc3 Bb4 8.
+Na4 Bxd2+ 9. Nxd2 Qd4 10. Nb3 Qxa4 11. Qc1 Qb4+ 12. Ke2 c6 13. g3 f5 14. Qc3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "1una5cii"]
+[Black "TheHouseOfNoodles"]
+[Result "0-1"]
+[WhiteElo "570"]
+[BlackElo "585"]
+[TimeControl "900+10"]
+[EndTime "13:27:32 GMT+0000"]
+[Termination "TheHouseOfNoodles won by resignation"]
+
+1. e4 c6 2. Nf3 d5 3. e5 Be6 4. d4 Nd7 5. Nbd2 c5 6. c4 cxd4 7. Nxd4 Nc5 8. b4
+Ne4 9. Qa4+ Bd7 10. b5 Nc5 11. Nc6 Bxc6 12. bxc6 Nxa4 13. cxb7 Rb8 14. cxd5 Qxd5
+0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "Michahellis"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "592"]
+[BlackElo "579"]
+[TimeControl "900+10"]
+[EndTime "1:46:16 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. Bc4 Nc6 4. Ng5 Bc5 5. Bxf7+ Kf8 6. O-O Bxf2+ 7. Rxf2 Ng4
+8. Bg6+ Nxf2 9. Qf3+ Qf6 10. Qxf2 Qxf2+ 11. Kxf2 hxg6 12. Na3 Rxh2 13. Nh3 Rh1
+14. c3 d6 15. Nc2 Bxh3 16. gxh3 Rxh3 17. Ne3 Rh1 18. Kg2 Rh4 19. d3 Kf7 20. Bd2
+Rah8 21. Nf1 Ke6 22. Be1 Rg4+ 23. Bg3 d5 24. Ne3 Rg5 25. exd5+ Kf6 26. Rf1+ Ke7
+27. dxc6 bxc6 28. Nc4 Rh4 29. Nxe5 Ra4 30. Nxc6+ Kd7 31. Ne5+ Ke6 32. Re1 Rxa2
+33. Nf3+ Kf6 34. Re2 Rg4 35. Kf2 a5 36. Be5+ Kf5 37. Nd4+ Kg5 38. Bxc7 a4 39.
+Ne6+ Kh4 40. Bg3+ Rxg3 41. Re4+ Kh3 42. Nf4+ Kh2 43. Re2 g5 44. Kf1+ Kh1 45. Kf2
+gxf4 46. Re1+ Kh2 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "kwmoore56"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "578"]
+[BlackElo "571"]
+[TimeControl "900+10"]
+[EndTime "2:14:57 GMT+0000"]
+[Termination "kwmoore56 won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. Bc4 Nc6 4. O-O Bc5 5. d3 d5 6. exd5 Nxd5 7. Bg5 Nf6 8.
+Qe2 Qe7 9. Nc3 Nd4 10. Nxd4 exd4 11. Qxe7+ Kxe7 12. Bxf6+ Kxf6 13. Ne4+ Ke5 14.
+Nxc5 Kd6 15. Ne4+ Ke5 16. Rfe1 Bg4 17. Nc3+ Kf4 18. f3 Bh5 19. Re4+ Kf5 20. Rxd4
+Rae8 21. Rd5+ Kf4 22. Rxh5 g6 23. Rh4+ Kf5 24. Rd4 h5 25. Nb5 c5 26. Rd5+ Kf4
+27. Rxc5 Re2 28. Bb3 Rhe8 29. Rc4+ Ke3 30. Re4+ Rxe4 31. fxe4 Rf2 32. Rf1 Re2
+33. Bxf7 Rxc2 34. Bxg6 Rxb2 35. Bxh5 Rxb5 36. Bd1 Kxd3 37. Re1 Kd2 38. Kf1 Re5
+39. h4 Re7 40. e5 Rf7+ 41. Bf3 Rh7 42. e6 Rxh4 43. e7 Rh1+ 44. Kf2 Rxe1 45. Bh5
+Rxe7 46. g4 Re2+ 47. Kf3 Kd3 48. Kf4 Rxa2 49. Kg5 b5 50. Kh6 b4 51. g5 b3 52. g6
+b2 53. g7 b1=Q 54. Bg6+ Ke3 55. Bxb1 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.01"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Noe_Wilde"]
+[Result "0-1"]
+[WhiteElo "563"]
+[BlackElo "559"]
+[TimeControl "900+10"]
+[EndTime "4:00:47 GMT+0000"]
+[Termination "Noe_Wilde won by resignation"]
+
+1. e4 g6 2. Nf3 Bg7 3. d4 d6 4. c4 b6 5. d5 c6 6. Qa4 Nf6 7. dxc6 Qc7 8. Nd4 O-O
+9. Be2 Nxe4 10. Be3 Nc5 11. Qb5 a6 12. Qb4 Nxc6 13. Nxc6 Qxc6 14. Nc3 Qxg2 15.
+O-O-O Qc6 16. Rhe1 b5 17. Kc2 Be6 18. b3 Rfb8 19. Qa5 Nb7 20. Qb4 Na5 21. Qxa5
+bxc4 22. Rb1 cxb3+ 23. axb3 Bxc3 24. Qxc3 Bxb3+ 25. Rxb3 Qa4 26. Ra1 Qh4 27.
+Rxb8+ Rxb8 28. Rb1 Rxb1 29. Kxb1 Qxh2 30. Qc8+ Kg7 31. Bd4+ f6 32. Qxa6 Qh1+ 33.
+Bf1 Qe4+ 34. Bd3 Qxd4 35. Kc2 Qxf2+ 36. Kc3 h5 37. Qa7 Qe1+ 38. Kd4 Qf2+ 39. Kd5
+Qxa7 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.02"]
+[Round "-"]
+[White "hari2206"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "534"]
+[BlackElo "571"]
+[TimeControl "900+10"]
+[EndTime "5:29:28 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nc3 Nc6 4. Bc4 d5 5. exd5 Nxd5 6. Ng5 Bc5 7. Nxf7 Bxf2+
+8. Kf1 Qf6 9. Nxh8 Bd4+ 10. Qf3 Qxf3+ 11. gxf3 Nf4 12. Bf7+ Ke7 13. Bc4 Bh3+ 14.
+Ke1 Rxh8 15. d3 Ng2+ 16. Kd2 Rf8 17. Nd5+ Kd6 18. Nc3 Rxf3 19. b3 Rf2+ 20. Ne2
+Bg4 21. Kd1 Bxe2+ 22. Kd2 Bf3# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.02"]
+[Round "-"]
+[White "1una5cii"]
+[Black "hari2206"]
+[Result "1-0"]
+[WhiteElo "578"]
+[BlackElo "527"]
+[TimeControl "900+10"]
+[EndTime "5:43:41 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 d6 4. Bc4 Nf6 5. d5 Nb4 6. Bb5+ c6 7. dxc6 bxc6 8. Ba4
+Nxe4 9. a3 Nd5 10. Bxc6+ Bd7 11. Qxd5 Bxc6 12. Qxc6+ Ke7 13. Qxe4 g6 14. Bg5+ f6
+15. Bxf6+ Kxf6 16. Qh4+ Kg7 17. Qxd8 Rxd8 18. Ng5 Rc8 19. c3 Be7 20. h4 h5 21.
+Nd2 Rc5 22. Ne6+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.02"]
+[Round "-"]
+[White "hari2206"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "536"]
+[BlackElo "569"]
+[TimeControl "900+10"]
+[EndTime "5:54:10 GMT+0000"]
+[Termination "hari2206 won by resignation"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 Bc5 5. Nxf7 Bxf2+ 6. Kxf2 Nxe4+ 7. Kg1 Qh4
+8. g3 Nxg3 9. Nxh8 d5 10. Qf3 Qd4+ 11. Qe3 Qg4 12. hxg3 dxc4 13. Nc3 Qd1+ 14.
+Nxd1 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.02"]
+[Round "-"]
+[White "1una5cii"]
+[Black "hari2206"]
+[Result "0-1"]
+[WhiteElo "560"]
+[BlackElo "545"]
+[TimeControl "900+10"]
+[EndTime "6:03:44 GMT+0000"]
+[Termination "hari2206 won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Nf6 5. Ng5 d5 6. exd5 Qe7+ 7. Be2 Nxd5 8.
+O-O h6 9. Nf3 Bg4 10. Re1 O-O-O 11. Bc4 Bxf3 12. gxf3 Ne5 13. Bxd5 Rxd5 14. f4
+Nf3+ 15. Qxf3 Qxe1+ 16. Kg2 Rd6 17. Nd2 Rg6+ 18. Kh3 Be7 19. Ne4 Qf1+ 20. Qg2
+Qxg2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.08"]
+[Round "-"]
+[White "Nadhir1993"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "531"]
+[BlackElo "568"]
+[TimeControl "900+10"]
+[EndTime "20:53:28 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Qh5 Nf6 3. Qxe5+ Be7 4. Qg5 Nxe4 5. Qxg7 Bf6 6. Qg4 d5 7. Qh5 Qe7 8.
+d3 Ng3+ 9. Be3 Nxh5 10. d4 Qb4+ 11. Nc3 Qxb2 12. Rb1 Qxc2 13. Rc1 Qb2 14. Nh3
+Bf5 15. Ng1 Bxd4 16. Rb1 Bxc3+ 17. Bd2 Qxd2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.08"]
+[Round "-"]
+[White "1una5cii"]
+[Black "chrishk15"]
+[Result "1-0"]
+[WhiteElo "573"]
+[BlackElo "409"]
+[TimeControl "900+10"]
+[EndTime "21:17:59 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. d4 Bb4+ 4. Bd2 Bxd2+ 5. Qxd2 Nxe4 6. Qe2 d5 7. Nxe5 Qe7
+8. Nc3 f6 9. Qh5+ g6 10. Nxg6 Ng3+ 11. Nxe7+ Nxh5 12. Nxc8 Nd7 13. Nxd5 Rxc8 14.
+O-O-O Kd8 15. Be2 Ng7 16. Rhe1 c6 17. Nf4 Re8 18. Bg4 f5 19. Bh3 Rxe1 20. Rxe1
+c5 21. d5 b5 22. g4 fxg4 23. Bxg4 Rc7 24. d6 Rb7 25. Ne6+ Nxe6 26. Bxe6 Rb6 27.
+Bxd7 Rxd6 28. Bxb5 Kc7 29. Bd3 h6 30. f4 a5 31. Re7+ Kd8 32. Ra7 Rf6 33. f5 h5
+34. Rxa5 Ke7 35. Rxc5 Kd6 36. Rc4 Ke5 37. Rh4 Rh6 38. Kd2 Kf6 39. c4 Kg5 40. Rh3
+Ra6 41. a3 Rd6 42. Rf3 h4 43. c5 Rc6 44. b4 Rc8 45. a4 Rb8 46. b5 Ra8 47. Bc2
+Kg4 48. Ke2 h3 49. c6 Rc8 50. a5 Ra8 51. a6 Rb8 52. Rb3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.08"]
+[Round "-"]
+[White "chrishk15"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "421"]
+[BlackElo "561"]
+[TimeControl "900+10"]
+[EndTime "21:46:48 GMT+0000"]
+[Termination "chrishk15 won by resignation"]
+
+1. d4 e5 2. d5 Nf6 3. Nc3 c6 4. e4 Bb4 5. Bd2 Bxc3 6. Bxc3 Nxe4 7. Ne2 Nxc3 8.
+Nxc3 Qa5 9. Be2 O-O 10. h4 Qb6 11. Na4 Qa5+ 12. c3 b5 13. Nc5 d6 14. b4 Qd8 15.
+Ne4 Bf5 16. Bf3 Qb6 17. Nxd6 Bg6 18. h5 Qd8 19. Nb7 Qg5 20. hxg6 fxg6 21. Na5
+Qf6 22. dxc6 Nxc6 23. Qd5+ Kh8 24. Qxc6 Rae8 25. Qxf6 Rxf6 26. O-O h5 27. Bc6
+Ree6 28. Bd5 Rd6 29. Rad1 Rd8 30. Rd2 g5 31. Rfd1 Rdf8 32. Nc6 R6f7 33. Bxf7
+Rxf7 34. Nxe5 Re7 35. Rd5 Kh7 36. Re1 g6 37. Rd7 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.08"]
+[Round "-"]
+[White "1una5cii"]
+[Black "chrishk15"]
+[Result "1-0"]
+[WhiteElo "566"]
+[BlackElo "416"]
+[TimeControl "900+10"]
+[EndTime "22:05:05 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Bd6 3. d4 exd4 4. Bc4 c5 5. c3 Nc6 6. Ng5 Qe7 7. O-O Ne5 8. Bd5
+h6 9. Nh3 Nf6 10. Bb3 c4 11. Ba4 Nd3 12. g3 Nc5 13. Bb5 Ncxe4 14. Bxc4 Bc5 15.
+Re1 d5 16. cxd4 dxc4 17. dxc5 Bxh3 18. Qa4+ Nd7 19. Qxc4 Ndf6 20. Nc3 Bf5 21.
+Bf4 O-O-O 22. c6 b6 23. Qa6+ Qb7 24. Qxb7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Saanvi12345677"]
+[Result "1-0"]
+[WhiteElo "574"]
+[BlackElo "559"]
+[TimeControl "900+10"]
+[EndTime "9:27:24 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 d5 4. Bb5 dxe4 5. Bxc6+ bxc6 6. Nxe5 Bf5 7. O-O c5 8.
+Nc6 Qc8 9. dxc5 Bxc5 10. Qd5 Nf6 11. Qxc5 Bd7 12. Qe7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "Saanvi12345677"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "551"]
+[BlackElo "582"]
+[TimeControl "900+10"]
+[EndTime "9:39:37 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nc3 Nc6 4. Bc4 d6 5. O-O d5 6. exd5 Nd4 7. Nxe5 Bc5 8.
+Nf3 O-O 9. d3 Bg4 10. Be3 Bxf3 11. gxf3 Qd6 12. Bxd4 Bxd4 13. Qd2 c6 14. dxc6
+bxc6 15. Rfe1 Nh5 16. Kf1 Qxh2 17. Ke2 Qxf2+ 18. Kd1 Qxf3+ 19. Kc1 Rae8 20. Rd1
+Be3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "dodas_tlm"]
+[Result "1-0"]
+[WhiteElo "590"]
+[BlackElo "564"]
+[TimeControl "900+10"]
+[EndTime "10:04:07 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 d6 4. Bc4 Qe7 5. Ng5 Nh6 6. Nxf7 Nxf7 7. O-O Nxd4 8.
+c3 Nc6 9. Nd2 Na5 10. Bb3 Nxb3 11. axb3 Ng5 12. Nf3 Nxe4 13. Qd5 Bf5 14. Qxb7
+Qd8 15. Qc6+ Bd7 16. Qxe4 c5 17. Bg5 Be7 18. h4 Bb5 19. Rfe1 O-O 20. c4 Bd7 21.
+Qd5+ Kh8 22. Nxe5 dxe5 23. Rxe5 Bxg5 24. hxg5 Rc8 25. Rxa7 Bc6 26. Qxc5 Qd1+ 27.
+Kh2 Rxf2 28. Qxf2 Bxg2 29. Qxg2 Qxb3 30. Qb7 Qxc4 31. Qxg7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "LemmurBell"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "592"]
+[BlackElo "582"]
+[TimeControl "900+10"]
+[EndTime "10:07:32 GMT+0000"]
+[Termination "LemmurBell won by resignation"]
+
+1. d4 e5 2. f4 exf4 3. Bxf4 Qh4+ 4. g3 Qg4 5. e4 g5 6. Qxg4 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "LemmurBell"]
+[Result "0-1"]
+[WhiteElo "574"]
+[BlackElo "600"]
+[TimeControl "900+10"]
+[EndTime "10:18:19 GMT+0000"]
+[Termination "LemmurBell won by resignation"]
+
+1. e4 c5 2. Nf3 d6 3. d4 Nc6 4. Bc4 Nf6 5. O-O e5 6. dxe5 dxe5 7. Bxf7+ Kxf7 8.
+Ng5+ Ke8 9. Qf3 h6 10. Nh3 Bxh3 11. Qxh3 Qd7 12. Qb3 Nd4 13. Nc3 Nxb3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "RiskSzn"]
+[Result "0-1"]
+[WhiteElo "567"]
+[BlackElo "611"]
+[TimeControl "900+10"]
+[EndTime "10:36:12 GMT+0000"]
+[Termination "RiskSzn won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 f6 4. Bc4 d6 5. O-O Bg4 6. c3 Bxf3 7. Qxf3 exd4 8. Re1
+dxc3 9. Na3 cxb2 10. Bxb2 Nge7 11. Rad1 Nb4 12. e5 fxe5 13. Qf7+ Kd7 14. Qe6+
+Ke8 15. Rxe5 dxe5 16. Rxd8+ Kxd8 17. Bxe5 a6 18. Be2 Nec6 19. Bf6+ gxf6 20.
+Qxf6+ Kd7 21. Qxh8 Re8 22. Qxh7+ Kd8 23. Qh4+ Kc8 24. Bg4+ Kb8 25. Qh7 Re1# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "stonedpunter"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "521"]
+[BlackElo "574"]
+[TimeControl "900+10"]
+[EndTime "10:42:18 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. Bc4 Nc6 4. d4 Nxe4 5. dxe5 Nxe5 6. Bxf7+ Nxf7 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "stonedpunter"]
+[Result "1-0"]
+[WhiteElo "581"]
+[BlackElo "514"]
+[TimeControl "900+10"]
+[EndTime "10:46:26 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 d5 5. Bxd5 Nf6 6. e5 Nxd5 7. Nxd4 Bf5 8.
+Nxf5 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "omkarpune2002"]
+[Result "1-0"]
+[WhiteElo "589"]
+[BlackElo "576"]
+[TimeControl "900+10"]
+[EndTime "10:49:31 GMT+0000"]
+[Termination "1una5cii won - game abandoned"]
+
+1. e4 e5 2. Nf3 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "Ohh_Yugioh"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "560"]
+[BlackElo "580"]
+[TimeControl "900+10"]
+[EndTime "11:12:15 GMT+0000"]
+[Termination "Ohh_Yugioh won by checkmate"]
+
+1. e4 e5 2. d4 Qh4 3. dxe5 Qxe4+ 4. Qe2 d5 5. f3 Qb4+ 6. c3 Qe7 7. Na3 Nc6 8.
+Bf4 g5 9. Bg3 Bg7 10. O-O-O Nxe5 11. f4 Nc6 12. fxg5 Be6 13. Nb5 O-O-O 14. Bh4
+f6 15. gxf6 Bxf6 16. Bxf6 Nxf6 17. Qf2 Kb8 18. Nd4 Ne4 19. Nxc6+ bxc6 20. Qd4
+Qg5+ 21. Kb1 Bf5 22. Qb4+ Kc8 23. Ba6+ Kd7 24. Nf3 Qxg2 25. Ne5+ Ke6 26. Nxc6
+Nf2+ 27. Ka1 Nxh1 28. Qe7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "SuHao2k14"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "565"]
+[BlackElo "588"]
+[TimeControl "900+10"]
+[EndTime "11:25:31 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Bc4 Nf6 3. Nf3 d5 4. exd5 Bc5 5. Nxe5 Bxf2+ 6. Kxf2 Ne4+ 7. Ke1 Qh4+
+8. g3 Nxg3 9. Rf1 Nxf1+ 10. Kxf1 Qxh2 11. Qe2 Bh3+ 12. Ke1 Qg1+ 13. Qf1 Qxf1+
+14. Bxf1 Bxf1 15. Kxf1 Nd7 16. Nxd7 Kxd7 17. c4 Rae8 18. Nc3 Re7 19. d3 Rhe8 20.
+Kf2 h5 21. Bg5 f6 22. Bf4 g5 23. Bd2 Kd6 24. Re1 h4 25. Nb5+ Kc5 26. Nxa7 h3 27.
+b4+ Kd4 28. Rxe7 Rxe7 29. Nb5+ Kxd3 30. Bc3 Re2+ 31. Kg3 h2 32. Bxf6 h1=Q 33.
+Bxg5 Re3+ 34. Kg4 Qf3+ 35. Kh4 Qh3# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Dmitry_639"]
+[Result "1-0"]
+[WhiteElo "596"]
+[BlackElo "590"]
+[TimeControl "900+10"]
+[EndTime "11:43:52 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 Nxd4 4. Bc4 h6 5. Nxe5 Bb4+ 6. c3 Nc6 7. Nxf7 Qe7 8.
+cxb4 Qxe4+ 9. Be3 Qxg2 10. Bd5 Qh3 11. Nxh8 Ne5 12. Nd2 Nf6 13. Nf3 d6 14. Nxe5
+dxe5 15. Bf7+ Ke7 16. Bc5# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "jkaisz"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "579"]
+[BlackElo "604"]
+[TimeControl "900+10"]
+[EndTime "4:41:16 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. d4 e5 2. Nf3 Qe7 3. Nxe5 Nc6 4. Nxc6 bxc6 5. e3 d6 6. Nc3 Bb7 7. d5 Nf6 8.
+Bc4 Nxd5 9. Bxd5 cxd5 10. Nxd5 Bxd5 11. Qxd5 O-O-O 12. O-O Kd7 13. Qb5+ c6 14.
+Qa6 Qe5 15. Qxa7+ Ke6 16. f4 Qf6 17. Bd2 Qxb2 18. Ba5 Re8 19. Rfb1 Qxc2 20. Rb8
+Be7 21. Rb7 Bf6 22. Rd7 Bxa1 23. Bd8 Rxd8 24. Re7+ Kf6 25. g4 Rde8 26. g5+ Kf5
+27. Rxf7+ Ke4 28. Rxg7 Kf3 29. Qa6 Qg2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.09"]
+[Round "-"]
+[White "kenji53"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "668"]
+[BlackElo "614"]
+[TimeControl "900+10"]
+[EndTime "4:50:14 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. d3 e5 2. Nf3 Nf6 3. Nxe5 Nc6 4. Nf3 d5 5. a3 Bc5 6. e3 O-O 7. d4 Bb6 8. Be2
+Re8 9. O-O Bf5 10. Bd3 Ne4 11. Nbd2 Qf6 12. Nb1 Rad8 13. Nc3 a6 14. b4 Nxc3 15.
+Qd2 Ne4 16. Qe1 Ne7 17. Bb2 Ng6 18. a4 c6 19. a5 Bc7 20. c4 Nh4 21. Ne5 Bxe5 22.
+dxe5 Qg6 23. g3 Nf3+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.10"]
+[Round "-"]
+[White "1una5cii"]
+[Black "kik3kor"]
+[Result "1-0"]
+[WhiteElo "622"]
+[BlackElo "597"]
+[TimeControl "900+10"]
+[EndTime "5:00:01 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 d5 2. Nf3 dxe4 3. Ng5 f5 4. d3 exd3 5. Bxd3 h6 6. Qh5+ Kd7 7. Bxf5+ e6 8.
+Qf7+ Qe7 9. Bxe6+ Kd8 10. O-O Qxf7 11. Nxf7+ Ke8 12. Nxh8 Bxe6 13. Re1 Kd7 14.
+Ng6 Bd6 15. Nc3 c6 16. Be3 Bf5 17. Nf4 Bxc2 18. Rac1 Bh7 19. Rcd1 Kc7 20. Ne6+
+Kd7 21. Nc5+ Kc7 22. g3 Nd7 23. Nxd7 Kxd7 24. Bf4 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "1una5cii"]
+[Black "nafiz_sadiq"]
+[Result "1-0"]
+[WhiteElo "630"]
+[BlackElo "618"]
+[TimeControl "900+10"]
+[EndTime "8:59:25 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 Nf6 2. Nf3 Nxe4 3. d4 e6 4. Bd3 Bb4+ 5. Nbd2 Nxd2 6. Bxd2 Nc6 7. a3 Bxd2+
+8. Qxd2 Qf6 9. c3 d5 10. O-O h6 11. Rfe1 e5 12. dxe5 Nxe5 13. Nxe5 O-O 14. Re3
+Bf5 15. Bxf5 Qxf5 16. Rae1 Rae8 17. Qxd5 b6 18. Qf3 Qg5 19. Nd7 Rxe3 20. Rxe3
+Rd8 21. Ne5 f6 22. Nc6 Rf8 23. Ne7+ Kh8 24. Nf5 Qg6 25. Re7 Kg8 26. Rxg7+ Qxg7
+27. Nxg7 Kxg7 28. Qg3+ Kf7 29. Qxc7+ Kg8 30. Qxa7 Rd8 31. h3 Rd2 32. Qxb6 Rd1+
+33. Kh2 Kg7 34. Qc7+ Kg6 35. Qg3+ Kf7 36. Qc7+ Ke6 37. Qf4 Rb1 38. Qe4+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "nafiz_sadiq"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "626"]
+[BlackElo "622"]
+[TimeControl "900+10"]
+[EndTime "9:19:32 GMT+0000"]
+[Termination "nafiz_sadiq won by resignation"]
+
+1. e4 d6 2. d4 g6 3. d5 f5 4. Bc4 Nf6 5. exf5 Bxf5 6. Nf3 Bg7 7. Nh4 Be4 8. O-O
+O-O 9. Nc3 c6 10. Nxe4 Nxe4 11. Qe2 Nf6 12. Bg5 h6 13. Nxg6 Rf7 14. Nxe7+ Rxe7
+15. Bxf6 Bxf6 16. Qg4+ Rg7 17. Qe6+ Kh7 18. dxc6 Nxc6 19. Bd3+ Kh8 20. h3 Nd4
+21. Qd5 Qb6 22. c3 Rag8 23. Be4 Ne2+ 24. Kh2 Be5+ 25. Kh1 Qxb2 26. Qe6 Bf4 27.
+Rab1 Qxc3 28. Qf5 Ng3+ 29. fxg3 Qxg3 30. Rxf4 Qxg2+ 31. Bxg2 Rxg2 32. Qf6+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "tanggushan"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "621"]
+[BlackElo "630"]
+[TimeControl "900+10"]
+[EndTime "19:50:22 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 e5 2. Nf3 Nf6 3. d4 Bb4+ 4. c3 Ba5 5. b4 Bb6 6. h3 d6 7. Bc4 Nxe4 8. O-O
+Nc6 9. Ng5 Nxg5 10. Bxg5 Qxg5 11. Qf3 Be6 12. Bxe6 fxe6 13. Nd2 Qxd2 14. Rad1
+Qxa2 15. dxe5 Nxe5 16. Kh1 O-O-O 17. Qf5 exf5 18. f4 Nc4 19. Ra1 Qd2 20. Rad1
+Qxc3 21. b5 Ne3 22. Rc1 Qb2 23. Rb1 Qd4 24. Rfe1 Qxf4 25. g3 Qxg3 26. Rb3 Qg2#
+0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Sentine7"]
+[Result "0-1"]
+[WhiteElo "622"]
+[BlackElo "626"]
+[TimeControl "900+10"]
+[EndTime "20:02:59 GMT+0000"]
+[Termination "Sentine7 won by resignation"]
+
+1. e4 g6 2. Nf3 d5 3. d3 e6 4. Nd4 Bg7 5. Be3 Ne7 6. Nd2 O-O 7. Qf3 c5 8. N4b3
+Nbc6 9. Nxc5 Qb6 10. exd5 exd5 11. d4 Qxb2 12. Rb1 Qxc2 13. Bd3 Qxa2 14. Qe2
+Bxd4 15. Bxd4 Nxd4 16. Qe3 Nc2+ 17. Bxc2 Qxc2 18. O-O Be6 19. Nxe6 fxe6 20.
+Qxe6+ Kh8 21. Qxe7 Qxd2 22. Qxb7 Qc2 23. Qxd5 Rxf2 24. Rxf2 Qxb1+ 25. Rf1 Qb6+
+26. Kh1 Rd8 27. Qc4 Rd4 28. Qc8+ Kg7 29. Qe8 Rf4 30. Rxf4 Qb1+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "Sentine7"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "634"]
+[BlackElo "614"]
+[TimeControl "900+10"]
+[EndTime "20:13:50 GMT+0000"]
+[Termination "Sentine7 won by checkmate"]
+
+1. d4 e5 2. dxe5 Nc6 3. Bf4 Qe7 4. e3 Qb4+ 5. c3 Qxb2 6. Nd2 Qxc3 7. Ne2 Qb4 8.
+g3 Qe7 9. Nc4 Qb4+ 10. Nd2 b5 11. Bg2 Qe7 12. Qc2 Nxe5 13. Bxa8 Qf6 14. Bxe5
+Qxe5 15. O-O c6 16. Nf3 Qh5 17. Qe4+ Be7 18. Nf4 Qc5 19. Rac1 Qb6 20. Nh5 Qb8
+21. Nxg7+ Kf8 22. Nf5 Qxa8 23. Qf4 Bb7 24. Ne5 Qd8 25. Rcd1 d5 26. Nh6 Qd6 27.
+Qxf7# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "1una5cii"]
+[Black "saretik_the_snorlax"]
+[Result "0-1"]
+[WhiteElo "606"]
+[BlackElo "635"]
+[TimeControl "900+10"]
+[EndTime "0:16:35 GMT+0000"]
+[Termination "saretik_the_snorlax won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. d4 exd4 4. Bc4 h6 5. c3 Nxe4 6. Ne5 Qf6 7. Qxd4 Nxf2 8.
+Qe4 Nxe4 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "MATEK9087"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "610"]
+[BlackElo "598"]
+[TimeControl "900+10"]
+[EndTime "0:49:33 GMT+0000"]
+[Termination "MATEK9087 won on time"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nxe5 Nc6 4. Nxc6 dxc6 5. d3 Bc5 6. Be3 Bg4 7. Be2 Bxe3 8.
+fxe3 Qd7 9. e5 Bxe2 10. Qxe2 Ng4 11. d4 O-O-O 12. Nd2 b6 13. O-O Rhf8 14. c4 c5
+15. Nf3 cxd4 16. exd4 c5 17. d5 h5 18. h3 Nh6 19. Rf2 Nf5 20. Raf1 g6 21. e6
+fxe6 22. dxe6 Qd6 23. Rd1 Qxd1+ 24. Qxd1 Rxd1+ 25. Kh2 Re8 26. Ng5 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "Colonel_Caveman"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "533"]
+[BlackElo "605"]
+[TimeControl "900+10"]
+[EndTime "3:39:54 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e3 e5 2. b3 d5 3. Bb2 Nc6 4. e4 dxe4 5. Qe2 Nf6 6. g3 Bc5 7. Qc4 Bd4 8. c3
+Bxf2+ 9. Kxf2 Ng4+ 10. Ke1 Qf6 11. Nh3 Bf5 12. Bg2 O-O-O 13. d4 exd3 14. Bf1 Ne3
+15. Qc5 b6 16. Qxe3 e4 17. Nd2 Rd7 18. Rb1 Rhd8 19. Nf4 Qg5 20. Be2 dxe2 21.
+Kxe2 Qg4+ 22. Ke1 Ne5 23. Kf1 Rxd2 24. c4 R8d3 25. Qe1 Qf3+ 26. Kg1 Qg2+ 27.
+Nxg2 Nf3+ 28. Kf1 Nxe1 29. Nxe1 Re3 30. Bxg7 Bh3+ 31. Kg1 Ree2 32. Be5 Rf2 33.
+Nc2 Rf3 34. Bc3 Rg2# 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Cuarezjds7"]
+[Result "1/2-1/2"]
+[WhiteElo "604"]
+[BlackElo "582"]
+[TimeControl "900+10"]
+[EndTime "4:06:44 GMT+0000"]
+[Termination "Game drawn by stalemate"]
+
+1. e4 d5 2. Nf3 dxe4 3. Ne5 g6 4. d3 exd3 5. Bxd3 Bg7 6. Nxf7 Kxf7 7. Bxg6+ Kxg6
+8. Qxd8 Nf6 9. Qxc8 Rxc8 10. O-O Rd8 11. Be3 Kf7 12. Nc3 Nc6 13. h3 Nb4 14. Nb5
+Nxc2 15. Rac1 Nxe3 16. fxe3 c6 17. Nd4 Kg8 18. Nf5 e6 19. Ne7+ Kh8 20. Rf4 Rf8
+21. g4 Nd5 22. Nxd5 exd5 23. Rb4 Rab8 24. Ra4 a6 25. e4 Bxb2 26. Re1 Bc3 27. Re2
+Bd4+ 28. Kg2 Rf2+ 29. Rxf2 Bxf2 30. Kxf2 dxe4 31. Rxe4 Rf8+ 32. Ke3 Rf7 33. Kd4
+Kg8 34. Kc5 Kf8 35. Kd6 Rf6+ 36. Kc7 b5 37. Kb6 a5 38. Kxa5 Rd6 39. Kb6 Kf7 40.
+Kc5 Re6 41. Rxe6 Kxe6 42. Kxc6 b4 43. Kc5 Ke5 44. Kc4 Kf4 45. Kxb4 Kg3 46. a4
+Kxh3 47. a5 Kxg4 48. a6 h6 49. a7 h5 50. a8=Q h4 51. Qg8+ Kh3 52. Kc4 Kh2 53.
+Kd4 h3 54. Kd3 Kh1 55. Ke2 h2 56. Kf2 1/2-1/2
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.16"]
+[Round "-"]
+[White "OverBlast480V"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "638"]
+[BlackElo "597"]
+[TimeControl "900+10"]
+[EndTime "4:23:27 GMT+0000"]
+[Termination "OverBlast480V won by resignation"]
+
+1. c4 e5 2. d3 Nf6 3. Nf3 d5 4. Nxe5 Nc6 5. cxd5 Nxe5 6. Nc3 Bc5 7. Bf4 Bxf2+ 8.
+Kxf2 Neg4+ 9. Ke1 c6 10. h3 Nxd5 11. Nxd5 Qxd5 12. hxg4 Bxg4 13. Rh4 Be6 14. e4
+Qd4 15. b3 h6 16. Rc1 g5 17. Rc4 Qf6 18. e5 Qf5 19. g4 Qg6 20. Bxg5 Qxg5 21. Rh2
+O-O-O 22. Rg2 Qxe5+ 23. Be2 h5 24. d4 Qe3 25. Qd3 Qxd3 26. Bxd3 Bxc4 27. Bxc4
+Rxd4 28. Bxf7 Rxg4 29. Be6+ Kc7 30. Bxg4 hxg4 31. Rxg4 Rh1+ 32. Kd2 Rh2+ 33. Kc3
+Rxa2 34. Rg7+ Kd6 35. b4 b6 36. Kc4 a5 37. Rg6+ Kc7 38. Kb3 Rd2 39. bxa5 bxa5
+40. Rg7+ Kb6 41. Kc4 Rc2+ 42. Kb3 Rc5 43. Rg8 Rb5+ 44. Ka4 c5 45. Rb8+ Kc6 46.
+Rxb5 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.17"]
+[Round "-"]
+[White "1una5cii"]
+[Black "edwardjoh"]
+[Result "1-0"]
+[WhiteElo "605"]
+[BlackElo "583"]
+[TimeControl "900+10"]
+[EndTime "9:03:33 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. e4 e5 2. Nf3 Qf6 3. d4 exd4 4. Bc4 h6 5. e5 Qb6 6. O-O Qb4 7. Nbd2 g6 8. a3
+Qc5 9. b4 Qb6 10. Re1 Bg7 11. Ne4 Qc6 12. Qxd4 Ne7 13. Nf6+ Bxf6 14. exf6 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.17"]
+[Round "-"]
+[White "1una5cii"]
+[Black "tontriu"]
+[Result "0-1"]
+[WhiteElo "597"]
+[BlackElo "610"]
+[TimeControl "900+10"]
+[EndTime "9:09:25 GMT+0000"]
+[Termination "tontriu won by resignation"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Nf6 5. c3 dxc3 6. O-O Bc5 7. e5 Ng4 8.
+Bxf7+ Kxf7 9. Qd5+ Ke8 10. Qxc5 c2 11. Qxc2 Ngxe5 12. Re1 d6 13. Qc4 d5 14. Qf4
+Qf6 15. Qxe5+ Nxe5 16. Nxe5 Qe6 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.17"]
+[Round "-"]
+[White "tontriu"]
+[Black "1una5cii"]
+[Result "1-0"]
+[WhiteElo "621"]
+[BlackElo "589"]
+[TimeControl "900+10"]
+[EndTime "9:19:23 GMT+0000"]
+[Termination "tontriu won by resignation"]
+
+1. d4 e5 2. c4 Nc6 3. d5 Nd4 4. Nc3 Qe7 5. e4 Qc5 6. Nf3 g6 7. Nxd4 exd4 8. Na4
+Qb4+ 9. Bd2 Qe7 10. Bd3 Bg7 11. O-O Nf6 12. e5 Nh5 13. c5 Bxe5 14. Re1 d6 15.
+Qb3 dxc5 16. Rac1 b6 17. Qb5+ Bd7 18. Qa6 Bc8 19. Bb5+ Bd7 20. Bxd7+ Qxd7 21.
+Rxe5+ Kf8 22. Qc4 f6 23. Bh6+ Kf7 24. d6+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.17"]
+[Round "-"]
+[White "MeowUwuuu"]
+[Black "1una5cii"]
+[Result "0-1"]
+[WhiteElo "596"]
+[BlackElo "597"]
+[TimeControl "900+10"]
+[EndTime "9:20:45 GMT+0000"]
+[Termination "1una5cii won by resignation"]
+
+1. d4 e5 2. Nc3 d5 3. dxe5 Nc6 4. Bf4 Qe7 5. Nb1 Qb4+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.17"]
+[Round "-"]
+[White "1una5cii"]
+[Black "billuchase"]
+[Result "0-1"]
+[WhiteElo "590"]
+[BlackElo "632"]
+[TimeControl "900+10"]
+[EndTime "9:41:36 GMT+0000"]
+[Termination "billuchase won by resignation"]
+
+1. e4 e5 2. Nf3 Nf6 3. d4 Nxe4 4. Bc4 c5 5. Bxf7+ Kxf7 6. Nxe5+ Ke6 7. Qg4+ Kd5
+8. f3 Nf6 9. Nc3+ Kd6 10. Nc4+ Kc7 11. Bf4+ d6 12. Qg3 Nh5 13. Nb5+ Kd7 14. Qg4+
+Kc6 15. Qxh5 Kxb5 16. b3 d5 17. Ne3 cxd4 18. Nxd5 Kc6 19. O-O-O Qxd5 20. Qxd5+
+Kxd5 21. c4+ Kc5 22. Rd2 Bd6 23. Bxd6+ Kxd6 24. Rxd4+ Kc5 25. Rhd1 Be6 26. Kc2
+Nc6 27. Rd6 Bf5+ 28. Kc3 Rad8 29. R6d5+ Kb6 30. c5+ Kc7 31. R1d2 b5 32. Rxf5 b4+
+33. Kc2 Nd4+ 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.30"]
+[Round "-"]
+[White "1una5cii"]
+[Black "Murdererere"]
+[Result "1-0"]
+[WhiteElo "594"]
+[BlackElo "405"]
+[TimeControl "900+10"]
+[EndTime "3:45:35 GMT+0000"]
+[Termination "1una5cii won by checkmate"]
+
+1. e4 d5 2. Nf3 dxe4 3. Ne5 f6 4. Qh5+ g6 5. Nxg6 hxg6 6. Qxh8 e3 7. Qxg8 exd2+
+8. Bxd2 Qd6 9. Qxg6+ Kd8 10. Nc3 Qe6+ 11. Be2 Qc6 12. O-O-O Na6 13. Bf4+ Bd7 14.
+Qf7 Nb4 15. Qxf8# 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2026.05.30"]
+[Round "-"]
+[White "Murdererere"]
+[Black "1una5cii"]
+[Result "1/2-1/2"]
+[WhiteElo "409"]
+[BlackElo "590"]
+[TimeControl "900+10"]
+[EndTime "4:00:47 GMT+0000"]
+[Termination "Game drawn by stalemate"]
+
+1. f4 e5 2. Nf3 e4 3. Ne5 Qh4+ 4. g3 Qe7 5. e3 f5 6. Nc3 Nf6 7. Bb5 a6 8. Nxd7
+Bxd7 9. Bxd7+ Qxd7 10. d4 c5 11. dxc5 Bxc5 12. O-O Nc6 13. Qd2 O-O-O 14. Rf2
+Qxd2 15. Bxd2 Rxd2 16. Rxd2 Bxe3+ 17. Kf1 Bxd2 18. Na4 Nd5 19. Nc5 Rd8 20. Ne6
+Rd6 21. Ng5 Rh6 22. Nf7 Rxh2 23. Nd6+ Kd7 24. Nxf5 Ne3+ 25. Nxe3 Bxe3 26. f5 Ne5
+27. Rd1+ Ke7 28. g4 Nxg4 29. f6+ Kxf6 30. Rd6+ Ke7 31. Rd5 Rxc2 32. Ra5 Rxb2 33.
+Ra4 Nh2+ 34. Ke1 Bf2+ 35. Kd1 e3 36. Kc1 Rb5 37. Re4+ Kf6 38. Rf4+ Ke5 39. Rh4
+Nf3 40. Rh3 e2 41. Rh5+ Ke4 42. Rxb5 axb5 43. a4 e1=Q+ 44. Kc2 bxa4 45. Kb2 b5
+46. Ka3 Qc1+ 47. Ka2 Kd4 1/2-1/2
