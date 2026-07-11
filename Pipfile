@@ -12,6 +12,8 @@ requests = "*"
 ipython = "*"
 
 [dev-packages]
+pytest-django = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.14"

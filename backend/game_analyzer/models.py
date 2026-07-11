@@ -51,4 +51,4 @@ class Report(models.Model):
     games = models.ManyToManyField(Game, related_name='reports', blank=True)
 
     def __str__(self):
-        return {self.name}
+        return self.name
