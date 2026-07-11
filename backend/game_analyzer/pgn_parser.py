@@ -52,11 +52,6 @@ def parse_pgn(pgn_file):
         board = pgn_game.board()
         move_number = 1
         white_move = ""
-        eco_code = "" # Default to empty string if no opening is found
-        opening_line = "" # Default to empty string if no opening is found
-        opening_family = "" # Default to empty string if no opening is found
-        first_fen_match = "" # Default to empty string if no opening is found
-        second_fen_match = "" # Default to empty string if no opening is found
 
         for move in pgn_game.mainline_moves():
             if board.turn == chess.WHITE:
@@ -74,16 +69,6 @@ def parse_pgn(pgn_file):
                 white_move = None
 
             board.push(move)
-            fen = board.fen()
-            if fen in eco_lookup:
-                if not first_fen_match:
-                    first_fen_match = eco_lookup[fen]['name']
-                elif not second_fen_match:
-                    second_fen_match = eco_lookup[fen]['name']
-                eco_code = eco_lookup[fen]['eco']
-                opening_line = eco_lookup[fen]['name']
-                opening_family = opening_line.split(':')[0]
-            
 
         # If the game ended on white's move (no black response)
         if white_move is not None:
@@ -93,15 +78,49 @@ def parse_pgn(pgn_file):
                 white_move=white_move,
                 black_move="",
             )
-        game.eco_code = eco_code
-        game.opening_line = opening_line
-        game.opening_family = opening_family
-        game.first_fen_match = first_fen_match
-        game.second_fen_match = second_fen_match
+
+        # Classify the opening from the board's move history
+        opening = classify_opening(board)
+        game.eco_code = opening["eco_code"]
+        game.opening_line = opening["opening_line"]
+        game.opening_family = opening["opening_family"]
+        game.fen_matches_array = opening["fen_matches_array"]
         game.save()
         games.append(game)
         
     return games         
 
-def calculate_opening(game):
-    pass
+def classify_opening(board):
+    """
+    Replay a board's move history and check each position against the ECO
+    lookup table. Returns the most specific match found.
+
+    Args:
+        board: a chess.Board object with moves already pushed onto it.
+
+    Returns:
+        dict with eco_code, opening_line, opening_family, and
+        fen_matches_array. Strings default to empty, array defaults to [].
+    """
+    eco_code = ""
+    opening_line = ""
+    opening_family = ""
+    fen_matches_array = []
+
+    # Replay the game move by move, checking each position against ECO data
+    replay_board = chess.Board()
+    for move in board.move_stack:
+        replay_board.push(move)
+        fen = replay_board.fen()
+        if fen in eco_lookup:
+            fen_matches_array.append(eco_lookup[fen]['name'])
+            eco_code = eco_lookup[fen]['eco']
+            opening_line = eco_lookup[fen]['name']
+            opening_family = opening_line.split(':')[0]
+
+    return {
+        "eco_code": eco_code,
+        "opening_line": opening_line,
+        "opening_family": opening_family,
+        "fen_matches_array": fen_matches_array,
+    }

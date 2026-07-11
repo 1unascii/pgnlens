@@ -17,8 +17,7 @@ class Game(models.Model):
     end_time = models.TimeField(null=True, blank=True)  
     termination = models.CharField(max_length=50) # e.g. "Time forfeit", "Draw by agreement", "Resignation"
     eco_code = models.CharField(max_length=10, blank=True) # e.g. "B90"
-    first_fen_match = models.CharField(max_length=200, blank=True) # e.g. "King's Pawn Game"
-    second_fen_match = models.CharField(max_length=200, blank=True) # e.g. "Let's see"
+    fen_matches_array = models.JSONField(default=list, blank=True) # e.g. ["King's Pawn Game", "Sicilian Defense", "Sicilian Defense: Najdorf Variation"]
     opening_line = models.CharField(max_length=200, blank=True) # e.g. "King's Pawn Game: Sicilian Defense: Najdorf Variation"
     opening_family = models.CharField(max_length=200, blank=True) # e.g. "Sicilian Defense"
     

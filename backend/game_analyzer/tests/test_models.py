@@ -20,9 +20,8 @@ def sample_game():
         time_control="10+0",
         termination="Resignation",
         eco_code="A00",
-        first_fen_match="King's Pawn Game",
-        second_fen_match="Let's see",
-        opening_line="King's Pawn Game: Sicilian Defense: Najdorf Variation",
+        fen_matches_array=["King's Pawn Game", "Sicilian Defense", "Sicilian Defense: Najdorf Variation"],
+        opening_line="Sicilian Defense: Najdorf Variation",
         opening_family="Sicilian Defense",
     )
 
