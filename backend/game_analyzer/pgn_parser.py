@@ -80,47 +80,70 @@ def parse_pgn(pgn_file):
             )
 
         # Classify the opening from the board's move history
-        opening = classify_opening(board)
+        fen_matches = get_fen_matches(board)
+        opening = classify_opening(fen_matches)
         game.eco_code = opening["eco_code"]
         game.opening_line = opening["opening_line"]
         game.opening_family = opening["opening_family"]
-        game.fen_matches_array = opening["fen_matches_array"]
+        game.fen_matches_array = [match["name"] for match in fen_matches]
         game.save()
         games.append(game)
         
     return games         
 
-def classify_opening(board):
+def get_fen_matches(board):
     """
-    Replay a board's move history and check each position against the ECO
-    lookup table. Returns the most specific match found.
+    Replay a board's move history and collect every ECO match in order.
 
     Args:
         board: a chess.Board object with moves already pushed onto it.
 
     Returns:
-        dict with eco_code, opening_line, opening_family, and
-        fen_matches_array. Strings default to empty, array defaults to [].
+        list of dicts, each with 'eco_code' and 'name' keys.
+        Example: [
+            {"eco_code": "B20", "name": "Sicilian Defense"},
+            {"eco_code": "B90", "name": "Sicilian Defense: Najdorf Variation"},
+        ]
     """
-    eco_code = ""
-    opening_line = ""
-    opening_family = ""
-    fen_matches_array = []
-
-    # Replay the game move by move, checking each position against ECO data
+    fen_matches = []
     replay_board = chess.Board()
     for move in board.move_stack:
         replay_board.push(move)
         fen = replay_board.fen()
         if fen in eco_lookup:
-            fen_matches_array.append(eco_lookup[fen]['name'])
-            eco_code = eco_lookup[fen]['eco']
-            opening_line = eco_lookup[fen]['name']
-            opening_family = opening_line.split(':')[0]
+            fen_matches.append({
+                "eco_code": eco_lookup[fen]['eco'],
+                "name": eco_lookup[fen]['name'],
+            })
+    return fen_matches
+
+
+def classify_opening(fen_matches):
+    """
+    Given a list of ECO matches (from get_fen_matches), determine the
+    opening line, family, and eco code to assign to the game.
+
+    Current logic: use the last (most specific) match.
+
+    Args:
+        fen_matches: list of dicts with 'eco_code' and 'name' keys.
+
+    Returns:
+        dict with eco_code, opening_line, opening_family (strings, default empty).
+    """
+    if not fen_matches:
+        return {
+            "eco_code": "",
+            "opening_line": "",
+            "opening_family": "",
+        }
+
+    last_match = fen_matches[-1]
+    opening_line = last_match["name"]
+    opening_family = opening_line.split(":")[0].strip()
 
     return {
-        "eco_code": eco_code,
+        "eco_code": last_match["eco_code"],
         "opening_line": opening_line,
         "opening_family": opening_family,
-        "fen_matches_array": fen_matches_array,
     }

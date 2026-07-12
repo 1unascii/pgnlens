@@ -15,3 +15,6 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = '__all__'
+
+class PGNUploadSerializer(serializers.Serializer):
+    file = serializers.FileField()

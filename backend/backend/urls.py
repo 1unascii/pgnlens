@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from game_analyzer.views import GameViewSet, upload_pgn, MoveViewSet, ReportViewSet
+from game_analyzer.views import GameViewSet, MoveViewSet, ReportViewSet, UploadPGNView
 
 # DefaultRouter auto-generates URL routes for all registered viewsets
 # and provides a browsable API root at /api/
@@ -29,5 +29,5 @@ router.register(r'reports', ReportViewSet)  # /api/reports/
 urlpatterns = [
     path('admin/', admin.site.urls),        # Django admin panel
     path('api/', include(router.urls)),     # REST API endpoints
-    path('api/upload_pgn/', upload_pgn),   # Upload PGN file endpoint
+    path('api/upload_pgn/', UploadPGNView.as_view()),   # Upload PGN file endpoint
 ]
