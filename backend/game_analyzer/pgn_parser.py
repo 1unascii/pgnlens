@@ -2,6 +2,7 @@ import chess.pgn  # PGN parsing from python-chess library
 import io          # TextIOWrapper converts binary file to text mode
 import json
 import os
+from collections import Counter
 from .models import Game, Move
 
 # Load all ECO JSON files into one lookup dictionary keyed by FEN
@@ -147,3 +148,34 @@ def classify_opening(fen_matches):
         "opening_line": opening_line,
         "opening_family": opening_family,
     }
+
+def detect_player_name(games):
+    
+    # Find the most common player name across a list of games.
+    # Looks at both white_player and black_player fields.
+
+    # Returns the most common name, or raises ValueError if no games
+    # or there's an unbreakable tie.
+    
+    if not games:
+        raise ValueError("No games to detect player name from.")
+
+    names = []
+    for game in games:
+        names.append(game.white_player)
+        names.append(game.black_player)
+
+    counter = Counter(names)
+    most_common = counter.most_common(2)
+
+    if len(most_common) == 0:
+        raise ValueError("No player names found in games.")
+
+    # If there's a tie between the top two, we can't determine the player
+    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+        raise ValueError(
+            f"Cannot determine player: '{most_common[0][0]}' and "
+            f"'{most_common[1][0]}' both appear {most_common[0][1]} times."
+        )
+
+    return most_common[0][0]

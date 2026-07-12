@@ -17,4 +17,6 @@ class ReportSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PGNUploadSerializer(serializers.Serializer):
+    player_name = serializers.CharField(required=False)
+    report_name = serializers.CharField(required=False)
     file = serializers.FileField()
