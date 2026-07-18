@@ -3,6 +3,7 @@ import ReportIndex from './pages/ReportIndex.tsx'
 import ReportView from './pages/ReportView.tsx'
 import ReportCreate from './pages/ReportCreate.tsx'
 import GameIndex from './pages/GameIndex.tsx'
+import GameView from './pages/GameView.tsx'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route path="/reports/:id" element={<ReportView />} />
       <Route path="/reports/create" element={<ReportCreate />} />
       <Route path="/games" element={<GameIndex />} />
+      <Route path="/games/:id" element={<GameView />} />
     </Routes>
     </BrowserRouter>
   )
