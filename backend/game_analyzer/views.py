@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from collections import defaultdict
-from .models import Game, Move, Report, ReportGame
-from .serializers import GameSerializer, MoveSerializer, ReportSerializer, PGNUploadSerializer
+from .models import Game, Report, ReportGame
+from .serializers import GameSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn, detect_player_name
 
 
@@ -16,13 +16,6 @@ from .pgn_parser import parse_pgn, detect_player_name
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
-
-# GET /api/moves/       — list all moves
-# GET /api/moves/?game=1 — filter moves by game (add later)
-# GET /api/moves/1/     — get one move
-class MoveViewSet(viewsets.ModelViewSet):
-    queryset = Move.objects.all()
-    serializer_class = MoveSerializer
 
 # GET /api/reports/      — list all reports
 # GET /api/reports/1/    — get one report
