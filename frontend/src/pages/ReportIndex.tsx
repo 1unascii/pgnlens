@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import type { Report } from '../types.ts'
+import { FaTrash, FaFolderOpen } from 'react-icons/fa'
 
 /* ========================================================
 This page is the main page for the report index. It displays
@@ -18,30 +19,40 @@ returns the created report as a JSON object. The client
 then displays the created report.
 ======================================================= */
 
-function ReportsIndex() {
-    const [reports, setReports] = useState<Report[]>([])
-  
-    useEffect(() => {
-      fetch('/api/reports/')           // hits Django via the Vite proxy
-        .then(response => response.json())  // parse the JSON body
-        .then(data => setReports(data))     // store it in state
-    }, [])  // empty array = run once when the component first mounts
-  
-    return (
-      <div>
+function ReportIndex() {
+  const [reports, setReports] = useState<Report[]>([])
+
+  useEffect(() => {
+      fetch('/api/reports/')
+          .then(response => response.json())
+          .then(data => setReports(data))
+  }, [])
+
+  return (
+    
+    
+    <div>  
         <h1>Saved Reports</h1>
         <Link to="/reports/create">Upload PGN File</Link>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {reports.map(report => (
-          <div key={report.id}>
-            <h2>{report.report_name}</h2>
-            <p>{report.wins}W / {report.losses}L / {report.draws}</p>
-            <p>{report.date_created}</p>
-            <Link to={`/reports/${report.id}`}>Open</Link>
+          <div key={report.id} className="border rounded-lg p-4 shadow-sm mb-4 max-w-4xl mx-auto">
+              <div className="flex justify-between items-center">
+                  <h2 className="text-lg font-bold">{report.report_name}</h2>
+                  <button><FaTrash /></button>
+              </div>
+              <p>Games: {report.total_games} | Win Rate: {report.win_rate}% | Openings: {report.opening_family_count}</p>
+              <hr className="my-2" />
+              <div className="flex justify-between items-center">
+                  <p className="text-sm text-gray-500">{report.created_at}</p>
+                  <Link to={`/reports/${report.id}`}><FaFolderOpen /></Link>
+              </div>
           </div>
         ))}
-      </div>
-    )
-  }
+      </div>  
+    </div>
+  )
+}
   
-  export default ReportsIndex
+  export default ReportIndex

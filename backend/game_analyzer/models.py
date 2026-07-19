@@ -20,28 +20,10 @@ class Game(models.Model):
     fen_matches_array = models.JSONField(default=list, blank=True) # e.g. ["King's Pawn Game", "Sicilian Defense", "Sicilian Defense: Najdorf Variation"]
     opening_line = models.CharField(max_length=200, blank=True) # e.g. "King's Pawn Game: Sicilian Defense: Najdorf Variation"
     opening_family = models.CharField(max_length=200, blank=True) # e.g. "Sicilian Defense"
-    
+    moves = models.JSONField(default=list, blank=True) # structured move data with analysis info
+
     def __str__(self):
         return f"{self.white_player} vs {self.black_player} on {self.date}"
-
-class Move(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='moves')
-    move_number = models.IntegerField()          # Which move (1, 2, 3...)
-    white_move = models.CharField(max_length=10) # White's move in UCI notation (e.g. "e2e4")
-    black_move = models.CharField(max_length=10, blank=True)  # Black's move (blank if game ended on white's move)
-    evaluation = models.FloatField(null=True)    # Stockfish score (added later during analysis)
-    is_blunder = models.BooleanField(default=False)  # Flagged during analysis
-    is_mistake = models.BooleanField(default=False)  # Flagged during analysis
-    is_good_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_brilliant_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_excellent_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_superb_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_perfect_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_terrible_move = models.BooleanField(default=False)  # Flagged during analysis
-    is_horrible_move = models.BooleanField(default=False)  # Flagged during analysis
-
-    def __str__(self):
-        return f"Game {self.game.id} - Move {self.move_number}"
 
 class ReportGame(models.Model):
     # 'Report' is a string because the Report class is defined below this one

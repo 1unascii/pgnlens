@@ -3,7 +3,7 @@ import io          # TextIOWrapper converts binary file to text mode
 import json
 import os
 from collections import Counter
-from .models import Game, Move
+from .models import Game
 
 # Load all ECO JSON files into one lookup dictionary keyed by FEN
 eco_directory = os.path.join(os.path.dirname(__file__), '..', 'eco')
@@ -49,36 +49,42 @@ def parse_pgn(pgn_file):
             termination=headers.get("Termination", ""),
         )
 
-        # Save each move as a separate record linked to this game
+        # Build a list of moves as structured dicts
         board = pgn_game.board()
+        move_list = []
         move_number = 1
         white_move = ""
 
         for move in pgn_game.mainline_moves():
             if board.turn == chess.WHITE:
-                # White's turn — store the move and wait for black's response
                 white_move = str(move)
             else:
-                # Black's turn — save the pair as one Move record
-                Move.objects.create(
-                    game=game,
-                    move_number=move_number,
-                    white_move=white_move,
-                    black_move=str(move),
-                )
+                move_list.append({
+                    "move_number": move_number,
+                    "white_move": white_move,
+                    "black_move": str(move),
+                    "white_eval": None,
+                    "black_eval": None,
+                    "white_classification": "",
+                    "black_classification": "",
+                })
                 move_number += 1
-                white_move = None
 
             board.push(move)
 
         # If the game ended on white's move (no black response)
-        if white_move is not None:
-            Move.objects.create(
-                game=game,
-                move_number=move_number,
-                white_move=white_move,
-                black_move="",
-            )
+        if board.turn == chess.BLACK:
+            move_list.append({
+                "move_number": move_number,
+                "white_move": white_move,
+                "black_move": "",
+                "white_eval": None,
+                "black_eval": None,
+                "white_classification": "",
+                "black_classification": "",
+            })
+
+        game.moves = move_list
 
         # Classify the opening from the board's move history
         fen_matches = get_fen_matches(board)

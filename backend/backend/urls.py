@@ -17,13 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from game_analyzer.views import GameViewSet, MoveViewSet, ReportViewSet
+from game_analyzer.views import GameViewSet, ReportViewSet
 
 # DefaultRouter auto-generates URL routes for all registered viewsets
 # and provides a browsable API root at /api/
 router = routers.DefaultRouter()
 router.register(r'games', GameViewSet)  # /api/games/
-router.register(r'moves', MoveViewSet)  # /api/moves/
 router.register(r'reports', ReportViewSet)  # /api/reports/ (POST here uploads a PGN)
 
 urlpatterns = [
