@@ -17,6 +17,8 @@ class Game(models.Model):
     end_time = models.TimeField(null=True, blank=True)  
     termination = models.CharField(max_length=50) # e.g. "Time forfeit", "Draw by agreement", "Resignation"
     eco_code = models.CharField(max_length=10, blank=True) # e.g. "B90"
+    first_moves = models.CharField(max_length=200, blank=True) # e.g. "e2e4 e7e5"
+    opening_category = models.CharField(max_length=200, blank=True) # e.g. "Open Game", "Semi-Open Game", "Closed Game"
     fen_matches_array = models.JSONField(default=list, blank=True) # e.g. ["King's Pawn Game", "Sicilian Defense", "Sicilian Defense: Najdorf Variation"]
     opening_line = models.CharField(max_length=200, blank=True) # e.g. "King's Pawn Game: Sicilian Defense: Najdorf Variation"
     opening_family = models.CharField(max_length=200, blank=True) # e.g. "Sicilian Defense"
@@ -50,8 +52,10 @@ class Report(models.Model):
     losses = models.IntegerField(default=0)
     draws = models.IntegerField(default=0)
     win_rate = models.FloatField(default=0.0)
+    opening_category_count = models.IntegerField(default=0)
     opening_family_count = models.IntegerField(default=0)
     opening_line_count = models.IntegerField(default=0)
+    opening_category_stats = models.JSONField(default=dict, blank=True)
     opening_family_stats = models.JSONField(default=dict, blank=True)
     opening_line_stats = models.JSONField(default=dict, blank=True)
 

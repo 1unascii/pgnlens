@@ -51,6 +51,7 @@ class ReportViewSet(viewsets.ModelViewSet):
             player_name=player_name,
         )
 
+        opening_category_stats = defaultdict(lambda: ({"wins": 0, "losses": 0, "draws": 0, "total": 0}))
         opening_family_stats = defaultdict(lambda: ({"wins": 0, "losses": 0, "draws": 0, "total": 0}))
         opening_line_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
         wins = 0
@@ -86,11 +87,15 @@ class ReportViewSet(viewsets.ModelViewSet):
             ReportGame.objects.create(report=report, game=game, outcome=outcome)
 
             # Count per-opening results
+            category = game.opening_category or "Unknown"
             family = game.opening_family or "Unknown"
             line = game.opening_line or "Unknown"
 
             # Convert outcome to the dict key: "win"->"wins", "loss"->"losses", "draw"->"draws"
             outcome_key = "losses" if outcome == "loss" else outcome + "s"
+
+            opening_category_stats[category]["total"] += 1
+            opening_category_stats[category][outcome_key] += 1
 
             opening_family_stats[family]["total"] += 1
             opening_family_stats[family][outcome_key] += 1
@@ -100,6 +105,9 @@ class ReportViewSet(viewsets.ModelViewSet):
 
         # Calculate win rates
         total_games = len(games)
+
+        for stats in opening_category_stats.values():
+            stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
 
         for stats in opening_family_stats.values():
             stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
@@ -113,8 +121,10 @@ class ReportViewSet(viewsets.ModelViewSet):
         report.losses = losses
         report.draws = draws
         report.win_rate = round(wins / total_games * 100, 1) if total_games > 0 else 0.0
+        report.opening_category_count = len(opening_category_stats)
         report.opening_family_count = len(opening_family_stats)
         report.opening_line_count = len(opening_line_stats)
+        report.opening_category_stats = dict(opening_category_stats)
         report.opening_family_stats = dict(opening_family_stats)
         report.opening_line_stats = dict(opening_line_stats)
         report.save()

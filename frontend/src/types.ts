@@ -7,8 +7,12 @@ export interface Report {
     losses: number
     draws: number
     win_rate: number
+    opening_category_count: number
     opening_family_count: number
     opening_line_count: number
+    opening_category_stats: Record<string, OpeningStats>
+    opening_family_stats: Record<string, OpeningStats>
+    opening_line_stats: Record<string, OpeningStats>
     created_at: string
 }
 
@@ -20,6 +24,14 @@ export interface GameMove {
     black_eval: number | null
     white_classification: string
     black_classification: string
+}
+
+export interface OpeningStats {         
+    wins: number
+    losses: number      
+    draws: number
+    total: number                                                                        
+    win_rate: number
 }
 
 export interface Game {

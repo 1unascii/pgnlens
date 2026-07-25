@@ -59,15 +59,20 @@ def parse_pgn(pgn_file):
             if board.turn == chess.WHITE:
                 white_move = str(move)
             else:
+                black_move = str(move)
                 move_list.append({
                     "move_number": move_number,
                     "white_move": white_move,
-                    "black_move": str(move),
+                    "black_move": black_move,
                     "white_eval": None,
                     "black_eval": None,
                     "white_classification": "",
                     "black_classification": "",
                 })
+
+                if move_number == 1:
+                    game.opening_category = categorize_opening(white_move, black_move)
+                    game.first_moves = f"{white_move} {black_move}"
                 move_number += 1
 
             board.push(move)
@@ -124,20 +129,12 @@ def get_fen_matches(board):
             })
     return fen_matches
 
+# These openings are so common that they aren't statistically useful for analysis. 
+# A number of openings such as Scotch Game, Scandinavian, The London, Italian etc can only be 
+# matched if we ignore that these games are also "King's Pawn Game" or "Queen's Pawn Game."   
+TOO_BROAD_FAMILY_NAMES = {"King's Pawn Game", "Queen's Pawn Game", "King's Knight Opening"}
 
-def classify_opening(fen_matches):
-    """
-    Given a list of ECO matches (from get_fen_matches), determine the
-    opening line, family, and eco code to assign to the game.
-
-    Current logic: use the last (most specific) match.
-
-    Args:
-        fen_matches: list of dicts with 'eco_code' and 'name' keys.
-
-    Returns:
-        dict with eco_code, opening_line, opening_family (strings, default empty).
-    """
+def classify_opening(fen_matches):    
     if not fen_matches:
         return {
             "eco_code": "",
@@ -147,7 +144,42 @@ def classify_opening(fen_matches):
 
     last_match = fen_matches[-1]
     opening_line = last_match["name"]
-    opening_family = opening_line.split(":")[0].strip()
+
+    # Find the most specific opening family that is not in the list of too broad families.
+    opening_family = None
+    for potential_match in fen_matches:
+        if potential_match["name"].split(":")[0].strip() not in TOO_BROAD_FAMILY_NAMES:
+            match = potential_match["name"].split(":")[0].strip()
+            opening_family = match
+            break
+    
+    # If no opening family was found, use the last match minus any ": Variant" suffix.
+    if not opening_family:
+        opening_family = last_match["name"].split(":")[0].strip()
+
+    # Known quirks (ECO data issues, not logic bugs):
+    #
+    # - "Queen's Pawn" vs "Queen's Pawn Game" — the ECO data uses both names
+    #   for different positions, so they end up as separate families.
+    #
+    # - Mismatched chains — some ECO match chains bounce through unrelated
+    #   openings (e.g. French Defense shows "Scandinavian" in its chain).
+    #   The first non-broad match might not be the "true" family.
+    #
+    # - "King's Pawn Game" still appears for games where no more specific
+    #   match exists (e.g. 1. e4 e5 2. Ke2).
+    #
+    # TODO: A FAMILY_ALIASES map could normalize the remaining duplicates:
+    #   "Scandinavian" -> "Scandinavian Defense"
+    #   "Scotch" -> "Scotch Game"
+    #   "Sicilian" -> "Sicilian Defense"
+    #   "Caro-Kann" -> "Caro-Kann Defense"
+    #   "Van Geet" -> "Van Geet Opening"
+    #   "QGD" -> "Queen's Gambit Declined"
+    #   "Pirc" -> "Pirc Defense"
+    #   "Modern" -> "Modern Defense"
+    #   "Vienna" -> "Vienna Game"
+    #   "Queen's Pawn" -> "Queen's Pawn Game"
 
     return {
         "eco_code": last_match["eco_code"],
@@ -185,3 +217,15 @@ def detect_player_name(games):
         )
 
     return most_common[0][0]
+
+def categorize_opening(white_move, black_move):
+    if white_move == "e2e4" and black_move == "e7e5":
+        return "Open Game"
+    elif white_move == "e2e4":
+        return "Semi-Open Game"
+    elif white_move == "d2d4" and black_move == "d7d5":
+        return "Closed Game"
+    elif white_move == "d2d4":
+        return "Semi-Closed Game"
+    else:
+        return "Flank Game"

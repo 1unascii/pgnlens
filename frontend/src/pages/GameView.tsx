@@ -70,11 +70,26 @@ function GameView() {
         ? currentMoveRecord?.black_classification
         : currentMoveRecord?.white_classification
 
+    /* Available board sizes for Chessboard component:
+    - `max-w-sm` — 384px
+    - `max-w-md` — 448px (good default)
+    - `max-w-lg` — 512px
+    - `max-w-xl` — 576px
+    - `max-w-2xl` — 640px
+    - `max-w-3xl` — 704px
+    - `max-w-4xl` — 768px
+    - `max-w-5xl` — 832px
+    - `max-w-6xl` — 896px
+    - `max-w-7xl` — 960px
+    - `max-w-8xl` — 1024px
+    - `max-w-9xl` — 1088px
+    */
     return (
         <div>
             <h1>{game.white_player} vs {game.black_player}</h1>
             <p>{game.opening_line} -- {game.opening_family} -- {game.result}</p>
-            <div className="[image-rendering:pixelated]">
+            <div className="max-w-3xl [image-rendering:pixelated]">
+                
                 <Chessboard options={{
                     position: FENpositions[currentMoveIndex],
                     pieces: makePieceSet('monarchy', 'webp'),
@@ -87,10 +102,10 @@ function GameView() {
             {classification && <p>{classification}</p>}
 
             <div>
-                <button onClick={() => {setCurrentMoveIndex(Math.min(FENpositions.length - 1, currentMoveIndex + 1)); playMoveSound()}}>Next</button>
-                <button onClick={() => {setCurrentMoveIndex(Math.max(0, currentMoveIndex - 1)); playMoveSound()}}>Previous</button>
-                <button onClick={() => {setCurrentMoveIndex(0); playMoveSound()}}>Start</button>
-                <button onClick={() => {setCurrentMoveIndex(FENpositions.length - 1); playMoveSound()}}>End</button>
+                <button onClick={() => {setCurrentMoveIndex(Math.min(FENpositions.length - 1, currentMoveIndex + 1)); playMoveSound()}}> Next |</button>
+                <button onClick={() => {setCurrentMoveIndex(Math.max(0, currentMoveIndex - 1)); playMoveSound()}}> | Previous |</button>
+                <button onClick={() => {setCurrentMoveIndex(0); playMoveSound()}}> | Start |</button> 
+                <button onClick={() => {setCurrentMoveIndex(FENpositions.length - 1); playMoveSound()}}> | End </button>
             </div>
         </div>
     )

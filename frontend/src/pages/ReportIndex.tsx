@@ -9,7 +9,6 @@ a list of reports and allows the user to upload a PGN file
 and create a new report.
 ======================================================= */
 
-
 /* ========================================================
 The backend expects a POST request with a FormData object
 containing the PGN file and the player name. The form data
@@ -28,19 +27,34 @@ function ReportIndex() {
           .then(data => setReports(data))
   }, [])
 
+  async function deleteReport(reportId: number) {
+    const csrfToken = document.cookie                                                    
+        .split('; ')
+        .find(row => row.startsWith('csrftoken='))
+        ?.split('=')[1]
+
+    await fetch(`/api/reports/${reportId}/`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRFToken': csrfToken || '',
+        },
+    })
+    setReports(reports.filter(report => report.id !== reportId))
+  }
+
   return (
     
     
     <div>  
-        <h1>Saved Reports</h1>
-        <Link to="/reports/create">Upload PGN File</Link>
+      <h1>Saved Reports</h1>
+      <Link to="/reports/create">Upload PGN File</Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {reports.map(report => (
           <div key={report.id} className="border rounded-lg p-4 shadow-sm mb-4 max-w-4xl mx-auto">
               <div className="flex justify-between items-center">
                   <h2 className="text-lg font-bold">{report.report_name}</h2>
-                  <button><FaTrash /></button>
+                  <button onClick={() => deleteReport(report.id)}><FaTrash /></button>
               </div>
               <p>Games: {report.total_games} | Win Rate: {report.win_rate}% | Openings: {report.opening_family_count}</p>
               <hr className="my-2" />

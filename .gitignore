@@ -8,3 +8,4 @@ __pycache__/
 staticfiles/
 frontend/node_modules/
 pgn/
+.DEVLOG_FRONTEND.md
