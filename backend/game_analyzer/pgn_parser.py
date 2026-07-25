@@ -133,8 +133,11 @@ def get_fen_matches(board):
 # A number of openings such as Scotch Game, Scandinavian, The London, Italian etc can only be 
 # matched if we ignore that these games are also "King's Pawn Game" or "Queen's Pawn Game."   
 TOO_BROAD_FAMILY_NAMES = {"King's Pawn Game", "Queen's Pawn Game", "King's Knight Opening"}
+# Should capture any opening that uses the London System or transposes into it.
+FAMILY_KEYWORDS = {"London": "London System"}
 
-def classify_opening(fen_matches):    
+def classify_opening(fen_matches):   
+
     if not fen_matches:
         return {
             "eco_code": "",
@@ -147,15 +150,29 @@ def classify_opening(fen_matches):
 
     # Find the most specific opening family that is not in the list of too broad families.
     opening_family = None
+
+    # Check for a KEYWORD match first
     for potential_match in fen_matches:
-        if potential_match["name"].split(":")[0].strip() not in TOO_BROAD_FAMILY_NAMES:
-            match = potential_match["name"].split(":")[0].strip()
-            opening_family = match
+
+        
+        for keyword, family_name in FAMILY_KEYWORDS.items():
+            if keyword in potential_match["name"]:
+                opening_family = family_name
+                break
+        if opening_family: # if we found a keyword match then stop checking potential matches
+                break
+
+        # Sicilaian Defense: Najdorf Variation becomes "Sicilaian Defense" 
+        # King's Pawn Game, Wayward Queen Attack, Kiddie Counter Gambit becomes "King's Pawn Game"
+        potential_match = potential_match["name"].split(":")[0].split(",")[0].strip()
+
+        if potential_match not in TOO_BROAD_FAMILY_NAMES:
+            opening_family = potential_match
             break
     
     # If no opening family was found, use the last match minus any ": Variant" suffix.
     if not opening_family:
-        opening_family = last_match["name"].split(":")[0].strip()
+        opening_family = last_match["name"].split(":")[0].split(",")[0].strip()
 
     # Known quirks (ECO data issues, not logic bugs):
     #

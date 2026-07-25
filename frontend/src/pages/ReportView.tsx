@@ -35,6 +35,11 @@ function ReportView() {
         '#a855f7', '#f472b6', '#3b82f6', '#10b981', '#f59e0b',
     ]
 
+    // Calculate the height of the X-axis labels based on the longest opening family name.// Calculate the height of the X-axis labels based on the longest opening family name.
+    const nameLengths = Object.keys(report.opening_family_stats).map(name => name.length)
+    const longestName = Math.max(...nameLengths)  
+    const xAxisHeight = Math.max(100, longestName * 7)
+
     // The API returns opening_family_stats as an object like:
     //   { "Sicilian Defense": { wins: 10, losses: 5, draws: 2, total: 17, win_rate: 58.8 }, ... }
     // recharts needs an array of objects, so we convert it with Object.entries().
@@ -94,9 +99,9 @@ function ReportView() {
                         </button>
                     </div>
                 </div>
-                <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={openingData}>
-                        <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} interval={0}/>
+                <ResponsiveContainer width="100%" height={300 + xAxisHeight}>
+                    <BarChart data={openingData} margin={{ top: 20, right: 0, left: 50, bottom: 0 }}>
+                        <XAxis dataKey="name" angle={-45} textAnchor="end" height={xAxisHeight} interval={0}/>
                         <YAxis />
                         <Tooltip formatter={(_value: number, _name: string, { payload }: {     
                         payload?: { total: number } }) => [
