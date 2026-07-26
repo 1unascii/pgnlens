@@ -57,6 +57,8 @@ class ReportViewSet(viewsets.ModelViewSet):
         wins = 0
         losses = 0
         draws = 0
+        family_to_lines = defaultdict(set)
+
 
         for game in games:
             if game.white_player == player_name:
@@ -103,6 +105,9 @@ class ReportViewSet(viewsets.ModelViewSet):
             opening_line_stats[line]["total"] += 1
             opening_line_stats[line][outcome_key] += 1
 
+            # Add line to family_to_lines
+            family_to_lines[family].add(line)
+
         # Calculate win rates
         total_games = len(games)
 
@@ -127,6 +132,9 @@ class ReportViewSet(viewsets.ModelViewSet):
         report.opening_category_stats = dict(opening_category_stats)
         report.opening_family_stats = dict(opening_family_stats)
         report.opening_line_stats = dict(opening_line_stats)
+        report.family_to_lines = {family: list(lines) for family, lines in                   
+        family_to_lines.items()}
+
         report.save()
 
         return Response({

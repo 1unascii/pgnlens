@@ -58,6 +58,7 @@ class Report(models.Model):
     opening_category_stats = models.JSONField(default=dict, blank=True)
     opening_family_stats = models.JSONField(default=dict, blank=True)
     opening_line_stats = models.JSONField(default=dict, blank=True)
+    family_to_lines = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
         return self.report_name
