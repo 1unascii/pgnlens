@@ -43,6 +43,15 @@ INSTALLED_APPS = [
     'game_analyzer', #This is the primary app for the project
     'rest_framework', #This is the API framework for the project
     'corsheaders', #This is the CORS framework for the project
+
+    # Authentication dj-rest-auth
+    'rest_framework.authtoken',
+    'django.contrib.sites',       # required by allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',      # required even if not using social login
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 ]    
 
 MIDDLEWARE = [
@@ -54,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'allauth.account.middleware.AccountMiddleware', #authentication middleware
 
 ]
 
@@ -128,3 +138,41 @@ CORS_ORIGIN_WHITELIST = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
 ]
+
+# authentication settings
+SITE_ID = 1 # required by ``django.contrib.sites``, which allauth depends on
+
+# dj-rest-auth settings
+REST_AUTH = {
+    'USE_JWT': False,                # use Django's token auth, not JWT
+    'SESSION_LOGIN': True,           # keep session auth working too
+}
+
+# allauth settings
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'
+
+# Prints to the terminal unless production settings [below] are uncommented
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Production settings
+#Gmail requires an **app password** — a 16-character password generated
+#in your Google account settings (Security → 2-Step Verification →
+#App passwords). Your regular Gmail password won't work.
+
+#Add the credentials to your `.env` file:
+
+#EMAIL_HOST_USER=you@gmail.com
+#EMAIL_HOST_PASSWORD=abcd efgh ijkl mnop
+
+#**Other services:** SendGrid, Mailgun, Amazon SES.
+
+#MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = env('EMAIL_HOST_USER')       # your Gmail address
+#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # Gmail app password (not your login password)
+#DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from game_analyzer.views import GameViewSet, ReportViewSet
+from game_analyzer.views import GameViewSet, ReportViewSet, verify_email
 
 # DefaultRouter auto-generates URL routes for all registered viewsets
 # and provides a browsable API root at /api/
@@ -28,4 +28,7 @@ router.register(r'reports', ReportViewSet)  # /api/reports/ (POST here uploads a
 urlpatterns = [
     path('admin/', admin.site.urls),        # Django admin panel
     path('api/', include(router.urls)),     # REST API endpoints
+    path('api/auth/verify-email/', verify_email),  # email verification — must be before the includes
+    path('api/auth/', include('dj_rest_auth.urls')),  # login/logout/password endpoints
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),  # registration endpoints
 ]

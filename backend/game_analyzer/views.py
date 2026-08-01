@@ -1,4 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from collections import defaultdict
@@ -142,3 +144,22 @@ class ReportViewSet(viewsets.ModelViewSet):
             'games_created': len(games),
             'player_name': player_name,
         })
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_email(request):
+    """Verify an email address using the confirmation key."""
+    from allauth.account.models import get_emailconfirmation_model
+
+    key = request.data.get('key')
+    if not key:
+        return Response({'detail': 'Key is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    model = get_emailconfirmation_model()
+    confirmation = model.from_key(key)
+    if not confirmation:
+        return Response({'detail': 'Invalid or expired key.'}, status=status.HTTP_404_NOT_FOUND)
+
+    confirmation.confirm(request)
+    return Response({'detail': 'Email verified successfully.'}, status=status.HTTP_200_OK)

@@ -14,6 +14,7 @@ export interface Report {
     opening_family_stats: Record<string, OpeningStats>
     opening_line_stats: Record<string, OpeningStats>
     created_at: string
+    family_to_lines: Record<string, string[]>
 }
 
 export interface GameMove {

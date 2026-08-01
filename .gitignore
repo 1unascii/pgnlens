@@ -10,3 +10,7 @@ frontend/node_modules/
 pgn/
 DEVLOG_FRONTEND.md
 BUGFIX.md
+start-backend.bat
+start-frontend.bat
+migrate.bat
+sent_emails/
