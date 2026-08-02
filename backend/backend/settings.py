@@ -164,15 +164,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #Add the credentials to your `.env` file:
 
-#EMAIL_HOST_USER=you@gmail.com
-#EMAIL_HOST_PASSWORD=abcd efgh ijkl mnop
+#EMAIL_HOST_USER=you@gmail.com #bring a variable from the .env file
+#EMAIL_HOST_PASSWORD=abcd efgh ijkl mnop #bring a variable from the .env file
 
 #**Other services:** SendGrid, Mailgun, Amazon SES.
 
 #MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_PORT = 587
+#EMAIL_HOST = 'smtp.gmail.com' #bring a variable from the .env file
+#EMAIL_PORT = 587 #bring a variable from the .env file
 #EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = env('EMAIL_HOST_USER')       # your Gmail address
-#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # Gmail app password (not your login password)
-#DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
+#EMAIL_HOST_USER = env('EMAIL_HOST_USER')       # your Gmail address #bring a variable from the .env file
+#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # Gmail app password (not your login password) #bring a variable from the .env file
+#DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER') #bring a variable from the .env file
