@@ -55,3 +55,14 @@ export interface Game {
     opening_family: string
     moves: GameMove[]
 }
+
+export interface GameCard {
+    id: number
+    white_player: string
+    black_player: string
+    date: string
+    result: string
+    termination: string
+    opening_line: string
+    opening_family: string
+}

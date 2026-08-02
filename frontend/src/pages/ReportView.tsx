@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
-import type { Report } from '../types'
+import type { Report, GameCardData } from '../types'
 import SortButtons from '../components/SortButtons'
 import PaginationControls from '../components/PaginationControls'
 import OpeningLineCard from '../components/OpeningLineCard'
 import OpeningFamilyCard from '../components/OpeningFamilyCard'
 import OpeningBarChart from '../components/OpeningBarChart'
 import StatCard from '../components/StatCard'
+import GameCard from '../components/GameCard'
 
 
 function ReportView() {
@@ -30,6 +31,9 @@ function ReportView() {
     const linesPerPage = 5
     const [minimumGames, setMinimumGames] = useState(1)
     const [expandedFamily, setExpandedFamily] = useState<string | null>(null)
+    const [expandedLine, setExpandedLine] = useState<string | null>(null)
+    const [gameCards, setGameCards] = useState<GameCardData[]>([])
+
     // Colors for the bar chart — each opening gets a different color.
     // Cycles back to the start if there are more openings than colors.
     function generateChartColors(count: number): string[] {
@@ -46,11 +50,25 @@ function ReportView() {
     // Fetch the report data from the API when the component mounts.
     // The [id] dependency means this re-runs if the URL id changes.
     useEffect(() => {
+
+        // Fetch the report data from the API
         fetch(`/api/reports/${id}/`)
             .then(response => response.json())
             .then(data => setReport(data))
+
+        // Fetch the game cards data from the API
+        fetch(`/api/games/?report=${id}`)
+            .then(response => response.json())
+            .then(data => setGameCards(data))
     }, [id])
 
+    const handleLineCardClick = (line: string) => {
+        setExpandedLine(expandedLine === line ? null : line)
+    }
+
+
+    
+    // Show loading text until the API responses arrive
     // Show loading text until the API response arrives
     if (!report) return <div>Loading...</div>
 
@@ -68,6 +86,7 @@ function ReportView() {
     }))
     .sort((a, b) => b[sortBy.barChart] - a[sortBy.barChart])
 
+    // Render the report view
     return (
         <div className="max-w-6xl mx-auto p-4">
 
@@ -116,6 +135,7 @@ function ReportView() {
 
                 {/* BAR CHART */}
                 <OpeningBarChart data={openingFamilyBarChartData} />
+
             </div>
 
             {/* OPENING FAMILIES*/}
@@ -153,6 +173,9 @@ function ReportView() {
                                 isExpanded={expandedFamily === name}
                                 onToggle={() => setExpandedFamily(expandedFamily === name ? null : name)}
                                 report={report}
+                                gameCards={gameCards}
+                                expandedLine={expandedLine}
+                                onLineToggle={(lineName) => setExpandedLine(expandedLine === lineName ? null : lineName)}
                             />
                         ))
                     }
@@ -197,7 +220,21 @@ function ReportView() {
                             (currentPage.weakLines + 1) * linesPerPage
                         )
                         .map(([name, stats]) => (
-                            <OpeningLineCard key={name} name={name} stats={stats} />
+                            <div key={name}>
+                                <div onClick={() => handleLineCardClick(name)} className="cursor-pointer">
+                                    <OpeningLineCard name={name} stats={stats} />
+                                </div>
+                                {expandedLine === name && (
+                                    <div className="mt-2 space-y-2">
+                                        {gameCards
+                                            .filter(game => game.opening_line === name)
+                                            .map(game => (
+                                                <GameCard key={game.id} game={game} />
+                                            ))
+                                        }
+                                    </div>
+                                )}
+                            </div>
                         ))
                     }
                 </div>

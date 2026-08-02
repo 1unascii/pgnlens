@@ -6,6 +6,12 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 
+class GameCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = ['id', 'white_player', 'black_player', 'date', 'result',
+                  'termination', 'opening_category','opening_line', 'opening_family']        
+
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report

@@ -5,7 +5,7 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from collections import defaultdict
 from .models import Game, Report, ReportGame
-from .serializers import GameSerializer, ReportSerializer, PGNUploadSerializer
+from .serializers import GameSerializer, GameCardSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn, detect_player_name
 
 
@@ -17,7 +17,19 @@ from .pgn_parser import parse_pgn, detect_player_name
 # DELETE /api/games/1/  — delete a game
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
-    serializer_class = GameSerializer
+
+    def get_serializer_class(self):
+        """Use GameCardSerializer when filtering by report (card display),
+        GameSerializer for individual game detail (move replay)."""
+        if self.request.query_params.get('report'):
+            return GameCardSerializer
+        return GameSerializer
+
+    def get_queryset(self):
+        report_id = self.request.query_params.get('report')
+        if report_id:
+            return Game.objects.filter(reports__id=report_id)
+        return Game.objects.all()
 
 # GET /api/reports/      — list all reports
 # GET /api/reports/1/    — get one report
