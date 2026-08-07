@@ -1,10 +1,60 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Chess } from 'chess.js'
 import { Chessboard } from 'react-chessboard'
 import type { Game } from '../types'
 
 const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
+
+import {
+    FaChessKing, FaChessQueen, FaChessRook,
+    FaChessBishop, FaChessKnight, FaChessPawn
+} from 'react-icons/fa'
+
+const pieceIconMap: Record<string, React.ReactNode> = {
+    K: <FaChessKing className="text-white" />,
+    Q: <FaChessQueen className="text-white" />,
+    R: <FaChessRook className="text-white" />,
+    B: <FaChessBishop className="text-white" />,
+    N: <FaChessKnight className="text-white" />,
+    P: <FaChessPawn className="text-white" />,
+    k: <FaChessKing className="text-black" />,
+    q: <FaChessQueen className="text-black" />,
+    r: <FaChessRook className="text-black" />,
+    b: <FaChessBishop className="text-black" />,
+    n: <FaChessKnight className="text-black" />,
+    p: <FaChessPawn className="text-black" />,
+}
+
+function getCapturedPieces(fen: string) {
+    const boardPart = fen.split(' ')[0]
+
+    const startingPieces = {
+        white: { K: 1, Q: 1, R: 2, B: 2, N: 2, P: 8 },
+        black: { k: 1, q: 1, r: 2, b: 2, n: 2, p: 8 },
+    }
+
+    const currentPieces: Record<string, number> = {}
+    for (const char of boardPart) {
+        if (/[A-Za-z]/.test(char)) {
+            currentPieces[char] = (currentPieces[char] || 0) + 1
+        }
+    }
+
+    const whiteCaptured: string[] = []
+    const blackCaptured: string[] = []
+
+    for (const [piece, count] of Object.entries(startingPieces.white)) {
+        const missing = count - (currentPieces[piece] || 0)
+        for (let i = 0; i < missing; i++) whiteCaptured.push(piece)
+    }
+    for (const [piece, count] of Object.entries(startingPieces.black)) {
+        const missing = count - (currentPieces[piece] || 0)
+        for (let i = 0; i < missing; i++) blackCaptured.push(piece)
+    }
+
+    return { whiteCaptured, blackCaptured }
+}
 
 function makePieceSet(theme: string, extension = 'svg') {
     const pieceSet: Record<string, () => React.JSX.Element> = {}
@@ -22,9 +72,27 @@ function makePieceSet(theme: string, extension = 'svg') {
 
 function GameView() {
     const { id } = useParams()
+    const [searchParams] = useSearchParams()
+    const boardOrientation = searchParams.get('color') === 'black' ? 'black' : 'white'
+    const playerColor = searchParams.get('color') || 'white'
     const [game, setGame] = useState<Game | null>(null)
+    const playerName = playerColor === 'white' ? game?.white_player : game?.black_player
+    const opponentName = playerColor === 'white' ? game?.black_player : game?.white_player
+    const playerElo = playerColor === 'white' ? game?.white_elo : game?.black_elo
+    const opponentElo = playerColor === 'white' ? game?.black_elo : game?.white_elo
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0)
     const [FENpositions, setFENPositions] = useState<string[]>([])
+
+    
+    //TODO:current FEN match (the last FEN match that was reached)
+    const [ecoLookup, setEcoLookup] = useState<Record<string, { eco: string, name: string       
+    }>>({})
+    const [FENMatches, setFENMatches] = useState<{ name: string, halfMove: number }[]>([])
+    useEffect(() => {
+        fetch('/data/eco.json')
+            .then(response => response.json())
+            .then(data => setEcoLookup(data))
+    }, [])
 
     function playMoveSound() {
         new Audio('/sound/lichess/standard/Move.mp3').play()
@@ -38,11 +106,13 @@ function GameView() {
     }, [id])
 
     useEffect(() => {
-        if (!game || game.moves.length === 0) return
-
+        if (!game || game.moves.length === 0 || Object.keys(ecoLookup).length === 0) return     
+  
         const chess = new Chess()
         const fenList = [chess.fen()]
-
+        const matches: { name: string, halfMove: number }[] = []
+  
+        let halfMove = 0
         for (const move of game.moves) {
             for (const side of [move.white_move, move.black_move]) {
                 if (side) {
@@ -52,7 +122,16 @@ function GameView() {
                             to: side.slice(2, 4),
                             promotion: side[4] || undefined,
                         })
-                        fenList.push(chess.fen())
+                        halfMove++
+                        const fen = chess.fen()
+                        fenList.push(fen)
+  
+                        if (ecoLookup[fen]) {
+                            matches.push({
+                                name: ecoLookup[fen].name,
+                                halfMove: halfMove,
+                            })
+                        }
                     } catch (error) {
                         console.log('Error parsing move:', side, error)
                     }
@@ -60,34 +139,55 @@ function GameView() {
             }
         }
         setFENPositions(fenList)
-    }, [game])
+        setFENMatches(matches)
+    }, [game, ecoLookup])
 
     if (!game || FENpositions.length === 0) return <div>Loading...</div>
 
+    const currentFENMatch = FENMatches
+      .filter(match => match.halfMove <= currentMoveIndex)
+      .at(-1)
     const currentMoveRecord = game.moves[Math.floor(currentMoveIndex / 2)]
     const isBlackTurn = currentMoveIndex % 2 === 0
     const classification = isBlackTurn
         ? currentMoveRecord?.black_classification
         : currentMoveRecord?.white_classification
 
-    /* Available board sizes for Chessboard component:
-    - `max-w-sm` — 384px
-    - `max-w-md` — 448px (good default)
-    - `max-w-lg` — 512px
-    - `max-w-xl` — 576px
-    - `max-w-2xl` — 640px
-    - `max-w-3xl` — 704px
-    - `max-w-4xl` — 768px
-    - `max-w-5xl` — 832px
-    - `max-w-6xl` — 896px
-    - `max-w-7xl` — 960px
-    - `max-w-8xl` — 1024px
-    - `max-w-9xl` — 1088px
-    */
+    
+    const { whiteCaptured, blackCaptured } = getCapturedPieces(
+        FENpositions[currentMoveIndex]
+    )
+
+    //pieces captured BY the player (opponent's missing pieces)
+    const opponentMissingPieces = playerColor === 'white'
+        ? blackCaptured
+        : whiteCaptured
+
+    //pieces captured BY the opponent (player's missing pieces)
+    const playerMissingPieces = playerColor === 'white'
+    ? whiteCaptured
+    : blackCaptured
+
     return (
-        <div>
-            <h1>{game.white_player} vs {game.black_player}</h1>
-            <p>{game.opening_line} -- {game.opening_family} -- {game.result}</p>
+        <div className="bg-white dark:bg-gray-800">
+            <h1>{game.white_player} vs {game.black_player} -- {game.date}</h1>
+            <p>Opening Family: {game.opening_family}</p>
+            <p>Opening Line: {game.opening_line}</p>
+            <p>Result: {game.result} -- {game.termination}</p>
+
+            {/* Opponent at top */}
+            <div className="flex items-center gap-2">
+                <span className="font-semibold">{opponentName}</span>
+                {opponentElo && <span className="text-sm text-gray-500">({opponentElo})</span>}
+                {/* Opponent's captured pieces go here */}
+                <div className="flex items-center gap-1">
+                    {playerMissingPieces.map((piece, index) => (
+                        <span key={index}>{pieceIconMap[piece]}</span>
+                    ))}
+                </div>
+            </div>
+
+            {/* Board */}
             <div className="max-w-3xl [image-rendering:pixelated]">
                 
                 <Chessboard options={{
@@ -95,9 +195,30 @@ function GameView() {
                     pieces: makePieceSet('monarchy', 'webp'),
                     darkSquareStyle: { backgroundColor: '#999' },
                     lightSquareStyle: { backgroundColor: '#ddd' },
+                    boardOrientation: boardOrientation,
                 }} />
             </div>
 
+            {/* Player at bottom */}
+            <div className="flex items-center gap-2">
+                <span className="font-semibold">{playerName}</span>
+                {playerElo && <span className="text-sm text-gray-500">({playerElo})</span>}
+                {/* Player's captured pieces go here */}
+                <div className="flex items-center gap-1">
+                    {opponentMissingPieces.map((piece, index) => (
+                        <span key={index}>{pieceIconMap[piece]}</span>
+                    ))}
+                </div>
+            </div>
+
+            {/*TODO: current FEN match (the last FEN match that was reached) */}
+            {currentFENMatch && (
+                <p className="text-sm text-gray-500">
+                    Position: {currentFENMatch.name}
+                </p>
+            )}
+
+            {/* Move counter */}      
             <p>Move: {currentMoveIndex} / {FENpositions.length - 1}</p>
             {classification && <p>{classification}</p>}
 

@@ -4,15 +4,24 @@ import type { GameCardData } from '../types'
 interface GameCardProps {
     game: GameCardData
     variant?: 'child' | 'childOfChild'
+    playerName?: string
 }
 
-function GameCard({ game, variant = 'child' }: GameCardProps) {
+function GameCard({ game, variant = 'child', playerName }: GameCardProps) {
+
     const styles = variant === 'childOfChild'
         ? 'border rounded p-3 ml-8 bg-gray-100 dark:bg-gray-700'
         : 'border rounded p-3 ml-4 bg-gray-50 dark:bg-gray-800'
 
+    const playerColor = playerName === game.white_player ? 'white' : 'black'
+    
+    const linkTarget = playerName
+        ? `/games/${game.id}?color=${playerColor}`
+        : `/games/${game.id}`
+
     return (
-        <Link to={`/games/${game.id}`}>
+
+        <Link to={linkTarget}>
             <div className={styles}>
                 <p className="font-semibold text-sm">
                     {game.white_player} vs {game.black_player}

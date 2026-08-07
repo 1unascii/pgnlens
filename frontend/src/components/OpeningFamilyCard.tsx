@@ -1,5 +1,4 @@
-import type { OpeningStats, Report, GameCardData } from '../types'
-import GameCard from './GameCard'
+import type { OpeningStats, ReportStats, GameCardData } from '../types'
 import OpeningLineCard from './OpeningLineCard'
 
 interface OpeningFamilyCardProps {
@@ -7,38 +6,46 @@ interface OpeningFamilyCardProps {
     stats: OpeningStats
     isExpanded: boolean
     onToggle: () => void
-    report: Report
+    reportStats: ReportStats
     gameCards: GameCardData[]
     expandedLine: string | null
     onLineToggle: (lineName: string) => void
+    playerName?: string
 }
 
-function OpeningFamilyCard({ name, stats, isExpanded, onToggle, report, gameCards, expandedLine, onLineToggle }: OpeningFamilyCardProps) {
+function OpeningFamilyCard({ 
+    name, 
+    stats, 
+    isExpanded, 
+    onToggle, 
+    reportStats, 
+    gameCards, 
+    expandedLine, 
+    onLineToggle, 
+    playerName 
+    }: OpeningFamilyCardProps) 
+{
     return (
         <div className="cursor-pointer" onClick={onToggle}>
-            <OpeningLineCard name={name} stats={stats} />
+            <OpeningLineCard name={name} stats={stats} playerName={playerName} />
 
             {isExpanded && (
                 <div className="mt-4 space-y-2" onClick={(e) => e.stopPropagation()}>
-                    {(report.family_to_lines[name] || []).map(lineName => {
-                        const lineStats = report.opening_line_stats[lineName]
+                    {(reportStats.family_to_lines[name] || []).map(lineName => {
+                        const lineStats = reportStats.opening_line_stats[lineName]
                         if (!lineStats) return null
                         return (
-                            <div key={lineName}>
-                                <div onClick={() => onLineToggle(lineName)} className="cursor-pointer">
-                                    <OpeningLineCard name={lineName} stats={lineStats} variant="child" />
-                                </div>
-                                {expandedLine === lineName && (
-                                    <div className="mt-2 space-y-2">
-                                        {gameCards
-                                            .filter(game => game.opening_line === lineName)
-                                            .map(game => (
-                                                <GameCard key={game.id} game={game} variant="childOfChild" />
-                                            ))
-                                        }
-                                    </div>
-                                )}
-                            </div>
+                            <OpeningLineCard
+                                key={lineName}
+                                name={lineName}
+                                stats={lineStats}
+                                variant="child"
+                                gameCards={gameCards}
+                                isExpanded={expandedLine === lineName}
+                                onToggle={() => onLineToggle(lineName)}
+                                gameCardVariant="childOfChild"
+                                playerName={playerName}
+                            />
                         )
                     })}
                 </div>

@@ -9,6 +9,7 @@ import OpeningFamilyCard from '../components/OpeningFamilyCard'
 import OpeningBarChart from '../components/OpeningBarChart'
 import StatCard from '../components/StatCard'
 import GameCard from '../components/GameCard'
+import filterSortPaginate from '../utils/filterSortPaginate'
 
 
 function ReportView() {
@@ -23,6 +24,27 @@ function ReportView() {
         weakLines: 'total' as 'total' | 'win_rate',
         allOpenings: 'total' as 'total' | 'win_rate',
     })
+
+    // sortDirection controls the direction of the sort (asc or desc)
+    const [sortDirection, setSortDirection] = useState({
+        barChart: 'asc' as 'asc' | 'desc',
+        weakLines: 'asc' as 'asc' | 'desc',
+        allOpenings: 'asc' as 'asc' | 'desc',
+    })
+
+    
+    function handleSortChange(
+        section: 'barChart' | 'weakLines' | 'allOpenings',
+        value: 'total' | 'win_rate'
+    ) {
+        setSortBy({ ...sortBy, [section]: value })
+        if (section === 'weakLines' && value === 'win_rate') {
+            setSortDirection({ ...sortDirection, [section]: 'asc' })
+        } else {
+            setSortDirection({ ...sortDirection, [section]: 'desc' })
+        }
+    }
+
     // Pagination controls for the weak lines section
     const [currentPage, setCurrentPage] = useState({
         weakLines: 0,
@@ -66,25 +88,44 @@ function ReportView() {
         setExpandedLine(expandedLine === line ? null : line)
     }
 
+    const [colorFilter, setColorFilter] = useState<'all' | 'white' | 'black'>('all')
 
-    
     // Show loading text until the API responses arrive
     // Show loading text until the API response arrives
     if (!report) return <div>Loading...</div>
+
+    const reportStats = colorFilter === 'white'
+    ? report.player_is_white_stats
+    : colorFilter === 'black'
+    ? report.player_is_black_stats
+    : report.all_games_stats
+    
+    const filteredGameCards = colorFilter === 'all'
+    ? gameCards
+    : gameCards.filter(game => 
+        colorFilter === 'white'
+        ? game.white_player === report.player_name
+        : game.black_player === report.player_name
+    )
 
     // The API returns opening_family_stats as an object like:
     //   { "Sicilian Defense": { wins: 10, losses: 5, draws: 2, total: 17, win_rate: 58.8 }, ... }
     // recharts needs an array of objects, so we convert it with Object.entries().
     // Each entry becomes { name: "Sicilian Defense", wins: 10, ..., fill: "#4f46e5" }.
     // Then we sort by whichever column the user picked (total games or win rate).
-    const openingFamilyBarChartData = Object.entries(report.opening_family_stats)
-    .filter(([, stats]) => stats.total >= minimumGames)
+    const openingFamilyBarChartData = filterSortPaginate(
+        reportStats.opening_family_stats,
+        minimumGames,
+        sortBy.barChart,
+        sortDirection.barChart,
+        0,
+        Infinity
+    )
     .map(([name, stats], index) => ({
         name,
         ...stats,
         fill: CHART_COLORS[index % CHART_COLORS.length]
     }))
-    .sort((a, b) => b[sortBy.barChart] - a[sortBy.barChart])
 
     // Render the report view
     return (
@@ -107,6 +148,18 @@ function ReportView() {
 
             </div>
 
+            {/* Input */}
+            {/* Player color */}
+            <select
+                value={colorFilter}
+                onChange={(e) => setColorFilter(e.target.value as 'all' | 'white' | 'black')}
+                className="border rounded p-1 bg-white text-black"
+            >
+                <option value="all">All Games</option>
+                <option value="white">Playing White</option>
+                <option value="black">Playing Black</option>
+            </select>
+
             {/* Header — report name on the left, back arrow link on the right */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">{report.report_name}</h1>
@@ -116,9 +169,9 @@ function ReportView() {
             {/* Output */}
             {/* Stat cards — three summary numbers in a row */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-                <StatCard label="Total Games" value={report.total_games} />
-                <StatCard label="Win Rate" value={`${report.win_rate}%`} />
-                <StatCard label="Openings" value={report.opening_family_count} />
+                <StatCard label="Total Games" value={reportStats.total_games} />
+                <StatCard label="Win Rate" value={`${reportStats.win_rate}%`} />
+                <StatCard label="Openings" value={reportStats.opening_family_count} />
             </div>
 
             
@@ -129,7 +182,12 @@ function ReportView() {
                 {/* SORT BY GAMES OR WIN RATE */}
                 <SortButtons
                     sortBy={sortBy.barChart}
-                    onChange={(value) => setSortBy({ ...sortBy, barChart: value })}
+                    onChange={(value) => handleSortChange('barChart', value)}
+                    direction={sortDirection.barChart}
+                    onDirectionToggle={() => setSortDirection({
+                        ...sortDirection,
+                        barChart: sortDirection.barChart === 'desc' ? 'asc' : 'desc'
+                    })}
                 />
                 </div>
 
@@ -147,23 +205,25 @@ function ReportView() {
                 {/* SORT #1 - GAMES | WIN RATE  - OPENING FAMILIES */}
                 <SortButtons
                     sortBy={sortBy.allOpenings}
-                    onChange={(value) => setSortBy({ ...sortBy, allOpenings: value })}
+                    onChange={(value) => handleSortChange('allOpenings', value)}
+                    direction={sortDirection.allOpenings}
+                    onDirectionToggle={() => setSortDirection({
+                        ...sortDirection,
+                        allOpenings: sortDirection.allOpenings === 'desc' ? 'asc' : 'desc'
+                    })}
                 />
 
                 </div>
 
                 {/* CARDS #1 - OPENING FAMILIES */}
                 <div className="space-y-4">
-                    {Object.entries(report.opening_family_stats)
-                        .filter(([, stats]) => stats.total >= minimumGames)
-                        .sort((a, b) =>
-                            sortBy.allOpenings === 'win_rate'
-                                ? b[1].win_rate - a[1].win_rate   // best first
-                                : b[1].total - a[1].total          // most played first
-                        )
-                        .slice(
-                            currentPage.allOpenings * linesPerPage, 
-                            (currentPage.allOpenings + 1) * linesPerPage
+                    {filterSortPaginate(
+                            reportStats.opening_family_stats,
+                            minimumGames,
+                            sortBy.allOpenings,
+                            sortDirection.allOpenings,
+                            currentPage.allOpenings,
+                            linesPerPage
                         )
                         .map(([name, stats]) => (
                             <OpeningFamilyCard
@@ -172,10 +232,11 @@ function ReportView() {
                                 stats={stats}
                                 isExpanded={expandedFamily === name}
                                 onToggle={() => setExpandedFamily(expandedFamily === name ? null : name)}
-                                report={report}
-                                gameCards={gameCards}
+                                reportStats={reportStats}
+                                gameCards={filteredGameCards}
                                 expandedLine={expandedLine}
                                 onLineToggle={(lineName) => setExpandedLine(expandedLine === lineName ? null : lineName)}
+                                playerName={report.player_name}
                             />
                         ))
                     }
@@ -184,7 +245,7 @@ function ReportView() {
                 {/* PAGINATION #1 - OPENING FAMILIES */}
                 <PaginationControls
                     currentPage={currentPage.allOpenings}
-                    totalItems={Object.values(report.opening_family_stats)
+                    totalItems={Object.values(reportStats.opening_family_stats)
                         .filter(s => s.total >= minimumGames).length}
                     itemsPerPage={linesPerPage}
                     onChange={(page) => setCurrentPage({ ...currentPage, allOpenings: page })}
@@ -196,29 +257,32 @@ function ReportView() {
             <div className="mb-6">
                 
                 <div className="flex justify-between items-center mb-2">
-                <h2 className="text-lg font-bold">Weak Opening Lines</h2>
+                <h2 className="text-lg font-bold">Lines That Need Practice</h2>
                 
                     {/* SORT #2 - GAMES | WIN RATE - LINES THAT NEED PRACTICE */}
                     <SortButtons
                         sortBy={sortBy.weakLines}
-                        onChange={(value) => setSortBy({ ...sortBy, weakLines: value })}
+                        onChange={(value) => handleSortChange('weakLines', value)}
+                        direction={sortDirection.weakLines}
+                        onDirectionToggle={() => setSortDirection({
+                            ...sortDirection,
+                            weakLines: sortDirection.weakLines === 'desc' ? 'asc' : 'desc'
+                        })}
                     />
 
                 </div>
 
                 {/* CARDS #2 - LINES THAT NEED PRACTICE */}
                 <div className="space-y-4">
-                    {Object.entries(report.opening_line_stats)
-                        .filter(([, stats]) => stats.win_rate < 50 && stats.total >= minimumGames)
-                        .sort((a, b) =>
-                            sortBy.weakLines === 'win_rate'
-                                ? a[1].win_rate - b[1].win_rate   // worst first
-                                : b[1].total - a[1].total          // most played first
-                        )
-                        .slice(
-                            currentPage.weakLines * linesPerPage, 
-                            (currentPage.weakLines + 1) * linesPerPage
-                        )
+                    {filterSortPaginate(
+                        reportStats.opening_line_stats,
+                        minimumGames,
+                        sortBy.weakLines,
+                        sortDirection.weakLines,
+                        currentPage.weakLines,
+                        linesPerPage,
+                        50
+                    )
                         .map(([name, stats]) => (
                             <div key={name}>
                                 <div onClick={() => handleLineCardClick(name)} className="cursor-pointer">
@@ -226,7 +290,7 @@ function ReportView() {
                                 </div>
                                 {expandedLine === name && (
                                     <div className="mt-2 space-y-2">
-                                        {gameCards
+                                        {filteredGameCards
                                             .filter(game => game.opening_line === name)
                                             .map(game => (
                                                 <GameCard key={game.id} game={game} />
@@ -242,8 +306,8 @@ function ReportView() {
                 {/* PAGINATION #2 - LINES THAT NEED PRACTICE */}
                 <PaginationControls
                     currentPage={currentPage.weakLines}
-                    totalItems={Object.values(report.opening_family_stats)
-                        .filter(s => s.total >= minimumGames).length}
+                    totalItems={Object.values(reportStats.opening_line_stats)
+                        .filter(s => s.win_rate < 50 && s.total >= minimumGames).length}
                     itemsPerPage={linesPerPage}
                     onChange={(page) => setCurrentPage({ ...currentPage, weakLines: page })}
                 />

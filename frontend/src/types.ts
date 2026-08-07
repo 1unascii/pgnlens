@@ -1,7 +1,4 @@
-export interface Report {
-    id: number
-    report_name: string
-    player_name: string
+export interface ReportStats {                                                              
     total_games: number
     wins: number
     losses: number
@@ -13,8 +10,17 @@ export interface Report {
     opening_category_stats: Record<string, OpeningStats>
     opening_family_stats: Record<string, OpeningStats>
     opening_line_stats: Record<string, OpeningStats>
-    created_at: string
     family_to_lines: Record<string, string[]>
+}
+
+export interface Report {
+    id: number
+    report_name: string
+    player_name: string
+    created_at: string
+    all_games_stats: ReportStats
+    player_is_white_stats: ReportStats
+    player_is_black_stats: ReportStats
 }
 
 export interface GameMove {
@@ -56,7 +62,7 @@ export interface Game {
     moves: GameMove[]
 }
 
-export interface GameCard {
+export interface GameCardData {
     id: number
     white_player: string
     black_player: string
