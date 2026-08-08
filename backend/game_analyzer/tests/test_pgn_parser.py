@@ -74,7 +74,7 @@ def test_queens_gambit_declined():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "Queen's Gambit Declined"
+    assert result["opening_family"] == "Queen's Gambit"
     assert result["opening_line"] == "Queen's Gambit Declined"
     assert result["eco_code"] == "D30"
 
@@ -86,7 +86,7 @@ def test_queens_gambit_accepted():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "Queen's Gambit Accepted"
+    assert result["opening_family"] == "Queen's Gambit"
     assert result["opening_line"] == "Queen's Gambit Accepted"
     assert result["eco_code"] == "D20"
 
@@ -152,7 +152,7 @@ def test_kings_indian_classical():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "King's Indian Defense"
+    assert result["opening_family"] == "Indian Defense"
     assert result["opening_line"] == "King's Indian Defense: Normal Variation, Rare Defenses"
     assert result["eco_code"] == "E90"
 
@@ -164,7 +164,7 @@ def test_kings_indian_samisch():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "King's Indian Defense"
+    assert result["opening_family"] == "Indian Defense"
     assert "misch Variation" in result["opening_line"]
     assert result["eco_code"] == "E80"
 
@@ -204,7 +204,7 @@ def test_london_system():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "Queen's Pawn Game"
+    assert result["opening_family"] == "London System"
     assert result["opening_line"] == "Queen's Pawn Game: London System"
     assert result["eco_code"] == "D02"
 
@@ -216,7 +216,7 @@ def test_london_accelerated():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "Queen's Pawn Game"
+    assert result["opening_family"] == "London System"
     assert result["opening_line"] == "Queen's Pawn Game: Accelerated London System"
     assert result["eco_code"] == "D00"
 

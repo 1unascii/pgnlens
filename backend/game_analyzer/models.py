@@ -47,18 +47,9 @@ class Report(models.Model):
     player_name = models.CharField(max_length=100, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     games = models.ManyToManyField(Game, through='ReportGame', related_name='reports', blank=True)
-    total_games = models.IntegerField(default=0)
-    wins = models.IntegerField(default=0)
-    losses = models.IntegerField(default=0)
-    draws = models.IntegerField(default=0)
-    win_rate = models.FloatField(default=0.0)
-    opening_category_count = models.IntegerField(default=0)
-    opening_family_count = models.IntegerField(default=0)
-    opening_line_count = models.IntegerField(default=0)
-    opening_category_stats = models.JSONField(default=dict, blank=True)
-    opening_family_stats = models.JSONField(default=dict, blank=True)
-    opening_line_stats = models.JSONField(default=dict, blank=True)
-    family_to_lines = models.JSONField(default=dict, blank=True)
+    all_games_stats = models.JSONField(default=dict, blank=True)
+    player_is_white_stats = models.JSONField(default=dict, blank=True)
+    player_is_black_stats = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
         return self.report_name

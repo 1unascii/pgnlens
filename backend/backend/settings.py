@@ -148,14 +148,21 @@ REST_AUTH = {
     'SESSION_LOGIN': True,           # keep session auth working too
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
 # allauth settings
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_LOGIN_METHODS = {'username', 'email'} # currently won't accept email unless the form field format is changed.
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'
 
 # Prints to the terminal unless production settings [below] are uncommented
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Production settings
 #Gmail requires an **app password** — a 16-character password generated
@@ -164,15 +171,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #Add the credentials to your `.env` file:
 
-#EMAIL_HOST_USER=you@gmail.com #bring a variable from the .env file
-#EMAIL_HOST_PASSWORD=abcd efgh ijkl mnop #bring a variable from the .env file
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('RESEND_API_KEY')
 
 #**Other services:** SendGrid, Mailgun, Amazon SES.
 
-#MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.gmail.com' #bring a variable from the .env file
-#EMAIL_PORT = 587 #bring a variable from the .env file
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = env('EMAIL_HOST_USER')       # your Gmail address #bring a variable from the .env file
-#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # Gmail app password (not your login password) #bring a variable from the .env file
-#DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER') #bring a variable from the .env file
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.resend.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_TIMEOUT = 30 # 30 seconds

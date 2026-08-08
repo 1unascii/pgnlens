@@ -1,6 +1,6 @@
 import pytest
 from django.contrib.auth.models import User
-from game_analyzer.models import Game, Move, Report
+from game_analyzer.models import Game, Report
 
 
 @pytest.fixture
@@ -32,20 +32,9 @@ def test_game_str(sample_game):
 
 
 @pytest.mark.django_db
-def test_move_str(sample_game):
-    move = Move.objects.create(
-        game=sample_game,
-        move_number=1,
-        white_move="e2e4",
-        black_move="e7e5",
-    )
-    assert str(move) == f"Game {sample_game.id} - Move 1"
-
-
-@pytest.mark.django_db
 def test_report_str(sample_user):
     report = Report.objects.create(
-        name="Test Report",
+        report_name="Test Report",
         user=sample_user,
     )
     assert str(report) == "Test Report"

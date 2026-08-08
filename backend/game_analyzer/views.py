@@ -31,6 +31,68 @@ class GameViewSet(viewsets.ModelViewSet):
             return Game.objects.filter(reports__id=report_id)
         return Game.objects.all()
 
+def build_stats_by_player_color(games, player_name):
+    """Compute all report stats from a list of games."""
+    opening_category_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
+    opening_family_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
+    opening_line_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
+    wins = 0
+    losses = 0
+    draws = 0
+    family_to_lines = defaultdict(set)
+
+    for game in games:
+        if game.white_player == player_name:
+            outcome = "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
+        elif game.black_player == player_name:
+            outcome = "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
+        else:
+            outcome = "error: player not found"
+
+        if outcome == "win":
+            wins += 1
+        elif outcome == "loss":
+            losses += 1
+        else:
+            draws += 1
+
+        category = game.opening_category or "Unknown"
+        family = game.opening_family or "Unknown"
+        line = game.opening_line or "Unknown"
+        outcome_key = "losses" if outcome == "loss" else outcome + "s"
+
+        opening_category_stats[category]["total"] += 1
+        opening_category_stats[category][outcome_key] += 1
+        opening_family_stats[family]["total"] += 1
+        opening_family_stats[family][outcome_key] += 1
+        opening_line_stats[line]["total"] += 1
+        opening_line_stats[line][outcome_key] += 1
+        family_to_lines[family].add(line)
+
+    total_games = len(games)
+
+    for stats in opening_category_stats.values():
+        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
+    for stats in opening_family_stats.values():
+        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
+    for stats in opening_line_stats.values():
+        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
+
+    return {
+        "total_games": total_games,
+        "wins": wins,
+        "losses": losses,
+        "draws": draws,
+        "win_rate": round(wins / total_games * 100, 1) if total_games > 0 else 0.0,
+        "opening_category_count": len(opening_category_stats),
+        "opening_family_count": len(opening_family_stats),
+        "opening_line_count": len(opening_line_stats),
+        "opening_category_stats": dict(opening_category_stats),
+        "opening_family_stats": dict(opening_family_stats),
+        "opening_line_stats": dict(opening_line_stats),
+        "family_to_lines": {family: list(lines) for family, lines in family_to_lines.items()},
+    }
+
 # GET /api/reports/      — list all reports
 # GET /api/reports/1/    — get one report
 # POST /api/reports/     — upload a PGN file to create a report (the only way to create one)
@@ -39,6 +101,9 @@ class ReportViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
     parser_classes = [MultiPartParser]  # Django REST Framework (DRF) file upload parser (not related to pgn_parser)
+
+    def get_queryset(self):
+        return Report.objects.filter(user=self.request.user)
 
     # When CREATEING A REPORT, use the PGN Upload Serializer!!!
     def get_serializer_class(self):
@@ -65,90 +130,24 @@ class ReportViewSet(viewsets.ModelViewSet):
             player_name=player_name,
         )
 
-        opening_category_stats = defaultdict(lambda: ({"wins": 0, "losses": 0, "draws": 0, "total": 0}))
-        opening_family_stats = defaultdict(lambda: ({"wins": 0, "losses": 0, "draws": 0, "total": 0}))
-        opening_line_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
-        wins = 0
-        losses = 0
-        draws = 0
-        family_to_lines = defaultdict(set)
-
+        white_games = []
+        black_games = []
 
         for game in games:
             if game.white_player == player_name:
-                if game.result == "1-0":
-                    outcome = "win"
-                    wins += 1
-                elif game.result == "0-1":
-                    outcome = "loss"
-                    losses += 1
-                elif game.result == "1/2-1/2":
-                    outcome = "draw"
-                    draws += 1
+                outcome = "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
+                white_games.append(game)
             elif game.black_player == player_name:
-                if game.result == "0-1":
-                    outcome = "win"
-                    wins += 1
-                elif game.result == "1-0":
-                    outcome = "loss"
-                    losses += 1
-                elif game.result == "1/2-1/2":
-                    outcome = "draw"
-                    draws += 1
+                outcome = "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
+                black_games.append(game)
             else:
-                outcome = "draw" ## Edge case 
-                draws += 1
+                outcome = "error: player not found"
 
-            # Link game to report with its outcome
             ReportGame.objects.create(report=report, game=game, outcome=outcome)
 
-            # Count per-opening results
-            category = game.opening_category or "Unknown"
-            family = game.opening_family or "Unknown"
-            line = game.opening_line or "Unknown"
-
-            # Convert outcome to the dict key: "win"->"wins", "loss"->"losses", "draw"->"draws"
-            outcome_key = "losses" if outcome == "loss" else outcome + "s"
-
-            opening_category_stats[category]["total"] += 1
-            opening_category_stats[category][outcome_key] += 1
-
-            opening_family_stats[family]["total"] += 1
-            opening_family_stats[family][outcome_key] += 1
-
-            opening_line_stats[line]["total"] += 1
-            opening_line_stats[line][outcome_key] += 1
-
-            # Add line to family_to_lines
-            family_to_lines[family].add(line)
-
-        # Calculate win rates
-        total_games = len(games)
-
-        for stats in opening_category_stats.values():
-            stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
-
-        for stats in opening_family_stats.values():
-            stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
-
-        for stats in opening_line_stats.values():
-            stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
-
-        # Save summary stats to the report
-        report.total_games = total_games
-        report.wins = wins
-        report.losses = losses
-        report.draws = draws
-        report.win_rate = round(wins / total_games * 100, 1) if total_games > 0 else 0.0
-        report.opening_category_count = len(opening_category_stats)
-        report.opening_family_count = len(opening_family_stats)
-        report.opening_line_count = len(opening_line_stats)
-        report.opening_category_stats = dict(opening_category_stats)
-        report.opening_family_stats = dict(opening_family_stats)
-        report.opening_line_stats = dict(opening_line_stats)
-        report.family_to_lines = {family: list(lines) for family, lines in                   
-        family_to_lines.items()}
-
+        report.all_games_stats = build_stats_by_player_color(games, player_name)
+        report.player_is_white_stats = build_stats_by_player_color(white_games, player_name)
+        report.player_is_black_stats = build_stats_by_player_color(black_games, player_name)
         report.save()
 
         return Response({
