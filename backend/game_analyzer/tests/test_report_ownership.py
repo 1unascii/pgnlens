@@ -147,3 +147,26 @@ def test_each_user_sees_only_own_reports(
 
     assert len(response_a.data) == 2
     assert len(response_b.data) == 1
+
+
+@pytest.mark.django_db
+def test_invalid_player_name_returns_error(client_a):
+    """Uploading a PGN with a player name that doesn't
+    match any game should return 400 and not create
+    a report."""
+    pgn_path = os.path.join(FIXTURE_DIR, 'test.pgn')
+    with open(pgn_path, 'rb') as pgn_file:
+        response = client_a.post(
+            '/api/reports/',
+            {
+                'file': pgn_file,
+                'player_name': 'NonexistentPlayer',
+            },
+            format='multipart',
+        )
+    assert response.status_code == 400
+    assert 'not found' in response.data['detail']
+
+    # Verify no report was created
+    list_response = client_a.get('/api/reports/')
+    assert len(list_response.data) == 0

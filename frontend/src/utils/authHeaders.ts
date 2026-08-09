@@ -1,5 +1,9 @@
 function authHeaders() {
     const token = localStorage.getItem('authToken')
+    if (!token) {
+        window.location.href = '/login'
+        return {}
+    }
     const csrfToken = document.cookie
         .split('; ')
         .find(row => row.startsWith('csrftoken='))

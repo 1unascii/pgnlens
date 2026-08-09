@@ -1,6 +1,7 @@
 import { Outlet, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { FaSun, FaMoon } from 'react-icons/fa'
+import authHeaders from '../utils/authHeaders'
 
 function Navbar() {
     const [darkMode, setDarkMode] = useState(() => {
@@ -50,7 +51,11 @@ function Navbar() {
                     {isLoggedIn ? (
                         <>
                             <button
-                                onClick={() => {
+                                onClick={async () => {
+                                    await fetch('/api/auth/logout/', {
+                                        method: 'POST',
+                                        headers: authHeaders(),
+                                    })
                                     localStorage.removeItem('authToken')
                                     setIsLoggedIn(false)
                                     window.location.href = '/login'

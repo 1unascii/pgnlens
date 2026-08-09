@@ -10,7 +10,7 @@ class Game(models.Model):
     round = models.IntegerField(null=True, blank=True) # null if round is unknown (PGN uses "-" or "?")
     white_player = models.CharField(max_length=50) # e.g. "Magnus Carlsen"
     black_player = models.CharField(max_length=50) # e.g. "Hikaru Nakamura"
-    result = models.CharField(max_length=10) # e.g. "1-0", "0-1", "1/2-1/2", "*"
+    result = models.CharField(max_length=50) # e.g. "1-0", "0-1", "1/2-1/2", "*", "error: player not found"
     white_elo = models.IntegerField(null=True, blank=True) # null if ELO is unknown
     black_elo = models.IntegerField(null=True, blank=True) # null if ELO is unknown
     time_control = models.CharField(max_length=25) # e.g. "10+0" or "30/15"

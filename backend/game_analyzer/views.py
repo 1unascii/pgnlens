@@ -119,9 +119,28 @@ class ReportViewSet(viewsets.ModelViewSet):
         games = parse_pgn(file)
 
         # If no player_name provided, detect from the games
-        if not player_name:
-            player_name = detect_player_name(games)
+        #if not player_name:
+            #player_name = detect_player_name(games)
 
+        # If no player_name provided, return an error and don't create the report. I wanted to 
+        # originally allow the player name to be detected from the games, but decided against it.
+        if not player_name:
+            return Response({'detail': 'Player name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Prevent the user from mis typing their player name and creating a junk report.
+        player_in_all_games = all(
+            game.white_player == player_name
+            or game.black_player == player_name
+            for game in games
+        )
+
+        if not player_in_all_games:
+            return Response(
+                {'detail': f'Invalid player name: "{player_name}".'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # If the player name is found in the games, create the report.
         # Use provided report name, or fall back to the uploaded filename
         report_name = request.data.get('report_name', '').strip() or file.name
         report = Report.objects.create(
