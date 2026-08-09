@@ -9,6 +9,7 @@ import Practice from './pages/GameLobby'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ConfirmEmail from './pages/ConfirmEmail'
+import Profile from './pages/Profile'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/confirm-email/:key/" element={<ConfirmEmail />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 journal/
-DEVLOG.md
+devlogs/
 wireframe/
 .env
 db.sqlite3
@@ -8,10 +8,6 @@ __pycache__/
 staticfiles/
 frontend/node_modules/
 pgn/
-DEVLOG_FRONTEND.md
 BUGFIX.md
-start-backend.bat
-start-frontend.bat
-migrate.bat
+batch_files/
 sent_emails/
-DEVLOG_FEATURES.md

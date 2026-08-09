@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 function ConfirmEmail() {
     const { key } = useParams()
+    //console.log('key:', key)
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
 

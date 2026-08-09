@@ -7,6 +7,10 @@ function Navbar() {
         return localStorage.getItem('theme') === 'dark'
     })
 
+    const [isLoggedIn, setIsLoggedIn] = useState(() => {                                        
+        return !!localStorage.getItem('authToken')
+    })
+
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark')
@@ -43,12 +47,32 @@ function Navbar() {
 
                     <span className="text-gray-400">|</span>
 
-                    <Link to="/login" className="hover:underline">
-                        Login
-                    </Link>
-                    <Link to="/register" className="hover:underline">
-                        Register
-                    </Link>
+                    {isLoggedIn ? (
+                        <>
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem('authToken')
+                                    setIsLoggedIn(false)
+                                    window.location.href = '/login'
+                                }}
+                                className="hover:underline"
+                            >
+                                Logout
+                            </button>
+                            <Link to="/profile" className="hover:underline">
+                                Profile
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login" className="hover:underline">
+                                Login
+                            </Link>
+                            <Link to="/register" className="hover:underline">
+                                Register
+                            </Link>
+                        </>
+                    )}
                 </div>
             </nav>
 

@@ -1,7 +1,8 @@
 import { useState } from 'react'                                                            
 
   function Login() {
-      const [email, setEmail] = useState('')
+      //const [email, setEmail] = useState('')
+      const [username, setUsername] = useState('')
       const [password, setPassword] = useState('')
       const [error, setError] = useState('')
 
@@ -19,7 +20,7 @@ import { useState } from 'react'
                   'Content-Type': 'application/json',
                   'X-CSRFToken': csrfToken || '',
               },
-              body: JSON.stringify({ email, password }),
+              body: JSON.stringify({ username,  password }),
           })
 
           if (response.ok) {
@@ -37,10 +38,10 @@ import { useState } from 'react'
               {error && <p className="text-red-500 mb-4">{error}</p>}
               <form onSubmit={handleSubmit} className="space-y-4">
                   <input
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       className="border rounded p-2 w-full"
                   />
                   <input

@@ -1,31 +1,22 @@
 import { useState } from 'react'
+import authHeaders from '../utils/authHeaders'
 
-async function uploadPGNFileAndCreateReport(file: File, playerName: string) {
-    
-    const csrfToken = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('csrftoken='))
-          ?.split('=')[1]
-    if (!csrfToken) {
-        throw new Error('CSRF token not found')
-    }
+async function uploadPGNFileAndCreateReport(
+    file: File, playerName: string
+) {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('player_name', playerName)
 
     const response = await fetch('/api/reports/', {
         method: 'POST',
-        headers: {
-            'X-CSRFToken': csrfToken,
-        },
-        body: formData, // send the form data to the server
-        
+        headers: authHeaders(),
+        body: formData,
     })
 
     const result = await response.json()
     console.log('Created report:', result)
-    return result // return the result to the caller
-    
+    return result
 }
 
 function ReportsCreate() {

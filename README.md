@@ -1,88 +1,193 @@
 # PGNLens
 
-A chess opening analysis tool. Upload PGN files to analyze your games, identify weak openings, and practice specific lines.
+A chess game analysis tool. Upload PGN files, generate
+reports on your opening performance, and review
+individual games with board replay.
 
-## Setup
+Built with Django REST Framework (backend) and
+React + TypeScript (frontend).
 
-### Requirements
+## Prerequisites
 
 - Python 3.14+
 - Node.js 18+
 - PostgreSQL 17+
 - pipenv (`pip install pipenv`)
 
-### Install
+## Setup
+
+### 1. Clone the repo
 
 ```bash
+git clone <repo-url>
 cd pgnlens
-pipenv install
-cd frontend
+```
+
+### 2. Create the .env file
+
+Create a `.env` file in the project root:
+
+```
+SECRET_KEY=your-secret-key-here
+DATABASE_URL=postgres://postgres:YOUR_PASSWORD@localhost:5432/pgnlens
+RESEND_API_KEY=re_your_api_key_here
+DEFAULT_FROM_EMAIL=noreply@yourdomain.com
+EMAIL_HOST_USER=resend
+```
+
+The Resend settings are for email verification. If you
+don't have a Resend account, switch to the console
+backend in `backend/backend/settings.py`:
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+```
+
+and comment out the SMTP settings below it.
+Verification links will print to the terminal instead
+of being emailed.
+
+Generate a secret key with:
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+### 3. Create the database
+
+```bash
+psql -U postgres -c "CREATE DATABASE pgnlens;"
+```
+
+### 4. Install backend dependencies
+
+```bash
+cd backend
+pipenv install --dev
+```
+
+### 5. Run migrations
+
+```bash
+pipenv run python manage.py migrate
+```
+
+### 6. Create a superuser
+
+```bash
+pipenv run python manage.py createsuperuser
+```
+
+### 7. Install frontend dependencies
+
+```bash
+cd ../frontend
 npm install
 ```
 
-### Development
+## Running the dev servers
 
-Terminal 1 — Backend:
+Start both servers in separate terminals:
+
+**Backend** (port 8002):
 
 ```bash
-cd pgnlens
-pipenv shell
 cd backend
-python manage.py migrate
-python manage.py runserver 8002
+pipenv run python manage.py runserver 8002
 ```
 
-Terminal 2 — Frontend:
+**Frontend** (port 5173):
 
 ```bash
-cd pgnlens/frontend
+cd frontend
 npm run dev
 ```
 
-### Production
+Open http://localhost:5173 in the browser. The Vite
+dev server proxies `/api/*` requests to Django on
+port 8002.
 
-Terminal 1 — Backend:
+## Running tests
+
+**Backend:**
 
 ```bash
-cd pgnlens
-pipenv shell
 cd backend
-python serve.py
+pipenv run pytest
 ```
 
-Terminal 2 — Frontend:
+**Frontend:**
 
 ```bash
-cd pgnlens/frontend
-npm run build
+cd frontend
+npm test
 ```
 
-### Environment
-
-Create `.env` in the project root (`pgnlens/`):
-
-```
-DEBUG=True
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=postgres://postgres:YOUR_PASSWORD@127.0.0.1:5432/pgnlens
-```
-
-## Project Structure
+## Project structure
 
 ```
 pgnlens/
-├── backend/
-│   ├── manage.py
-│   ├── backend/         ← settings
-│   └── game_analyzer/   ← app
-├── frontend/
-│   └── src/             ← React + TypeScript
-└── wireframe/
+    .env
+    backend/
+        backend/
+            settings.py
+            urls.py
+        game_analyzer/
+            models.py
+            views.py
+            serializers.py
+            pgn_parser.py
+            adapter.py
+            tests/
+        eco/
+    frontend/
+        public/
+            data/
+                eco.json
+            piece/
+            sound/
+        src/
+            components/
+            pages/
+            utils/
+            types.ts
+            App.tsx
+        vite.config.ts
+        package.json
 ```
+
+## API endpoints
+
+| Method | URL | Description |
+|--------|-----|-------------|
+| GET | /api/games/ | List all games |
+| GET | /api/games/?report=ID | List games for a report |
+| GET | /api/games/ID/ | Game detail with moves |
+| GET | /api/reports/ | List user's reports |
+| POST | /api/reports/ | Upload PGN + create report |
+| DELETE | /api/reports/ID/ | Delete a report |
+| POST | /api/auth/login/ | Login |
+| POST | /api/auth/logout/ | Logout |
+| POST | /api/auth/registration/ | Register |
+| POST | /api/auth/verify-email/ | Verify email |
+| GET | /api/auth/user/ | Current user info |
+
+## Authentication
+
+Uses dj-rest-auth with django-allauth. Token-based
+authentication. Login accepts username or email.
+Email verification is mandatory.
+
+Reports are scoped to the authenticated user.
+Games are public.
 
 ## Stack
 
 - Django + Django REST Framework
 - React + TypeScript (Vite)
+- Tailwind CSS
 - PostgreSQL
-- JWT authentication
+- Token authentication (dj-rest-auth + django-allauth)
+- Resend (email verification)
+- Vitest (frontend tests)
+- pytest (backend tests)

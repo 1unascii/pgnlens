@@ -10,6 +10,7 @@ import OpeningBarChart from '../components/OpeningBarChart'
 import StatCard from '../components/StatCard'
 import GameCard from '../components/GameCard'
 import filterSortPaginate from '../utils/filterSortPaginate'
+import authHeaders from '../utils/authHeaders'
 
 
 function ReportView() {
@@ -72,14 +73,13 @@ function ReportView() {
     // Fetch the report data from the API when the component mounts.
     // The [id] dependency means this re-runs if the URL id changes.
     useEffect(() => {
-
-        // Fetch the report data from the API
-        fetch(`/api/reports/${id}/`)
+        const headers = authHeaders()
+    
+        fetch(`/api/reports/${id}/`, { headers })
             .then(response => response.json())
             .then(data => setReport(data))
-
-        // Fetch the game cards data from the API
-        fetch(`/api/games/?report=${id}`)
+    
+        fetch(`/api/games/?report=${id}`, { headers })
             .then(response => response.json())
             .then(data => setGameCards(data))
     }, [id])

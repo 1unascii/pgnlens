@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import type { Report } from '../types.ts'
 import { FaTrash, FaFolderOpen } from 'react-icons/fa'
+import authHeaders from '../utils/authHeaders.ts'
 
 /* ========================================================
 This page is the main page for the report index. It displays
@@ -22,24 +23,21 @@ function ReportIndex() {
   const [reports, setReports] = useState<Report[]>([])
 
   useEffect(() => {
-      fetch('/api/reports/')
+      fetch('/api/reports/', {
+          headers: authHeaders(),
+      })
           .then(response => response.json())
           .then(data => setReports(data))
   }, [])
 
   async function deleteReport(reportId: number) {
-    const csrfToken = document.cookie                                                    
-        .split('; ')
-        .find(row => row.startsWith('csrftoken='))
-        ?.split('=')[1]
-
-    await fetch(`/api/reports/${reportId}/`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRFToken': csrfToken || '',
-        },
-    })
-    setReports(reports.filter(report => report.id !== reportId))
+      await fetch(`/api/reports/${reportId}/`, {
+          method: 'DELETE',
+          headers: authHeaders(),
+      })
+      setReports(reports.filter(
+          report => report.id !== reportId
+      ))
   }
 
   return (
@@ -56,7 +54,7 @@ function ReportIndex() {
                   <h2 className="text-lg font-bold">{report.report_name}</h2>
                   <button onClick={() => deleteReport(report.id)}><FaTrash /></button>
               </div>
-              <p>Games: {report.total_games} | Win Rate: {report.win_rate}% | Openings: {report.opening_family_count}</p>
+              <p>Games: {report.all_games_stats.total_games} | Win Rate: {report.all_games_stats.win_rate}% | Openings: {report.all_games_stats.opening_family_count}</p>
               <hr className="my-2" />
               <div className="flex justify-between items-center">
                   <p className="text-sm text-gray-500">{report.created_at}</p>
