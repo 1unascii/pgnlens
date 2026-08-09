@@ -157,6 +157,8 @@ REST_FRAMEWORK = {
 
 # allauth settings
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_UNIQUE_USERNAME = True
 ACCOUNT_LOGIN_METHODS = {'username', 'email'} # currently won't accept email unless the form field format is changed.
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'

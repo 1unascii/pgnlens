@@ -53,6 +53,7 @@ function ReportView() {
     })
     const linesPerPage = 5
     const [minimumGames, setMinimumGames] = useState(1)
+    const [openingSearch, setOpeningSearch] = useState('')
     const [expandedFamily, setExpandedFamily] = useState<string | null>(null)
     const [expandedLine, setExpandedLine] = useState<string | null>(null)
     const [gameCards, setGameCards] = useState<GameCardData[]>([])
@@ -114,14 +115,14 @@ function ReportView() {
     // Each entry becomes { name: "Sicilian Defense", wins: 10, ..., fill: "#4f46e5" }.
     // Then we sort by whichever column the user picked (total games or win rate).
     const openingFamilyBarChartData = filterSortPaginate(
-        reportStats.opening_family_stats,
-        minimumGames,
-        sortBy.barChart,
-        sortDirection.barChart,
-        0,
-        Infinity
-    )
-    .map(([name, stats], index) => ({
+        reportStats.opening_family_stats, {
+            minimumGames,
+            sortField: sortBy.barChart,
+            sortDirection: sortDirection.barChart,
+            page: 0,
+            perPage: Infinity,
+        }
+    ).map(([name, stats], index) => ({
         name,
         ...stats,
         fill: CHART_COLORS[index % CHART_COLORS.length]
@@ -215,15 +216,28 @@ function ReportView() {
 
                 </div>
 
+                <input
+                    type="text"
+                    placeholder="Search openings..."
+                    value={openingSearch}
+                    onChange={(e) => {
+                        setOpeningSearch(e.target.value)
+                        setCurrentPage({ ...currentPage, allOpenings: 0 })
+                    }}
+                    className="border rounded p-1 w-full mb-2 bg-white dark:bg-gray-800"
+                />
+
                 {/* CARDS #1 - OPENING FAMILIES */}
                 <div className="space-y-4">
                     {filterSortPaginate(
-                            reportStats.opening_family_stats,
-                            minimumGames,
-                            sortBy.allOpenings,
-                            sortDirection.allOpenings,
-                            currentPage.allOpenings,
-                            linesPerPage
+                            reportStats.opening_family_stats, {
+                                minimumGames,
+                                sortField: sortBy.allOpenings,
+                                sortDirection: sortDirection.allOpenings,
+                                page: currentPage.allOpenings,
+                                perPage: linesPerPage,
+                                searchTerm: openingSearch,
+                            }
                         )
                         .map(([name, stats]) => (
                             <OpeningFamilyCard
@@ -245,8 +259,10 @@ function ReportView() {
                 {/* PAGINATION #1 - OPENING FAMILIES */}
                 <PaginationControls
                     currentPage={currentPage.allOpenings}
-                    totalItems={Object.values(reportStats.opening_family_stats)
-                        .filter(s => s.total >= minimumGames).length}
+                    totalItems={Object.entries(reportStats.opening_family_stats)
+                        .filter(([name, s]) => s.total >= minimumGames
+                            && (!openingSearch || name.toLowerCase().includes(openingSearch.toLowerCase()))
+                        ).length}
                     itemsPerPage={linesPerPage}
                     onChange={(page) => setCurrentPage({ ...currentPage, allOpenings: page })}
                 />
@@ -275,13 +291,14 @@ function ReportView() {
                 {/* CARDS #2 - LINES THAT NEED PRACTICE */}
                 <div className="space-y-4">
                     {filterSortPaginate(
-                        reportStats.opening_line_stats,
-                        minimumGames,
-                        sortBy.weakLines,
-                        sortDirection.weakLines,
-                        currentPage.weakLines,
-                        linesPerPage,
-                        50
+                        reportStats.opening_line_stats, {
+                            minimumGames,
+                            sortField: sortBy.weakLines,
+                            sortDirection: sortDirection.weakLines,
+                            page: currentPage.weakLines,
+                            perPage: linesPerPage,
+                            winRateCap: 50,
+                        }
                     )
                         .map(([name, stats]) => (
                             <div key={name}>

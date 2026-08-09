@@ -1,19 +1,28 @@
 import type { OpeningStats } from "../types"
 
-// Each card in the ReportView is filtered, sorted, and paginated independently.
+interface FilterSortPaginateOptions {
+    minimumGames: number
+    sortField: 'total' | 'win_rate'
+    sortDirection: 'asc' | 'desc'
+    page: number
+    perPage: number
+    winRateCap?: number
+    searchTerm?: string
+}
+
 function filterSortPaginate(
     stats: Record<string, OpeningStats>,
-    minimumGames: number,
-    sortField: 'total' | 'win_rate',
-    sortDirection: 'asc' | 'desc',
-    page: number,
-    perPage: number,
-    winRateCap?: number
+    options: FilterSortPaginateOptions
 ) {
+    const { minimumGames, sortField, sortDirection,
+            page, perPage, winRateCap, searchTerm } = options
+
     return Object.entries(stats)
-        .filter(([, s]) => s.total >= minimumGames
-            && (winRateCap === undefined
-                || s.win_rate < winRateCap))
+        .filter(([name, s]) =>
+            s.total >= minimumGames
+            && (winRateCap === undefined || s.win_rate < winRateCap)
+            && (!searchTerm || name.toLowerCase().includes(searchTerm.toLowerCase()))
+        )
         .sort((a, b) =>
             sortDirection === 'desc'
                 ? b[1][sortField] - a[1][sortField]

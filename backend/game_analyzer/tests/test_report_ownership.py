@@ -165,7 +165,7 @@ def test_invalid_player_name_returns_error(client_a):
             format='multipart',
         )
     assert response.status_code == 400
-    assert 'not found' in response.data['detail']
+    assert 'Invalid player name' in response.data['detail']
 
     # Verify no report was created
     list_response = client_a.get('/api/reports/')

@@ -6,7 +6,7 @@ import { useState } from 'react'
       const [password, setPassword] = useState('')
       const [error, setError] = useState('')
 
-      const handleSubmit = async (event: React.FormEvent) => {
+      const handleSubmit = async (event: React.SyntheticEvent) => {
           event.preventDefault()
 
           const csrfToken = document.cookie
@@ -28,7 +28,7 @@ import { useState } from 'react'
               localStorage.setItem('authToken', data.key)
               window.location.href = '/reports'
           } else {
-              setError('Invalid email or password.')
+              setError('Invalid username or password.')
           }
       }
 

@@ -8,6 +8,5 @@ __pycache__/
 staticfiles/
 frontend/node_modules/
 pgn/
-BUGFIX.md
-batch_files/
+#batch_files/
 sent_emails/

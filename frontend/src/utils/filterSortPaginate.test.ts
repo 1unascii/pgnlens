@@ -27,30 +27,38 @@ const mockStats = {
     },
 }
 
+const defaults = {
+    minimumGames: 1,
+    sortField: 'total' as const,
+    sortDirection: 'desc' as const,
+    page: 0,
+    perPage: Infinity,
+}
+
 describe('filterSortPaginate', () => {
 
     it('returns entries with total >= minimumGames', () => {
-        const result = filterSortPaginate(
-            mockStats, 5, 'total', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, minimumGames: 5,
+        })
         result.forEach(([, stats]) => {
             expect(stats.total).toBeGreaterThanOrEqual(5)
         })
     })
 
     it('filters out entries below minimumGames', () => {
-        const result = filterSortPaginate(
-            mockStats, 5, 'total', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, minimumGames: 5,
+        })
         const names = result.map(([name]) => name)
         expect(names).not.toContain('Italian Game')
         expect(names).not.toContain('Caro-Kann')
     })
 
     it('sorts descending when direction is desc', () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, sortDirection: 'desc',
+        })
         for (let i = 0; i < result.length - 1; i++) {
             expect(result[i][1].total)
                 .toBeGreaterThanOrEqual(result[i + 1][1].total)
@@ -58,9 +66,9 @@ describe('filterSortPaginate', () => {
     })
 
     it('sorts ascending when direction is asc', () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'asc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, sortDirection: 'asc',
+        })
         for (let i = 0; i < result.length - 1; i++) {
             expect(result[i][1].total)
                 .toBeLessThanOrEqual(result[i + 1][1].total)
@@ -68,48 +76,46 @@ describe('filterSortPaginate', () => {
     })
 
     it('sorts by total when sortField is total', () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, sortField: 'total',
+        })
         expect(result[0][0]).toBe('Sicilian Defense')
     })
 
     it('sorts by win_rate when sortField is win_rate', () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'win_rate', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, sortField: 'win_rate',
+        })
         expect(result[0][0]).toBe('Caro-Kann')
     })
 
-    it('returns correct page slice (page 0, 2 per page)',
-    () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 0, 2
-        )
+    it('returns correct page slice (page 0, 2 per page)', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, page: 0, perPage: 2,
+        })
         expect(result).toHaveLength(2)
     })
 
-    it('returns correct page slice (page 1, 2 per page)',
-    () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 1, 2
-        )
+    it('returns correct page slice (page 1, 2 per page)', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, page: 1, perPage: 2,
+        })
         expect(result).toHaveLength(2)
         expect(result[0][0]).not.toBe('Sicilian Defense')
     })
 
-    it('returns empty array when no entries pass filter',
-    () => {
-        const result = filterSortPaginate(
-            mockStats, 100, 'total', 'desc', 0, Infinity
-        )
+    it('returns empty array when no entries pass filter', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, minimumGames: 100,
+        })
         expect(result).toEqual([])
     })
 
     it('filters by winRateCap when provided', () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'win_rate', 'asc', 0, Infinity, 50
-        )
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, sortField: 'win_rate',
+            sortDirection: 'asc', winRateCap: 50,
+        })
         result.forEach(([, stats]) => {
             expect(stats.win_rate).toBeLessThan(50)
         })
@@ -119,26 +125,43 @@ describe('filterSortPaginate', () => {
         expect(names).not.toContain('Sicilian Defense')
     })
 
-    it('returns all entries when winRateCap is undefined',
-    () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 0, Infinity
-        )
+    it('returns all entries when winRateCap is undefined', () => {
+        const result = filterSortPaginate(mockStats, defaults)
         expect(result).toHaveLength(6)
     })
 
     it('handles empty stats object', () => {
-        const result = filterSortPaginate(
-            {}, 1, 'total', 'desc', 0, Infinity
-        )
+        const result = filterSortPaginate({}, defaults)
         expect(result).toEqual([])
     })
 
-    it('returns empty array for page beyond total items',
-    () => {
-        const result = filterSortPaginate(
-            mockStats, 1, 'total', 'desc', 10, 5
-        )
+    it('returns empty array for page beyond total items', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, page: 10, perPage: 5,
+        })
         expect(result).toEqual([])
+    })
+
+    it('filters by searchTerm', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, searchTerm: 'sicilian',
+        })
+        expect(result).toHaveLength(1)
+        expect(result[0][0]).toBe('Sicilian Defense')
+    })
+
+    it('searchTerm is case insensitive', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, searchTerm: 'FRENCH',
+        })
+        expect(result).toHaveLength(1)
+        expect(result[0][0]).toBe('French Defense')
+    })
+
+    it('returns all when searchTerm is empty', () => {
+        const result = filterSortPaginate(mockStats, {
+            ...defaults, searchTerm: '',
+        })
+        expect(result).toHaveLength(6)
     })
 })

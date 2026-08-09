@@ -123,6 +123,19 @@ cd frontend
 npm test
 ```
 
+## Batch files (Windows)
+
+The `batch_files/` folder has shortcuts that open
+a Git Bash window for common tasks:
+
+| File | What it does |
+|------|-------------|
+| `start-backend.bat` | Starts the Django dev server |
+| `start-frontend.bat` | Starts the Vite dev server |
+| `test-backend.bat` | Runs backend pytest suite |
+| `test-frontend.bat` | Runs frontend Vitest suite |
+| `migrate.bat` | Runs Django migrations |
+
 ## Project structure
 
 ```

@@ -153,7 +153,6 @@ def classify_opening(fen_matches):
 
     # Check for a KEYWORD match first
     for potential_match in fen_matches:
-
         
         for keyword, family_name in FAMILY_KEYWORDS.items():
             if keyword in potential_match["name"]:
@@ -174,7 +173,7 @@ def classify_opening(fen_matches):
     if not opening_family:
         opening_family = last_match["name"].split(":")[0].split(",")[0].strip()
 
-    # Known quirks (ECO data issues, not logic bugs):
+    # Known issues with the ECO table:
     #
     # - "Queen's Pawn" vs "Queen's Pawn Game" — the ECO data uses both names
     #   for different positions, so they end up as separate families.
@@ -186,17 +185,13 @@ def classify_opening(fen_matches):
     # - "King's Pawn Game" still appears for games where no more specific
     #   match exists (e.g. 1. e4 e5 2. Ke2).
     #
-    # TODO: A FAMILY_ALIASES map could normalize the remaining duplicates:
-    #   "Scandinavian" -> "Scandinavian Defense"
-    #   "Scotch" -> "Scotch Game"
-    #   "Sicilian" -> "Sicilian Defense"
-    #   "Caro-Kann" -> "Caro-Kann Defense"
-    #   "Van Geet" -> "Van Geet Opening"
-    #   "QGD" -> "Queen's Gambit Declined"
-    #   "Pirc" -> "Pirc Defense"
-    #   "Modern" -> "Modern Defense"
-    #   "Vienna" -> "Vienna Game"
-    #   "Queen's Pawn" -> "Queen's Pawn Game"
+    # Normalize the opening family name to the most common name.
+    FAMILY_ALIASES = {
+        "QGD": "Queen's Gambit Declined",
+        "Queen's Pawn": "Queen's Pawn Game"
+    }
+
+    opening_family = FAMILY_ALIASES.get(opening_family, opening_family)
 
     return {
         "eco_code": last_match["eco_code"],
@@ -216,6 +211,7 @@ def detect_player_name(games):
         raise ValueError("No games to detect player name from.")
 
     names = []
+
     for game in games:
         names.append(game.white_player)
         names.append(game.black_player)
