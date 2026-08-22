@@ -26,10 +26,10 @@ environ.Env.read_env(BASE_DIR.parent / '.env')
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG', default=True)
 
 # Empty is fine for local dev with DEBUG=True. Add your domain here for production.
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=[])
 
 # Application definition
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,7 +73,9 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+	    BASE_DIR.parent / 'frontend' / 'dist',
+	],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,13 +133,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR.parent / 'frontend' / 'dist' / 'assets',
+]
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',
+	'https://pgnlens.com',
+	'https://www.pgnlens.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
+	'https://pgnlens.com',
+	'https://www.pgnlens.com',
 ]
 
 # authentication settings
@@ -157,8 +168,6 @@ REST_FRAMEWORK = {
 
 # allauth settings
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_UNIQUE_USERNAME = True
 ACCOUNT_LOGIN_METHODS = {'username', 'email'} # currently won't accept email unless the form field format is changed.
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'
@@ -173,14 +182,8 @@ ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'
 
 #Add the credentials to your `.env` file:
 
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('RESEND_API_KEY')
-
 #**Other services:** SendGrid, Mailgun, Amazon SES.
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.resend.backend.ResendBackend'
 EMAIL_HOST = 'smtp.resend.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-EMAIL_TIMEOUT = 30 # 30 seconds

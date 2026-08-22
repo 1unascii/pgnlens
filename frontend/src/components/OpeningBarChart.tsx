@@ -7,10 +7,8 @@ interface ChartDataEntry {
     fill: string
 }
 
-type ToolTipContents = { payload?: { total: number } }
-
-function formatToolTip(_value: number, _name: string, { payload }: ToolTipContents) {
-    return [`${payload?.total ?? 0} games`]
+function formatToolTip(_value: number | string | undefined, _name: string, entry: { payload?: { total: number } }) {
+    return [`${entry.payload?.total ?? 0} games`]
 }
 
 interface OpeningBarChartProps {
@@ -38,7 +36,7 @@ function OpeningBarChart({ data }: OpeningBarChartProps) {
                     tick={{ fontSize: 12 }}
                 />
                 <YAxis />
-                <Tooltip formatter={formatToolTip} />
+                <Tooltip formatter={formatToolTip as never} />
                 <Bar dataKey="win_rate" fill="#4f46e5" />
             </BarChart>
         </ResponsiveContainer>

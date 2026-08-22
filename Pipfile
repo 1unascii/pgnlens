@@ -12,6 +12,7 @@ ipython = "*"
 dj-rest-auth = "*"
 django-allauth = "*"
 resend = "*"
+whitenoise = "*"
 
 [dev-packages]
 pytest-django = "*"
