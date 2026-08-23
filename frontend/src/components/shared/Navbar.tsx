@@ -1,7 +1,7 @@
 import { Outlet, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { FaSun, FaMoon } from 'react-icons/fa'
-import authHeaders from '../utils/authHeaders'
+import authHeaders from '../../utils/authHeaders'
 
 function Navbar() {
     const [darkMode, setDarkMode] = useState(() => {

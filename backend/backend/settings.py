@@ -184,6 +184,13 @@ ACCOUNT_ADAPTER = 'game_analyzer.adapter.CustomAccountAdapter'
 
 #**Other services:** SendGrid, Mailgun, Amazon SES.
 
-EMAIL_BACKEND = 'django.resend.backend.ResendBackend'
-EMAIL_HOST = 'smtp.resend.com'
+#EMAIL_BACKEND = 'django.resend.backend.ResendBackend'
+#EMAIL_HOST = 'smtp.resend.com'
+#DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_BACKEND = 'game_analyzer.email_handler.ResendHTTPBackend'
+RESEND_API_KEY = env('RESEND_API_KEY')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+# Uses the path from .env if set, otherwise assumes                                            
+# stockfish is available on the system PATH                                                    
+STOCKFISH_PATH = env('STOCKFISH_PATH', default='stockfish') 

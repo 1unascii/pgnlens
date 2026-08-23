@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from game_analyzer.views import GameViewSet, ReportViewSet, verify_email
+from game_analyzer.views import (
+    GameViewSet, ReportViewSet, verify_email,
+    analyze_game,
+)
 from django.views.generic import TemplateView
 
 # DefaultRouter auto-generates URL routes for all registered viewsets
@@ -27,11 +30,15 @@ router.register(r'games', GameViewSet)  # /api/games/
 router.register(r'reports', ReportViewSet)  # /api/reports/ (POST here uploads a PGN)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),        # Django admin panel
-    path('api/', include(router.urls)),     # REST API endpoints
-    path('api/auth/verify-email/', verify_email),  # email verification — must be before the includes
-    path('api/auth/', include('dj_rest_auth.urls')),  # login/logout/password endpoints
-    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),  # registration endpoints
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('api/auth/verify-email/', verify_email),
+    path('api/auth/', include('dj_rest_auth.urls')),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/games/<int:game_id>/analyze/', analyze_game),
+    # Catch-all: serve React app for any non-API
+    # route. MUST be last or it intercepts API
+    # requests.
     path('', TemplateView.as_view(template_name='index.html')),
     path('<path:path>', TemplateView.as_view(template_name='index.html')),
 ]

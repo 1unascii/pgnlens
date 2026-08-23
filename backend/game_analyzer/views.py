@@ -7,6 +7,8 @@ from collections import defaultdict
 from .models import Game, Report, ReportGame
 from .serializers import GameSerializer, GameCardSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn, detect_player_name
+from .stockfish_analyzer import analyze_all_moves
+from django.views.decorators.csrf import csrf_exempt
 
 
 # ModelViewSet gives you full CRUD at /api/games/ automatically:
@@ -175,7 +177,6 @@ class ReportViewSet(viewsets.ModelViewSet):
             'player_name': player_name,
         })
 
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def verify_email(request):
@@ -193,3 +194,36 @@ def verify_email(request):
 
     confirmation.confirm(request)
     return Response({'detail': 'Email verified successfully.'}, status=status.HTTP_200_OK)
+
+import threading
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def analyze_game(request, game_id):
+    """Analyze all moves in a game at the requested depth.
+    Depths <= 15 run synchronously (fast, frontend waits for results).
+    Depth > 15 runs in a background thread (slow, frontend polls for results)."""
+    try:
+        game = Game.objects.get(id=game_id)
+    except Game.DoesNotExist:
+        return Response({'detail': 'Game not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    depth = request.query_params.get('depth')
+    nodes = request.query_params.get('nodes')
+
+    if nodes:
+        # Node-limited deep pass — background thread so polls can pick up partial results
+        def run_analysis(game_id, nodes):
+            from django.db import connection
+            connection.close()
+            game = Game.objects.get(id=game_id)
+            analyze_all_moves(game, nodes=int(nodes), final_pass=True)
+
+        thread = threading.Thread(target=run_analysis, args=(game_id, int(nodes)))
+        thread.daemon = True
+        thread.start()
+        return Response({ 'game_id': game.id, 'moves': game.moves })
+    else:
+        # Depth-limited passes — synchronous
+        analyze_all_moves(game, depth=int(depth or 15))
+        return Response({ 'game_id': game.id, 'moves': game.moves })

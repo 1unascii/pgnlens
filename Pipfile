@@ -11,8 +11,8 @@ requests = "*"
 ipython = "*"
 dj-rest-auth = "*"
 django-allauth = "*"
-resend = "*"
 whitenoise = "*"
+resend = "*"
 
 [dev-packages]
 pytest-django = "*"

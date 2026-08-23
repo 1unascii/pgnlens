@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navbar from './components/shared/Navbar'
 import ReportIndex from './pages/ReportIndex'
 import ReportView from './pages/ReportView'
 import ReportCreate from './pages/ReportCreate'

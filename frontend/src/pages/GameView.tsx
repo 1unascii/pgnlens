@@ -3,28 +3,11 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { Chess } from 'chess.js'
 import { Chessboard } from 'react-chessboard'
 import type { Game } from '../types'
+import EvalBar from '../components/gameview/EvalBar'
+import PlayerBar from '../components/gameview/PlayerBar'
+import InfoPanel from '../components/gameview/InfoPanel'
 
 const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
-
-import {
-    FaChessKing, FaChessQueen, FaChessRook,
-    FaChessBishop, FaChessKnight, FaChessPawn
-} from 'react-icons/fa'
-
-const pieceIconMap: Record<string, React.ReactNode> = {
-    K: <FaChessKing className="text-white" />,
-    Q: <FaChessQueen className="text-white" />,
-    R: <FaChessRook className="text-white" />,
-    B: <FaChessBishop className="text-white" />,
-    N: <FaChessKnight className="text-white" />,
-    P: <FaChessPawn className="text-white" />,
-    k: <FaChessKing className="text-black" />,
-    q: <FaChessQueen className="text-black" />,
-    r: <FaChessRook className="text-black" />,
-    b: <FaChessBishop className="text-black" />,
-    n: <FaChessKnight className="text-black" />,
-    p: <FaChessPawn className="text-black" />,
-}
 
 function getCapturedPieces(fen: string) {
     const boardPart = fen.split(' ')[0]
@@ -82,17 +65,23 @@ function GameView() {
     const opponentElo = playerColor === 'white' ? game?.black_elo : game?.white_elo
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0)
     const [FENpositions, setFENPositions] = useState<string[]>([])
-
+    const [analysisComplete, setAnalysisComplete] = useState(false)
+    const [FENComputed, setFENComputed] = useState(false)
     
-    //TODO:current FEN match (the last FEN match that was reached)
-    const [ecoLookup, setEcoLookup] = useState<Record<string, { eco: string, name: string       
-    }>>({})
+    //FEN matches (the last FEN match that was reached)
+    const [ecoLookup, setEcoLookup] = useState<Record<string, { eco: string, name: string }>>({})
     const [FENMatches, setFENMatches] = useState<{ name: string, halfMove: number }[]>([])
+
     useEffect(() => {
         fetch('/data/eco.json')
             .then(response => response.json())
             .then(data => setEcoLookup(data))
     }, [])
+
+    function goToMove(halfMove: number) {
+        setCurrentMoveIndex(halfMove)
+        playMoveSound()
+    }
 
     function playMoveSound() {
         new Audio('/sound/lichess/standard/Move.mp3').play()
@@ -106,7 +95,7 @@ function GameView() {
     }, [id])
 
     useEffect(() => {
-        if (!game || game.moves.length === 0 || Object.keys(ecoLookup).length === 0) return     
+        if (!game || FENComputed || game.moves.length === 0 || Object.keys(ecoLookup).length === 0) return
   
         const chess = new Chess()
         const fenList = [chess.fen()]
@@ -140,19 +129,78 @@ function GameView() {
         }
         setFENPositions(fenList)
         setFENMatches(matches)
-    }, [game, ecoLookup])
+        setFENComputed(true)
+    }, [game, ecoLookup, FENComputed])
+
+    const [analysisDone, setAnalysisDone] = useState(false)
+
+    // Three-pass Stockfish analysis: depth 8 (quick), depth 15 (decent), depth 20 (accurate)
+    useEffect(() => {
+        if (!game) return
+
+        // Skip if already analyzed
+        const alreadyAnalyzed = game.moves.every((move: any) =>
+            (!move.white_move || move.white_eval !== null) &&
+            (!move.black_move || move.black_eval !== null)
+        )
+        if (alreadyAnalyzed) { setAnalysisDone(true); return }
+
+        // Pass 1: depth 8 — quick evals (~5-8 seconds), visible graph building
+        fetch(`/api/games/${id}/analyze/?depth=8`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
+                // Pass 2: depth 15 — commented out for now
+                // return fetch(`/api/games/${id}/analyze/?depth=15`)
+                // })
+                // .then(r => r.json())
+                // .then(data => {
+                // if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
+                // Pass 3: node-limited (~depth 18) — runs in background thread
+                // Response comes back immediately; poll picks up results as they save
+                fetch(`/api/games/${id}/analyze/?nodes=1500000`)
+            })
+            .catch(error => console.error('Analysis error:', error))
+    }, [game?.id])
+
+    // Poll game data to pick up partial results from background analysis.
+    // Stops when the server sets analysis_complete = true.
+    useEffect(() => {
+        if (!game) return
+
+        const poll = setInterval(() => {
+            fetch(`/api/games/${id}/`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
+                    if (data.analysis_complete) clearInterval(poll)
+                })
+        }, 3000)
+
+        return () => clearInterval(poll)
+    }, [game?.id])
 
     if (!game || FENpositions.length === 0) return <div>Loading...</div>
 
     const currentFENMatch = FENMatches
       .filter(match => match.halfMove <= currentMoveIndex)
       .at(-1)
-    const currentMoveRecord = game.moves[Math.floor(currentMoveIndex / 2)]
-    const isBlackTurn = currentMoveIndex % 2 === 0
-    const classification = isBlackTurn
-        ? currentMoveRecord?.black_classification
-        : currentMoveRecord?.white_classification
+      const currentMoveRecord = currentMoveIndex === 0
+      ? null
+      : game.moves[Math.floor((currentMoveIndex - 1) / 2)]
+    const isWhiteMove = currentMoveIndex % 2 === 1
+    const classification = currentMoveRecord
+      ? (isWhiteMove
+          ? currentMoveRecord.white_classification
+          : currentMoveRecord.black_classification)
+      : null
 
+    const currentEval = currentMoveIndex === 0
+    ? 0
+    : isWhiteMove
+        ? currentMoveRecord?.white_eval ?? null
+        : currentMoveRecord?.black_eval ?? null
+  
     
     const { whiteCaptured, blackCaptured } = getCapturedPieces(
         FENpositions[currentMoveIndex]
@@ -169,64 +217,44 @@ function GameView() {
     : blackCaptured
 
     return (
-        <div className="bg-white dark:bg-gray-800">
-            <h1>{game.white_player} vs {game.black_player} -- {game.date}</h1>
-            <p>Opening Family: {game.opening_family}</p>
-            <p>Opening Line: {game.opening_line}</p>
-            <p>Result: {game.result} -- {game.termination}</p>
-
-            {/* Opponent at top */}
-            <div className="flex items-center gap-2">
-                <span className="font-semibold">{opponentName}</span>
-                {opponentElo && <span className="text-sm text-gray-500">({opponentElo})</span>}
-                {/* Opponent's captured pieces go here */}
-                <div className="flex items-center gap-1">
-                    {playerMissingPieces.map((piece, index) => (
-                        <span key={index}>{pieceIconMap[piece]}</span>
-                    ))}
+        <div className="bg-white dark:bg-gray-800 p-4">
+            <div className="flex gap-4">
+                {/* Left column: opponent bar, eval bar + board, player bar */}
+                <div>
+                    <PlayerBar name={opponentName} elo={opponentElo} capturedPieces={playerMissingPieces} />
+                    <div className="flex gap-2">
+                        <EvalBar centipawns={currentEval} orientation={boardOrientation} />
+                        <div className="w-[768px] [image-rendering:pixelated]">
+                            <Chessboard options={{
+                                position: FENpositions[currentMoveIndex],
+                                pieces: makePieceSet('monarchy', 'webp'),
+                                darkSquareStyle: { backgroundColor: '#999' },
+                                lightSquareStyle: { backgroundColor: '#ddd' },
+                                boardOrientation: boardOrientation,
+                            }} />
+                        </div>
+                    </div>
+                    <PlayerBar name={playerName} elo={playerElo} capturedPieces={opponentMissingPieces} />
                 </div>
-            </div>
-
-            {/* Board */}
-            <div className="max-w-3xl [image-rendering:pixelated]">
-                
-                <Chessboard options={{
-                    position: FENpositions[currentMoveIndex],
-                    pieces: makePieceSet('monarchy', 'webp'),
-                    darkSquareStyle: { backgroundColor: '#999' },
-                    lightSquareStyle: { backgroundColor: '#ddd' },
-                    boardOrientation: boardOrientation,
-                }} />
-            </div>
-
-            {/* Player at bottom */}
-            <div className="flex items-center gap-2">
-                <span className="font-semibold">{playerName}</span>
-                {playerElo && <span className="text-sm text-gray-500">({playerElo})</span>}
-                {/* Player's captured pieces go here */}
-                <div className="flex items-center gap-1">
-                    {opponentMissingPieces.map((piece, index) => (
-                        <span key={index}>{pieceIconMap[piece]}</span>
-                    ))}
-                </div>
-            </div>
-
-            {/*TODO: current FEN match (the last FEN match that was reached) */}
-            {currentFENMatch && (
-                <p className="text-sm text-gray-500">
-                    Position: {currentFENMatch.name}
-                </p>
-            )}
-
-            {/* Move counter */}      
-            <p>Move: {currentMoveIndex} / {FENpositions.length - 1}</p>
-            {classification && <p>{classification}</p>}
-
-            <div>
-                <button onClick={() => {setCurrentMoveIndex(Math.min(FENpositions.length - 1, currentMoveIndex + 1)); playMoveSound()}}> Next |</button>
-                <button onClick={() => {setCurrentMoveIndex(Math.max(0, currentMoveIndex - 1)); playMoveSound()}}> | Previous |</button>
-                <button onClick={() => {setCurrentMoveIndex(0); playMoveSound()}}> | Start |</button> 
-                <button onClick={() => {setCurrentMoveIndex(FENpositions.length - 1); playMoveSound()}}> | End </button>
+    
+                {/* Right column: classification, move list, opening, eval graph, nav */}
+                <InfoPanel
+                    classification={classification}
+                    currentEval={currentEval}
+                    moves={game.moves}
+                    currentMoveIndex={currentMoveIndex}
+                    totalHalfMoves={FENpositions.length - 1}
+                    result={game.result}
+                    termination={game.termination}
+                    openingFamily={game.opening_family}
+                    openingMatch={currentFENMatch?.name ?? null}
+                    orientation={boardOrientation}
+                    onMoveClick={goToMove}
+                    onStart={() => goToMove(0)}
+                    onBack={() => goToMove(Math.max(0, currentMoveIndex - 1))}
+                    onForward={() => goToMove(Math.min(FENpositions.length - 1, currentMoveIndex + 1))}
+                    onEnd={() => goToMove(FENpositions.length - 1)}
+                />
             </div>
         </div>
     )

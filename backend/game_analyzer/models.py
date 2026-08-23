@@ -23,6 +23,7 @@ class Game(models.Model):
     opening_line = models.CharField(max_length=200, blank=True) # e.g. "King's Pawn Game: Sicilian Defense: Najdorf Variation"
     opening_family = models.CharField(max_length=200, blank=True) # e.g. "Sicilian Defense"
     moves = models.JSONField(default=list, blank=True) # structured move data with analysis info
+    analysis_complete = models.BooleanField(default=False) # True when deepest Stockfish pass is done
 
     def __str__(self):
         return f"{self.white_player} vs {self.black_player} on {self.date}"
