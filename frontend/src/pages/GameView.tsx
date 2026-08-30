@@ -173,7 +173,7 @@ function GameView() {
                         setPolling(false)
                     }
                 })
-        }, 3000)
+        }, 1000)
 
         return () => clearInterval(poll)
     }, [polling, game?.id])
