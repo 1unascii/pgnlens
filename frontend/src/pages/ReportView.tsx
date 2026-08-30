@@ -310,7 +310,7 @@ function ReportView() {
                                         {filteredGameCards
                                             .filter(game => game.opening_line === name)
                                             .map(game => (
-                                                <GameCard key={game.id} game={game} />
+                                                <GameCard key={game.id} game={game} playerName={report.player_name} />
                                             ))
                                         }
                                     </div>
