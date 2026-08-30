@@ -65,7 +65,6 @@ function GameView() {
     const opponentElo = playerColor === 'white' ? game?.black_elo : game?.white_elo
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0)
     const [FENpositions, setFENPositions] = useState<string[]>([])
-    const [analysisComplete, setAnalysisComplete] = useState(false)
     const [FENComputed, setFENComputed] = useState(false)
     
     //FEN matches (the last FEN match that was reached)
@@ -132,7 +131,7 @@ function GameView() {
         setFENComputed(true)
     }, [game, ecoLookup, FENComputed])
 
-    const [analysisDone, setAnalysisDone] = useState(false)
+    const [, setAnalysisDone] = useState(false)
 
     // Three-pass Stockfish analysis: depth 8 (quick), depth 16 (decent), 1.5M nodes (accurate)
     useEffect(() => {

@@ -1,4 +1,4 @@
-import type { OpeningStats, GameCardData } from '../types'                                    
+import type { OpeningStats, GameCardData } from '../../types'                                    
 import GameCard from './GameCard'
                                                                                               
   interface OpeningLineCardProps {

@@ -1,4 +1,4 @@
-import type { OpeningStats, ReportStats, GameCardData } from '../types'
+import type { OpeningStats, ReportStats, GameCardData } from '../../types'
 import OpeningLineCard from './OpeningLineCard'
 
 interface OpeningFamilyCardProps {
@@ -31,7 +31,7 @@ function OpeningFamilyCard({
 
             {isExpanded && (
                 <div className="mt-4 space-y-2" onClick={(e) => e.stopPropagation()}>
-                    {(reportStats.family_to_lines[name] || []).map(lineName => {
+                    {(reportStats.family_to_lines[name] || []).map((lineName: string) => {
                         const lineStats = reportStats.opening_line_stats[lineName]
                         if (!lineStats) return null
                         return (
