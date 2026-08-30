@@ -60,8 +60,9 @@ def analyze_all_moves(game, depth=None, nodes=None, final_pass=False):
             previous_eval = after_eval
 
         # Save after each move so the frontend can fetch partial results
-        game.moves = moves
-        game.save()
+        # Force a new list so Django's JSONField detects the change
+        game.moves = list(moves)
+        game.save(update_fields=['moves'])
         print(f"  game {game.id} | {limit_label}: move {index + 1}/{len(moves)} ({time.time() - start:.1f}s)")
 
     engine.quit()
