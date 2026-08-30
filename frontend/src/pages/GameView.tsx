@@ -145,20 +145,14 @@ function GameView() {
         )
         if (alreadyAnalyzed) return
 
-        // Pass 1: depth 8 — quick evals (~5-8 seconds), visible graph building
+        // Pass 1: depth 8 — synchronous, quick evals (~5-8 seconds)
         fetch(`/api/games/${id}/analyze/?depth=8`)
             .then(r => { if (!r.ok) throw new Error(`Depth 8 failed: ${r.status}`); return r.json() })
             .then(data => {
                 if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                // Pass 2: depth 16 — refine evaluations
-                return fetch(`/api/games/${id}/analyze/?depth=16`)
-            })
-            .then(r => { if (!r.ok) throw new Error(`Depth 16 failed: ${r.status}`); return r.json() })
-            .then(data => {
-                if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                // Pass 3: node-limited (~depth 18) — runs in background thread
-                // Response comes back immediately; start polling to pick up results
-                fetch(`/api/games/${id}/analyze/?nodes=1500000`)
+                // Pass 2+3: depth 16 then 1.5M nodes — both run in background sequentially
+                // Start polling to pick up progressive updates from both passes
+                fetch(`/api/games/${id}/analyze/?depth=16&nodes=1500000`)
                 setPolling(true)
             })
             .catch(error => console.error('Analysis error:', error))

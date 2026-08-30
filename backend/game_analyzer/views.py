@@ -211,19 +211,33 @@ def analyze_game(request, game_id):
     depth = request.query_params.get('depth')
     nodes = request.query_params.get('nodes')
 
-    if nodes:
+    if depth and nodes:
+        # Combined pass — run depth then nodes sequentially in background
+        def run_combined_analysis(game_id, depth, nodes):
+            from django.db import connection
+            connection.close()
+            game = Game.objects.get(id=game_id)
+            analyze_all_moves(game, depth=int(depth))
+            game.refresh_from_db()
+            analyze_all_moves(game, nodes=int(nodes), final_pass=True)
+
+        thread = threading.Thread(target=run_combined_analysis, args=(game_id, int(depth), int(nodes)))
+        thread.daemon = True
+        thread.start()
+        return Response({ 'game_id': game.id, 'moves': game.moves })
+    elif nodes:
         # Node-limited deep pass — background thread so polls can pick up partial results
-        def run_analysis(game_id, nodes):
+        def run_node_analysis(game_id, nodes):
             from django.db import connection
             connection.close()
             game = Game.objects.get(id=game_id)
             analyze_all_moves(game, nodes=int(nodes), final_pass=True)
 
-        thread = threading.Thread(target=run_analysis, args=(game_id, int(nodes)))
+        thread = threading.Thread(target=run_node_analysis, args=(game_id, int(nodes)))
         thread.daemon = True
         thread.start()
         return Response({ 'game_id': game.id, 'moves': game.moves })
     else:
-        # Depth-limited passes — synchronous
-        analyze_all_moves(game, depth=int(depth or 15))
+        # Depth-limited pass — synchronous (fast enough to wait)
+        analyze_all_moves(game, depth=int(depth or 8))
         return Response({ 'game_id': game.id, 'moves': game.moves })
