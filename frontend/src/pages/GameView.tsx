@@ -134,7 +134,7 @@ function GameView() {
 
     const [analysisDone, setAnalysisDone] = useState(false)
 
-    // Three-pass Stockfish analysis: depth 8 (quick), depth 15 (decent), depth 20 (accurate)
+    // Three-pass Stockfish analysis: depth 8 (quick), depth 16 (decent), 1.5M nodes (accurate)
     useEffect(() => {
         if (!game) return
 
@@ -150,12 +150,12 @@ function GameView() {
             .then(r => r.json())
             .then(data => {
                 if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                // Pass 2: depth 15 — commented out for now
-                // return fetch(`/api/games/${id}/analyze/?depth=15`)
-                // })
-                // .then(r => r.json())
-                // .then(data => {
-                // if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
+                // Pass 2: depth 16 — refine evaluations
+                return fetch(`/api/games/${id}/analyze/?depth=16`)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
                 // Pass 3: node-limited (~depth 18) — runs in background thread
                 // Response comes back immediately; poll picks up results as they save
                 fetch(`/api/games/${id}/analyze/?nodes=1500000`)
