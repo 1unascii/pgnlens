@@ -133,7 +133,7 @@ function GameView() {
 
     const [polling, setPolling] = useState(false)
 
-    // Three-pass Stockfish analysis: depth 8 (quick), depth 16 + 1.5M nodes (background)
+    // Two-pass Stockfish analysis: depth 8 (sync), then 1.5M nodes (background with polling)
     useEffect(() => {
         if (!game) return
 
@@ -150,14 +150,15 @@ function GameView() {
             .then(r => { if (!r.ok) throw new Error(`Depth 8 failed: ${r.status}`); return r.json() })
             .then(data => {
                 if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                // Pass 2+3: depth 16 then 1.5M nodes — single background thread
+                // Pass 2: 1.5M nodes — background thread, poll for progressive updates
                 fetch(`/api/games/${id}/analyze/?nodes=1500000`)
                 setPolling(true)
             })
             .catch(error => console.error('Analysis error:', error))
     }, [game?.id])
 
-    // Poll for progressive updates during background analysis.
+    // Poll game data to pick up partial results from background analysis.
+    // Stops when analysis_complete is true.
     useEffect(() => {
         if (!polling || !game) return
 
