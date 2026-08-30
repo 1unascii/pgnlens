@@ -211,22 +211,8 @@ def analyze_game(request, game_id):
     depth = request.query_params.get('depth')
     nodes = request.query_params.get('nodes')
 
-    if depth and nodes:
-        # Combined pass — run depth then nodes sequentially in background
-        def run_combined_analysis(game_id, depth, nodes):
-            from django.db import connection
-            connection.close()
-            game = Game.objects.get(id=game_id)
-            analyze_all_moves(game, depth=int(depth))
-            game.refresh_from_db()
-            analyze_all_moves(game, nodes=int(nodes), final_pass=True)
-
-        thread = threading.Thread(target=run_combined_analysis, args=(game_id, int(depth), int(nodes)))
-        thread.daemon = True
-        thread.start()
-        return Response({ 'game_id': game.id, 'moves': game.moves })
-    elif nodes:
-        # Node-limited deep pass — background thread so polls can pick up partial results
+    if nodes:
+        # Node-limited deep pass — background thread, frontend polls for results
         def run_node_analysis(game_id, nodes):
             from django.db import connection
             connection.close()
@@ -237,7 +223,19 @@ def analyze_game(request, game_id):
         thread.daemon = True
         thread.start()
         return Response({ 'game_id': game.id, 'moves': game.moves })
+    elif depth and int(depth) > 8:
+        # Deeper depth pass — background thread, frontend polls for results
+        def run_depth_analysis(game_id, depth):
+            from django.db import connection
+            connection.close()
+            game = Game.objects.get(id=game_id)
+            analyze_all_moves(game, depth=int(depth))
+
+        thread = threading.Thread(target=run_depth_analysis, args=(game_id, int(depth)))
+        thread.daemon = True
+        thread.start()
+        return Response({ 'game_id': game.id, 'moves': game.moves })
     else:
-        # Depth-limited pass — synchronous (fast enough to wait)
+        # Shallow depth pass — synchronous (fast enough to wait)
         analyze_all_moves(game, depth=int(depth or 8))
         return Response({ 'game_id': game.id, 'moves': game.moves })

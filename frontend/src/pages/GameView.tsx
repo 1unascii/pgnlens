@@ -131,7 +131,7 @@ function GameView() {
         setFENComputed(true)
     }, [game, ecoLookup, FENComputed])
 
-    const [polling, setPolling] = useState(false)
+    const [analysisPhase, setAnalysisPhase] = useState<'idle' | 'depth16' | 'nodes' | 'done'>('idle')
 
     // Three-pass Stockfish analysis: depth 8 (quick), depth 16 (decent), 1.5M nodes (accurate)
     useEffect(() => {
@@ -145,38 +145,59 @@ function GameView() {
         )
         if (alreadyAnalyzed) return
 
-        // Pass 1: depth 8 — synchronous, quick evals (~5-8 seconds)
+        // Pass 1: depth 8 — synchronous, quick evals
         fetch(`/api/games/${id}/analyze/?depth=8`)
             .then(r => { if (!r.ok) throw new Error(`Depth 8 failed: ${r.status}`); return r.json() })
             .then(data => {
                 if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                // Pass 2+3: depth 16 then 1.5M nodes — both run in background sequentially
-                // Start polling to pick up progressive updates from both passes
-                fetch(`/api/games/${id}/analyze/?depth=16&nodes=1500000`)
-                setPolling(true)
+                // Pass 2: depth 16 — background thread, poll for progressive updates
+                fetch(`/api/games/${id}/analyze/?depth=16`)
+                setAnalysisPhase('depth16')
             })
             .catch(error => console.error('Analysis error:', error))
     }, [game?.id])
 
-    // Poll game data to pick up partial results from background analysis.
-    // Only starts after the nodes pass kicks off. Stops when analysis_complete is true.
+    // Poll for progressive updates during background analysis.
+    // During depth16 phase: poll until moves stop changing, then kick off nodes.
+    // During nodes phase: poll until analysis_complete is true.
     useEffect(() => {
-        if (!polling || !game) return
+        if (analysisPhase === 'idle' || analysisPhase === 'done' || !game) return
+
+        let lastMovesJson = ''
+        let unchangedCount = 0
 
         const poll = setInterval(() => {
             fetch(`/api/games/${id}/`)
                 .then(r => r.json())
                 .then(data => {
                     if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                    if (data.analysis_complete) {
+
+                    if (analysisPhase === 'nodes' && data.analysis_complete) {
                         clearInterval(poll)
-                        setPolling(false)
+                        setAnalysisPhase('done')
+                        return
+                    }
+
+                    if (analysisPhase === 'depth16') {
+                        const currentJson = JSON.stringify(data.moves)
+                        if (currentJson === lastMovesJson) {
+                            unchangedCount++
+                            if (unchangedCount >= 3) {
+                                // Depth 16 is done — kick off nodes pass
+                                fetch(`/api/games/${id}/analyze/?nodes=1500000`)
+                                setAnalysisPhase('nodes')
+                                unchangedCount = 0
+                            }
+                        } else {
+                            unchangedCount = 0
+                        }
+                        lastMovesJson = currentJson
                     }
                 })
         }, 1000)
 
         return () => clearInterval(poll)
-    }, [polling, game?.id])
+    }, [analysisPhase, game?.id])
 
     if (!game || FENpositions.length === 0) return <div>Loading...</div>
 
