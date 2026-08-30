@@ -212,26 +212,16 @@ def analyze_game(request, game_id):
     nodes = request.query_params.get('nodes')
 
     if nodes:
-        # Node-limited deep pass — background thread, frontend polls for results
-        def run_node_analysis(game_id, nodes):
+        # Deep analysis — depth 16 then node-limited, both in one background thread
+        def run_deep_analysis(game_id, nodes):
             from django.db import connection
             connection.close()
             game = Game.objects.get(id=game_id)
+            analyze_all_moves(game, depth=16)
+            game.refresh_from_db()
             analyze_all_moves(game, nodes=int(nodes), final_pass=True)
 
-        thread = threading.Thread(target=run_node_analysis, args=(game_id, int(nodes)))
-        thread.daemon = True
-        thread.start()
-        return Response({ 'game_id': game.id, 'moves': game.moves })
-    elif depth and int(depth) > 8:
-        # Deeper depth pass — background thread, frontend polls for results
-        def run_depth_analysis(game_id, depth):
-            from django.db import connection
-            connection.close()
-            game = Game.objects.get(id=game_id)
-            analyze_all_moves(game, depth=int(depth))
-
-        thread = threading.Thread(target=run_depth_analysis, args=(game_id, int(depth)))
+        thread = threading.Thread(target=run_deep_analysis, args=(game_id, int(nodes)))
         thread.daemon = True
         thread.start()
         return Response({ 'game_id': game.id, 'moves': game.moves })
