@@ -131,18 +131,19 @@ function GameView() {
         setFENComputed(true)
     }, [game, ecoLookup, FENComputed])
 
-    const [, setAnalysisDone] = useState(false)
+    const [polling, setPolling] = useState(false)
 
     // Three-pass Stockfish analysis: depth 8 (quick), depth 16 (decent), 1.5M nodes (accurate)
     useEffect(() => {
         if (!game) return
 
         // Skip if already analyzed
+        if (game.analysis_complete) return
         const alreadyAnalyzed = game.moves.every((move: any) =>
             (!move.white_move || move.white_eval !== null) &&
             (!move.black_move || move.black_eval !== null)
         )
-        if (alreadyAnalyzed) { setAnalysisDone(true); return }
+        if (alreadyAnalyzed) return
 
         // Pass 1: depth 8 — quick evals (~5-8 seconds), visible graph building
         fetch(`/api/games/${id}/analyze/?depth=8`)
@@ -156,28 +157,32 @@ function GameView() {
             .then(data => {
                 if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
                 // Pass 3: node-limited (~depth 18) — runs in background thread
-                // Response comes back immediately; poll picks up results as they save
+                // Response comes back immediately; start polling to pick up results
                 fetch(`/api/games/${id}/analyze/?nodes=1500000`)
+                setPolling(true)
             })
             .catch(error => console.error('Analysis error:', error))
     }, [game?.id])
 
     // Poll game data to pick up partial results from background analysis.
-    // Stops when the server sets analysis_complete = true.
+    // Only starts after the nodes pass kicks off. Stops when analysis_complete is true.
     useEffect(() => {
-        if (!game) return
+        if (!polling || !game) return
 
         const poll = setInterval(() => {
             fetch(`/api/games/${id}/`)
                 .then(r => r.json())
                 .then(data => {
                     if (data.moves) setGame(prev => prev ? { ...prev, moves: data.moves } : prev)
-                    if (data.analysis_complete) clearInterval(poll)
+                    if (data.analysis_complete) {
+                        clearInterval(poll)
+                        setPolling(false)
+                    }
                 })
         }, 3000)
 
         return () => clearInterval(poll)
-    }, [game?.id])
+    }, [polling, game?.id])
 
     if (!game || FENpositions.length === 0) return <div>Loading...</div>
 

@@ -60,6 +60,7 @@ export interface Game {
     opening_line: string
     opening_family: string
     moves: GameMove[]
+    analysis_complete: boolean
 }
 
 export interface GameCardData {
