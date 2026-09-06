@@ -56,6 +56,26 @@ check $? "Piece images accessible"
 echo ""
 echo "=== Results: $PASSED passed, $FAILED failed ==="
 
+if [ -n "$RESEND_API_KEY" ]; then
+    if [ $FAILED -gt 0 ]; then
+        # Send alert immediately on failure
+        curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"from\":\"noreply@pgnlens.com\",\"to\":\"josephearlweiner83@gmail.com\",\"subject\":\"PGNLens smoke test FAILED\",\"text\":\"$FAILED of $((PASSED + FAILED)) checks failed. SSH into the server and check.\"}" > /dev/null
+    else
+        # Send daily "all clear" at 8am (check if current hour is 08)
+        HOUR=$(date +%H)
+        MINUTE=$(date +%M)
+        if [ "$HOUR" = "08" ] && [ "$MINUTE" -lt "15" ]; then
+            curl -s -X POST https://api.resend.com/emails \
+                -H "Authorization: Bearer $RESEND_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{\"from\":\"noreply@pgnlens.com\",\"to\":\"josephearlweiner83@gmail.com\",\"subject\":\"PGNLens daily status: all clear\",\"text\":\"All $PASSED checks passed. Everything is running.\"}" > /dev/null
+        fi
+    fi
+fi
+
 if [ $FAILED -gt 0 ]; then
     exit 1
 fi
