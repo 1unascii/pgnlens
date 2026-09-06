@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=[])
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne', #ASGI server for WebSockets - must be first
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -194,3 +195,21 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 # Uses the path from .env if set, otherwise assumes                                            
 # stockfish is available on the system PATH                                                    
 STOCKFISH_PATH = env('STOCKFISH_PATH', default='stockfish') 
+
+ASGI_APPLICATION = 'backend.asgi.application'
+
+if DEBUG:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        },
+    }
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [('127.0.0.1', 6379)],
+            },
+        },
+    }

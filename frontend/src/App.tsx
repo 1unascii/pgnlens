@@ -10,7 +10,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ConfirmEmail from './pages/ConfirmEmail'
 import Profile from './pages/Profile'
-
+import LiveGame from './pages/LiveGame'
 
 function App() {
     return (
@@ -39,6 +39,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/confirm-email/:key/" element={<ConfirmEmail />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/play/:gameId" element={<LiveGame />} />
                 </Route>
             </Routes>
         </BrowserRouter>

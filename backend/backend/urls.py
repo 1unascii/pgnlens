@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from game_analyzer.views import (
-    GameViewSet, ReportViewSet, verify_email,
+    GameViewSet, 
+    ReportViewSet, 
+    verify_email,
     analyze_game,
+    create_live_game,
+    live_game_state,
 )
 from django.views.generic import TemplateView
 
@@ -36,6 +40,8 @@ urlpatterns = [
     path('api/auth/', include('dj_rest_auth.urls')),
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/games/<int:game_id>/analyze/', analyze_game),
+    path('api/live-games/', create_live_game),
+    path('api/live-games/<uuid:game_id>/', live_game_state),
     # Catch-all: serve React app for any non-API
     # route. MUST be last or it intercepts API
     # requests.

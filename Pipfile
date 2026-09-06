@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-djangorestframework = "*"
 django-cors-headers = "*"
 python-chess = "*"
 requests = "*"
@@ -13,6 +12,10 @@ dj-rest-auth = "*"
 django-allauth = "*"
 whitenoise = "*"
 resend = "*"
+channels = "*"
+channels-redis = "*"
+daphne = "*"
+djangorestframework = "*"
 
 [dev-packages]
 pytest-django = "*"

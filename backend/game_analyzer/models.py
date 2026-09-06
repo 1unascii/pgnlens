@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 
 class Game(models.Model):
-    report = models.ForeignKey('Report', null=True, blank=True, on_delete=models.CASCADE, related_name='pgn_file_games')
+    # This differentiates between games uploaded from a PGN file and games created from a report. 
+    # PGN uploaded games are deleted when the report is deleted.
+    report = models.ForeignKey('Report', null=True, blank=True, 
+    on_delete=models.CASCADE, related_name='pgn_file_games') 
     event = models.CharField(max_length=50)
     site = models.CharField(max_length=50)
     date = models.DateField()
@@ -55,3 +59,26 @@ class Report(models.Model):
 
     def __str__(self):
         return self.report_name
+
+class LiveGame(models.Model):
+    """A real-time chess game between two players."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    white_player = models.ForeignKey(User, on_delete=models.CASCADE, related_name='white_games')
+    black_player = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='black_games')
+    moves = models.JSONField(default=list, blank=True)  # list of UCI moves: ["e2e4", "e7e5", ...]
+    fen = models.CharField(max_length=100, default='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+    status = models.CharField(max_length=20, default='waiting', choices=[
+        ('waiting', 'Waiting for opponent'),
+        ('active', 'Game in progress'),
+        ('checkmate', 'Checkmate'),
+        ('stalemate', 'Stalemate'),
+        ('resigned', 'Resigned'),
+        ('draw', 'Draw'),
+    ])
+    result = models.CharField(max_length=10, blank=True)  # "1-0", "0-1", "1/2-1/2"
+    time_control = models.IntegerField(default=600)  # seconds per player
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        black = self.black_player.username if self.black_player else 'waiting...'
+        return f"{self.white_player.username} vs {black}"

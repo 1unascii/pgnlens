@@ -1,12 +1,99 @@
 import chess
 import chess.engine
 import math
+import subprocess
+import sys
 from django.conf import settings
 import time
 
 # Load ECO lookup for book move detection
 import json
 import os
+
+
+def _get_engine():
+    """Open a Stockfish engine. Uses subprocess.Popen directly on Windows
+    with Daphne/ASGI because chess.engine.SimpleEngine.popen_uci uses
+    asyncio.run() internally, which conflicts with Daphne's event loop
+    on Windows (SelectorEventLoop can't spawn subprocesses)."""
+    try:
+        return chess.engine.SimpleEngine.popen_uci(settings.STOCKFISH_PATH)
+    except NotImplementedError:
+        # Windows + Daphne fallback: use subprocess directly
+        process = subprocess.Popen(
+            [settings.STOCKFISH_PATH],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+        return _StockfishProcess(process)
+
+
+class _StockfishProcess:
+    """Minimal wrapper around a Stockfish subprocess that mimics
+    the chess.engine.SimpleEngine interface for our use case."""
+
+    def __init__(self, process):
+        self.process = process
+        # Read the initial UCI greeting
+        self._send('uci')
+        self._read_until('uciok')
+        self._send('isready')
+        self._read_until('readyok')
+
+    def _send(self, command):
+        self.process.stdin.write(command + '\n')
+        self.process.stdin.flush()
+
+    def _read_until(self, token):
+        while True:
+            line = self.process.stdout.readline().strip()
+            if line == token:
+                return
+            if not line:
+                return
+
+    def analyse(self, board, limit):
+        """Analyze a position and return a dict with 'score'."""
+        self._send(f'position fen {board.fen()}')
+        if hasattr(limit, 'depth') and limit.depth is not None:
+            self._send(f'go depth {limit.depth}')
+        elif hasattr(limit, 'nodes') and limit.nodes is not None:
+            self._send(f'go nodes {limit.nodes}')
+        else:
+            self._send('go depth 8')
+
+        best_score = None
+        while True:
+            line = self.process.stdout.readline().strip()
+            if line.startswith('info') and ' score ' in line:
+                parts = line.split()
+                try:
+                    score_idx = parts.index('score')
+                    score_type = parts[score_idx + 1]
+                    score_value = int(parts[score_idx + 2])
+                    if score_type == 'cp':
+                        best_score = chess.engine.PovScore(
+                            chess.engine.Cp(score_value), chess.WHITE
+                        )
+                    elif score_type == 'mate':
+                        best_score = chess.engine.PovScore(
+                            chess.engine.Mate(score_value), chess.WHITE
+                        )
+                except (ValueError, IndexError):
+                    pass
+            if line.startswith('bestmove'):
+                break
+
+        return {'score': best_score}
+
+    def quit(self):
+        try:
+            self._send('quit')
+            self.process.wait(timeout=5)
+        except Exception:
+            self.process.kill()
 
 eco_directory = os.path.join(
     os.path.dirname(__file__), '..', 'eco'
@@ -37,7 +124,7 @@ def analyze_all_moves(game, depth=None, nodes=None, final_pass=False):
     start = time.time()
     moves = game.moves
     board = chess.Board()
-    engine = chess.engine.SimpleEngine.popen_uci(settings.STOCKFISH_PATH)
+    engine = _get_engine()
 
     # Evaluate starting position
     previous_eval = _analyze_position(engine, board, limit)

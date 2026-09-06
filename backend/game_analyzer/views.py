@@ -4,11 +4,12 @@ from rest_framework.permissions import AllowAny
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from collections import defaultdict
-from .models import Game, Report, ReportGame
+from .models import Game, Report, ReportGame, LiveGame
 from .serializers import GameSerializer, GameCardSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn, detect_player_name
 from .stockfish_analyzer import analyze_all_moves
 from django.views.decorators.csrf import csrf_exempt
+
 
 
 # ModelViewSet gives you full CRUD at /api/games/ automatically:
@@ -231,3 +232,36 @@ def analyze_game(request, game_id):
         # Depth-limited pass — synchronous
         analyze_all_moves(game, depth=int(depth or 8))
         return Response({ 'game_id': game.id, 'moves': game.moves })
+
+# LIVE GAME VIEWS
+@api_view(['POST'])
+def create_live_game(request):
+    """Create a new live game. Returns the game ID for sharing."""
+    time_control = request.data.get('time_control', 600)
+    game = LiveGame.objects.create(
+        white_player=request.user,
+        time_control=time_control,
+    )
+    return Response({
+        'game_id': str(game.id),
+        'join_url': f'/play/{game.id}',
+    })
+
+
+@api_view(['GET'])
+def live_game_state(request, game_id):
+    """Get the current state of a live game."""
+    try:
+        game = LiveGame.objects.get(id=game_id)
+    except LiveGame.DoesNotExist:
+        return Response({'detail': 'Game not found.'}, status=404)
+    return Response({
+        'game_id': str(game.id),
+        'fen': game.fen,
+        'moves': game.moves,
+        'status': game.status,
+        'result': game.result,
+        'white': game.white_player.username,
+        'black': game.black_player.username if game.black_player else None,
+        'time_control': game.time_control,
+    })

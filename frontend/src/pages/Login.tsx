@@ -26,6 +26,7 @@ import { useState } from 'react'
           if (response.ok) {
               const data = await response.json()
               localStorage.setItem('authToken', data.key)
+              localStorage.setItem('username', username) //live game needs this
               window.location.href = '/reports'
           } else {
               setError('Invalid username or password.')
