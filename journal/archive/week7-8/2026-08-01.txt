@@ -1,0 +1,18 @@
+2026-08-01
+
+Created start-backend.bat and start-frontend.bat scripts to launch dev servers from Git Bash.
+Created migrate.bat to run Django migrations from Git Bash.
+
+Added navigation bar using React Router layout routes. The Navbar component wraps all pages with a persistent nav bar containing Analyze, Practice, dark/light mode toggle, Login, and Register links. Dark mode uses Tailwind's class-based dark variant with localStorage persistence.
+
+Added placeholder pages: GameLobby (Practice), Login, Register, ConfirmEmail.
+
+Set up authentication with dj-rest-auth and django-allauth:
+- Email-based login with mandatory email verification
+- Registration with email, username, and password
+- Custom account adapter to generate confirmation URLs pointing to the React frontend
+- Custom verify_email view to bypass dj-rest-auth's broken VerifyEmailView in allauth 65
+- File-based email backend for development to avoid quoted-printable URL corruption
+- ConfirmEmail React page that extracts the key from the URL and POSTs to the verify-email API endpoint
+
+Moved old journal files to journal/week6/.

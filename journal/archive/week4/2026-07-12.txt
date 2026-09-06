@@ -1,0 +1,41 @@
+Session Summary — July 12, 2026
+=================================
+
+- Refactored classify_opening into two functions
+  - get_fen_matches(board) — replays the board's move history, returns all ECO matches as a list of dicts (each with eco_code and name)
+  - classify_opening(fen_matches) — takes that list, picks the last (most specific) match as opening line, derives family by splitting on ":"
+  - parse_pgn now calls get_fen_matches then classify_opening separately
+  - Updated all 18 tests to use the new two-function signature
+  - All 18 tests passing
+  - Updated DEVLOG with full instructions for the refactor
+
+- Moved PGN upload from separate endpoint to ReportViewSet.create
+  - POST /api/reports/ now handles file upload (was /api/upload_pgn/)
+  - Overrode get_serializer_class to show PGNUploadSerializer for POST
+  - DRF browsable API shows file input, player_name, report_name fields
+
+- Added player_name field to Report model
+  - Chess.com username (e.g. "1una5cii"), different from Django login user
+  - Optional on upload — detect_player_name() finds the most common name in games
+  - Used to determine win/loss from each game's result
+
+- Created ReportGame through model
+  - Custom join table between Report and Game
+  - Stores outcome ("win", "loss", "draw") per game-report pair
+  - Computed once at upload, queryable later without recomputation
+  - Django forward reference: ForeignKey('Report') as string since Report is defined below
+
+- Report stats computed at creation
+  - total_games, wins, losses, draws, win_rate stored on Report model
+  - opening_family_stats and opening_line_stats as JSONFields
+  - Per-opening breakdown with wins, losses, draws, total, win_rate
+  - All computed in one loop alongside ReportGame creation
+
+- Nuked all migrations and rebuilt from scratch
+  - Dropped all game_analyzer tables, cleared django_migrations entries
+  - Single clean 0001_initial.py migration with all current models
+
+- Fixed bugs along the way
+  - "losss" KeyError — outcome + "s" doesn't work for "loss", added outcome_key logic
+  - UnboundLocalError — wins/losses/draws not initialized before loop
+  - Report created after stats loop tried to use it — reordered to create report first

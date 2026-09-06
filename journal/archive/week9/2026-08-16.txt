@@ -1,0 +1,67 @@
+2026-08-16
+
+DIGITALOCEAN VPS SETUP
+
+Set up a DigitalOcean Droplet ($12/mo Basic plan)
+to host pgnlens.com, tuneopedia.com, and
+josephweiner.dev. All three domains purchased
+through Cloudflare.
+
+Server setup:
+- Ubuntu 24.04, 1 vCPU, 2 GB RAM, 50 GB SSD
+- Created non-root user (earl) with sudo access
+- Disabled root login and password auth via SSH
+- Configured ufw firewall (ports 22, 80, 443)
+- Installed nginx with virtual hosts for all 3 sites
+- Installed PostgreSQL (for pgnlens)
+- Installed MySQL (for tuneopedia)
+- SSL certificates via Certbot for all domains
+- DNS A records set in Cloudflare (gray cloud/DNS only)
+
+PGNLens deployment:
+- Cloned repo, installed dependencies with pipenv
+  (using Python 3.12 since server doesn't have 3.14)
+- Created .env with production secrets
+- Ran migrations and collectstatic
+- Set up Gunicorn with systemd service on port 8002
+- Built React frontend locally, uploaded via scp
+- Added whitenoise middleware, STATICFILES_DIRS,
+  TEMPLATES pointing to frontend/dist, and
+  catch-all URL route for the SPA
+- Set DEBUG=False, ALLOWED_HOSTS, CORS, CSRF
+  for production
+- Configured nginx to serve /static/assets/ from
+  frontend dist and /static/ from Django staticfiles
+- Added base: '/static/' to vite.config.ts so built
+  assets reference the correct path
+
+Issues encountered and resolved:
+- SSH key mismatch: had to generate new key locally
+  and add it to server via DigitalOcean web console
+- Ubuntu 24.04 blocks system-wide pip installs:
+  used pipx to install pipenv
+- Pipfile requires Python 3.14 but server has 3.12:
+  used --python 3.12 flag
+- .env parsing: django-environ interprets $ as
+  variable references, breaking SECRET_KEY values
+  with $ in them. Generated a new key using
+  secrets.token_urlsafe() instead
+- DATABASE_URL must use postgresql:// not postgres://
+  or django-environ returns dummy backend
+- nginx static files: needed separate location
+  blocks for /static/assets/ (frontend dist) and
+  /static/ (Django staticfiles)
+- DigitalOcean blocks outbound SMTP ports: switching
+  from SMTP to Resend HTTP API using custom email
+  backend (in progress)
+
+TYPESCRIPT FIX
+
+Fixed recharts Tooltip formatter type error in
+OpeningBarChart.tsx. Changed formatToolTip value
+parameter from number to number | string | undefined
+and cast the formatter prop as never to satisfy
+the recharts type system.
+
+Created DEVLOG_VPS_SETUP.md in htdocs/ documenting
+the full server setup process.

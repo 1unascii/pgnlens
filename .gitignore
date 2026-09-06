@@ -11,3 +11,5 @@ pgn/
 #batch_files/
 sent_emails/
 stockfish/
+frontend/coverage/
+backend/.coverage

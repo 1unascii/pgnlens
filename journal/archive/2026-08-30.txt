@@ -1,0 +1,25 @@
+2026-08-30
+
+Deployed PGNLens to production on DigitalOcean VPS. Fixed multiple production issues:
+
+- Installed Stockfish on the server and set STOCKFISH_PATH to /usr/games/stockfish
+- Ran pending migration for analysis_complete field on the Game model
+- Fixed Django Sites framework — created Site with id=1 for pgnlens.com so registration emails work
+- Fixed email confirmation URL in adapter.py — was hardcoded to localhost:5173, now uses pgnlens.com
+- Added nginx location blocks for /data/, /piece/, /sound/, and favicon so static assets serve correctly instead of falling through to the SPA catch-all
+- Fixed TypeScript build errors from component reorganization — import paths in reportview components needed ../../types instead of ../types, added type annotation for lineName parameter, removed unused state variables
+- Created deploy.sh script for one-command production deploys (git pull, npm build, collectstatic, migrate, restart)
+
+Simplified Stockfish analysis to two passes:
+- Pass 1: depth 8 — runs synchronously, graph appears immediately
+- Pass 2: 1.5M nodes — runs in background thread, frontend polls every 1 second for progressive graph updates
+
+Fixed playerName not being passed to GameCard in the "lines that need practice" section of ReportView, so the color=black parameter now works correctly when navigating to games where the player is black.
+
+Also fixed the trip planner widget on josephweiner.dev:
+- Added cURL fallback to directions.php and geocode.php for when allow_url_fopen is off
+- Fixed geocode.php endpoint URL (geocoding → geocode)
+- Fixed config.php syntax (missing PHP tags, unclosed parenthesis)
+- Added busy guard on optimize button to prevent repeated firing
+
+Removed the widgets tab from the portfolio projects page — all projects now show in a single list.

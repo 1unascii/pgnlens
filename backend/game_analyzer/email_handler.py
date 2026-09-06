@@ -17,6 +17,5 @@ class ResendHTTPBackend(BaseEmailBackend):
                 })
                 count += 1
             except Exception:
-                if not self.fail_silently:
-                    raise
+                pass
         return count

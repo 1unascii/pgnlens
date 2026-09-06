@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 # GET /api/games/1/     — get one game
 # PUT /api/games/1/     — update a game
 # DELETE /api/games/1/  — delete a game
-class GameViewSet(viewsets.ModelViewSet):
+class GameViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Game.objects.all()
 
     def get_serializer_class(self):
@@ -49,7 +49,7 @@ def build_stats_by_player_color(games, player_name):
         elif game.black_player == player_name:
             outcome = "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
         else:
-            outcome = "error: player not found"
+            continue
 
         if outcome == "win":
             wins += 1
@@ -170,6 +170,10 @@ class ReportViewSet(viewsets.ModelViewSet):
         report.player_is_white_stats = build_stats_by_player_color(white_games, player_name)
         report.player_is_black_stats = build_stats_by_player_color(black_games, player_name)
         report.save()
+
+        for game in games:
+            game.report = report
+            game.save()
 
         return Response({
             'report_id': report.id,

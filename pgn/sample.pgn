@@ -1,0 +1,74 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2024.03.15"]
+[Round "-"]
+[White "testuser"]
+[Black "DragonSlayer99"]
+[Result "1-0"]
+[WhiteElo "850"]
+[BlackElo "820"]
+[TimeControl "600"]
+[EndTime "14:30:00"]
+[Termination "testuser won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8 10. d4 Nbd7 11. Nbd2 Bb7 12. Bc2 Re8 13. Nf1 Bf8 14. Ng3 g6 15. a4 Bg7 16. Bd3 c5 17. d5 c4 18. Bc2 Nc5 19. Bg5 h6 20. Be3 Ncd7 21. Qd2 Kh7 22. Ra3 Qc7 23. Rea1 Reb8 24. axb5 axb5 25. Ra7 Rxa7 26. Rxa7 Qd8 27. Nh4 Nf8 28. Nhf5 gxf5 29. Nxf5 Ng6 30. Qg5 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2024.03.15"]
+[Round "-"]
+[White "KnightRider42"]
+[Black "testuser"]
+[Result "0-1"]
+[WhiteElo "900"]
+[BlackElo "855"]
+[TimeControl "600"]
+[EndTime "15:10:00"]
+[Termination "testuser won by resignation"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nc6 8. d5 Ne7 9. Ne1 Nd7 10. Be3 f5 11. f3 f4 12. Bf2 g5 13. Nd3 Ng6 14. c5 Nf6 15. Rc1 Rf7 16. cxd6 cxd6 17. Nb5 a6 18. Na3 b5 19. Qb3 h5 20. Nc2 g4 21. a4 g3 22. Bg1 gxh2+ 23. Kxh2 Ng4+ 24. fxg4 Qh4+ 25. Kg3 f3 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2024.03.16"]
+[Round "-"]
+[White "testuser"]
+[Black "PawnStorm77"]
+[Result "0-1"]
+[WhiteElo "855"]
+[BlackElo "870"]
+[TimeControl "600"]
+[EndTime "20:45:00"]
+[Termination "PawnStorm77 won by checkmate"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5 7. Nb3 Be6 8. f3 Be7 9. Qd2 O-O 10. O-O-O Nbd7 11. g4 b5 12. g5 Nh5 13. Nd5 Bxd5 14. exd5 f5 15. gxf6 Bxf6 16. Rg1 Kh8 17. Bg2 Rc8 18. Kb1 Nf4 19. Bf1 Bg5 20. Bxf4 Bxf4 21. Qd3 Nc5 22. Nxc5 Rxc5 23. h4 Qf6 24. Rg4 Be3 25. Qxb5 Rxc2 0-1
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2024.03.17"]
+[Round "-"]
+[White "CheckMate_Pro"]
+[Black "testuser"]
+[Result "1/2-1/2"]
+[WhiteElo "840"]
+[BlackElo "850"]
+[TimeControl "600"]
+[EndTime "11:20:00"]
+[Termination "Game drawn by stalemate"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Bd2 Bxd2+ 8. Nbxd2 d5 9. exd5 Nxd5 10. Qb3 Nce7 11. O-O O-O 12. Rfe1 c6 13. a4 Nf4 14. Ne5 Ned5 15. Ndf3 Be6 16. Qc2 Rc8 17. Bd3 g6 18. Bh6 Re8 19. Ng5 Nd3 20. Re3 N3f4 21. Nxe6 Nxe6 22. g3 Nef4 23. Rae1 Rxe5 24. Rxe5 Qf6 25. gxf4 Nxf4 26. R5e4 Nd5 27. Qe2 Nf6 28. Re5 Nd7 29. R5e3 Nf6 1/2-1/2
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2024.03.18"]
+[Round "-"]
+[White "testuser"]
+[Black "BishopSniper"]
+[Result "1-0"]
+[WhiteElo "860"]
+[BlackElo "830"]
+[TimeControl "900+10"]
+[EndTime "19:00:00"]
+[Termination "testuser won by resignation"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 Nbd7 7. Rc1 c6 8. Bd3 dxc4 9. Bxc4 Nd5 10. Bxe7 Qxe7 11. O-O Nxc3 12. Rxc3 e5 13. Qc2 exd4 14. Nxd4 Ne5 15. Bb3 Bg4 16. f3 Bd7 17. Rd1 Rad8 18. Nf5 Bxf5 19. Qxf5 Rd6 20. Rcd3 Rfd8 21. Rxd6 Rxd6 22. Rxd6 Qxd6 23. Qxb5 Qd1+ 24. Kf2 Qd2+ 25. Kg3 Qe1+ 26. Kh3 1-0

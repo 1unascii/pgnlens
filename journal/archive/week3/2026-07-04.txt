@@ -1,0 +1,49 @@
+Session Summary — July 4, 2026
+Started: 12:20 AM
+Ended: 2:28 AM
+=================================
+
+- Got the REST API fully working and browsable at /api/
+- Added comments to urls.py explaining router and routes
+- Added pgn/ to .gitignore (personal game data)
+- Fixed README: removed migrate/createsuperuser from production, fixed .env path, updated app name
+- Committed all changes
+
+- Set up React frontend with Vite (react-ts template)
+  - Learned why create-react-app is outdated, Vite is the replacement
+  - Learned about .tsx files (TypeScript + JSX)
+  - ESLint included by default, ran lint with no errors
+  - Learned about Bootstrap — tutorial used it for styling but we don't need it
+  - Our app will have its own UI (PGN upload, game lists, analysis reports)
+
+- Updated DEVLOG with frontend setup, linting explanation, and dev server steps
+
+Session 2 — July 4, 2026
+Started: 2:28 AM
+Ended: 4:09 AM
+=================================
+
+- Planned out the PGN parser architecture
+  - Will be a module (pgn_parser.py) inside game_analyzer app, not a separate app
+  - Parser reads PGN file and saves games directly to the database (Option A)
+  - Parser validates data before saving, skips bad games
+  - Reporter (reporter.py) will come later — analyzes a Game and creates a Report
+
+- Discovered python-chess library
+  - Handles PGN parsing, move validation, board state, engine analysis (Stockfish)
+  - Will use it instead of writing our own parser from scratch
+  - Installed on the backend (Python library, not usable in frontend)
+
+- Wrote full parser and upload endpoint code in the DEVLOG
+  - pgn_parser.py uses chess.pgn.read_game() in a loop for multi-game files
+  - upload_pgn view accepts file upload via POST at /api/upload_pgn/
+  - Passes file directly to parser (TextIOWrapper for binary-to-text conversion)
+  - Added detailed comments throughout all code blocks
+
+- Decided to use pytest (with pytest-django) for testing
+  - Will add tests after parser is working
+  - Goes in DEVLOG after PGN Parser section, before Frontend
+
+- Looked into color themes for better comment visibility in DEVLOG
+  - Cursor's theme picker: Ctrl+Shift+P > "Color Theme"
+  - Can install Dracula or GitHub Dark for green/gray comments

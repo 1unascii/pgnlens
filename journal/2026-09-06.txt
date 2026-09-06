@@ -1,0 +1,27 @@
+2026-09-06
+
+Test coverage session. Backend went from 85% to 96%, frontend from 0% measured to 78% lines.
+
+Backend tests added:
+- End-to-end test: register, verify email, login, upload PGN, view report stats, view game detail, delete report
+- Analyze game endpoint: game not found, depth sync, default depth, background thread (mocked)
+- Report stats: win/loss/draw counting, win rates, opening groupings, family-to-lines mapping, player not found
+- Email handler: registration sends email, correct from address, confirmation URL, failure doesn't crash registration
+
+Frontend tests added:
+- GameView: mock chessboard, eco.json, fetch — renders board, player names, result
+- ReportView: mock fetch, recharts — renders report name, stat cards, openings, sort buttons, search, filters
+- Login, Register, ConfirmEmail, Profile, ReportCreate, ReportIndex, GameLobby, GameIndex, App
+- Components: EvalBar, EvalGraph, InfoPanel, Navbar, OpeningFamilyCard, OpeningBarChart, authHeaders
+
+Bugs found and fixed:
+- "error: player not founds" KeyError in views.py — player name mismatch caused crash in stats calculation
+- Email handler fail_silently not working — Resend API failure crashed registration instead of failing gracefully
+
+Other changes:
+- GameViewSet changed from ModelViewSet to ReadOnlyModelViewSet — users can no longer PUT/DELETE games via API
+- Added cascade delete: uploaded games now have a report FK, deleted when report is deleted
+- Added smoke test (smoke-test.sh) that runs after every deploy — checks homepage, API, static assets, sounds, pieces
+- Smoke test sends email alert on failure, daily "all clear" at 8am via Resend API
+- Set up cron job on server to run smoke test every 15 minutes
+- Created sample PGN file for testing (pgn/sample.pgn)

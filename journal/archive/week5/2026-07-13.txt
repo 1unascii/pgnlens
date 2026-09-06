@@ -1,0 +1,16 @@
+Session Summary — July 13, 2026
+=================================
+Estimated hours: 1.5
+
+- Added opening_category field to Game model
+  - Five categories: Open Game, Semi-Open Game, Closed Game, Semi-Closed Game, Flank Game
+  - Determined by the first two moves (white's first move + black's response)
+
+- Wrote categorize_opening() function in pgn_parser.py
+  - Takes white_move and black_move in UCI notation (e.g. "e2e4", "e7e5")
+  - e4 e5 → Open, e4 anything else → Semi-Open, d4 d5 → Closed, d4 anything else → Semi-Closed, else → Flank
+
+- Fixed bugs in categorize_opening call
+  - Was passing undefined black_move variable — fixed to use str(move)
+  - first_moves field was outside the if move_number == 1 block, overwritten every move pair with the last moves of the game — indented inside the if
+  - d4 cases were swapped: "not d5" was returning "Closed" instead of "Semi-Closed"

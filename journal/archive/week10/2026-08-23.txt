@@ -1,0 +1,70 @@
+2026-08-23
+
+STOCKFISH ON-DEMAND ANALYSIS
+
+Implemented three-pass Stockfish analysis that runs
+when a user opens a game:
+- Pass 1: depth 8 (synchronous, ~5-8 seconds)
+- Pass 2: depth 15 (synchronous, ~15-30 seconds)
+  Currently commented out for testing
+- Pass 3: 1.5M nodes (background thread, ~1-3 min)
+
+Backend saves after each move so the frontend can
+poll for partial results. Engine stays alive across
+positions for speed. analyze_all_moves replaces the
+old analyze_next_move (one move at a time).
+
+Added analysis_complete boolean field to Game model
+so the frontend poll knows exactly when to stop.
+
+GAMEVIEW UI REDESIGN
+
+Restructured GameView into extracted components:
+- PlayerBar: player name, elo, captured pieces
+- MoveList: scrollable clickable move list
+- NavButtons: start/back/forward/end with FA icons
+- InfoPanel: classification callout, move counter,
+  move list, opening info, eval graph, nav buttons
+- EvalGraph: SVG line chart showing eval over game,
+  clickable to jump to a position
+
+Two-column layout: eval bar + board on left, info
+panel on right. Player bars above/below board only,
+info panel extends independently.
+
+Added game info at top of panel (result, opening
+family, opening line). Shows "Starting Position"
+at move 0.
+
+COMPONENT ORGANIZATION
+
+Moved all components into subfolders:
+- components/gameview/ — EvalBar, EvalGraph, etc.
+- components/reportview/ — GameCard, StatCard, etc.
+- components/shared/ — Navbar
+
+Updated all import paths in App.tsx, GameView.tsx,
+ReportView.tsx, and Navbar.tsx.
+
+EVAL BAR AND GRAPH
+
+- EvalBar uses useRef to remember last eval when
+  data is temporarily null (prevents flashing)
+- EvalBar and EvalGraph flip based on board
+  orientation (color=black flips both)
+- EvalGraph renders white fill area with SVG path
+- Removed CSS transitions on EvalBar (caused
+  performance issues)
+- React.memo on EvalBar to prevent unnecessary
+  re-renders
+
+FIXES
+
+- Fixed move index calculation for classification
+  display (was off by one for even half-moves)
+- Fixed classification not showing for last moves
+- Fixed 403 on analyze endpoint (AllowAny, csrf)
+- Changed analyze endpoint from POST to GET
+- Fixed test imports after moving classify_move
+  to stockfish_analyzer module
+- Fixed Navbar import path after moving to shared/

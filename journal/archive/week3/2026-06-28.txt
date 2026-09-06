@@ -1,0 +1,44 @@
+Session Summary — June 28, 2026
+=================================
+
+TUNEOPEDIA
+----------
+- Lowered nav bar so it doesn't cover the banner heading
+  (removed -mt-[60px] from nav-bar.blade.php)
+
+PGNLENS
+-------
+- Created SETUP.txt with full environment setup instructions
+- Created journal folder (gitignored) for session notes
+- Added .gitignore (journal/, db.sqlite3, __pycache__, staticfiles/)
+- Fixed SETUP.txt: all commands now use pipenv shell first
+- Added frontend creation step to SETUP.txt
+  (npm create vite@latest frontend -- --template react-ts)
+- Created React + TypeScript frontend with Vite
+- Created superuser account
+- Deleted SETUP.txt, consolidated all instructions into README.md
+- Installed PostgreSQL 17, created pgnlens database
+- Installed django-environ and psycopg2-binary
+- Created .env file for secrets (DATABASE_URL, SECRET_KEY, DEBUG)
+- Added .env to .gitignore
+- Updated settings.py to use django-environ, commented out old
+  SQLite config and hardcoded secret key
+- Ran migrations on PostgreSQL — all tables created
+- Initial commit and push to github.com/1unascii/pgnlens
+- Multiple README updates (frontend build, relaunch instructions,
+  PostgreSQL setup, django-environ setup)
+- Created games app with Game and Report models
+- Game: white, black, result, opening_family, opening_variation,
+  opening_line, eco_first_match, eco_last_match, moves, date
+- Report: name, user, games (ManyToMany), created_at
+- Used ManyToMany so games can exist without a report (future live games)
+  and belong to multiple reports
+- Migrated to PostgreSQL
+- Next: build PGN parser (games/parser.py)
+
+DJANGO + REACT TUTORIAL
+-----------------------
+- Finished the tutorial — full CRUD Todo app working
+- Added JWT auth setup (djangorestframework-simplejwt)
+- AuthContext created but login form not wired up
+- Tutorial ended incomplete on auth — registration not covered

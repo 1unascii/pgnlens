@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Game(models.Model):
+    report = models.ForeignKey('Report', null=True, blank=True, on_delete=models.CASCADE, related_name='pgn_file_games')
     event = models.CharField(max_length=50)
     site = models.CharField(max_length=50)
     date = models.DateField()

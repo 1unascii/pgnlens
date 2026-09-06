@@ -1,0 +1,20 @@
+2026-08-21
+
+PRODUCTION SERVER SYNC
+
+Downloaded settings.py and urls.py from production
+server to local machine via scp. Goal is to make
+both files environment-aware so one codebase works
+for local dev and production. Local machine stays
+the single source of truth for git; server pulls
+from the repo going forward.
+
+Still to do:
+- Make settings.py read DEBUG and ALLOWED_HOSTS
+  from .env with defaults for local dev
+- Make vite.config.ts base path conditional on
+  build mode
+- Create resend_backend.py for email via HTTP API
+  (DigitalOcean blocks SMTP ports)
+- Set DEBUG=False on production once everything
+  is working

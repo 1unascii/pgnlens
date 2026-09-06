@@ -1,0 +1,53 @@
+Session Summary — July 11, 2026
+Started: late night
+=================================
+
+- Reorganized DEVLOG.md
+  - Added a SERVER section with visible HTML comment block for easy scrolling
+  - Moved "Running Both Servers" and "Production Server (Waitress)" into the SERVER section
+
+- Registered Report model in Django admin
+  - Added ReportAdmin class with list_display (name, user, created_at)
+  - Fixed ManyToManyField error — can't put 'games' in list_display or list_filter
+  - Fixed __str__ returning a set instead of a string (was `return {self.name}`, changed to `return self.name`)
+
+- Registered Move model in Django admin
+  - Added MoveAdmin class with list_display and filters
+
+- Set up pytest-django for testing
+  - Installed pytest-django and pytest-cov as dev dependencies
+  - Created pytest.ini in backend/ with DJANGO_SETTINGS_MODULE, pythonpath, testpaths, and addopts
+  - Configured coverage reporting with --cov=game_analyzer and --cov-report=term-missing
+  - Wrote first test (test_game_str) — verifies Game.__str__ output
+  - First run: 1 passed, 54% overall coverage
+  - models.py at 96%, pgn_parser/serializers/views at 0% (not yet tested)
+
+- Added test_move_str and test_report_str tests
+  - test_move_str failed — hardcoded Game ID as 1, but auto-increment doesn't reset between tests
+  - Fixed by using f-string with move.game.id instead
+  - test_report_str failed — passed username string instead of User instance for ForeignKey
+  - Fixed by creating a User object with User.objects.create_user()
+
+- Refactored tests to use pytest fixtures
+  - Created sample_game and sample_user fixtures to avoid duplicating setup code
+  - Each test that needs a game or user just adds the fixture as a parameter
+
+- Extracted classify_opening() from parse_pgn()
+  - Opening lookup was inline inside the move loop, tangled with DB writes
+  - New function takes a chess.Board and returns a dict with eco_code, opening_line, etc.
+  - parse_pgn now calls classify_opening(board) after replaying moves
+  - Can now test opening classification independently — no database or PGN file needed
+
+- Replaced first_fen_match and second_fen_match with fen_matches_array
+  - Removed two CharField fields from Game model
+  - Added single JSONField (fen_matches_array) that stores all ECO matches as a list
+  - Updated classify_opening() to collect matches into an array instead of just first/second
+  - No arbitrary limit on number of matches recorded
+
+- Commented pytest.ini
+  - Added explanations for every setting
+  - Added filterwarnings to suppress python-chess DeprecationWarning
+    (asyncio.DefaultEventLoopPolicy deprecated in Python 3.14, their code not ours)
+    Filter is scoped to chess.engine only — our warnings still show
+
+- All 4 tests passing, coverage at 72%

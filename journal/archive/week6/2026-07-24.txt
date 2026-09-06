@@ -1,0 +1,22 @@
+2026-07-25
+
+- Recreated .env file after it went missing (SECRET_KEY, DATABASE_URL with Postgres)
+- Fixed CSRF 403 on PGN upload by adding X-CSRFToken header to ReportCreate fetch
+- Fixed opening family classification in pgn_parser — scan forward through ECO matches
+  skipping too-broad names (King's Pawn Game, Queen's Pawn Game, King's Knight Opening)
+  instead of splitting the last match on colon. Dropped families from 56 to ~35.
+- Noted remaining ECO quirks and a TODO alias map for normalizing duplicates
+- Added opening_category and opening_category_stats to the report model
+- Constrained chessboard size with max-w-2xl (was filling full page width after App.css was deleted)
+- Added custom recharts tooltip showing game count per opening on hover
+- Added comments to ReportView explaining all hooks, data flow, and chart config
+- Removed DEVLOG_FRONTEND.md from git tracking (added to .gitignore, git rm --cached)
+- Installed recharts and react-icons
+- Added comma splitting to classify_opening so names like
+  "King's Pawn Game, Wayward Queen Attack, Kiddie Countergambit"
+  get filtered by TOO_BROAD_FAMILY_NAMES correctly
+- Added FAMILY_KEYWORD_OVERRIDES for openings with inconsistent ECO naming
+  (e.g. all London variations now group under "London System")
+- Made chart X-axis height dynamic based on longest opening name
+- Made chart height grow with axis (300 + xAxisHeight) so bars aren't squeezed
+- Added left margin to BarChart so first diagonal label isn't cut off
