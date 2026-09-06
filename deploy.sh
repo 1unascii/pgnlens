@@ -22,4 +22,7 @@ pipenv run python manage.py migrate --run-syncdb
 echo "=== Restarting server ==="
 sudo systemctl restart pgnlens
 
-echo "=== Done! ==="
+echo "=== Running smoke tests ==="
+sleep 2
+cd /var/www/pgnlens
+./smoke-test.sh
