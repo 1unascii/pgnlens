@@ -72,8 +72,9 @@ function PlayGame() {
         return () => socket.close()
     }, [gameId])
 
-    function onDrop({ sourceSquare, targetSquare }: 
-        { sourceSquare: string, targetSquare: string }): boolean {
+    function onDrop({ sourceSquare, targetSquare }:
+        { sourceSquare: string, targetSquare: string | null }): boolean {
+        if (!targetSquare) return false
         // Try the move locally with chess.js
         const move = chess.move({
             from: sourceSquare,
