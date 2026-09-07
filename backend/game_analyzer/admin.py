@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Game, Report, ReportGame
+from .models import Game, Report, ReportGame, LiveGame
 
 class GameAdmin(admin.ModelAdmin):
     list_display = ('white_player', 'black_player', 'result', 'date', 'time_control', 'end_time', 'termination')
@@ -20,3 +20,4 @@ class ReportGameAdmin(admin.ModelAdmin):
 admin.site.register(Game, GameAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(ReportGame, ReportGameAdmin)
+admin.site.register(LiveGame)

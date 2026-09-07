@@ -127,18 +127,27 @@ function PlayGame() {
                     {status === 'waiting' && !black && (
                         <div>
                             <p className="text-sm mb-2">Share this link:</p>
-                            <input
-                                type="text"
-                                readOnly
-                                value={shareUrl}
-                                className="border rounded p-2 w-full text-sm"
-                                onClick={(e) => (e.target as HTMLInputElement).select()}
-                            />
+                            <div className="flex gap-1">
+                                <input
+                                    type="text"
+                                    readOnly
+                                    value={shareUrl}
+                                    className="border rounded p-2 w-full text-sm"
+                                    onClick={(e) => (e.target as HTMLInputElement).select()}
+                                />
+                                <button
+                                    onClick={() => { navigator.clipboard.writeText(shareUrl) }}
+                                    className="border rounded p-2 text-sm hover:bg-gray-100"
+                                    title="Copy link"
+                                >
+                                    📋
+                                </button>
+                            </div>
                             <button
                                 onClick={handleJoin}
                                 className="mt-2 bg-blue-500 text-white rounded p-2 w-full"
                             >
-                                Join as Black
+                                Join Game
                             </button>
                         </div>
                     )}

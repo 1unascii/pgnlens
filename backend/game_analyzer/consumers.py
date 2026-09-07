@@ -56,7 +56,6 @@ class GameConsumer(AsyncWebsocketConsumer):
         result = await self.make_move(move_uci, user)
 
         if result['valid']:
-            # Broadcast the move to both players
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
