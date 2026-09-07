@@ -79,9 +79,11 @@ function PlayGame() {
         // In dev, connect directly to Django (Vite proxy doesn't reliably forward WS data frames)
         // In production, use the same host (nginx handles the proxy)
         const isDev = window.location.port === '5173'
+        const authToken = localStorage.getItem('authToken')
         const wsUrl = isDev
-            ? `ws://localhost:8002/ws/game/${gameId}/`
-            : `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws/game/${gameId}/`
+            ? `ws://localhost:8002/ws/game/${gameId}/?token=${authToken}`
+            : `${window.location.protocol === 'https:' ? 'wss' :
+        'ws'}://${window.location.host}/ws/game/${gameId}/?token=${authToken}`
         const socket = new WebSocket(wsUrl)
 
         // Set the ref immediately so handlers always use the latest socket

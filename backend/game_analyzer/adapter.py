@@ -4,6 +4,10 @@ from django.conf import settings
 
 class CustomAccountAdapter(DefaultAccountAdapter):
     def get_email_confirmation_url(self, request, emailconfirmation):
-        protocol = 'https' if request and request.is_secure() else 'https'
-        domain = 'pgnlens.com'
+        if settings.DEBUG:
+            domain = 'localhost:5173'
+            protocol = 'http'
+        else:
+            domain = 'pgnlens.com'
+            protocol = 'https'
         return f'{protocol}://{domain}/confirm-email/{emailconfirmation.key}/'
