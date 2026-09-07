@@ -1,8 +1,6 @@
 import chess
 import chess.engine
 import math
-import subprocess
-import sys
 from django.conf import settings
 import time
 
@@ -10,59 +8,6 @@ import time
 import json
 import os
 
-
-def _get_engine():
-    """Open Stockfish. Falls back to raw subprocess on Windows + Daphne
-    where asyncio can't spawn subprocesses."""
-    try:
-        return chess.engine.SimpleEngine.popen_uci(settings.STOCKFISH_PATH)
-    except NotImplementedError:
-        return _RawStockfish(settings.STOCKFISH_PATH)
-
-
-class _RawStockfish:
-    """Talks to Stockfish via stdin/stdout. Same interface as SimpleEngine
-    for analyse() and quit(). Only used on Windows with Daphne."""
-
-    def __init__(self, path):
-        self.proc = subprocess.Popen(
-            [path], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL, text=True,
-        )
-        self._cmd('uci');       self._wait('uciok')
-        self._cmd('isready');   self._wait('readyok')
-
-    def _cmd(self, s):
-        self.proc.stdin.write(s + '\n'); self.proc.stdin.flush()
-
-    def _wait(self, token):
-        for line in self.proc.stdout:
-            if line.strip() == token: return
-
-    def analyse(self, board, limit):
-        self._cmd(f'position fen {board.fen()}')
-        depth = getattr(limit, 'depth', None)
-        nodes = getattr(limit, 'nodes', None)
-        self._cmd(f'go depth {depth}' if depth else f'go nodes {nodes}' if nodes else 'go depth 8')
-
-        score = None
-        for line in self.proc.stdout:
-            line = line.strip()
-            if 'score' in line:
-                parts = line.split()
-                try:
-                    i = parts.index('score')
-                    val = int(parts[i + 2])
-                    score_cls = chess.engine.Cp if parts[i + 1] == 'cp' else chess.engine.Mate
-                    score = chess.engine.PovScore(score_cls(val), chess.WHITE)
-                except (ValueError, IndexError):
-                    pass
-            if line.startswith('bestmove'): break
-        return {'score': score}
-
-    def quit(self):
-        try: self._cmd('quit'); self.proc.wait(timeout=5)
-        except Exception: self.proc.kill()
 
 eco_directory = os.path.join(
     os.path.dirname(__file__), '..', 'eco'
@@ -93,7 +38,7 @@ def analyze_all_moves(game, depth=None, nodes=None, final_pass=False):
     start = time.time()
     moves = game.moves
     board = chess.Board()
-    engine = _get_engine()
+    engine = chess.engine.SimpleEngine.popen_uci(settings.STOCKFISH_PATH)
 
     # Evaluate starting position
     previous_eval = _analyze_position(engine, board, limit)

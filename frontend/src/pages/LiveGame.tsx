@@ -178,7 +178,8 @@ function PlayGame() {
     }
 
     function handleJoin() {
-        ws.current?.send(JSON.stringify({ type: 'join' }))
+        if (ws.current?.readyState === WebSocket.OPEN)
+            ws.current.send(JSON.stringify({ type: 'join' }))
     }
 
     const shareUrl = `${window.location.origin}/play/${gameId}`
