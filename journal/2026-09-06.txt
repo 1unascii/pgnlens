@@ -25,3 +25,23 @@ Other changes:
 - Smoke test sends email alert on failure, daily "all clear" at 8am via Resend API
 - Set up cron job on server to run smoke test every 15 minutes
 - Created sample PGN file for testing (pgn/sample.pgn)
+
+Multiplayer chess feature (in progress):
+- Created LiveGame model with UUID primary key, player FKs, FEN, moves, status, time control
+- Built WebSocket consumer (consumers.py) with connect, move, join, resign handlers
+- Added WebSocket routing (routing.py) for /ws/game/<game_id>/
+- Configured Django Channels with ASGI (asgi.py), InMemoryChannelLayer for local dev
+- Installed daphne, channels, channels-redis
+- Created LiveGame.tsx frontend page with chessboard, WebSocket connection, join/resign buttons
+- Updated GameLobby.tsx with "Create Game" button that creates a LiveGame and navigates to it
+- Added random color assignment when second player joins
+- Added localStorage.setItem('username') to Login.tsx for board orientation
+- Added /ws proxy to vite.config.ts for local WebSocket development
+- Fixed Stockfish on Windows with Daphne: chess.engine.SimpleEngine.popen_uci fails because
+  asyncio.run() uses SelectorEventLoop which can't spawn subprocesses. Added _RawStockfish
+  class that talks to Stockfish via subprocess.Popen directly as a fallback. Refactored
+  from 83 lines to 40.
+
+Still needs debugging:
+- Move broadcasting not reaching opponent's board
+- WebSocket authentication (scope['user'] may be AnonymousUser)

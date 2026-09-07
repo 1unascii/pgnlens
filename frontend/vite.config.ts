@@ -10,8 +10,9 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:8002',  // forward /api/* to Django backend
       '/ws': {
-        target: 'ws://localhost:8002',  // forward /ws/* to Django Channels
+        target: 'http://localhost:8002',
         ws: true,
+        changeOrigin: true,
       },
     },
   },
