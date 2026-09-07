@@ -12,88 +12,57 @@ import os
 
 
 def _get_engine():
-    """Open a Stockfish engine. Uses subprocess.Popen directly on Windows
-    with Daphne/ASGI because chess.engine.SimpleEngine.popen_uci uses
-    asyncio.run() internally, which conflicts with Daphne's event loop
-    on Windows (SelectorEventLoop can't spawn subprocesses)."""
+    """Open Stockfish. Falls back to raw subprocess on Windows + Daphne
+    where asyncio can't spawn subprocesses."""
     try:
         return chess.engine.SimpleEngine.popen_uci(settings.STOCKFISH_PATH)
     except NotImplementedError:
-        # Windows + Daphne fallback: use subprocess directly
-        process = subprocess.Popen(
-            [settings.STOCKFISH_PATH],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            text=True,
+        return _RawStockfish(settings.STOCKFISH_PATH)
+
+
+class _RawStockfish:
+    """Talks to Stockfish via stdin/stdout. Same interface as SimpleEngine
+    for analyse() and quit(). Only used on Windows with Daphne."""
+
+    def __init__(self, path):
+        self.proc = subprocess.Popen(
+            [path], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL, text=True,
         )
-        return _StockfishProcess(process)
+        self._cmd('uci');       self._wait('uciok')
+        self._cmd('isready');   self._wait('readyok')
 
+    def _cmd(self, s):
+        self.proc.stdin.write(s + '\n'); self.proc.stdin.flush()
 
-class _StockfishProcess:
-    """Minimal wrapper around a Stockfish subprocess that mimics
-    the chess.engine.SimpleEngine interface for our use case."""
-
-    def __init__(self, process):
-        self.process = process
-        # Read the initial UCI greeting
-        self._send('uci')
-        self._read_until('uciok')
-        self._send('isready')
-        self._read_until('readyok')
-
-    def _send(self, command):
-        self.process.stdin.write(command + '\n')
-        self.process.stdin.flush()
-
-    def _read_until(self, token):
-        while True:
-            line = self.process.stdout.readline().strip()
-            if line == token:
-                return
-            if not line:
-                return
+    def _wait(self, token):
+        for line in self.proc.stdout:
+            if line.strip() == token: return
 
     def analyse(self, board, limit):
-        """Analyze a position and return a dict with 'score'."""
-        self._send(f'position fen {board.fen()}')
-        if hasattr(limit, 'depth') and limit.depth is not None:
-            self._send(f'go depth {limit.depth}')
-        elif hasattr(limit, 'nodes') and limit.nodes is not None:
-            self._send(f'go nodes {limit.nodes}')
-        else:
-            self._send('go depth 8')
+        self._cmd(f'position fen {board.fen()}')
+        depth = getattr(limit, 'depth', None)
+        nodes = getattr(limit, 'nodes', None)
+        self._cmd(f'go depth {depth}' if depth else f'go nodes {nodes}' if nodes else 'go depth 8')
 
-        best_score = None
-        while True:
-            line = self.process.stdout.readline().strip()
-            if line.startswith('info') and ' score ' in line:
+        score = None
+        for line in self.proc.stdout:
+            line = line.strip()
+            if 'score' in line:
                 parts = line.split()
                 try:
-                    score_idx = parts.index('score')
-                    score_type = parts[score_idx + 1]
-                    score_value = int(parts[score_idx + 2])
-                    if score_type == 'cp':
-                        best_score = chess.engine.PovScore(
-                            chess.engine.Cp(score_value), chess.WHITE
-                        )
-                    elif score_type == 'mate':
-                        best_score = chess.engine.PovScore(
-                            chess.engine.Mate(score_value), chess.WHITE
-                        )
+                    i = parts.index('score')
+                    val = int(parts[i + 2])
+                    score_cls = chess.engine.Cp if parts[i + 1] == 'cp' else chess.engine.Mate
+                    score = chess.engine.PovScore(score_cls(val), chess.WHITE)
                 except (ValueError, IndexError):
                     pass
-            if line.startswith('bestmove'):
-                break
-
-        return {'score': best_score}
+            if line.startswith('bestmove'): break
+        return {'score': score}
 
     def quit(self):
-        try:
-            self._send('quit')
-            self.process.wait(timeout=5)
-        except Exception:
-            self.process.kill()
+        try: self._cmd('quit'); self.proc.wait(timeout=5)
+        except Exception: self.proc.kill()
 
 eco_directory = os.path.join(
     os.path.dirname(__file__), '..', 'eco'
