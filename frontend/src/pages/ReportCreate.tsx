@@ -9,34 +9,46 @@ function ReportsCreate() {
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
     const [fading, setFading] = useState(false)
+    const [uploading, setUploading] = useState(false)
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
-        if (!file || !playerName) return
+        if (!file || !playerName || uploading) return
+
+        setUploading(true)
+        setError('')
 
         const formData = new FormData()
         formData.append('file', file)
         formData.append('player_name', playerName)
 
-        const response = await fetch('/api/reports/', {
-            method: 'POST',
-            headers: authHeaders(),
-            body: formData,
-        })
+        try {
+            const response = await fetch('/api/reports/', {
+                method: 'POST',
+                headers: authHeaders(),
+                body: formData,
+            })
 
-        if (response.ok) {
-            setMessage('Report created!')
-            setError('')
-            setTimeout(() => setFading(true), 1500)
-            setTimeout(() => navigate('/reports'), 2500)
-        } else {
-            const data = await response.json()
-            setError(
-                typeof data === 'object'
-                    ? Object.values(data).flat().join(' ')
-                    : 'Something went wrong.'
-            )
-            setMessage('')
+            setUploading(false)
+
+            if (response.ok) {
+                setMessage('Report created!')
+                setError('')
+                setTimeout(() => setFading(true), 1500)
+                setTimeout(() => navigate('/reports'), 2500)
+            } else {
+                const data = await response.json()
+                setError(
+                    typeof data === 'object'
+                        ? Object.values(data).flat().join(' ')
+                        : 'Something went wrong.'
+                )
+                setMessage('')
+            }
+        } catch {
+            setUploading(false)
+            setError('Request timed out.')
+            setTimeout(() => navigate('/reports'), 2000)
         }
     }
 
@@ -60,11 +72,11 @@ function ReportsCreate() {
                 />
                 <button
                     type="submit"
-                    disabled={!file || !playerName}
+                    disabled={!file || !playerName || uploading}
                     className="bg-blue-500 text-white rounded p-2 w-full font-semibold
                                disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Upload and Create Report
+                    {uploading ? 'Uploading...' : 'Upload and Create Report'}
                 </button>
             </form>
 

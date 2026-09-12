@@ -109,6 +109,17 @@ function ReportView() {
         : game.black_player === report.player_name
     )
 
+    // Recalculate summary stats based on minimum games filter
+    const filteredFamilies = Object.entries(reportStats.opening_family_stats)
+        .filter(([, stats]) => stats.total >= minimumGames)
+
+    const filteredTotalGames = filteredFamilies.reduce((sum, [, stats]) => sum + stats.total, 0)
+    const filteredWins = filteredFamilies.reduce((sum, [, stats]) => sum + stats.wins, 0)
+    const filteredWinRate = filteredTotalGames > 0
+        ? Math.round((filteredWins / filteredTotalGames) * 1000) / 10
+        : 0
+    const filteredOpeningCount = filteredFamilies.length
+
     // The API returns opening_family_stats as an object like:
     //   { "Sicilian Defense": { wins: 10, losses: 5, draws: 2, total: 17, win_rate: 58.8 }, ... }
     // recharts needs an array of objects, so we convert it with Object.entries().
@@ -142,7 +153,7 @@ function ReportView() {
                     value={minimumGames}
                     onChange={(e) => {
                         setMinimumGames(Number(e.target.value))
-                        setCurrentPage({ ...currentPage, weakLines: 0 })
+                        setCurrentPage({ weakLines: 0, allOpenings: 0 })
                     }}
                     className="border rounded p-1 w-16"
                 />
@@ -153,7 +164,10 @@ function ReportView() {
             {/* Player color */}
             <select
                 value={colorFilter}
-                onChange={(e) => setColorFilter(e.target.value as 'all' | 'white' | 'black')}
+                onChange={(e) => {
+                    setColorFilter(e.target.value as 'all' | 'white' | 'black')
+                    setCurrentPage({ weakLines: 0, allOpenings: 0 })
+                }}
                 className="border rounded p-1 bg-white text-black"
             >
                 <option value="all">All Games</option>
@@ -170,9 +184,9 @@ function ReportView() {
             {/* Output */}
             {/* Stat cards — three summary numbers in a row */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-                <StatCard label="Total Games" value={reportStats.total_games} />
-                <StatCard label="Win Rate" value={`${reportStats.win_rate}%`} />
-                <StatCard label="Openings" value={reportStats.opening_family_count} />
+                <StatCard label="Total Games" value={filteredTotalGames} />
+                <StatCard label="Win Rate" value={`${filteredWinRate}%`} />
+                <StatCard label="Openings" value={filteredOpeningCount} />
             </div>
 
             

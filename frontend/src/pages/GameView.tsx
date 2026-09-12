@@ -6,6 +6,7 @@ import type { Game } from '../types'
 import EvalBar from '../components/gameview/EvalBar'
 import PlayerBar from '../components/gameview/PlayerBar'
 import InfoPanel from '../components/gameview/InfoPanel'
+import playSound from '../utils/playSound'
 
 const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
 
@@ -65,6 +66,7 @@ function GameView() {
     const opponentElo = playerColor === 'white' ? game?.black_elo : game?.white_elo
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0)
     const [FENpositions, setFENPositions] = useState<string[]>([])
+    const [moveSoundType, setMoveSoundType] = useState<('Move' | 'Capture' | 'Castle')[]>([])
     const [FENComputed, setFENComputed] = useState(false)
     
     //FEN matches (the last FEN match that was reached)
@@ -78,12 +80,10 @@ function GameView() {
     }, [])
 
     function goToMove(halfMove: number) {
+        if (halfMove > 0) {
+            playSound(moveSoundType[halfMove])
+        }
         setCurrentMoveIndex(halfMove)
-        playMoveSound()
-    }
-
-    function playMoveSound() {
-        new Audio('/sound/lichess/standard/Move.mp3').play()
     }
 
     useEffect(() => {
@@ -98,25 +98,30 @@ function GameView() {
   
         const chess = new Chess()
         const fenList = [chess.fen()]
+        const soundTypes: ('Move' | 'Capture' | 'Castle')[] = ['Move']
         const matches: { name: string, halfMove: number }[] = []
-  
+
         let halfMove = 0
         for (const move of game.moves) {
             for (const side of [move.white_move, move.black_move]) {
                 if (side) {
                     try {
-                        chess.move({
+                        const result = chess.move({
                             from: side.slice(0, 2),
                             to: side.slice(2, 4),
                             promotion: side[4] || undefined,
                         })
                         halfMove++
-                        const fen = chess.fen()
-                        fenList.push(fen)
-  
-                        if (ecoLookup[fen]) {
+                        fenList.push(chess.fen())
+                        soundTypes.push(
+                            result.san.startsWith('O-O') ? 'Castle'
+                            : result.captured ? 'Capture'
+                            : 'Move'
+                        )
+
+                        if (ecoLookup[chess.fen()]) {
                             matches.push({
-                                name: ecoLookup[fen].name,
+                                name: ecoLookup[chess.fen()].name,
                                 halfMove: halfMove,
                             })
                         }
@@ -127,6 +132,7 @@ function GameView() {
             }
         }
         setFENPositions(fenList)
+        setMoveSoundType(soundTypes)
         setFENMatches(matches)
         setFENComputed(true)
     }, [game, ecoLookup, FENComputed])

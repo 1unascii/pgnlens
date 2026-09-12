@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Chess } from 'chess.js'
 import { Chessboard } from 'react-chessboard'
 import PlayerBar from '../components/gameview/PlayerBar'
+import playSound from '../utils/playSound'
 
 const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
 
@@ -66,8 +67,14 @@ function PlayGame() {
     const ws = useRef<WebSocket | null>(null)
     const moveListRef = useRef<HTMLDivElement>(null)
 
-    function playMoveSound() {
-        new Audio('/sound/lichess/standard/Move.mp3').play().catch(() => {})
+    function applyMove(moveUCI: string) {
+        const result = chess.move({
+            from: moveUCI.slice(0, 2),
+            to: moveUCI.slice(2, 4),
+            promotion: moveUCI[4] || undefined,
+        })
+        setFen(chess.fen())
+        return result
     }
 
     useEffect(() => {
@@ -107,11 +114,14 @@ function PlayGame() {
             }
 
             if (data.type === 'game_move') {
-                chess.load(data.fen)
-                setFen(data.fen)
+                const result = applyMove(data.move)
                 setStatus(data.status)
                 setMoveList(prev => [...prev, data.move])
-                playMoveSound()
+                playSound(
+                    result?.san.startsWith('O-O') ? 'Castle'
+                    : result?.captured ? 'Capture'
+                    : 'Move'
+                )
             }
 
             if (data.type === 'player_joined') {
@@ -162,7 +172,11 @@ function PlayGame() {
         if (!move) return false
 
         setFen(chess.fen())
-        playMoveSound()
+        playSound(
+            move.san.startsWith('O-O') ? 'Castle'
+            : move.captured ? 'Capture'
+            : 'Move'
+        )
 
         // Send move to server
         console.log('ws.current:', ws.current, 'readyState:', ws.current?.readyState)

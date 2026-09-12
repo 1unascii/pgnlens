@@ -1,3 +1,4 @@
 #!/bin/bash
 cd "$(dirname "$0")"
-pipenv run python manage.py runserver 8002
+source venv/bin/activate
+daphne --http-timeout 300 -p 8002 backend.asgi:application
