@@ -1,0 +1,15 @@
+certifi==2026.2.25
+charset-normalizer==3.4.7
+distlib==0.4.3
+filelock==3.29.4
+fonttools==4.62.1
+git-filter-repo==2.47.0
+idna==3.11
+packaging==26.2
+pipenv==2026.6.2
+platformdirs==4.10.0
+python-discovery==1.4.2
+requests==2.33.1
+setuptools==82.0.1
+urllib3==2.6.3
+virtualenv==21.5.1
