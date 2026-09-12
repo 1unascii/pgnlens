@@ -80,8 +80,10 @@ function GameView() {
     }, [])
 
     function goToMove(halfMove: number) {
-        if (halfMove > 0) {
-            playSound(moveSoundType[halfMove])
+        if (halfMove > 0 || currentMoveIndex > 0) {
+            const goingBack = halfMove < currentMoveIndex
+            const soundIndex = goingBack ? currentMoveIndex : halfMove
+            playSound(moveSoundType[soundIndex])
         }
         setCurrentMoveIndex(halfMove)
     }
