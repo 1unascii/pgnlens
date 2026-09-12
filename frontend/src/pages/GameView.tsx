@@ -131,7 +131,6 @@ function GameView() {
                             : 'Move'
                         )
                         if (chess.isCheck()) {
-                            const kingPiece = chess.turn() === 'w' ? 'K' : 'k'
                             const kingSquare = chess.board().flat().find(
                                 sq => sq && sq.type === 'k' && sq.color === chess.turn()
                             )
