@@ -67,6 +67,8 @@ function GameView() {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0)
     const [FENpositions, setFENPositions] = useState<string[]>([])
     const [moveSoundType, setMoveSoundType] = useState<('Move' | 'Capture' | 'Castle')[]>([])
+    const [checkSquares, setCheckSquares] = useState<(string | null)[]>([])
+    const [activeCheckSquare, setActiveCheckSquare] = useState<string | null>(null)
     const [FENComputed, setFENComputed] = useState(false)
     
     //FEN matches (the last FEN match that was reached)
@@ -83,9 +85,16 @@ function GameView() {
         if (halfMove > 0 || currentMoveIndex > 0) {
             const goingBack = halfMove < currentMoveIndex
             const soundIndex = goingBack ? currentMoveIndex : halfMove
-            playSound(moveSoundType[soundIndex])
+            playSound(moveSoundType[soundIndex], !!checkSquares[soundIndex])
         }
         setCurrentMoveIndex(halfMove)
+        setActiveCheckSquare(null)
+        if (checkSquares[halfMove]) {
+            setTimeout(() => {
+                setActiveCheckSquare(checkSquares[halfMove])
+                setTimeout(() => setActiveCheckSquare(null), 1200)
+            }, 50)
+        }
     }
 
     useEffect(() => {
@@ -101,6 +110,7 @@ function GameView() {
         const chess = new Chess()
         const fenList = [chess.fen()]
         const soundTypes: ('Move' | 'Capture' | 'Castle')[] = ['Move']
+        const checks: (string | null)[] = [null]
         const matches: { name: string, halfMove: number }[] = []
 
         let halfMove = 0
@@ -120,6 +130,15 @@ function GameView() {
                             : result.captured ? 'Capture'
                             : 'Move'
                         )
+                        if (chess.isCheck()) {
+                            const kingPiece = chess.turn() === 'w' ? 'K' : 'k'
+                            const kingSquare = chess.board().flat().find(
+                                sq => sq && sq.type === 'k' && sq.color === chess.turn()
+                            )
+                            checks.push(kingSquare ? kingSquare.square : null)
+                        } else {
+                            checks.push(null)
+                        }
 
                         if (ecoLookup[chess.fen()]) {
                             matches.push({
@@ -135,6 +154,7 @@ function GameView() {
         }
         setFENPositions(fenList)
         setMoveSoundType(soundTypes)
+        setCheckSquares(checks)
         setFENMatches(matches)
         setFENComputed(true)
     }, [game, ecoLookup, FENComputed])
@@ -236,6 +256,13 @@ function GameView() {
                                 darkSquareStyle: { backgroundColor: '#999' },
                                 lightSquareStyle: { backgroundColor: '#ddd' },
                                 boardOrientation: boardOrientation,
+                                squareStyles: activeCheckSquare ? {
+                                    [activeCheckSquare]: {
+                                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                                        transition: 'background-color 0.8s ease-out',
+                                        animation: 'king-wiggle 0.4s ease-in-out',
+                                    }
+                                } : {},
                             }} />
                         </div>
                     </div>

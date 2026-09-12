@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tasklist)",
+      "Read(//c/Users/josep/.cloudflared/**)",
+      "Bash(where cloudflared:*)",
+      "Bash(cloudflared tunnel:*)",
+      "Read(//c/Program Files \\(x86\\)/cloudflared/**)",
+      "Read(//c/ProgramData/**)",
+      "Bash(wmic process:*)",
+      "Bash(tasklist:*)",
+      "Bash(powershell:*)",
+      "Bash(nslookup pgnlens.com)",
+      "Bash(mkdir -p /c/xampp/htdocs/pgnlens/public)",
+      "Bash(mv /c/xampp/htdocs/pgnlens/index.php /c/xampp/htdocs/pgnlens/public/index.php)"
+    ]
+  }
+}

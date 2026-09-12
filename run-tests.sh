@@ -3,7 +3,8 @@ cd "$(dirname "$0")"
 
 echo "=== Backend Tests ==="
 cd backend
-pipenv run pytest
+source venv/bin/activate
+pytest
 BACKEND_EXIT=$?
 
 echo ""

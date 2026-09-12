@@ -55,7 +55,7 @@ function getMaterialScore(whiteCaptured: string[], blackCaptured: string[]): num
     return whiteScore - blackScore
 }
 
-function PlayGame() {
+function LiveGameView() {
     const { gameId } = useParams()
     const [chess] = useState(new Chess())
     const [fen, setFen] = useState(chess.fen())
@@ -66,6 +66,21 @@ function PlayGame() {
     const [moveList, setMoveList] = useState<string[]>([])
     const ws = useRef<WebSocket | null>(null)
     const moveListRef = useRef<HTMLDivElement>(null)
+    const [activeCheckSquare, setActiveCheckSquare] = useState<string | null>(null)
+
+    function flashCheckHighlight() {
+        if (chess.isCheck()) {
+            const kingSquare = chess.board().flat().find(
+                sq => sq && sq.type === 'k' && sq.color === chess.turn()
+            )
+            if (kingSquare) {
+                setActiveCheckSquare(kingSquare.square)
+                setTimeout(() => setActiveCheckSquare(null), 1200)
+            }
+        } else {
+            setActiveCheckSquare(null)
+        }
+    }
 
     function applyMove(moveUCI: string) {
         const result = chess.move({
@@ -120,8 +135,10 @@ function PlayGame() {
                 playSound(
                     result?.san.startsWith('O-O') ? 'Castle'
                     : result?.captured ? 'Capture'
-                    : 'Move'
+                    : 'Move',
+                    chess.isCheck()
                 )
+                flashCheckHighlight()
             }
 
             if (data.type === 'player_joined') {
@@ -164,19 +181,30 @@ function PlayGame() {
             return false
         }
 
-        const move = chess.move({
-            from: sourceSquare,
-            to: targetSquare,
-            promotion: 'q',
-        })
-        if (!move) return false
+        let move
+        try {
+            move = chess.move({
+                from: sourceSquare,
+                to: targetSquare,
+                promotion: 'q',
+            })
+        } catch {
+            playSound('Error')
+            return false
+        }
+        if (!move) {
+            playSound('Error')
+            return false
+        }
 
         setFen(chess.fen())
         playSound(
             move.san.startsWith('O-O') ? 'Castle'
             : move.captured ? 'Capture'
-            : 'Move'
+            : 'Move',
+            chess.isCheck()
         )
+        flashCheckHighlight()
 
         // Send move to server
         console.log('ws.current:', ws.current, 'readyState:', ws.current?.readyState)
@@ -235,7 +263,7 @@ function PlayGame() {
                     </div>
 
                     {/* Board */}
-                    <div style={{ lineHeight: 0 }}>
+                    <div className="w-[768px] [image-rendering:pixelated]" style={{ lineHeight: 0 }}>
                         <Chessboard options={{
                             position: fen,
                             onPieceDrop: onDrop,
@@ -243,6 +271,13 @@ function PlayGame() {
                             pieces: makePieceSet('monarchy', 'webp'),
                             darkSquareStyle: { backgroundColor: '#999' },
                             lightSquareStyle: { backgroundColor: '#ddd' },
+                            squareStyles: activeCheckSquare ? {
+                                [activeCheckSquare]: {
+                                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                                    transition: 'background-color 0.8s ease-out',
+                                    animation: 'king-wiggle 0.4s ease-in-out',
+                                }
+                            } : {},
                         }} />
                     </div>
 
@@ -327,4 +362,4 @@ function PlayGame() {
     )
 }
 
-export default PlayGame
+export default LiveGameView

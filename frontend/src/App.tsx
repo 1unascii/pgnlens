@@ -5,12 +5,13 @@ import ReportView from './pages/ReportView'
 import ReportCreate from './pages/ReportCreate'
 import GameIndex from './pages/GameIndex'
 import GameView from './pages/GameView'
-import Practice from './pages/GameLobby'
+import GameLobby from './pages/GameLobby'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ConfirmEmail from './pages/ConfirmEmail'
 import Profile from './pages/Profile'
-import LiveGame from './pages/LiveGame'
+import LiveGameView from './pages/LiveGameView'
+import PracticeView from './pages/PracticeView'
 
 function App() {
     return (
@@ -34,12 +35,13 @@ function App() {
                     <Route path="/reports/create" element={<ReportCreate />} />
                     <Route path="/games" element={<GameIndex />} />
                     <Route path="/games/:id" element={<GameView />} />
-                    <Route path="/practice" element={<Practice />} />
+                    <Route path="/play" element={<GameLobby />} />
+                    <Route path="/practice" element={<PracticeView />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/confirm-email/:key/" element={<ConfirmEmail />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/play/:gameId" element={<LiveGame />} />
+                    <Route path="/play/:gameId" element={<LiveGameView />} />
                 </Route>
             </Routes>
         </BrowserRouter>

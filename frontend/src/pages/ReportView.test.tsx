@@ -21,13 +21,13 @@ const mockReport = {
     player_name: 'TestPlayer',
     created_at: '2024-01-01',
     all_games_stats: {
-        total_games: 10,
-        wins: 6,
+        total_games: 9,
+        wins: 5,
         losses: 3,
         draws: 1,
-        win_rate: 60.0,
+        win_rate: 55.6,
         opening_category_count: 2,
-        opening_family_count: 3,
+        opening_family_count: 2,
         opening_line_count: 5,
         opening_category_stats: {},
         opening_family_stats: {
@@ -53,7 +53,10 @@ const mockReport = {
         opening_family_count: 2,
         opening_line_count: 2,
         opening_category_stats: {},
-        opening_family_stats: {},
+        opening_family_stats: {
+            'Italian Game': { wins: 2, losses: 0, draws: 0, total: 2, win_rate: 100.0 },
+            'Sicilian Defense': { wins: 2, losses: 1, draws: 0, total: 3, win_rate: 66.7 },
+        },
         opening_line_stats: {},
         family_to_lines: {},
     },
@@ -144,9 +147,9 @@ describe('ReportView', () => {
     it('renders stat cards', async () => {
         renderReportView()
         expect(await screen.findByText('Total Games')).toBeInTheDocument()
-        expect(screen.getByText('10')).toBeInTheDocument()
+        expect(screen.getByText('9')).toBeInTheDocument()
         expect(screen.getByText('Win Rate')).toBeInTheDocument()
-        expect(screen.getByText('60%')).toBeInTheDocument()
+        expect(screen.getByText('55.6%')).toBeInTheDocument()
     })
 
     it('renders opening families', async () => {
