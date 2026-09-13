@@ -198,15 +198,14 @@ STOCKFISH_PATH = env('STOCKFISH_PATH', default='stockfish')
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
-if DEBUG:
-    # Use Redis for channel layer — both dev and production.
-    # InMemoryChannelLayer doesn't broadcast across connections.
-    # Redis must be running: on Windows use WSL, on Linux it's native.
-    CHANNEL_LAYERS = {
-        'default': {
-            'BACKEND': 'channels_redis.core.RedisChannelLayer',
-            'CONFIG': {
-                'hosts': [('127.0.0.1', 6379)],
-            },
+# Use Redis for channel layer — both dev and production.
+# InMemoryChannelLayer doesn't broadcast across connections.
+# Redis must be running: on Windows use WSL, on Linux it's native.
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
         },
-    }
+    },
+}
