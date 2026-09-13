@@ -74,9 +74,17 @@ class LiveGame(models.Model):
         ('stalemate', 'Stalemate'),
         ('resigned', 'Resigned'),
         ('draw', 'Draw'),
+        ('timeout', 'Timeout'),
     ])
     result = models.CharField(max_length=10, blank=True)  # "1-0", "0-1", "1/2-1/2"
-    time_control = models.IntegerField(default=600)  # seconds per player
+    time_control = models.IntegerField(default=600)  # seconds per player (or per move for daily)
+    time_mode = models.CharField(max_length=10, default='total', choices=[
+        ('total', 'Total time'),
+        ('per_move', 'Time per move'),
+    ])
+    white_time_remaining = models.FloatField(default=0)
+    black_time_remaining = models.FloatField(default=0)
+    last_move_timestamp = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

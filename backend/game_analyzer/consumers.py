@@ -1,6 +1,7 @@
 import json
 import random
 import chess
+from django.utils import timezone
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import LiveGame
@@ -46,6 +47,8 @@ class GameConsumer(AsyncWebsocketConsumer):
             await self.handle_join(data)
         elif message_type == 'resign':
             await self.handle_resign(data)
+        elif message_type == 'clock_flag':
+            await self.handle_clock_flag(data)
 
     async def handle_move(self, data):
         """Validate and broadcast a move."""
@@ -55,7 +58,17 @@ class GameConsumer(AsyncWebsocketConsumer):
         # Validate the move server-side with python-chess
         result = await self.make_move(move_uci, user)
 
-        if result['valid']:
+        if result.get('timeout'):
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'game_over',
+                    'status': 'timeout',
+                    'result': result['result'],
+                    'message': result['message'],
+                }
+            )
+        elif result['valid']:
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
@@ -64,6 +77,9 @@ class GameConsumer(AsyncWebsocketConsumer):
                     'fen': result['fen'],
                     'status': result['status'],
                     'result': result.get('result', ''),
+                    'white_time': result['white_time'],
+                    'black_time': result['black_time'],
+                    'server_time': timezone.now().isoformat(),
                 }
             )
 
@@ -79,6 +95,9 @@ class GameConsumer(AsyncWebsocketConsumer):
                     'type': 'player_joined',
                     'white': result['white'],
                     'black': result['black'],
+                    'white_time': result['white_time'],
+                    'black_time': result['black_time'],
+                    'server_time': timezone.now().isoformat(),
                 }
             )
 
@@ -96,6 +115,20 @@ class GameConsumer(AsyncWebsocketConsumer):
                 'message': f'{user.username} resigned.',
             }
         )
+
+    async def handle_clock_flag(self, data):
+        """Handle a player claiming their opponent's time ran out."""
+        result = await self.check_timeout()
+        if result:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'game_over',
+                    'status': 'timeout',
+                    'result': result['result'],
+                    'message': result['message'],
+                }
+            )
 
     # ── Broadcast handlers ──────────────────────────────────
     # These are called by group_send and forward to all clients
@@ -122,11 +155,19 @@ class GameConsumer(AsyncWebsocketConsumer):
             'white': game.white_player.username,
             'black': game.black_player.username if game.black_player else None,
             'time_control': game.time_control,
+            'time_mode': game.time_mode,
+            'white_time': game.white_time_remaining,
+            'black_time': game.black_time_remaining,
+            'server_time': timezone.now().isoformat(),
         }
 
     @database_sync_to_async
     def make_move(self, move_uci, user):
         game = LiveGame.objects.get(id=self.game_id)
+
+        if game.status != 'active':
+            return {'valid': False}
+
         board = chess.Board(game.fen)
 
         # Verify it's this player's turn
@@ -134,6 +175,38 @@ class GameConsumer(AsyncWebsocketConsumer):
             return {'valid': False}
         if board.turn == chess.BLACK and game.black_player != user:
             return {'valid': False}
+
+        # Deduct time from the player who is moving
+        now = timezone.now()
+        if game.last_move_timestamp:
+            elapsed = (now - game.last_move_timestamp).total_seconds()
+            if board.turn == chess.WHITE:
+                game.white_time_remaining -= elapsed
+                if game.white_time_remaining <= 0:
+                    game.white_time_remaining = 0
+                    game.status = 'timeout'
+                    game.result = '0-1'
+                    game.save()
+                    return {'valid': False, 'timeout': True, 'result': '0-1',
+                            'message': f'{game.white_player.username} ran out of time.'}
+            else:
+                game.black_time_remaining -= elapsed
+                if game.black_time_remaining <= 0:
+                    game.black_time_remaining = 0
+                    game.status = 'timeout'
+                    game.result = '1-0'
+                    game.save()
+                    return {'valid': False, 'timeout': True, 'result': '1-0',
+                            'message': f'{game.black_player.username} ran out of time.'}
+
+        # For daily games, reset the moving player's clock after each move
+        if game.time_mode == 'per_move':
+            if board.turn == chess.WHITE:
+                game.white_time_remaining = game.time_control
+            else:
+                game.black_time_remaining = game.time_control
+
+        game.last_move_timestamp = now
 
         # Validate the move
         try:
@@ -166,7 +239,12 @@ class GameConsumer(AsyncWebsocketConsumer):
             result['result'] = game.result
 
         game.save()
-        return {'valid': True, 'fen': game.fen, 'status': game.status, **result}
+        return {
+            'valid': True, 'fen': game.fen, 'status': game.status,
+            'white_time': game.white_time_remaining,
+            'black_time': game.black_time_remaining,
+            **result,
+        }
 
     @database_sync_to_async
     def join_game(self, user):
@@ -184,10 +262,15 @@ class GameConsumer(AsyncWebsocketConsumer):
             # No swap — joiner gets black
             game.black_player = user
         game.status = 'active'
+        game.white_time_remaining = game.time_control
+        game.black_time_remaining = game.time_control
+        game.last_move_timestamp = timezone.now()
         game.save()
         return {
             'white': game.white_player.username,
             'black': game.black_player.username,
+            'white_time': game.white_time_remaining,
+            'black_time': game.black_time_remaining,
         }
 
     @database_sync_to_async
@@ -200,3 +283,31 @@ class GameConsumer(AsyncWebsocketConsumer):
             game.result = '1-0'
         game.save()
         return game.result
+
+    @database_sync_to_async
+    def check_timeout(self):
+        game = LiveGame.objects.get(id=self.game_id)
+        if game.status != 'active' or not game.last_move_timestamp:
+            return None
+
+        elapsed = (timezone.now() - game.last_move_timestamp).total_seconds()
+        board = chess.Board(game.fen)
+
+        if board.turn == chess.WHITE:
+            remaining = game.white_time_remaining - elapsed
+            if remaining <= 0:
+                game.white_time_remaining = 0
+                game.status = 'timeout'
+                game.result = '0-1'
+                game.save()
+                return {'result': '0-1', 'message': f'{game.white_player.username} ran out of time.'}
+        else:
+            remaining = game.black_time_remaining - elapsed
+            if remaining <= 0:
+                game.black_time_remaining = 0
+                game.status = 'timeout'
+                game.result = '1-0'
+                game.save()
+                return {'result': '1-0', 'message': f'{game.black_player.username} ran out of time.'}
+
+        return None

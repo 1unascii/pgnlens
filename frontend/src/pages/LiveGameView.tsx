@@ -55,6 +55,22 @@ function getMaterialScore(whiteCaptured: string[], blackCaptured: string[]): num
     return whiteScore - blackScore
 }
 
+function formatTime(seconds: number, isDaily: boolean): string {
+    if (isDaily) {
+        const days = Math.floor(seconds / 86400)
+        const hours = Math.floor((seconds % 86400) / 3600)
+        const minutes = Math.floor((seconds % 3600) / 60)
+        if (days > 0) return `${days}d ${hours}h`
+        if (hours > 0) return `${hours}h ${minutes}m`
+        return `${minutes}m`
+    }
+    if (seconds <= 0) return '0:00'
+    if (seconds < 10) return `0:${seconds.toFixed(1).padStart(4, '0')}`
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+}
+
 function LiveGameView() {
     const { gameId } = useParams()
     const [chess] = useState(new Chess())
@@ -67,6 +83,15 @@ function LiveGameView() {
     const ws = useRef<WebSocket | null>(null)
     const moveListRef = useRef<HTMLDivElement>(null)
     const [activeCheckSquare, setActiveCheckSquare] = useState<string | null>(null)
+
+    // Clock state — refs so the interval always reads current values
+    const whiteTimeRef = useRef(600)
+    const blackTimeRef = useRef(600)
+    const lastMoveTimestampRef = useRef<number | null>(null)
+    const serverTimeDeltaRef = useRef(0)
+    const [timeMode, setTimeMode] = useState<'total' | 'per_move'>('total')
+    const [displayWhiteTime, setDisplayWhiteTime] = useState<number>(600)
+    const [displayBlackTime, setDisplayBlackTime] = useState<number>(600)
 
     function flashCheckHighlight() {
         if (chess.isCheck()) {
@@ -90,6 +115,22 @@ function LiveGameView() {
         })
         setFen(chess.fen())
         return result
+    }
+
+    function syncClock(data: { white_time?: number, black_time?: number, server_time?: string }) {
+        if (data.white_time !== undefined) {
+            whiteTimeRef.current = data.white_time
+            setDisplayWhiteTime(data.white_time)
+        }
+        if (data.black_time !== undefined) {
+            blackTimeRef.current = data.black_time
+            setDisplayBlackTime(data.black_time)
+        }
+        if (data.server_time) {
+            const serverNow = new Date(data.server_time).getTime()
+            serverTimeDeltaRef.current = Date.now() - serverNow
+            lastMoveTimestampRef.current = serverNow
+        }
     }
 
     useEffect(() => {
@@ -124,21 +165,38 @@ function LiveGameView() {
                 setWhite(data.white)
                 setBlack(data.black)
                 if (data.moves) setMoveList(data.moves)
+                if (data.time_mode) setTimeMode(data.time_mode)
                 const username = localStorage.getItem('username')
                 if (data.black === username) setMyColor('black')
+                // Show time_control before game starts, actual times after
+                const initialWhite = data.white_time > 0 ? data.white_time : data.time_control
+                const initialBlack = data.black_time > 0 ? data.black_time : data.time_control
+                whiteTimeRef.current = initialWhite
+                blackTimeRef.current = initialBlack
+                setDisplayWhiteTime(initialWhite)
+                setDisplayBlackTime(initialBlack)
+                if (data.status === 'active') syncClock(data)
             }
 
             if (data.type === 'game_move') {
-                const result = applyMove(data.move)
-                setStatus(data.status)
-                setMoveList(prev => [...prev, data.move])
-                playSound(
-                    result?.san.startsWith('O-O') ? 'Castle'
-                    : result?.captured ? 'Capture'
-                    : 'Move',
-                    chess.isCheck()
-                )
-                flashCheckHighlight()
+                // If the board already matches (we made this move locally), skip applyMove
+                if (chess.fen() === data.fen) {
+                    setStatus(data.status)
+                    setMoveList(prev => [...prev, data.move])
+                    syncClock(data)
+                } else {
+                    const result = applyMove(data.move)
+                    setStatus(data.status)
+                    setMoveList(prev => [...prev, data.move])
+                    playSound(
+                        result?.san.startsWith('O-O') ? 'Castle'
+                        : result?.captured ? 'Capture'
+                        : 'Move',
+                        chess.isCheck()
+                    )
+                    flashCheckHighlight()
+                    syncClock(data)
+                }
             }
 
             if (data.type === 'player_joined') {
@@ -147,6 +205,7 @@ function LiveGameView() {
                 setStatus('active')
                 const username = localStorage.getItem('username')
                 setMyColor(data.black === username ? 'black' : 'white')
+                syncClock(data)
             }
 
             if (data.type === 'game_over') {
@@ -162,6 +221,36 @@ function LiveGameView() {
         }
     }, [gameId])
 
+    // Countdown timer — ticks every 100ms
+    useEffect(() => {
+        if (status !== 'active') return
+
+        const interval = setInterval(() => {
+            if (lastMoveTimestampRef.current === null) return
+
+            const elapsed = (Date.now() - serverTimeDeltaRef.current - lastMoveTimestampRef.current) / 1000
+            const isWhiteTurn = chess.turn() === 'w'
+
+            if (isWhiteTurn) {
+                setDisplayWhiteTime(Math.max(0, whiteTimeRef.current - elapsed))
+                setDisplayBlackTime(blackTimeRef.current)
+            } else {
+                setDisplayWhiteTime(whiteTimeRef.current)
+                setDisplayBlackTime(Math.max(0, blackTimeRef.current - elapsed))
+            }
+
+            // Send clock_flag if active player's time hits zero
+            const activeTime = isWhiteTurn
+                ? whiteTimeRef.current - elapsed
+                : blackTimeRef.current - elapsed
+            if (activeTime <= 0 && ws.current?.readyState === WebSocket.OPEN) {
+                ws.current.send(JSON.stringify({ type: 'clock_flag' }))
+            }
+        }, 100)
+
+        return () => clearInterval(interval)
+    }, [status])
+
     // Auto-scroll move list
     useEffect(() => {
         if (moveListRef.current) {
@@ -175,9 +264,7 @@ function LiveGameView() {
 
         // Only allow moves on your turn
         const isWhiteTurn = chess.turn() === 'w'
-        console.log('Turn check:', 'myColor:', myColor, 'isWhiteTurn:', isWhiteTurn, 'chess.turn():', chess.turn())
         if ((myColor === 'white' && !isWhiteTurn) || (myColor === 'black' && isWhiteTurn)) {
-            console.log('BLOCKED: not your turn')
             return false
         }
 
@@ -207,7 +294,6 @@ function LiveGameView() {
         flashCheckHighlight()
 
         // Send move to server
-        console.log('ws.current:', ws.current, 'readyState:', ws.current?.readyState)
         ws.current?.send(JSON.stringify({
             type: 'move',
             move: sourceSquare + targetSquare + (move.promotion ? move.promotion : ''),
@@ -233,12 +319,17 @@ function LiveGameView() {
     // Player names and captured pieces based on orientation
     const topPlayer = myColor === 'white' ? (black || 'waiting...') : white
     const bottomPlayer = myColor === 'white' ? white : (black || 'waiting...')
-    // Pieces captured BY the top player (bottom player's missing pieces)
     const topCaptured = myColor === 'white' ? whiteCaptured : blackCaptured
-    // Pieces captured BY the bottom player (top player's missing pieces)
     const bottomCaptured = myColor === 'white' ? blackCaptured : whiteCaptured
-    // Material advantage from bottom player's perspective
     const bottomAdvantage = myColor === 'white' ? materialScore : -materialScore
+
+    // Clock display values based on board orientation
+    const isDaily = timeMode === 'per_move'
+    const topTime = myColor === 'white' ? displayBlackTime : displayWhiteTime
+    const bottomTime = myColor === 'white' ? displayWhiteTime : displayBlackTime
+    const isWhiteTurn = chess.turn() === 'w'
+    const topIsActive = myColor === 'white' ? !isWhiteTurn : isWhiteTurn
+    const bottomIsActive = myColor === 'white' ? isWhiteTurn : !isWhiteTurn
 
     // Format move list into pairs for display
     const movePairs: { num: number, white: string, black?: string }[] = []
@@ -254,12 +345,22 @@ function LiveGameView() {
         <div className="max-w-4xl mx-auto p-4">
             <div className="flex gap-4">
                 <div>
-                    {/* Top player bar */}
-                    <div className="flex items-center gap-2">
-                        <PlayerBar name={topPlayer} elo={null} capturedPieces={topCaptured} />
-                        {bottomAdvantage < 0 && (
-                            <span className="text-xs text-gray-400">+{Math.abs(bottomAdvantage)}</span>
-                        )}
+                    {/* Top player bar + clock */}
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <PlayerBar name={topPlayer} elo={null} capturedPieces={topCaptured} />
+                            {bottomAdvantage < 0 && (
+                                <span className="text-xs text-gray-400">+{Math.abs(bottomAdvantage)}</span>
+                            )}
+                        </div>
+                        <div className={`font-mono text-lg font-bold px-3 py-1 rounded
+                            ${status === 'active' && topIsActive
+                                ? 'bg-white text-black'
+                                : 'bg-gray-700 text-gray-400'}
+                            ${status === 'active' && topIsActive && topTime < 30 ? 'text-red-600' : ''}`}
+                        >
+                            {formatTime(topTime, isDaily)}
+                        </div>
                     </div>
 
                     {/* Board */}
@@ -281,12 +382,22 @@ function LiveGameView() {
                         }} />
                     </div>
 
-                    {/* Bottom player bar */}
-                    <div className="flex items-center gap-2">
-                        <PlayerBar name={bottomPlayer} elo={null} capturedPieces={bottomCaptured} />
-                        {bottomAdvantage > 0 && (
-                            <span className="text-xs text-gray-400">+{bottomAdvantage}</span>
-                        )}
+                    {/* Bottom player bar + clock */}
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <PlayerBar name={bottomPlayer} elo={null} capturedPieces={bottomCaptured} />
+                            {bottomAdvantage > 0 && (
+                                <span className="text-xs text-gray-400">+{bottomAdvantage}</span>
+                            )}
+                        </div>
+                        <div className={`font-mono text-lg font-bold px-3 py-1 rounded
+                            ${status === 'active' && bottomIsActive
+                                ? 'bg-white text-black'
+                                : 'bg-gray-700 text-gray-400'}
+                            ${status === 'active' && bottomIsActive && bottomTime < 30 ? 'text-red-600' : ''}`}
+                        >
+                            {formatTime(bottomTime, isDaily)}
+                        </div>
                     </div>
                 </div>
 
@@ -351,7 +462,8 @@ function LiveGameView() {
 
                     {/* Game over */}
                     {(status === 'checkmate' || status === 'stalemate'
-                        || status === 'resigned' || status === 'draw') && (
+                        || status === 'resigned' || status === 'draw'
+                        || status === 'timeout') && (
                         <p className="text-lg font-bold text-center">
                             Game Over
                         </p>

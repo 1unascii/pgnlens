@@ -238,9 +238,11 @@ def analyze_game(request, game_id):
 def create_live_game(request):
     """Create a new live game. Returns the game ID for sharing."""
     time_control = request.data.get('time_control', 600)
+    time_mode = request.data.get('time_mode', 'total')
     game = LiveGame.objects.create(
         white_player=request.user,
         time_control=time_control,
+        time_mode=time_mode,
     )
     return Response({
         'game_id': str(game.id),
