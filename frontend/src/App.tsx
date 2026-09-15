@@ -11,7 +11,8 @@ import Register from './pages/Register'
 import ConfirmEmail from './pages/ConfirmEmail'
 import Profile from './pages/Profile'
 import LiveGameView from './pages/LiveGameView'
-import PracticeView from './pages/PracticeView'
+import OpeningIndexView from './pages/OpeningIndexView'
+import OpeningGameView from './pages/OpeningGameView'
 
 function App() {
     return (
@@ -36,7 +37,8 @@ function App() {
                     <Route path="/games" element={<GameIndex />} />
                     <Route path="/games/:id" element={<GameView />} />
                     <Route path="/play" element={<GameLobby />} />
-                    <Route path="/practice" element={<PracticeView />} />
+                    <Route path="/practice" element={<OpeningIndexView />} />
+                    <Route path="/practice/board/:family/:line" element={<OpeningGameView />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/confirm-email/:key/" element={<ConfirmEmail />} />

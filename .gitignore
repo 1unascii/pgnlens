@@ -14,3 +14,4 @@ stockfish/
 frontend/coverage/
 backend/.coverage
 *.jpg
+*.png
