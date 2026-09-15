@@ -13,3 +13,4 @@ sent_emails/
 stockfish/
 frontend/coverage/
 backend/.coverage
+*.jpg
