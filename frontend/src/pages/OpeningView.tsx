@@ -83,7 +83,7 @@ interface BookMove {
 
 const bookMoveCache = new Map<string, { moves: BookMove[], opening?: { name: string } }>()
 
-function OpeningGameView() {
+function OpeningView() {
     const { family, line } = useParams()
     const navigate = useNavigate()
     const familyName = decodeURIComponent(family || '')
@@ -108,16 +108,23 @@ function OpeningGameView() {
     useEffect(() => {
         if (!openingData || initialized) return
         chess.reset()
-        if (startingMoves) {
-            const moves = startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/)
-            for (const moveStr of moves) {
-                chess.move(moveStr)
-            }
+        const moves = startingMoves ? startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/) : []
+        for (const moveStr of moves) {
+            chess.move(moveStr)
         }
         setFen(chess.fen())
-        setMoveList(startingMoves ? startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/) : [])
-        setPlayerColor(chess.turn() === 'w' ? 'black' : 'white')
+        setMoveList(moves)
+        const color = moves.length % 2 === 0 ? 'black' : 'white'
+        setPlayerColor(color)
         setInitialized(true)
+
+        // If the computer moves first, trigger it
+        const isWhiteTurn = chess.turn() === 'w'
+        const isComputerTurn = (color === 'white' && !isWhiteTurn)
+            || (color === 'black' && isWhiteTurn)
+        if (isComputerTurn) {
+            setTimeout(() => makeComputerMove(), 800)
+        }
     }, [openingData])
 
     const [fen, setFen] = useState(chess.fen())
@@ -146,19 +153,6 @@ function OpeningGameView() {
         fetchBookMoves(fen)
     }, [fen])
 
-    // ── On initial load, if it's the computer's turn, make a move ──
-    const initialMoveTriggered = useRef(false)
-    useEffect(() => {
-        if (initialMoveTriggered.current) return
-        initialMoveTriggered.current = true
-
-        const isWhiteTurn = chess.turn() === 'w'
-        const isComputerTurn = (playerColor === 'white' && !isWhiteTurn)
-            || (playerColor === 'black' && isWhiteTurn)
-        if (isComputerTurn) {
-            setTimeout(() => makeComputerMove(), 800)
-        }
-    }, [])
 
     function getStockfishMove(fen: string, depth: number): Promise<string | null> {
         return new Promise((resolve) => {
@@ -615,4 +609,4 @@ function OpeningGameView() {
     )
 }
 
-export default OpeningGameView
+export default OpeningView

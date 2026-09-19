@@ -15,15 +15,6 @@ function makePieceSet(theme: string, extension = 'svg') {
     return pieceSet
 }
 
-interface BookMove {
-    uci: string
-    san: string
-    white: number
-    draws: number
-    black: number
-    averageRating: number
-}
-
 interface OpeningLine {
     fen: string
     eco: string
@@ -34,13 +25,7 @@ interface OpeningFamily {
     lines: Record<string, OpeningLine>
 }
 
-interface SelectedLine {
-    name: string
-    fen: string
-    moves: string
-}
-
-function OpeningIndexView() {
+function OpeningIndex() {
     const navigate = useNavigate()
     const [openings, setOpenings] = useState<Record<string, OpeningFamily>>({})
     const [expandedFamily, setExpandedFamily] = useState<string | null>(null)
@@ -97,10 +82,6 @@ function OpeningIndexView() {
 
                         // Find which row the expanded family is in
                         const expandedIndex = filtered.findIndex(([name]) => name === expandedFamily)
-                        const expandedRowEnd = expandedIndex >= 0
-                            ? Math.ceil((expandedIndex + 1) / columnsPerRow) * columnsPerRow
-                            : -1
-
                         const result: React.ReactNode[] = []
 
                         for (let i = 0; i < filtered.length; i += columnsPerRow) {
@@ -219,4 +200,4 @@ function OpeningIndexView() {
         )
 }
 
-export default OpeningIndexView
+export default OpeningIndex
