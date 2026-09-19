@@ -13,5 +13,6 @@ sent_emails/
 stockfish/
 frontend/coverage/
 backend/.coverage
+backend/debug_*.py
 *.jpg
 *.png

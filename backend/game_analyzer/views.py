@@ -185,15 +185,34 @@ class ReportViewSet(viewsets.ModelViewSet):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def verify_email(request):
-    """Verify an email address using the confirmation key."""
-    from allauth.account.models import get_emailconfirmation_model
+    """Verify an email address using the confirmation key.
+
+    Supports two key formats:
+    - DB-stored keys (long hex strings from EmailConfirmation.create())
+    - HMAC-based keys (colon-separated, from allauth's newer confirmation system)
+    """
+    from allauth.account.models import EmailConfirmation, get_emailconfirmation_model
 
     key = request.data.get('key')
     if not key:
         return Response({'detail': 'Key is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    model = get_emailconfirmation_model()
-    confirmation = model.from_key(key)
+    confirmation = None
+
+    # Try DB-stored key first (from our resend endpoint).
+    # key_expired() requires `sent` to be set, so check for that first.
+    db_confirmation = EmailConfirmation.objects.filter(key=key).first()
+    if db_confirmation:
+        if db_confirmation.sent and db_confirmation.key_expired():
+            db_confirmation = None  # key exists but is expired
+        else:
+            confirmation = db_confirmation
+
+    # Fall back to HMAC-based key (from allauth/dj-rest-auth resend)
+    if not confirmation:
+        model = get_emailconfirmation_model()
+        confirmation = model.from_key(key)
+
     if not confirmation:
         return Response({'detail': 'Invalid or expired key.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -266,4 +285,55 @@ def live_game_state(request, game_id):
         'white': game.white_player.username,
         'black': game.black_player.username if game.black_player else None,
         'time_control': game.time_control,
+    })
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def resend_verification_for_username(request):
+    """Look up a user by username, resend verification email,
+    and return a masked version of their email address."""
+    from django.contrib.auth.models import User
+    from allauth.account.models import EmailAddress
+
+    username = request.data.get('username')
+    if not username:
+        return Response(
+            {'detail': 'Username is required.'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        # Don't reveal whether the user exists
+        return Response({'detail': 'ok', 'masked_email': ''})
+
+    email_obj = EmailAddress.objects.filter(
+        user=user, verified=False
+    ).first()
+    if email_obj:
+        # Create a fresh confirmation key and send it.
+        # send_confirmation() may skip sending if an unexpired
+        # key already exists, so we create a new one explicitly.
+        from allauth.account.models import EmailConfirmation
+        confirmation = EmailConfirmation.create(email_obj)
+        confirmation.save()
+        confirmation.send(request)
+
+    # Mask the email: j****e@gmail.com
+    email = user.email
+    local, domain = email.split('@')
+    if len(local) <= 2:
+        masked_local = local[0] + '*' * (len(local) - 1)
+    else:
+        masked_local = (
+            local[0]
+            + '*' * (len(local) - 2)
+            + local[-1]
+        )
+    masked_email = f'{masked_local}@{domain}'
+
+    return Response({
+        'detail': 'ok',
+        'masked_email': masked_email,
     })

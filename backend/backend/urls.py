@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from game_analyzer.views import (
-    GameViewSet, 
-    ReportViewSet, 
+    GameViewSet,
+    ReportViewSet,
     verify_email,
     analyze_game,
     create_live_game,
     live_game_state,
+    resend_verification_for_username,
 )
 from django.views.generic import TemplateView
 
@@ -37,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth/verify-email/', verify_email),
+    path('api/auth/resend-verification/', resend_verification_for_username),
     path('api/auth/', include('dj_rest_auth.urls')),
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/games/<int:game_id>/analyze/', analyze_game),

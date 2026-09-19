@@ -30,7 +30,8 @@ function OpeningIndex() {
     const [openings, setOpenings] = useState<Record<string, OpeningFamily>>({})
     const [expandedFamily, setExpandedFamily] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState('')
-    const [visibleCount, setVisibleCount] = useState(24)
+    const rowsPerPage = 5
+    const [visibleRows, setVisibleRows] = useState(rowsPerPage)
     const gridRef = useRef<HTMLDivElement>(null)
     const [columnsPerRow, setColumnsPerRow] = useState(5)
     const accordionScrollRef = useRef<HTMLDivElement>(null)
@@ -47,7 +48,8 @@ function OpeningIndex() {
             if (gridRef.current) {
                 const width = gridRef.current.clientWidth
                 const cardWidth = 160 + 12 // 10rem + gap
-                setColumnsPerRow(Math.max(1, Math.floor(width / cardWidth)))
+                const tolerance = cardWidth * 0.25 // allow cards to overlap a bit before dropping a column
+                setColumnsPerRow(Math.max(1, Math.floor((width + tolerance) / cardWidth)))
             }
         }
         measure()
@@ -55,13 +57,15 @@ function OpeningIndex() {
         return () => window.removeEventListener('resize', measure)
     }, [])
 
+    const contentWidth = columnsPerRow * 160 + (columnsPerRow - 1) * 12
+
 
     function startPractice(familyName: string, lineName: string) {
         navigate(`/practice/board/${encodeURIComponent(familyName)}/${encodeURIComponent(lineName)}`)
     }
 
     return (
-            <div className="max-w-4xl mx-auto p-4">
+            <div className="max-w-7xl mx-auto p-8">
                 <h1 className="text-2xl font-bold mb-4">Practice Openings</h1>
     
                 {/* Search filter */}
@@ -69,8 +73,9 @@ function OpeningIndex() {
                     type="text"
                     placeholder="Search openings..."
                     value={searchTerm}
-                    onChange={(e) => { setSearchTerm(e.target.value); setVisibleCount(24) }}
-                    className="border rounded p-2 w-full mb-4"
+                    onChange={(e) => { setSearchTerm(e.target.value); setVisibleRows(rowsPerPage) }}
+                    className="border rounded p-2 mb-4"
+                    style={{ width: contentWidth }}
                 />
     
                 {/* Opening families — chunked into rows with accordion between rows */}
@@ -78,7 +83,7 @@ function OpeningIndex() {
                     {(() => {
                         const filtered = Object.entries(openings)
                             .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
-                            .slice(0, visibleCount)
+                            .slice(0, visibleRows * columnsPerRow)
 
                         // Find which row the expanded family is in
                         const expandedIndex = filtered.findIndex(([name]) => name === expandedFamily)
@@ -88,7 +93,7 @@ function OpeningIndex() {
                             const rowItems = filtered.slice(i, i + columnsPerRow)
 
                             result.push(
-                                <div key={`row-${i}`} className="flex flex-wrap gap-3 mb-3">
+                                <div key={`row-${i}`} className="flex flex-nowrap gap-3 mb-3 overflow-hidden">
                                     {rowItems.map(([familyName, family]) => (
                                         <div
                                             key={familyName}
@@ -186,12 +191,13 @@ function OpeningIndex() {
                 </div>
 
                 {/* Load more button */}
-                {visibleCount < Object.entries(openings).filter(([name]) =>
+                {visibleRows * columnsPerRow < Object.entries(openings).filter(([name]) =>
                     name.toLowerCase().includes(searchTerm.toLowerCase())
                 ).length && (
                     <button
-                        onClick={() => setVisibleCount(prev => prev + 24)}
-                        className="mt-4 w-full border rounded p-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        onClick={() => setVisibleRows(prev => prev + rowsPerPage)}
+                        className="mt-4 border rounded p-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        style={{ width: contentWidth }}
                     >
                         Load more
                     </button>
