@@ -137,6 +137,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'frontend' / 'dist' / 'assets',
+    ('stockfish', BASE_DIR.parent / 'frontend' / 'dist' / 'stockfish'),
 ]
 
 CORS_ORIGIN_WHITELIST = [
