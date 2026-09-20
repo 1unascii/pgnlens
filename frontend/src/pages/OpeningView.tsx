@@ -379,6 +379,14 @@ function OpeningView() {
         setCurrentOpeningName(lineName)
         setActiveCheckSquare(null)
         setShowCheckmate(false)
+
+        // If the computer moves first after reset, trigger it
+        const isWhiteTurn = chess.turn() === 'w'
+        const isComputerTurn = (playerColor === 'white' && !isWhiteTurn)
+            || (playerColor === 'black' && isWhiteTurn)
+        if (isComputerTurn) {
+            setTimeout(() => makeComputerMove(), 800)
+        }
     }
 
     function toggleColor() {
