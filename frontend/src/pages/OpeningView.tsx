@@ -178,16 +178,12 @@ function OpeningView() {
             return
         }
 
-        const headers = {
-            'Authorization': `Bearer ${import.meta.env.VITE_LICHESS_TOKEN}`
-        }
         const encodedFen = encodeURIComponent(currentFen)
         const response = await fetch(
             `https://explorer.lichess.ovh/lichess`
             + `?fen=${encodedFen}`
             + `&ratings=1600,1800,2000`
-            + `&speeds=blitz,rapid`,
-            { headers }
+            + `&speeds=blitz,rapid`
         )
         const data = await response.json()
 
@@ -266,16 +262,12 @@ function OpeningView() {
             if (bookMoveCache.has(currentFen)) {
                 currentBookMoves = bookMoveCache.get(currentFen)!.moves
             } else {
-                const headers = {
-                    'Authorization': `Bearer ${import.meta.env.VITE_LICHESS_TOKEN}`
-                }
                 const encodedFen = encodeURIComponent(currentFen)
                 const response = await fetch(
                     `https://explorer.lichess.ovh/lichess`
                     + `?fen=${encodedFen}`
                     + `&ratings=1600,1800,2000`
-                    + `&speeds=blitz,rapid`,
-                    { headers }
+                    + `&speeds=blitz,rapid`
                 )
                 const data = await response.json()
                 currentBookMoves = data.moves || []
