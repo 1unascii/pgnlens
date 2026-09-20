@@ -141,7 +141,8 @@ function OpeningView() {
 
     // ── Stockfish WASM setup ──────────────────────────────
     useEffect(() => {
-        const worker = new Worker('/stockfish/stockfish.js')
+        const base = import.meta.env.BASE_URL
+        const worker = new Worker(`${base}stockfish/stockfish.js`)
         worker.postMessage('uci')
         worker.postMessage('isready')
         stockfish.current = worker
@@ -220,10 +221,19 @@ function OpeningView() {
     }
 
     function applyMoveAndSound(moveUCI: string) {
+        // Stockfish WASM sometimes outputs castling in Chess960 format
+        // (king to rook square) instead of standard UCI (king to destination).
+        // Convert: e1h1 → e1g1, e1a1 → e1c1, e8h8 → e8g8, e8a8 → e8c8
+        const castlingMap: Record<string, string> = {
+            'e1h1': 'e1g1', 'e1a1': 'e1c1',
+            'e8h8': 'e8g8', 'e8a8': 'e8c8',
+        }
+        const normalizedUCI = castlingMap[moveUCI] || moveUCI
+
         const move = chess.move({
-            from: moveUCI.slice(0, 2),
-            to: moveUCI.slice(2, 4),
-            promotion: moveUCI[4] || undefined,
+            from: normalizedUCI.slice(0, 2),
+            to: normalizedUCI.slice(2, 4),
+            promotion: normalizedUCI[4] || undefined,
         })
         if (!move) return null
         setFen(chess.fen())
