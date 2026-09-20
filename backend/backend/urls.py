@@ -25,6 +25,7 @@ from game_analyzer.views import (
     create_live_game,
     live_game_state,
     resend_verification_for_username,
+    lichess_explorer,
 )
 from django.views.generic import TemplateView
 
@@ -44,6 +45,7 @@ urlpatterns = [
     path('api/games/<int:game_id>/analyze/', analyze_game),
     path('api/live-games/', create_live_game),
     path('api/live-games/<uuid:game_id>/', live_game_state),
+    path('api/lichess-explorer/', lichess_explorer),
     # Catch-all: serve React app for any non-API
     # route. MUST be last or it intercepts API
     # requests.

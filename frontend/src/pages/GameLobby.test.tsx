@@ -22,7 +22,7 @@ describe('GameLobby', () => {
                 <GameLobby />
             </MemoryRouter>
         )
-        expect(screen.getByText('Play')).toBeInTheDocument()
+        expect(screen.getByText('Live Arena')).toBeInTheDocument()
         expect(screen.getByText('Create Game')).toBeInTheDocument()
     })
 })

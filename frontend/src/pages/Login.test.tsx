@@ -17,7 +17,10 @@ describe('Login', () => {
     })
 
     it('shows error on failed login', async () => {
-        global.fetch = vi.fn().mockResolvedValue({ ok: false })
+        global.fetch = vi.fn().mockResolvedValue({
+            ok: false,
+            json: () => Promise.resolve({ non_field_errors: ['Unable to log in with provided credentials.'] }),
+        })
         render(<Login />)
         await userEvent.type(screen.getByPlaceholderText('Username'), 'baduser')
         await userEvent.type(screen.getByPlaceholderText('Password'), 'badpass')

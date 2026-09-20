@@ -4,6 +4,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from collections import defaultdict
+from django.conf import settings
+import requests
 from .models import Game, Report, ReportGame, LiveGame
 from .serializers import GameSerializer, GameCardSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn, detect_player_name
@@ -338,3 +340,29 @@ def resend_verification_for_username(request):
         'detail': 'ok',
         'masked_email': masked_email,
     })
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def lichess_explorer(request):
+    """Proxy requests to the Lichess Opening Explorer API.
+    The browser sends an Origin header that Lichess rejects for
+    unknown domains. This endpoint forwards the request from the
+    server (no Origin header) and returns the result."""
+    fen = request.query_params.get('fen', '')
+    ratings = request.query_params.get('ratings', '1600,1800,2000')
+    speeds = request.query_params.get('speeds', 'blitz,rapid')
+
+    response = requests.get(
+        'https://explorer.lichess.ovh/lichess',
+        params={'fen': fen, 'ratings': ratings, 'speeds': speeds},
+        headers={'Authorization': f'Bearer {settings.LICHESS_TOKEN}'} if hasattr(settings, 'LICHESS_TOKEN') and settings.LICHESS_TOKEN else {},
+    )
+
+    if not response.ok:
+        # Lichess returned an error (rate limit, block, etc.)
+        # Return empty data so the frontend falls back to Stockfish
+        print(f"Lichess explorer returned {response.status_code}: {response.text[:200]}")
+        return Response({'moves': [], 'opening': None})
+
+    return Response(response.json())

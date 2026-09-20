@@ -180,7 +180,7 @@ function OpeningView() {
 
         const encodedFen = encodeURIComponent(currentFen)
         const response = await fetch(
-            `https://explorer.lichess.ovh/lichess`
+            `/api/lichess-explorer/`
             + `?fen=${encodedFen}`
             + `&ratings=1600,1800,2000`
             + `&speeds=blitz,rapid`
@@ -264,7 +264,7 @@ function OpeningView() {
             } else {
                 const encodedFen = encodeURIComponent(currentFen)
                 const response = await fetch(
-                    `https://explorer.lichess.ovh/lichess`
+                    `/api/lichess-explorer/`
                     + `?fen=${encodedFen}`
                     + `&ratings=1600,1800,2000`
                     + `&speeds=blitz,rapid`

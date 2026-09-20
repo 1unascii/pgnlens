@@ -194,7 +194,10 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # Uses the path from .env if set, otherwise assumes                                            
 # stockfish is available on the system PATH                                                    
-STOCKFISH_PATH = env('STOCKFISH_PATH', default='stockfish') 
+STOCKFISH_PATH = env('STOCKFISH_PATH', default='stockfish')
+
+# Lichess API token for the Opening Explorer proxy
+LICHESS_TOKEN = env('LICHESS_TOKEN', default='') 
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
