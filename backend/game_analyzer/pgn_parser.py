@@ -5,13 +5,25 @@ import os
 from collections import Counter
 from .models import Game
 
-# Load all ECO JSON files into one lookup dictionary keyed by FEN
+# Load all ECO JSON files into one lookup dictionary keyed by FEN.
+# Used by get_fen_matches() to identify openings during game replay.
 eco_directory = os.path.join(os.path.dirname(__file__), '..', 'eco')
 eco_lookup = {}
 for letter in 'ABCDE':
     filepath = os.path.join(eco_directory, f'eco{letter}.json')
     with open(filepath) as f:
         eco_lookup.update(json.load(f))
+
+# Load openings.json to build a name → family lookup.
+# This lets classify_opening() use the same family grouping as
+# the opening browser instead of duplicating the derivation logic.
+openings_path = os.path.join(eco_directory, 'openings.json')
+name_to_family = {}
+with open(openings_path) as f:
+    openings_data = json.load(f)
+    for family_name, family_data in openings_data.items():
+        for line_name in family_data["lines"]:
+            name_to_family[line_name] = family_name
 
 def parse_pgn(pgn_file):
     """
@@ -129,15 +141,21 @@ def get_fen_matches(board):
             })
     return fen_matches
 
-# These openings are so common that they aren't statistically useful for analysis. 
-# A number of openings such as Scotch Game, Scandinavian, The London, Italian etc can only be 
-# matched if we ignore that these games are also "King's Pawn Game" or "Queen's Pawn Game."   
+# These openings are so common that they aren't statistically useful for analysis.
+# A number of openings such as Scotch Game, Scandinavian, The London, Italian etc can only be
+# matched if we ignore that these games are also "King's Pawn Game" or "Queen's Pawn Game."
 TOO_BROAD_FAMILY_NAMES = {"King's Pawn Game", "Queen's Pawn Game", "King's Knight Opening"}
-# Should capture any opening that uses the London System or transposes into it.
-FAMILY_KEYWORDS = {"London": "London System"}
 
-def classify_opening(fen_matches):   
+def classify_opening(fen_matches):
+    """Classify a game's opening using the FEN match chain.
 
+    Uses the name_to_family lookup (built from openings.json) to get the
+    family for each match, so family grouping is consistent with the
+    opening browser. Keyword overrides and alias normalization are already
+    applied in openings.json by build_openings.py.
+
+    Walks the match chain and picks the first non-broad family found.
+    """
     if not fen_matches:
         return {
             "eco_code": "",
@@ -147,51 +165,22 @@ def classify_opening(fen_matches):
 
     last_match = fen_matches[-1]
     opening_line = last_match["name"]
-
-    # Find the most specific opening family that is not in the list of too broad families.
     opening_family = None
 
-    # Check for a KEYWORD match first
-    for potential_match in fen_matches:
-        
-        for keyword, family_name in FAMILY_KEYWORDS.items():
-            if keyword in potential_match["name"]:
-                opening_family = family_name
-                break
-        if opening_family: # if we found a keyword match then stop checking potential matches
-                break
-
-        # Sicilaian Defense: Najdorf Variation becomes "Sicilaian Defense" 
-        # King's Pawn Game, Wayward Queen Attack, Kiddie Counter Gambit becomes "King's Pawn Game"
-        potential_match = potential_match["name"].split(":")[0].split(",")[0].strip()
-
-        if potential_match not in TOO_BROAD_FAMILY_NAMES:
-            opening_family = potential_match
+    # Walk the match chain and look up each name's family from openings.json.
+    # Skip families that are too broad to be useful in analysis.
+    for match in fen_matches:
+        family = name_to_family.get(match["name"])
+        if family and family not in TOO_BROAD_FAMILY_NAMES:
+            opening_family = family
             break
-    
-    # If no opening family was found, use the last match minus any ": Variant" suffix.
+
+    # Fallback: use the last match's family, even if it's broad
     if not opening_family:
-        opening_family = last_match["name"].split(":")[0].split(",")[0].strip()
-
-    # Known issues with the ECO table:
-    #
-    # - "Queen's Pawn" vs "Queen's Pawn Game" — the ECO data uses both names
-    #   for different positions, so they end up as separate families.
-    #
-    # - Mismatched chains — some ECO match chains bounce through unrelated
-    #   openings (e.g. French Defense shows "Scandinavian" in its chain).
-    #   The first non-broad match might not be the "true" family.
-    #
-    # - "King's Pawn Game" still appears for games where no more specific
-    #   match exists (e.g. 1. e4 e5 2. Ke2).
-    #
-    # Normalize the opening family name to the most common name.
-    FAMILY_ALIASES = {
-        "QGD": "Queen's Gambit Declined",
-        "Queen's Pawn": "Queen's Pawn Game"
-    }
-
-    opening_family = FAMILY_ALIASES.get(opening_family, opening_family)
+        opening_family = name_to_family.get(
+            opening_line,
+            opening_line.split(":")[0].split(",")[0].strip()
+        )
 
     return {
         "eco_code": last_match["eco_code"],

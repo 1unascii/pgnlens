@@ -9,9 +9,35 @@ function Navbar() {
         return localStorage.getItem('theme') === 'dark'
     })
 
-    const [isLoggedIn, setIsLoggedIn] = useState(() => {                                        
+    const [isLoggedIn, setIsLoggedIn] = useState(() => {
         return !!localStorage.getItem('authToken')
     })
+
+    // Verify auth status against the server on mount.
+    // localStorage may be stale (e.g. token cleared by browser restart
+    // but session cookie still valid, or vice versa).
+    useEffect(() => {
+        const token = localStorage.getItem('authToken')
+        if (!token) return // No token — definitely not logged in
+
+        async function verifyAuth() {
+            try {
+                const response = await fetch('/api/auth/user/', {
+                    headers: { 'Authorization': `Token ${token}` },
+                })
+                if (response.ok) {
+                    setIsLoggedIn(true)
+                } else {
+                    // Server says token is invalid — clear it
+                    localStorage.removeItem('authToken')
+                    setIsLoggedIn(false)
+                }
+            } catch {
+                // Network error — keep localStorage state as-is
+            }
+        }
+        verifyAuth()
+    }, [])
 
     useEffect(() => {
         if (darkMode) {
