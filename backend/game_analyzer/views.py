@@ -120,31 +120,30 @@ class ReportViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # Override create to handle PGN file upload instead of normal JSON create.
+        # Wrapped in a transaction so if validation fails, all games are rolled back
+        # automatically — no orphan games left in the database.
+        from django.db import transaction
+
         file = request.FILES['file']
         player_name = request.data.get('player_name', '').strip()
-        games = parse_pgn(file)
 
-        # If no player_name provided, detect from the games
-        #if not player_name:
-            #player_name = detect_player_name(games)
+        try:
+            with transaction.atomic():
+                games = parse_pgn(file)
 
-        # If no player_name provided, return an error and don't create the report. I wanted to 
-        # originally allow the player name to be detected from the games, but decided against it.
-        if not player_name:
-            return Response({'detail': 'Player name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                if not player_name:
+                    raise ValueError('Player name is required.')
 
-        # Prevent the user from mis typing their player name and creating a junk report.
-        player_in_all_games = all(
-            game.white_player == player_name
-            or game.black_player == player_name
-            for game in games
-        )
+                player_in_all_games = all(
+                    game.white_player == player_name
+                    or game.black_player == player_name
+                    for game in games
+                )
 
-        if not player_in_all_games:
-            return Response(
-                {'detail': f'Invalid player name: "{player_name}".'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+                if not player_in_all_games:
+                    raise ValueError(f'Invalid player name: "{player_name}".')
+        except ValueError as e:
+            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         # If the player name is found in the games, create the report.
         # Use provided report name, or fall back to the uploaded filename

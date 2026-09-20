@@ -364,11 +364,12 @@ function LiveGameView() {
                     </div>
 
                     {/* Board */}
-                    <div className="w-[768px] [image-rendering:pixelated]" style={{ lineHeight: 0 }}>
+                    <div className="w-[768px] [image-rendering:pixelated]">
                         <Chessboard options={{
                             position: fen,
                             onPieceDrop: onDrop,
                             boardOrientation: myColor,
+                            boardWidth: 768,
                             pieces: makePieceSet('monarchy', 'webp'),
                             darkSquareStyle: { backgroundColor: '#999' },
                             lightSquareStyle: { backgroundColor: '#ddd' },
