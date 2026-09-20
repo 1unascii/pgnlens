@@ -369,7 +369,6 @@ function LiveGameView() {
                             position: fen,
                             onPieceDrop: onDrop,
                             boardOrientation: myColor,
-                            boardWidth: 768,
                             pieces: makePieceSet('monarchy', 'webp'),
                             darkSquareStyle: { backgroundColor: '#999' },
                             lightSquareStyle: { backgroundColor: '#ddd' },
