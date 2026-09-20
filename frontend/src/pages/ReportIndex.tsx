@@ -75,7 +75,7 @@ function ReportIndex() {
               </p>
               <hr className="my-2 border-gray-200 dark:border-gray-700" />
               <div className="flex justify-between items-center">
-                  <p className="text-sm text-gray-500">{report.created_at}</p>
+                  <p className="text-sm text-gray-500">{new Date(report.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</p>
                   <Link to={`/reports/${report.id}`}><FaFolderOpen /></Link>
               </div>
           </div>

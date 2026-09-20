@@ -17,6 +17,8 @@ function ReportsCreate() {
 
         setUploading(true)
         setError('')
+        setMessage('')
+        setFading(false)
 
         const formData = new FormData()
         formData.append('file', file)
@@ -57,18 +59,25 @@ function ReportsCreate() {
                 setTimeout(() => setFading(true), 1500)
                 setTimeout(() => { setFading(false); navigate('/login') }, 2500)
             } else {
-                const data = await response.json()
-                setError(
-                    typeof data === 'object'
-                        ? Object.values(data).flat().join(' ')
-                        : 'Something went wrong.'
-                )
+                let errorMessage = 'Something went wrong.'
+                try {
+                    const data = await response.json()
+                    if (typeof data === 'object') {
+                        errorMessage = Object.values(data).flat().join(' ')
+                    }
+                } catch {
+                    // Response wasn't JSON
+                }
+                setError(errorMessage)
                 setMessage('')
+                setTimeout(() => setFading(true), 3000)
+                setTimeout(() => { setError(''); setFading(false) }, 4000)
             }
         } catch {
             setUploading(false)
             setError('Request timed out.')
-            setTimeout(() => navigate('/reports'), 2000)
+            setTimeout(() => setFading(true), 3000)
+            setTimeout(() => { setError(''); setFading(false) }, 4000)
         }
     }
 
@@ -100,10 +109,13 @@ function ReportsCreate() {
                 </button>
             </form>
 
-            {/* Success or error popup — same fade-out overlay for both */}
+            {/* Success or error popup */}
             {(message || error) && (
-                <div className={`fixed inset-0 flex items-start justify-center pt-32 bg-black/50 z-50
-                                 transition-opacity duration-1000 ${fading ? 'opacity-0' : 'opacity-100'}`}>
+                <div
+                    className={`fixed inset-0 flex items-start justify-center pt-32 bg-black/50 z-50
+                                 transition-opacity duration-1000 ${fading ? 'opacity-0' : 'opacity-100'}`}
+                    onClick={() => { setError(''); setMessage(''); setFading(false) }}
+                >
                     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg text-center">
                         {message && <p className="text-lg font-bold text-green-500">{message}</p>}
                         {error && <p className="text-lg font-bold text-red-500">{error}</p>}
