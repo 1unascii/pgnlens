@@ -42,7 +42,7 @@ def test_full_user_journey():
     with override_settings(EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend'):
         client = APIClient()
 
-        # ── Step 1: Register ─────────────────────────────────────────
+        # Step 1: Register
         register_response = client.post('/api/auth/registration/', {
             'username': 'testplayer',
             'email': 'testplayer@example.com',
@@ -52,14 +52,14 @@ def test_full_user_journey():
         assert register_response.status_code == 204 or register_response.status_code == 201, \
             f"Registration failed: {register_response.data}"
 
-        # ── Step 2: Verify email ─────────────────────────────────────
+        # Step 2: Verify email
         # Mark the email as verified directly in the database.
         # The verify-email endpoint is tested separately in test_verify_email.py.
         email_address = EmailAddress.objects.get(email='testplayer@example.com')
         email_address.verified = True
         email_address.save()
 
-        # ── Step 3: Login ────────────────────────────────────────────
+        # Step 3: Login
         login_response = client.post('/api/auth/login/', {
             'username': 'testplayer',
             'password': 'SecurePass123!',
@@ -72,7 +72,7 @@ def test_full_user_journey():
         assert token is not None, "No auth token returned"
         client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
 
-        # ── Step 4: Upload PGN and create report ─────────────────────
+        # Step 4: Upload PGN and create report
         pgn_file = SimpleUploadedFile(
             "test_games.pgn",
             TEST_PGN.encode(),
@@ -89,14 +89,14 @@ def test_full_user_journey():
         assert upload_response.data['player_name'] == 'TestPlayer'
         report_id = upload_response.data['report_id']
 
-        # ── Step 5: List reports — should see exactly one ─────────────
+        # Step 5: List reports — should see exactly one
         list_response = client.get('/api/reports/')
         assert list_response.status_code == 200
         assert len(list_response.data) == 1
         assert list_response.data[0]['report_name'] == 'Test Report'
         assert list_response.data[0]['player_name'] == 'TestPlayer'
 
-        # ── Step 6: View report detail ────────────────────────────────
+        # Step 6: View report detail
         detail_response = client.get(f'/api/reports/{report_id}/')
         assert detail_response.status_code == 200
         report_data = detail_response.data
@@ -131,7 +131,7 @@ def test_full_user_journey():
         assert all_stats['opening_family_count'] >= 1
         assert all_stats['opening_line_count'] >= 1
 
-        # ── Step 7: List games filtered by report ─────────────────────
+        # Step 7: List games filtered by report
         games_response = client.get(f'/api/games/?report={report_id}')
         assert games_response.status_code == 200
         assert len(games_response.data) == 2
@@ -143,7 +143,7 @@ def test_full_user_journey():
         assert 'opening_line' in first_game
         assert 'opening_family' in first_game
 
-        # ── Step 8: View individual game detail ───────────────────────
+        # Step 8: View individual game detail
         game_id = games_response.data[0]['id']
         game_response = client.get(f'/api/games/{game_id}/')
         assert game_response.status_code == 200
@@ -166,7 +166,7 @@ def test_full_user_journey():
         assert 'white_classification' in first_move
         assert 'black_classification' in first_move
 
-        # ── Step 9: Delete report ─────────────────────────────────────
+        # Step 9: Delete report
         delete_response = client.delete(f'/api/reports/{report_id}/')
         assert delete_response.status_code == 204
 

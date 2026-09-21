@@ -139,7 +139,7 @@ function OpeningView() {
     const [hoveredMove, setHoveredMove] = useState<string | null>(null)
     const stockfish = useRef<Worker | null>(null)
 
-    // ── Stockfish WASM setup ──────────────────────────────
+    // Stockfish WASM setup
     useEffect(() => {
         const base = import.meta.env.BASE_URL
         const worker = new Worker(`${base}stockfish/stockfish.js`)
@@ -149,7 +149,7 @@ function OpeningView() {
         return () => worker.terminate()
     }, [])
 
-    // ── Fetch book moves when position changes ────────────
+    // Fetch book moves when position changes
     useEffect(() => {
         fetchBookMoves(fen)
     }, [fen])

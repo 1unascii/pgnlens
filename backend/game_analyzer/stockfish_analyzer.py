@@ -78,17 +78,17 @@ def _analyze_position(engine, board, limit):
     return _score_to_centipawns(info["score"].white())
 
 
-def _run_stockfish(board, depth):
-    """Run Stockfish on a single position and return
-    the analysis info dict."""
-    engine = chess.engine.SimpleEngine.popen_uci(
-        settings.STOCKFISH_PATH
-    )
-    info = engine.analyse(
-        board, chess.engine.Limit(depth=depth)
-    )
-    engine.quit()
-    return info
+# def _run_stockfish(board, depth):
+#     """Run Stockfish on a single position and return
+#     the analysis info dict."""
+#     engine = chess.engine.SimpleEngine.popen_uci(
+#         settings.STOCKFISH_PATH
+#     )
+#     info = engine.analyse(
+#         board, chess.engine.Limit(depth=depth)
+#     )
+#     engine.quit()
+#     return info
 
 
 def _score_to_centipawns(score):

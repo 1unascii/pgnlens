@@ -31,7 +31,7 @@ Usage:
 import json
 import os
 
-# ── Same classification rules as pgn_parser.py ─────────
+# Same classification rules as pgn_parser.py
 
 TOO_BROAD_FAMILY_NAMES = {
     "King's Pawn Game",

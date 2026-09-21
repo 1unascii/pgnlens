@@ -130,7 +130,7 @@ class GameConsumer(AsyncWebsocketConsumer):
                 }
             )
 
-    # ── Broadcast handlers ──────────────────────────────────
+    # Broadcast handlers
     # These are called by group_send and forward to all clients
 
     async def game_move(self, event):
@@ -142,7 +142,7 @@ class GameConsumer(AsyncWebsocketConsumer):
     async def game_over(self, event):
         await self.send(text_data=json.dumps(event))
 
-    # ── Database operations ─────────────────────────────────
+    # Database operations
 
     @database_sync_to_async
     def get_game_state(self):

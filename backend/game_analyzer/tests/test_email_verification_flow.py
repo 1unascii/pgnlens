@@ -28,7 +28,7 @@ def register_user(client, username='testuser', email='testuser@example.com'):
     }, format='json')
 
 
-# ── Login with unverified email ──────────────────────────────
+# Login with unverified email
 
 @pytest.mark.django_db
 @LOCMEM
@@ -84,7 +84,7 @@ def test_verified_email_allows_login():
     assert 'key' in response.data
 
 
-# ── Resend verification ──────────────────────────────────────
+# Resend verification
 
 @pytest.mark.django_db
 @RESEND
@@ -154,7 +154,7 @@ def test_resend_requires_username():
     response = client.post('/api/auth/resend-verification/', {}, format='json')
 
     assert response.status_code == 400
-    assert 'Username is required' in response.data['detail']
+    assert 'Username or email is required' in response.data['detail']
 
 
 @pytest.mark.django_db
@@ -179,7 +179,7 @@ def test_resend_does_nothing_if_already_verified(mock_send):
     mock_send.assert_not_called()
 
 
-# ── Verify email ─────────────────────────────────────────────
+# Verify email
 
 @pytest.mark.django_db
 @LOCMEM
@@ -254,7 +254,7 @@ def test_verify_then_login_succeeds():
     assert 'key' in login_response.data
 
 
-# ── Full end-to-end flow ─────────────────────────────────────
+# Full end-to-end flow
 
 @pytest.mark.django_db
 @RESEND

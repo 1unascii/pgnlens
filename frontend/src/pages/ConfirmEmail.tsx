@@ -88,7 +88,7 @@ function ConfirmEmail() {
                                 .find(row => row.startsWith('csrftoken='))
                                 ?.split('=')[1]
 
-                            await fetch('/api/auth/registration/resend-email/', {
+                            const response = await fetch('/api/auth/resend-verification/', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -96,7 +96,12 @@ function ConfirmEmail() {
                                 },
                                 body: JSON.stringify({ email }),
                             })
-                            setResendMessage('Verification email sent. Check your inbox.')
+                            const data = await response.json()
+                            setResendMessage(
+                                data.masked_email
+                                    ? `Verification email sent to ${data.masked_email}.`
+                                    : 'Verification email sent. Check your inbox.'
+                            )
                         }}
                     >
                         Resend verification email
