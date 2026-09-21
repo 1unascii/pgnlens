@@ -84,7 +84,7 @@ def parse_pgn(pgn_file):
 
                 if move_number == 1:
                     game.opening_category = categorize_opening(white_move, black_move)
-                    game.first_moves = f"{white_move} {black_move}"
+                    # game.first_moves = f"{white_move} {black_move}"
                 move_number += 1
 
             board.push(move)
@@ -188,37 +188,6 @@ def classify_opening(fen_matches):
         "opening_family": opening_family,
     }
 
-def detect_player_name(games):
-    
-    # Find the most common player name across a list of games.
-    # Looks at both white_player and black_player fields.
-
-    # Returns the most common name, or raises ValueError if no games
-    # or there's an unbreakable tie.
-    
-    if not games:
-        raise ValueError("No games to detect player name from.")
-
-    names = []
-
-    for game in games:
-        names.append(game.white_player)
-        names.append(game.black_player)
-
-    counter = Counter(names)
-    most_common = counter.most_common(2)
-
-    if len(most_common) == 0:
-        raise ValueError("No player names found in games.")
-
-    # If there's a tie between the top two, we can't determine the player
-    if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
-        raise ValueError(
-            f"Cannot determine player: '{most_common[0][0]}' and "
-            f"'{most_common[1][0]}' both appear {most_common[0][1]} times."
-        )
-
-    return most_common[0][0]
 
 def categorize_opening(white_move, black_move):
     if white_move == "e2e4" and black_move == "e7e5":
