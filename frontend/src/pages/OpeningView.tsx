@@ -83,6 +83,32 @@ interface BookMove {
 
 const bookMoveCache = new Map<string, { moves: BookMove[], opening?: { name: string } }>()
 
+const ELO_LABELS: Record<number, number> = {
+    1: 400, 2: 600, 3: 800, 4: 1000, 5: 1100, 6: 1200,
+    7: 1400, 8: 1500, 9: 1600, 10: 1800, 11: 1900, 12: 2000,
+    13: 2200, 14: 2300, 15: 2400, 16: 2500, 17: 2600, 18: 2700,
+    19: 2800, 20: 2900,
+}
+
+function CheckmateOverlay({ square, orientation }: { square: string, orientation: 'white' | 'black' }) {
+    const file = square.charCodeAt(0) - 97
+    const rank = parseInt(square[1]) - 1
+    const squareSize = 768 / 8
+    const x = orientation === 'white' ? file * squareSize + squareSize / 2 : (7 - file) * squareSize + squareSize / 2
+    const y = orientation === 'white' ? (7 - rank) * squareSize + squareSize / 2 : rank * squareSize + squareSize / 2
+    return (
+        <div style={{ position: 'absolute', left: x, top: y, transform: 'translate(-50%, -50%)', zIndex: 10, pointerEvents: 'none' }}>
+            <span style={{
+                fontFamily: "'UnifrakturMaguntia', cursive", fontSize: '3rem', color: 'white',
+                whiteSpace: 'nowrap', textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
+                animation: 'textFadeOut 3s ease-out forwards',
+            }}>
+                Checkmate
+            </span>
+        </div>
+    )
+}
+
 function OpeningView() {
     const { family, line } = useParams()
     const navigate = useNavigate()
@@ -118,11 +144,7 @@ function OpeningView() {
         setPlayerColor(color)
         setInitialized(true)
 
-        // If the computer moves first, trigger it
-        const isWhiteTurn = chess.turn() === 'w'
-        const isComputerTurn = (color === 'white' && !isWhiteTurn)
-            || (color === 'black' && isWhiteTurn)
-        if (isComputerTurn) {
+        if (isComputersTurn(color)) {
             setTimeout(() => makeComputerMove(), 800)
         }
     }, [openingData])
@@ -310,11 +332,7 @@ function OpeningView() {
         { sourceSquare: string, targetSquare: string | null }): boolean {
         if (!targetSquare) return false
 
-        const isWhiteTurn = chess.turn() === 'w'
-        if ((playerColor === 'white' && !isWhiteTurn)
-            || (playerColor === 'black' && isWhiteTurn)) {
-            return false
-        }
+        if (isComputersTurn()) return false
 
         let move
         try {
@@ -348,13 +366,15 @@ function OpeningView() {
         return true
     }
 
+    function isComputersTurn(color: 'white' | 'black' = playerColor): boolean {
+        const isWhiteTurn = chess.turn() === 'w'
+        return (color === 'white' && !isWhiteTurn)
+            || (color === 'black' && isWhiteTurn)
+    }
+
     function playBookMove(uci: string) {
         applyMoveAndSound(uci)
-        // Only trigger computer response if it's now the computer's turn
-        const isWhiteTurn = chess.turn() === 'w'
-        const isComputerTurn = (playerColor === 'white' && !isWhiteTurn)
-            || (playerColor === 'black' && isWhiteTurn)
-        if (isComputerTurn && !chess.isGameOver()) {
+        if (isComputersTurn() && !chess.isGameOver()) {
             setTimeout(() => makeComputerMove(), 400)
         }
     }
@@ -380,11 +400,7 @@ function OpeningView() {
         setActiveCheckSquare(null)
         setShowCheckmate(false)
 
-        // If the computer moves first after reset, trigger it
-        const isWhiteTurn = chess.turn() === 'w'
-        const isComputerTurn = (playerColor === 'white' && !isWhiteTurn)
-            || (playerColor === 'black' && isWhiteTurn)
-        if (isComputerTurn) {
+        if (isComputersTurn()) {
             setTimeout(() => makeComputerMove(), 800)
         }
     }
@@ -392,16 +408,16 @@ function OpeningView() {
     function toggleColor() {
         const newColor = playerColor === 'white' ? 'black' : 'white'
         setPlayerColor(newColor)
-        // If it's now the computer's turn, make a move
-        const isWhiteTurn = chess.turn() === 'w'
-        const isComputerTurn = (newColor === 'white' && !isWhiteTurn)
-            || (newColor === 'black' && isWhiteTurn)
-        if (isComputerTurn && !chess.isGameOver()) {
+        if (isComputersTurn(newColor) && !chess.isGameOver()) {
             setTimeout(() => makeComputerMove(), 500)
         }
     }
 
     if (!initialized) return <div className="p-4">Loading...</div>
+
+    const { whiteCaptured, blackCaptured } = getCapturedPieces(fen)
+    const opponentCaptured = playerColor === 'white' ? whiteCaptured : blackCaptured
+    const playerCaptured = playerColor === 'white' ? blackCaptured : whiteCaptured
 
     return (
         <div className="max-w-6xl mx-auto p-4 relative">
@@ -428,9 +444,7 @@ function OpeningView() {
                     <PlayerBar
                         name={playerColor === 'white' ? 'Computer (Black)' : 'Computer (White)'}
                         elo={null}
-                        capturedPieces={playerColor === 'white'
-                            ? getCapturedPieces(fen).whiteCaptured
-                            : getCapturedPieces(fen).blackCaptured}
+                        capturedPieces={opponentCaptured}
                     />
 
                 <div className="w-[768px] [image-rendering:pixelated] relative">
@@ -467,44 +481,16 @@ function OpeningView() {
                         }] : [],
                     }} />
 
-                    {/* Checkmate text positioned over the king square */}
-                    {showCheckmate && activeCheckSquare && (() => {
-                        const file = activeCheckSquare.charCodeAt(0) - 97
-                        const rank = parseInt(activeCheckSquare[1]) - 1
-                        const squareSize = 768 / 8
-                        const x = playerColor === 'white' ? file * squareSize + squareSize / 2 : (7 - file) * squareSize + squareSize / 2
-                        const y = playerColor === 'white' ? (7 - rank) * squareSize + squareSize / 2 : rank * squareSize + squareSize / 2
-                        return (
-                            <div style={{
-                                position: 'absolute',
-                                left: x,
-                                top: y,
-                                transform: 'translate(-50%, -50%)',
-                                zIndex: 10,
-                                pointerEvents: 'none',
-                            }}>
-                                <span style={{
-                                    fontFamily: "'UnifrakturMaguntia', cursive",
-                                    fontSize: '3rem',
-                                    color: 'white',
-                                    whiteSpace: 'nowrap',
-                                    textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
-                                    animation: 'textFadeOut 3s ease-out forwards',
-                                }}>
-                                    Checkmate
-                                </span>
-                            </div>
-                        )
-                    })()}
+                    {showCheckmate && activeCheckSquare && (
+                        <CheckmateOverlay square={activeCheckSquare} orientation={playerColor} />
+                    )}
                 </div>
 
                     {/* Bottom player (you) */}
                     <PlayerBar
                         name={playerColor === 'white' ? 'You (White)' : 'You (Black)'}
                         elo={null}
-                        capturedPieces={playerColor === 'white'
-                            ? getCapturedPieces(fen).blackCaptured
-                            : getCapturedPieces(fen).whiteCaptured}
+                        capturedPieces={playerCaptured}
                     />
                 </div>
 
@@ -522,28 +508,17 @@ function OpeningView() {
                         Playing as: {playerColor === 'white' ? 'White' : 'Black'}
                     </button>
 
-                    {isBookExhausted && (() => {
-                        const eloLabels: Record<number, number> = {
-                            1: 400, 2: 600, 3: 800,
-                            4: 1000, 5: 1100, 6: 1200,
-                            7: 1400, 8: 1500, 9: 1600,
-                            10: 1800, 11: 1900, 12: 2000,
-                            13: 2200, 14: 2300, 15: 2400,
-                            16: 2500, 17: 2600, 18: 2700,
-                            19: 2800, 20: 2900,
-                        }
-                        return (
-                            <div className="text-sm">
-                                <label>Computer ELO: {eloLabels[engineDepth] || engineDepth}</label>
-                                <input
-                                    type="range" min={1} max={20}
-                                    value={engineDepth}
-                                    onChange={(e) => setEngineDepth(Number(e.target.value))}
-                                    className="w-full"
-                                />
-                            </div>
-                        )
-                    })()}
+                    {isBookExhausted && (
+                        <div className="text-sm">
+                            <label>Computer ELO: {ELO_LABELS[engineDepth] || engineDepth}</label>
+                            <input
+                                type="range" min={1} max={20}
+                                value={engineDepth}
+                                onChange={(e) => setEngineDepth(Number(e.target.value))}
+                                className="w-full"
+                            />
+                        </div>
+                    )}
 
                     <div className="border rounded p-2">
                         {bookMoves.length > 0 ? (

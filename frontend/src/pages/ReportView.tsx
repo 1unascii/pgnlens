@@ -46,6 +46,13 @@ function ReportView() {
         }
     }
 
+    function toggleDirection(section: 'barChart' | 'weakLines' | 'allOpenings') {
+        setSortDirection({
+            ...sortDirection,
+            [section]: sortDirection[section] === 'desc' ? 'asc' : 'desc'
+        })
+    }
+
     // Pagination controls for the weak lines section
     const [currentPage, setCurrentPage] = useState({
         weakLines: 0,
@@ -196,10 +203,7 @@ function ReportView() {
                     sortBy={sortBy.barChart}
                     onChange={(value) => handleSortChange('barChart', value)}
                     direction={sortDirection.barChart}
-                    onDirectionToggle={() => setSortDirection({
-                        ...sortDirection,
-                        barChart: sortDirection.barChart === 'desc' ? 'asc' : 'desc'
-                    })}
+                    onDirectionToggle={() => toggleDirection('barChart')}
                 />
                 </div>
 
@@ -219,10 +223,7 @@ function ReportView() {
                     sortBy={sortBy.allOpenings}
                     onChange={(value) => handleSortChange('allOpenings', value)}
                     direction={sortDirection.allOpenings}
-                    onDirectionToggle={() => setSortDirection({
-                        ...sortDirection,
-                        allOpenings: sortDirection.allOpenings === 'desc' ? 'asc' : 'desc'
-                    })}
+                    onDirectionToggle={() => toggleDirection('allOpenings')}
                 />
 
                 </div>
@@ -291,10 +292,7 @@ function ReportView() {
                         sortBy={sortBy.weakLines}
                         onChange={(value) => handleSortChange('weakLines', value)}
                         direction={sortDirection.weakLines}
-                        onDirectionToggle={() => setSortDirection({
-                            ...sortDirection,
-                            weakLines: sortDirection.weakLines === 'desc' ? 'asc' : 'desc'
-                        })}
+                        onDirectionToggle={() => toggleDirection('weakLines')}
                     />
 
                 </div>

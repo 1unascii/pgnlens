@@ -71,6 +71,18 @@ function formatTime(seconds: number, isDaily: boolean): string {
     return `${mins}:${secs.toString().padStart(2, '0')}`
 }
 
+function ClockDisplay({ time, isActive, status, isDaily }: {
+    time: number, isActive: boolean, status: string, isDaily: boolean
+}) {
+    return (
+        <div className={`font-mono text-lg font-bold px-3 py-1 rounded
+            ${status === 'active' && isActive ? 'bg-white text-black' : 'bg-gray-700 text-gray-400'}
+            ${status === 'active' && isActive && time < 30 ? 'text-red-600' : ''}`}>
+            {formatTime(time, isDaily)}
+        </div>
+    )
+}
+
 function LiveGameView() {
     const { gameId } = useParams()
     const [chess] = useState(new Chess())
@@ -353,14 +365,7 @@ function LiveGameView() {
                                 <span className="text-xs text-gray-400">+{Math.abs(bottomAdvantage)}</span>
                             )}
                         </div>
-                        <div className={`font-mono text-lg font-bold px-3 py-1 rounded
-                            ${status === 'active' && topIsActive
-                                ? 'bg-white text-black'
-                                : 'bg-gray-700 text-gray-400'}
-                            ${status === 'active' && topIsActive && topTime < 30 ? 'text-red-600' : ''}`}
-                        >
-                            {formatTime(topTime, isDaily)}
-                        </div>
+                        <ClockDisplay time={topTime} isActive={topIsActive} status={status} isDaily={isDaily} />
                     </div>
 
                     {/* Board */}
@@ -390,14 +395,7 @@ function LiveGameView() {
                                 <span className="text-xs text-gray-400">+{bottomAdvantage}</span>
                             )}
                         </div>
-                        <div className={`font-mono text-lg font-bold px-3 py-1 rounded
-                            ${status === 'active' && bottomIsActive
-                                ? 'bg-white text-black'
-                                : 'bg-gray-700 text-gray-400'}
-                            ${status === 'active' && bottomIsActive && bottomTime < 30 ? 'text-red-600' : ''}`}
-                        >
-                            {formatTime(bottomTime, isDaily)}
-                        </div>
+                        <ClockDisplay time={bottomTime} isActive={bottomIsActive} status={status} isDaily={isDaily} />
                     </div>
                 </div>
 

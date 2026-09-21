@@ -7,6 +7,32 @@ from channels.db import database_sync_to_async
 from .models import LiveGame
 
 
+def _check_player_timeout(game, board, elapsed):
+    """Check if the current player has timed out. Returns a timeout dict or None."""
+    is_white = board.turn == chess.WHITE
+    if is_white:
+        game.white_time_remaining -= elapsed
+        remaining = game.white_time_remaining
+        player = game.white_player.username
+        result = '0-1'
+    else:
+        game.black_time_remaining -= elapsed
+        remaining = game.black_time_remaining
+        player = game.black_player.username
+        result = '1-0'
+
+    if remaining <= 0:
+        if is_white:
+            game.white_time_remaining = 0
+        else:
+            game.black_time_remaining = 0
+        game.status = 'timeout'
+        game.result = result
+        game.save()
+        return {'result': result, 'message': f'{player} ran out of time.'}
+    return None
+
+
 class GameConsumer(AsyncWebsocketConsumer):
     """WebSocket consumer for a live chess game."""
 
@@ -180,24 +206,9 @@ class GameConsumer(AsyncWebsocketConsumer):
         now = timezone.now()
         if game.last_move_timestamp:
             elapsed = (now - game.last_move_timestamp).total_seconds()
-            if board.turn == chess.WHITE:
-                game.white_time_remaining -= elapsed
-                if game.white_time_remaining <= 0:
-                    game.white_time_remaining = 0
-                    game.status = 'timeout'
-                    game.result = '0-1'
-                    game.save()
-                    return {'valid': False, 'timeout': True, 'result': '0-1',
-                            'message': f'{game.white_player.username} ran out of time.'}
-            else:
-                game.black_time_remaining -= elapsed
-                if game.black_time_remaining <= 0:
-                    game.black_time_remaining = 0
-                    game.status = 'timeout'
-                    game.result = '1-0'
-                    game.save()
-                    return {'valid': False, 'timeout': True, 'result': '1-0',
-                            'message': f'{game.black_player.username} ran out of time.'}
+            timeout = _check_player_timeout(game, board, elapsed)
+            if timeout:
+                return {'valid': False, 'timeout': True, **timeout}
 
         # For daily games, reset the moving player's clock after each move
         if game.time_mode == 'per_move':
@@ -292,22 +303,4 @@ class GameConsumer(AsyncWebsocketConsumer):
 
         elapsed = (timezone.now() - game.last_move_timestamp).total_seconds()
         board = chess.Board(game.fen)
-
-        if board.turn == chess.WHITE:
-            remaining = game.white_time_remaining - elapsed
-            if remaining <= 0:
-                game.white_time_remaining = 0
-                game.status = 'timeout'
-                game.result = '0-1'
-                game.save()
-                return {'result': '0-1', 'message': f'{game.white_player.username} ran out of time.'}
-        else:
-            remaining = game.black_time_remaining - elapsed
-            if remaining <= 0:
-                game.black_time_remaining = 0
-                game.status = 'timeout'
-                game.result = '1-0'
-                game.save()
-                return {'result': '1-0', 'message': f'{game.black_player.username} ran out of time.'}
-
-        return None
+        return _check_player_timeout(game, board, elapsed)

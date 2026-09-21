@@ -10,6 +10,9 @@ from .models import Game, Report, ReportGame, LiveGame
 from .serializers import GameSerializer, GameCardSerializer, ReportSerializer, PGNUploadSerializer
 from .pgn_parser import parse_pgn
 from .stockfish_analyzer import analyze_all_moves
+from django.db import transaction
+from django.contrib.auth.models import User
+from allauth.account.models import EmailConfirmation, EmailAddress
 
 
 
@@ -35,6 +38,17 @@ class GameViewSet(viewsets.ReadOnlyModelViewSet):
             return Game.objects.filter(reports__id=report_id)
         return Game.objects.all()
 
+def _get_outcome(game, player_name):
+    if game.white_player == player_name:
+        return "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
+    elif game.black_player == player_name:
+        return "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
+    return None
+
+def _add_win_rates(stats_dict):
+    for stats in stats_dict.values():
+        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
+
 def build_stats_by_player_color(games, player_name):
     """Compute all report stats from a list of games."""
     opening_category_stats = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "total": 0})
@@ -46,11 +60,8 @@ def build_stats_by_player_color(games, player_name):
     family_to_lines = defaultdict(set)
 
     for game in games:
-        if game.white_player == player_name:
-            outcome = "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
-        elif game.black_player == player_name:
-            outcome = "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
-        else:
+        outcome = _get_outcome(game, player_name)
+        if not outcome:
             continue
 
         if outcome == "win":
@@ -75,12 +86,9 @@ def build_stats_by_player_color(games, player_name):
 
     total_games = len(games)
 
-    for stats in opening_category_stats.values():
-        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
-    for stats in opening_family_stats.values():
-        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
-    for stats in opening_line_stats.values():
-        stats["win_rate"] = round(stats["wins"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0.0
+    _add_win_rates(opening_category_stats)
+    _add_win_rates(opening_family_stats)
+    _add_win_rates(opening_line_stats)
 
     return {
         "total_games": total_games,
@@ -121,7 +129,6 @@ class ReportViewSet(viewsets.ModelViewSet):
         # Override create to handle PGN file upload instead of normal JSON create.
         # Wrapped in a transaction so if validation fails, all games are rolled back
         # automatically — no orphan games left in the database.
-        from django.db import transaction
 
         file = request.FILES['file']
         player_name = request.data.get('player_name', '').strip()
@@ -157,14 +164,11 @@ class ReportViewSet(viewsets.ModelViewSet):
         black_games = []
 
         for game in games:
+            outcome = _get_outcome(game, player_name) or "error: player not found"
             if game.white_player == player_name:
-                outcome = "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
                 white_games.append(game)
             elif game.black_player == player_name:
-                outcome = "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
                 black_games.append(game)
-            else:
-                outcome = "error: player not found"
 
             ReportGame.objects.create(report=report, game=game, outcome=outcome)
 
@@ -187,7 +191,6 @@ class ReportViewSet(viewsets.ModelViewSet):
 @permission_classes([AllowAny])
 def verify_email(request):
     """Verify an email address using the confirmation key."""
-    from allauth.account.models import EmailConfirmation
 
     key = request.data.get('key')
     if not key:
@@ -276,8 +279,6 @@ def live_game_state(request, game_id):
 def resend_verification_for_username(request):
     """Look up a user by username or email, resend verification email,
     and return a masked version of their email address."""
-    from django.contrib.auth.models import User
-    from allauth.account.models import EmailAddress
 
     username = request.data.get('username')
     email = request.data.get('email')
@@ -303,7 +304,6 @@ def resend_verification_for_username(request):
         # Create a fresh confirmation key and send it.
         # send_confirmation() may skip sending if an unexpired
         # key already exists, so we create a new one explicitly.
-        from allauth.account.models import EmailConfirmation
         confirmation = EmailConfirmation.create(email_obj)
         confirmation.save()
         confirmation.send(request)
