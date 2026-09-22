@@ -4,49 +4,12 @@ import { Chess } from 'chess.js'
 import { Chessboard } from 'react-chessboard'
 import PlayerBar from '../components/gameview/PlayerBar'
 import playSound from '../utils/playSound'
-
-const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
-
-function makePieceSet(theme: string, extension = 'svg') {
-    const pieceSet: Record<string, () => React.JSX.Element> = {}
-    for (const code of PIECE_CODES) {
-        pieceSet[code] = () => (
-            <img src={`/piece/${theme}/${code}.${extension}`} alt={code}
-                style={{ width: '100%', height: '100%' }} />
-        )
-    }
-    return pieceSet
-}
+import { makePieceSet, getCapturedPieces } from '../utils/chessHelpers'
 
 // Piece values for material score
 const PIECE_VALUES: Record<string, number> = {
     K: 0, Q: 9, R: 5, B: 3, N: 3, P: 1,
     k: 0, q: 9, r: 5, b: 3, n: 3, p: 1,
-}
-
-function getCapturedPieces(fen: string) {
-    const boardPart = fen.split(' ')[0]
-    const startingPieces = {
-        white: { K: 1, Q: 1, R: 2, B: 2, N: 2, P: 8 },
-        black: { k: 1, q: 1, r: 2, b: 2, n: 2, p: 8 },
-    }
-    const currentPieces: Record<string, number> = {}
-    for (const char of boardPart) {
-        if (/[A-Za-z]/.test(char)) {
-            currentPieces[char] = (currentPieces[char] || 0) + 1
-        }
-    }
-    const whiteCaptured: string[] = []
-    const blackCaptured: string[] = []
-    for (const [piece, count] of Object.entries(startingPieces.white)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) whiteCaptured.push(piece)
-    }
-    for (const [piece, count] of Object.entries(startingPieces.black)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) blackCaptured.push(piece)
-    }
-    return { whiteCaptured, blackCaptured }
 }
 
 function getMaterialScore(whiteCaptured: string[], blackCaptured: string[]): number {
@@ -152,13 +115,17 @@ function LiveGameView() {
         }
 
         // In dev, connect directly to Django (Vite proxy doesn't reliably forward WS data frames)
-        // In production, use the same host (nginx handles the proxy)
+        // Build WebSocket URL — dev uses localhost, production uses the same host
         const isDev = window.location.port === '5173'
         const authToken = localStorage.getItem('authToken')
-        const wsUrl = isDev
-            ? `ws://localhost:8002/ws/game/${gameId}/?token=${authToken}`
-            : `${window.location.protocol === 'https:' ? 'wss' :
-        'ws'}://${window.location.host}/ws/game/${gameId}/?token=${authToken}`
+
+        let wsProtocol = 'ws'
+        let wsHost = 'localhost:8002'
+        if (!isDev) {
+            wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+            wsHost = window.location.host
+        }
+        const wsUrl = `${wsProtocol}://${wsHost}/ws/game/${gameId}/?token=${authToken}`
         const socket = new WebSocket(wsUrl)
 
         // Set the ref immediately so handlers always use the latest socket

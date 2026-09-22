@@ -5,54 +5,9 @@ import { Chessboard } from 'react-chessboard'
 import type { Game } from '../types'
 import EvalBar from '../components/gameview/EvalBar'
 import PlayerBar from '../components/gameview/PlayerBar'
-import InfoPanel from '../components/gameview/InfoPanel'
+import SidePanel from '../components/gameview/SidePanel'
 import playSound from '../utils/playSound'
-
-const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
-
-function getCapturedPieces(fen: string) {
-    const boardPart = fen.split(' ')[0]
-
-    const startingPieces = {
-        white: { K: 1, Q: 1, R: 2, B: 2, N: 2, P: 8 },
-        black: { k: 1, q: 1, r: 2, b: 2, n: 2, p: 8 },
-    }
-
-    const currentPieces: Record<string, number> = {}
-    for (const char of boardPart) {
-        if (/[A-Za-z]/.test(char)) {
-            currentPieces[char] = (currentPieces[char] || 0) + 1
-        }
-    }
-
-    const whiteCaptured: string[] = []
-    const blackCaptured: string[] = []
-
-    for (const [piece, count] of Object.entries(startingPieces.white)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) whiteCaptured.push(piece)
-    }
-    for (const [piece, count] of Object.entries(startingPieces.black)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) blackCaptured.push(piece)
-    }
-
-    return { whiteCaptured, blackCaptured }
-}
-
-function makePieceSet(theme: string, extension = 'svg') {
-    const pieceSet: Record<string, () => React.JSX.Element> = {}
-    for (const code of PIECE_CODES) {
-        pieceSet[code] = () => (
-            <img
-                src={`/piece/${theme}/${code}.${extension}`}
-                alt={code}
-                style={{ width: '100%', height: '100%' }}
-            />
-        )
-    }
-    return pieceSet
-}
+import { makePieceSet, getCapturedPieces } from '../utils/chessHelpers'
 
 function GameView() {
     const { id } = useParams()
@@ -206,24 +161,28 @@ function GameView() {
 
     if (!game || FENpositions.length === 0) return <div>Loading...</div>
 
+    // Find the most recent opening match for this position
     const currentFENMatch = FENMatches
       .filter(match => match.halfMove <= currentMoveIndex)
       .at(-1)
-      const currentMoveRecord = currentMoveIndex === 0
-      ? null
-      : game.moves[Math.floor((currentMoveIndex - 1) / 2)]
-    const isWhiteMove = currentMoveIndex % 2 === 1
-    const classification = currentMoveRecord
-      ? (isWhiteMove
-          ? currentMoveRecord.white_classification
-          : currentMoveRecord.black_classification)
-      : null
 
-    const currentEval = currentMoveIndex === 0
-    ? 0
-    : isWhiteMove
-        ? currentMoveRecord?.white_eval ?? null
-        : currentMoveRecord?.black_eval ?? null
+    // Get the move record for the current position
+    const moveIndex = Math.floor((currentMoveIndex - 1) / 2)
+    const currentMoveRecord = currentMoveIndex === 0 ? null : game.moves[moveIndex]
+    const isWhiteMove = currentMoveIndex % 2 === 1
+
+    // Get classification and eval for the current move
+    let classification = null
+    let currentEval: number | null = 0
+    if (currentMoveRecord) {
+        if (isWhiteMove) {
+            classification = currentMoveRecord.white_classification
+            currentEval = currentMoveRecord.white_eval ?? null
+        } else {
+            classification = currentMoveRecord.black_classification
+            currentEval = currentMoveRecord.black_eval ?? null
+        }
+    }
   
     
     const { whiteCaptured, blackCaptured } = getCapturedPieces(
@@ -269,7 +228,7 @@ function GameView() {
                 </div>
     
                 {/* Right column: classification, move list, opening, eval graph, nav */}
-                <InfoPanel
+                <SidePanel
                     classification={classification}
                     currentEval={currentEval}
                     moves={game.moves}

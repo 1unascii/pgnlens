@@ -102,19 +102,21 @@ function ReportView() {
     // Show loading text until the API response arrives
     if (!report) return <div>Loading...</div>
 
-    const reportStats = colorFilter === 'white'
-    ? report.player_is_white_stats
-    : colorFilter === 'black'
-    ? report.player_is_black_stats
-    : report.all_games_stats
-    
-    const filteredGameCards = colorFilter === 'all'
-    ? gameCards
-    : gameCards.filter(game => 
-        colorFilter === 'white'
-        ? game.white_player === report.player_name
-        : game.black_player === report.player_name
-    )
+    let reportStats
+    if (colorFilter === 'white') {
+        reportStats = report.player_is_white_stats
+    } else if (colorFilter === 'black') {
+        reportStats = report.player_is_black_stats
+    } else {
+        reportStats = report.all_games_stats
+    }
+
+    let filteredGameCards = gameCards
+    if (colorFilter === 'white') {
+        filteredGameCards = gameCards.filter(game => game.white_player === report.player_name)
+    } else if (colorFilter === 'black') {
+        filteredGameCards = gameCards.filter(game => game.black_player === report.player_name)
+    }
 
     // Recalculate summary stats based on minimum games filter
     const filteredFamilies = Object.entries(reportStats.opening_family_stats)

@@ -1,19 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Chessboard } from 'react-chessboard'
-
-const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
-
-function makePieceSet(theme: string, extension = 'svg') {
-    const pieceSet: Record<string, () => React.JSX.Element> = {}
-    for (const code of PIECE_CODES) {
-        pieceSet[code] = () => (
-            <img src={`/piece/${theme}/${code}.${extension}`} alt={code}
-                style={{ width: '100%', height: '100%' }} />
-        )
-    }
-    return pieceSet
-}
+import { makePieceSet } from '../utils/chessHelpers'
 
 interface OpeningLine {
     fen: string

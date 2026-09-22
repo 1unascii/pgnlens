@@ -40,9 +40,19 @@ class GameViewSet(viewsets.ReadOnlyModelViewSet):
 
 def _get_outcome(game, player_name):
     if game.white_player == player_name:
-        return "win" if game.result == "1-0" else "loss" if game.result == "0-1" else "draw"
+        if game.result == "1-0":
+            return "win"
+        elif game.result == "0-1":
+            return "loss"
+        else:
+            return "draw"
     elif game.black_player == player_name:
-        return "win" if game.result == "0-1" else "loss" if game.result == "1-0" else "draw"
+        if game.result == "0-1":
+            return "win"
+        elif game.result == "1-0":
+            return "loss"
+        else:
+            return "draw"
     return None
 
 def _add_win_rates(stats_dict):
@@ -74,7 +84,12 @@ def build_stats_by_player_color(games, player_name):
         category = game.opening_category or "Unknown"
         family = game.opening_family or "Unknown"
         line = game.opening_line or "Unknown"
-        outcome_key = "losses" if outcome == "loss" else outcome + "s"
+        if outcome == "win":
+            outcome_key = "wins"
+        elif outcome == "loss":
+            outcome_key = "losses"
+        else:
+            outcome_key = "draws"
 
         opening_category_stats[category]["total"] += 1
         opening_category_stats[category][outcome_key] += 1
@@ -338,10 +353,14 @@ def lichess_explorer(request):
     ratings = request.query_params.get('ratings', '1600,1800,2000')
     speeds = request.query_params.get('speeds', 'blitz,rapid')
 
+    headers = {}
+    if hasattr(settings, 'LICHESS_TOKEN') and settings.LICHESS_TOKEN:
+        headers['Authorization'] = f'Bearer {settings.LICHESS_TOKEN}'
+
     response = requests.get(
         'https://explorer.lichess.ovh/lichess',
         params={'fen': fen, 'ratings': ratings, 'speeds': speeds},
-        headers={'Authorization': f'Bearer {settings.LICHESS_TOKEN}'} if hasattr(settings, 'LICHESS_TOKEN') and settings.LICHESS_TOKEN else {},
+        headers=headers,
     )
 
     if not response.ok:

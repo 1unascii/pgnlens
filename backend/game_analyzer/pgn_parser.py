@@ -177,10 +177,10 @@ def classify_opening(fen_matches):
 
     # Fallback: use the last match's family, even if it's broad
     if not opening_family:
-        opening_family = name_to_family.get(
-            opening_line,
-            opening_line.split(":")[0].split(",")[0].strip()
-        )
+        opening_family = name_to_family.get(opening_line)
+        if not opening_family:
+            # Extract the base name before any ":" or "," separator
+            opening_family = opening_line.split(":")[0].split(",")[0].strip()
 
     return {
         "eco_code": last_match["eco_code"],

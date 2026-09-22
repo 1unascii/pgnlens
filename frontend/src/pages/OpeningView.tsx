@@ -3,97 +3,21 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Chess } from 'chess.js'
 import { Chessboard } from 'react-chessboard'
 import PlayerBar from '../components/gameview/PlayerBar'
+import SidePanel from '../components/openingview/SidePanel'
+import type { BookMove } from '../components/openingview/SidePanel'
 import playSound from '../utils/playSound'
-import { FaChessKing, FaChessQueen, FaChessRook, FaChessBishop, FaChessKnight, FaChessPawn } from 'react-icons/fa'
+import { makePieceSet, getCapturedPieces } from '../utils/chessHelpers'
 
-const PIECE_CODES = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP']
-
-function makePieceSet(theme: string, extension = 'svg') {
-    const pieceSet: Record<string, () => React.JSX.Element> = {}
-    for (const code of PIECE_CODES) {
-        pieceSet[code] = () => (
-            <img src={`/piece/${theme}/${code}.${extension}`} alt={code}
-                style={{ width: '100%', height: '100%' }} />
-        )
-    }
-    return pieceSet
-}
-
-function getCapturedPieces(fen: string) {
-    const boardPart = fen.split(' ')[0]
-    const startingPieces = {
-        white: { K: 1, Q: 1, R: 2, B: 2, N: 2, P: 8 },
-        black: { k: 1, q: 1, r: 2, b: 2, n: 2, p: 8 },
-    }
-    const currentPieces: Record<string, number> = {}
-    for (const char of boardPart) {
-        if (/[A-Za-z]/.test(char)) {
-            currentPieces[char] = (currentPieces[char] || 0) + 1
-        }
-    }
-    const whiteCaptured: string[] = []
-    const blackCaptured: string[] = []
-    for (const [piece, count] of Object.entries(startingPieces.white)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) whiteCaptured.push(piece)
-    }
-    for (const [piece, count] of Object.entries(startingPieces.black)) {
-        const missing = count - (currentPieces[piece] || 0)
-        for (let i = 0; i < missing; i++) blackCaptured.push(piece)
-    }
-    return { whiteCaptured, blackCaptured }
-}
-
-const PIECE_ICON_MAP: Record<string, Record<string, React.ReactNode>> = {
-    white: {
-        K: <FaChessKing className="inline text-white" />,
-        Q: <FaChessQueen className="inline text-white" />,
-        R: <FaChessRook className="inline text-white" />,
-        B: <FaChessBishop className="inline text-white" />,
-        N: <FaChessKnight className="inline text-white" />,
-        P: <FaChessPawn className="inline text-white" />,
-    },
-    black: {
-        K: <FaChessKing className="inline text-black" />,
-        Q: <FaChessQueen className="inline text-black" />,
-        R: <FaChessRook className="inline text-black" />,
-        B: <FaChessBishop className="inline text-black" />,
-        N: <FaChessKnight className="inline text-black" />,
-        P: <FaChessPawn className="inline text-black" />,
-    },
-}
-
-function getPieceIconForMove(san: string, isWhiteTurn: boolean): React.ReactNode {
-    const color = isWhiteTurn ? 'white' : 'black'
-    const firstChar = san[0]
-    if (PIECE_ICON_MAP[color][firstChar]) {
-        return PIECE_ICON_MAP[color][firstChar]
-    }
-    return PIECE_ICON_MAP[color]['P']
-}
-
-interface BookMove {
-    uci: string
-    san: string
-    white: number
-    draws: number
-    black: number
-    averageRating: number
-}
-
+// Cache API responses so we don't re-fetch the same position
 const bookMoveCache = new Map<string, { moves: BookMove[], opening?: { name: string } }>()
 
-const ELO_LABELS: Record<number, number> = {
-    1: 400, 2: 600, 3: 800, 4: 1000, 5: 1100, 6: 1200,
-    7: 1400, 8: 1500, 9: 1600, 10: 1800, 11: 1900, 12: 2000,
-    13: 2200, 14: 2300, 15: 2400, 16: 2500, 17: 2600, 18: 2700,
-    19: 2800, 20: 2900,
-}
+// ── Components ──
 
+// "Checkmate" text positioned over the king square on the board
 function CheckmateOverlay({ square, orientation }: { square: string, orientation: 'white' | 'black' }) {
+    const squareSize = 768 / 8
     const file = square.charCodeAt(0) - 97
     const rank = parseInt(square[1]) - 1
-    const squareSize = 768 / 8
     const x = orientation === 'white' ? file * squareSize + squareSize / 2 : (7 - file) * squareSize + squareSize / 2
     const y = orientation === 'white' ? (7 - rank) * squareSize + squareSize / 2 : rank * squareSize + squareSize / 2
     return (
@@ -109,14 +33,32 @@ function CheckmateOverlay({ square, orientation }: { square: string, orientation
     )
 }
 
+// Main component — opening practice board with book moves and engine fallback
 function OpeningView() {
     const { family, line } = useParams()
     const navigate = useNavigate()
     const familyName = decodeURIComponent(family || '')
     const lineName = decodeURIComponent(line || '')
 
+    // State
     const [openingData, setOpeningData] = useState<{ fen: string, moves: string } | null>(null)
+    const [chess] = useState(new Chess())
+    const [initialized, setInitialized] = useState(false)
+    const [fen, setFen] = useState(chess.fen())
+    const [moveList, setMoveList] = useState<string[]>([])
+    const [bookMoves, setBookMoves] = useState<BookMove[]>([])
+    const [isBookExhausted, setIsBookExhausted] = useState(false)
+    const [playerColor, setPlayerColor] = useState<'white' | 'black'>('white')
+    const [engineDepth, setEngineDepth] = useState(10)
+    const [currentOpeningName, setCurrentOpeningName] = useState(lineName)
+    const [activeCheckSquare, setActiveCheckSquare] = useState<string | null>(null)
+    const [showCheckmate, setShowCheckmate] = useState(false)
+    const [hoveredMove, setHoveredMove] = useState<string | null>(null)
+    const stockfish = useRef<Worker | null>(null)
 
+    const startingMoves = openingData?.moves || ''
+
+    // Load opening data from JSON
     useEffect(() => {
         fetch('/data/openings.json')
             .then(r => r.json())
@@ -126,14 +68,11 @@ function OpeningView() {
             })
     }, [familyName, lineName])
 
-    const startingMoves = openingData?.moves || ''
-
-    const [chess] = useState(new Chess())
-    const [initialized, setInitialized] = useState(false)
-
+    // Initialize the board once opening data loads
     useEffect(() => {
         if (!openingData || initialized) return
         chess.reset()
+        // Strip move numbers ("1. e4 e5 2. Nf3" → "e4 e5 Nf3") and split into individual moves
         const moves = startingMoves ? startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/) : []
         for (const moveStr of moves) {
             chess.move(moveStr)
@@ -148,18 +87,6 @@ function OpeningView() {
             setTimeout(() => makeComputerMove(), 800)
         }
     }, [openingData])
-
-    const [fen, setFen] = useState(chess.fen())
-    const [moveList, setMoveList] = useState<string[]>([])
-    const [bookMoves, setBookMoves] = useState<BookMove[]>([])
-    const [isBookExhausted, setIsBookExhausted] = useState(false)
-    const [playerColor, setPlayerColor] = useState<'white' | 'black'>('white')
-    const [engineDepth, setEngineDepth] = useState(10)
-    const [currentOpeningName, setCurrentOpeningName] = useState(lineName)
-    const [activeCheckSquare, setActiveCheckSquare] = useState<string | null>(null)
-    const [showCheckmate, setShowCheckmate] = useState(false)
-    const [hoveredMove, setHoveredMove] = useState<string | null>(null)
-    const stockfish = useRef<Worker | null>(null)
 
     // Stockfish WASM setup
     useEffect(() => {
@@ -176,7 +103,7 @@ function OpeningView() {
         fetchBookMoves(fen)
     }, [fen])
 
-
+    // Ask Stockfish WASM for a move at the given depth
     function getStockfishMove(fen: string, depth: number): Promise<string | null> {
         return new Promise((resolve) => {
             const worker = stockfish.current
@@ -191,6 +118,7 @@ function OpeningView() {
         })
     }
 
+    // Fetch book moves from the Lichess explorer API (cached)
     async function fetchBookMoves(currentFen: string) {
         // Check cache first
         if (bookMoveCache.has(currentFen)) {
@@ -220,6 +148,7 @@ function OpeningView() {
         }
     }
 
+    // Highlight the king square on check or checkmate
     function flashCheckHighlight() {
         if (chess.isCheckmate()) {
             const kingSquare = chess.board().flat().find(
@@ -242,6 +171,7 @@ function OpeningView() {
         }
     }
 
+    // Apply a UCI move to the board, play the appropriate sound, and check for check/checkmate
     function applyMoveAndSound(moveUCI: string) {
         // Stockfish WASM sometimes outputs castling in Chess960 format
         // (king to rook square) instead of standard UCI (king to destination).
@@ -270,6 +200,7 @@ function OpeningView() {
         return move
     }
 
+    // Pick a random book move weighted by how often it's played
     function pickBookMove(moves: BookMove[]): string {
         const totalGames = moves.reduce(
             (sum, m) => sum + m.white + m.draws + m.black, 0
@@ -282,6 +213,7 @@ function OpeningView() {
         return moves[0].uci
     }
 
+    // Computer's turn: try a book move first, fall back to Stockfish engine
     async function makeComputerMove() {
         if (chess.isGameOver()) return
         await new Promise(r => setTimeout(r, 300))
@@ -328,6 +260,7 @@ function OpeningView() {
         }
     }
 
+    // Handle when the player drags and drops a piece
     function onDrop({ sourceSquare, targetSquare }:
         { sourceSquare: string, targetSquare: string | null }): boolean {
         if (!targetSquare) return false
@@ -366,12 +299,14 @@ function OpeningView() {
         return true
     }
 
+    // Check if it's the computer's turn to move
     function isComputersTurn(color: 'white' | 'black' = playerColor): boolean {
         const isWhiteTurn = chess.turn() === 'w'
         return (color === 'white' && !isWhiteTurn)
             || (color === 'black' && isWhiteTurn)
     }
 
+    // Player clicked a book move from the sidebar — play it and trigger computer response
     function playBookMove(uci: string) {
         applyMoveAndSound(uci)
         if (isComputersTurn() && !chess.isGameOver()) {
@@ -379,22 +314,23 @@ function OpeningView() {
         }
     }
 
+    // Undo one move
     function undoLastMove() {
         chess.undo()
         setFen(chess.fen())
         setMoveList(prev => prev.slice(0, -1))
     }
 
+    // Reset board back to the opening's starting position
     function resetBoard() {
         chess.reset()
-        if (startingMoves) {
-            const moves = startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/)
-            for (const moveStr of moves) {
-                chess.move(moveStr)
-            }
+        // Strip move numbers and split into individual moves
+        const moves = startingMoves ? startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/) : []
+        for (const moveStr of moves) {
+            chess.move(moveStr)
         }
         setFen(chess.fen())
-        setMoveList(startingMoves ? startingMoves.replace(/\d+\.\s*/g, '').trim().split(/\s+/) : [])
+        setMoveList(moves)
         setIsBookExhausted(false)
         setCurrentOpeningName(lineName)
         setActiveCheckSquare(null)
@@ -405,6 +341,7 @@ function OpeningView() {
         }
     }
 
+    // Switch which side the player is playing
     function toggleColor() {
         const newColor = playerColor === 'white' ? 'black' : 'white'
         setPlayerColor(newColor)
@@ -495,100 +432,22 @@ function OpeningView() {
                 </div>
 
                 {/* Side panel */}
-                <div className="flex-shrink-0 flex flex-col gap-2" style={{ width: 250 }}>
-                    <p className="font-bold">{currentOpeningName || 'Starting Position'}</p>
-                    <p className="text-sm text-gray-400">
-                        {isBookExhausted ? 'Engine' : 'Book'}
-                    </p>
-
-                    <button
-                        onClick={toggleColor}
-                        className="border rounded p-2 text-sm"
-                    >
-                        Playing as: {playerColor === 'white' ? 'White' : 'Black'}
-                    </button>
-
-                    {isBookExhausted && (
-                        <div className="text-sm">
-                            <label>Computer ELO: {ELO_LABELS[engineDepth] || engineDepth}</label>
-                            <input
-                                type="range" min={1} max={20}
-                                value={engineDepth}
-                                onChange={(e) => setEngineDepth(Number(e.target.value))}
-                                className="w-full"
-                            />
-                        </div>
-                    )}
-
-                    <div className="border rounded p-2">
-                        {bookMoves.length > 0 ? (
-                            bookMoves.map(move => {
-                                const total = move.white + move.draws + move.black
-                                const whitePercent = Math.round(move.white / total * 100)
-                                const drawPercent = Math.round(move.draws / total * 100)
-                                const blackPercent = Math.round(move.black / total * 100)
-                                return (
-                                    <div
-                                        key={move.uci}
-                                        onClick={() => playBookMove(move.uci)}
-                                        onMouseEnter={() => setHoveredMove(move.uci)}
-                                        onMouseLeave={() => setHoveredMove(null)}
-                                        className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-1 rounded"
-                                    >
-                                        <span className="font-bold inline-flex items-center gap-1">
-                                            {getPieceIconForMove(move.san, chess.turn() === 'w')}
-                                            {move.san}
-                                        </span>
-                                        <span className="text-sm ml-2">
-                                            {whitePercent}% / {drawPercent}% / {blackPercent}%
-                                        </span>
-                                        <span className="text-gray-400 text-xs ml-2">
-                                            {total} games
-                                        </span>
-                                    </div>
-                                )
-                            })
-                        ) : (
-                            <p className="text-sm text-gray-400">
-                                {isBookExhausted ? 'Book exhausted — using engine' : 'Loading...'}
-                            </p>
-                        )}
-                    </div>
-
-                    <div className="border rounded p-2 text-sm min-h-[60px]">
-                        {moveList.length === 0 ? (
-                            <p className="text-gray-400">No moves yet</p>
-                        ) : (
-                            moveList.map((move, i) => (
-                                <span key={i}>
-                                    {i % 2 === 0 && (
-                                        <span className="text-gray-400">
-                                            {Math.floor(i / 2) + 1}.{' '}
-                                        </span>
-                                    )}
-                                    {move}{' '}
-                                </span>
-                            ))
-                        )}
-                    </div>
-
-                    <div className="flex gap-2">
-                        <button
-                            onClick={undoLastMove}
-                            disabled={moveList.length === 0}
-                            className="border rounded p-2 flex-1
-                                       disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            ← Back
-                        </button>
-                        <button
-                            onClick={resetBoard}
-                            className="bg-red-500 text-white rounded p-2 flex-1"
-                        >
-                            Reset
-                        </button>
-                    </div>
-                </div>
+                <SidePanel
+                    currentOpeningName={currentOpeningName}
+                    isBookExhausted={isBookExhausted}
+                    playerColor={playerColor}
+                    isWhiteTurn={chess.turn() === 'w'}
+                    engineDepth={engineDepth}
+                    setEngineDepth={setEngineDepth}
+                    bookMoves={bookMoves}
+                    moveList={moveList}
+                    onToggleColor={toggleColor}
+                    onPlayBookMove={playBookMove}
+                    onUndoLastMove={undoLastMove}
+                    onResetBoard={resetBoard}
+                    hoveredMove={hoveredMove}
+                    setHoveredMove={setHoveredMove}
+                />
             </div>
         </div>
     )
