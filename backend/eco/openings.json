@@ -1,10 +1,48 @@
 {
+  "Accelerated London System": {
+    "lines": {
+      "Queen's Pawn Game: Accelerated London System": {
+        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR b KQkq - 1 2",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bf4"
+      },
+      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit": {
+        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bf4 c5"
+      },
+      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted": {
+        "fen": "rnbqkbnr/pp2pppp/8/2Pp4/5B2/8/PPP1PPPP/RN1QKBNR b KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bf4 c5 3. dxc5"
+      },
+      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit": {
+        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3PPB2/8/PPP2PPP/RN1QKBNR b KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bf4 c5 3. e4"
+      },
+      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit Accepted": {
+        "fen": "rnbqkbnr/pp2pppp/8/2p5/3PpB2/8/PPP2PPP/RN1QKBNR w KQkq - 0 4",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bf4 c5 3. e4 dxe4"
+      }
+    }
+  },
   "Advance System": {
     "lines": {
       "Advance System, Slav": {
         "fen": "rnbqkb1r/pp2pppp/5n2/2pp4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5",
         "eco": "D15",
         "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 c5"
+      }
+    }
+  },
+  "Alapin Opening": {
+    "lines": {
+      "King's Pawn Game: Alapin Opening": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPPNPPP/RNBQKB1R b KQkq - 1 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Ne2"
       }
     }
   },
@@ -486,7 +524,7 @@
         "eco": "B02",
         "moves": "1. e4 Nf6 2. Bc4 Nxe4 3. Bxf7+"
       },
-      "Alekhine Defense: Mar\u00c3\u00b3czy Variation": {
+      "Alekhine Defense: Mar\u00f3czy Variation": {
         "fen": "rnbqkb1r/pppppppp/5n2/8/4P3/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 2",
         "eco": "B02",
         "moves": "1. e4 Nf6 2. d3"
@@ -601,7 +639,7 @@
         "eco": "B02",
         "moves": "1. e4 Nf6 2. e5 Nd5 3. c4 Nb6 4. b3"
       },
-      "Alekhine Defense: S\u00c3\u00a4misch Attack": {
+      "Alekhine Defense: S\u00e4misch Attack": {
         "fen": "rnbqkb1r/pppppppp/8/3nP3/8/2N5/PPPP1PPP/R1BQKBNR b KQkq - 2 3",
         "eco": "B02",
         "moves": "1. e4 Nf6 2. e5 Nd5 3. Nc3"
@@ -691,7 +729,7 @@
         "eco": "A00",
         "moves": "1. Nh3  e5 "
       },
-      "Amar Opening, 1\u00e2\u20ac\u00a6d5": {
+      "Amar Opening, 1\u2026d5": {
         "fen": "rnbqkbnr/ppp1pppp/8/3p4/8/7N/PPPPPPPP/RNBQKB1R w KQkq - 0 2",
         "eco": "A00",
         "moves": "1. Nh3 d5"
@@ -777,12 +815,26 @@
       }
     }
   },
+  "Anglo-Slav Opening": {
+    "lines": {
+      "Queen's Pawn Game: Anglo-Slav Opening": {
+        "fen": "rnbqkbnr/pp2pppp/2pp4/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "A40",
+        "moves": "1. d4 c6 2. c4 d6"
+      }
+    }
+  },
   "Anti-Torre": {
     "lines": {
       "Anti-Torre": {
         "fen": "rn1qkbnr/ppp1pppp/8/3pNb2/3P2P1/8/PPP1PP1P/RNBQKB1R b KQkq - 0 4",
         "eco": "D02",
         "moves": "1. d4 d5 2. Nf3 Bg4 3. Ne5 Bf5 4. g4"
+      },
+      "Queen's Pawn Game: Anti-Torre": {
+        "fen": "rn1qkbnr/ppp1pppp/8/3p4/3P2b1/5N2/PPP1PPPP/RNBQKB1R w KQkq - 1 3",
+        "eco": "D02",
+        "moves": "1. Nf3 d5 2. d4 Bg4"
       }
     }
   },
@@ -888,6 +940,25 @@
       }
     }
   },
+  "Barry Attack": {
+    "lines": {
+      "Queen's Pawn Game: Barry Attack": {
+        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P1B2/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
+        "eco": "A48",
+        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7"
+      },
+      "Queen's Pawn Game: Barry Attack, Gr\u00fcnfeld Variation": {
+        "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/3P1B2/2N1PN2/PPP1BPPP/R2QK2R b KQ - 2 6",
+        "eco": "A48",
+        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. Be2"
+      },
+      "Queen's Pawn Game: Barry Attack, Tarzan Attack": {
+        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P1B2/2N2N2/PPPQPPPP/R3KB1R b KQkq - 3 5",
+        "eco": "A48",
+        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7 5. Qd2"
+      }
+    }
+  },
   "Basman's Creepy-Crawly System (as Black)": {
     "lines": {
       "Basman's Creepy-Crawly System (as Black)": {
@@ -903,6 +974,15 @@
         "fen": "rnbqkb1r/pppppppp/5n2/8/3P4/1P6/P1P1PPPP/RNBQKBNR b KQkq - 0 2",
         "eco": "A45",
         "moves": "1. d4 Nf6 2. b3"
+      }
+    }
+  },
+  "Bavarian Gambit": {
+    "lines": {
+      "King's Pawn Game: Bavarian Gambit": {
+        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/2P1P3/8/PP1P1PPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. c4 d5"
       }
     }
   },
@@ -1329,7 +1409,7 @@
         "eco": "A57",
         "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. Bg5"
       },
-      "Benko Gambit Declined: Hj\u00c3\u00b8rring Countergambit": {
+      "Benko Gambit Declined: Hj\u00f8rring Countergambit": {
         "fen": "rnbqkb1r/p2ppppp/5n2/1ppP4/2P1P3/8/PP3PPP/RNBQKBNR b KQkq - 0 4",
         "eco": "A57",
         "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. e4"
@@ -1339,7 +1419,7 @@
         "eco": "A57",
         "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. Nf3"
       },
-      "Benko Gambit Declined: Pseudo-S\u00c3\u00a4misch": {
+      "Benko Gambit Declined: Pseudo-S\u00e4misch": {
         "fen": "rnbqkb1r/p2ppppp/5n2/1ppP4/2P5/5P2/PP2P1PP/RNBQKBNR b KQkq - 0 4",
         "eco": "A57",
         "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. f3"
@@ -2781,7 +2861,7 @@
         "eco": "A43",
         "moves": "1. d4 Nf6 2. Nf3 c5 3. d5 c4"
       },
-      "Benoni Defense: Hrom\u00c3\u00a1dka System": {
+      "Benoni Defense: Hrom\u00e1dka System": {
         "fen": "rnbqkb1r/pp2pppp/3p1n2/2pP4/2P5/8/PP2PPPP/RNBQKBNR w KQkq - 0 4",
         "eco": "A56",
         "moves": "1. d4 Nf6 2. c4 c5 3. d5 d6"
@@ -2884,6 +2964,15 @@
         "fen": "r1bq1rk1/ppp1nppp/3p1n2/1B2p1B1/4P3/2PP1N2/P1P2PPP/R2Q1RK1 w - - 1 9",
         "eco": "C49",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Bb4 5. O-O O-O 6. d3 d6 7. Bg5 Bxc3 8. bxc3 Ne7"
+      }
+    }
+  },
+  "Beyer Gambit": {
+    "lines": {
+      "King's Pawn Game: Beyer Gambit": {
+        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d4 d5"
       }
     }
   },
@@ -3586,7 +3675,7 @@
         "eco": "C24",
         "moves": "1. e4 e5 2. Bc4 Nf6 3. d3 Nc6 4. Nc3"
       },
-      "Bishop's Opening: Vienna Hybrid, Hrom\u00c3\u00a1dka Variation": {
+      "Bishop's Opening: Vienna Hybrid, Hrom\u00e1dka Variation": {
         "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/1bB1P3/2NP4/PPP1NPPP/R1BQK2R b KQkq - 2 5",
         "eco": "C28",
         "moves": "1. e4 e5 2. Nc3 Nc6 3. Bc4 Nf6 4. d3 Bb4 5. Ne2"
@@ -4270,7 +4359,7 @@
         "eco": "E11",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 Bb4+ 4. Bd2 Bxd2+"
       },
-      "Bogo-Indian Defense: Gr\u00c3\u00bcnfeld Variation": {
+      "Bogo-Indian Defense: Gr\u00fcnfeld Variation": {
         "fen": "rnbqk2r/pppp1ppp/4pn2/8/1bPP4/5N2/PP1NPPPP/R1BQKB1R b KQkq - 3 4",
         "eco": "E11",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 Bb4+ 4. Nbd2"
@@ -4509,6 +4598,20 @@
         "fen": "rnbqkb1r/pppppppp/4P3/3n4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 3",
         "eco": "B02",
         "moves": "1.e4 Nf6 2.e5 Nd5 3.e6"
+      }
+    }
+  },
+  "Busch-Gass Gambit": {
+    "lines": {
+      "King's Pawn Game: Busch-Gass Gambit": {
+        "fen": "rnbqk1nr/pppp1ppp/8/2b1p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 Bc5"
+      },
+      "King's Pawn Game: Busch-Gass Gambit, Chiodini Gambit": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1N3/4P3/8/PPPP1PPP/RNBQKB1R w KQkq - 1 4",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 Bc5 3. Nxe5 Nc6"
       }
     }
   },
@@ -5711,7 +5814,7 @@
         "eco": "B18",
         "moves": "1. e4 c6 2. d4 d5 3. Nd2 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. h4"
       },
-      "Caro-Kann Defense: Classical Variation, Mar\u00c3\u00b3czy Attack": {
+      "Caro-Kann Defense: Classical Variation, Mar\u00f3czy Attack": {
         "fen": "rn1qkbnr/pp2pppp/2p3b1/8/3P1P2/6N1/PPP3PP/R1BQKBNR b KQkq - 0 6",
         "eco": "B18",
         "moves": "1. e4 c6 2. d4 d5 3. Nd2 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. f4"
@@ -5876,12 +5979,12 @@
         "eco": "B18",
         "moves": "1. e4 c6 2. d4 d5 3. Nd2 dxe4 4. Nxe4 Bf5 5. Ng5 Bg6 6. N1f3 h6 7. Ne6"
       },
-      "Caro-Kann Defense: Mar\u00c3\u00b3czy Variation": {
+      "Caro-Kann Defense: Mar\u00f3czy Variation": {
         "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/5P2/PPP3PP/RNBQKBNR b KQkq - 0 3",
         "eco": "B12",
         "moves": "1. e4 c6 2. d4 d5 3. f3"
       },
-      "Caro-Kann Defense: Mar\u00c3\u00b3czy Variation, Mar\u00c3\u00b3czy Gambit": {
+      "Caro-Kann Defense: Mar\u00f3czy Variation, Mar\u00f3czy Gambit": {
         "fen": "rnbqkbnr/pp3ppp/2p5/8/2BpP3/5N2/PPP3PP/RNBQK2R b KQkq - 1 6",
         "eco": "B12",
         "moves": "1. e4 c6 2. d4 d5 3. f3 dxe4 4. fxe4 e5 5. Nf3 exd4 6. Bc4"
@@ -6052,9 +6155,9 @@
       }
     }
   },
-  "Caro\u00e2\u20ac\u201cKann Defence": {
+  "Caro\u2013Kann Defence": {
     "lines": {
-      "Caro\u00e2\u20ac\u201cKann Defence": {
+      "Caro\u2013Kann Defence": {
         "fen": "rnbqkb1r/pp2pppp/2p2n2/8/3PN3/3Q4/PPP2PPP/R1B1KBNR b KQkq - 2 5",
         "eco": "B15",
         "moves": "1. e4  c6 2. d4  d5 3. Nc3  dxe4 4. Nxe4  Nf6 5. Qd3 "
@@ -7020,6 +7123,15 @@
       }
     }
   },
+  "Chandler Gambit": {
+    "lines": {
+      "Queen's Pawn Game: Chandler Gambit": {
+        "fen": "rnbqkbnr/pp2pppp/8/3p4/3p4/5NP1/PPP1PPBP/RNBQK2R b KQkq - 1 4",
+        "eco": "D02",
+        "moves": "1. d4 d5 2. Nf3 c5 3. g3 cxd4 4. Bg2"
+      }
+    }
+  },
   "Chepukaitis Gambit": {
     "lines": {
       "Chepukaitis Gambit": {
@@ -7035,6 +7147,55 @@
         "fen": "r1bqkbnr/pp1p1ppp/2n1p3/2p5/4P3/5N2/PPPPQPPP/RNB1KB1R w KQkq - 2 4",
         "eco": "C00",
         "moves": "1. e4  e6 2. Qe2  c5 3. Nf3  Nc6 "
+      },
+      "Queen's Pawn Game: Chigorin Variation": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+        "eco": "A45",
+        "moves": "1. d4 Nf6 2. Nc3 d5"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Alburt Defense": {
+        "fen": "rn1qkbnr/ppp1pppp/8/3p1b2/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 2 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Nc3 Bf5"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Anti-Veresov": {
+        "fen": "rn1qkbnr/ppp1pppp/8/3p4/3P2b1/2N5/PPP1PPPP/R1BQKBNR w KQkq - 2 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Nc3 Bg4"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Fianchetto Defense": {
+        "fen": "rnbqk1nr/ppp1ppbp/6p1/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
+        "eco": "D00",
+        "moves": "1. d4 g6 2. Nf3 Bg7 3. Nc3 d5"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Irish Gambit": {
+        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Nc3 c5"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Shaviliuk Gambit": {
+        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Nc3 e5"
+      },
+      "Queen's Pawn Game: Chigorin Variation, Shropshire Defense": {
+        "fen": "rnbqkbnr/ppp1ppp1/8/3p3p/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Nc3 h5"
+      }
+    }
+  },
+  "Clam Variation": {
+    "lines": {
+      "King's Pawn Game: Clam Variation, King's Gambit Reversed": {
+        "fen": "rnbqkbnr/pppp2pp/8/4pp2/4P3/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d3 f5"
+      },
+      "King's Pawn Game: Clam Variation, Radisch Gambit": {
+        "fen": "rnbqk2r/pppp1ppp/5n2/2b1p3/4PP2/3P4/PPP3PP/RNBQKBNR w KQkq - 1 4",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d3 Nf6 3. f4 Bc5"
       }
     }
   },
@@ -7194,6 +7355,26 @@
         "fen": "rnb1k1nr/pp1pppbp/6p1/q7/3N4/3BP3/PPP2PPP/RNBQK2R w KQkq - 1 6",
         "eco": "A40",
         "moves": "1. d4 g6 2. Nf3 Bg7 3. e3 c5 4. Bd3 cxd4 5. Nxd4 Qa5+"
+      },
+      "Queen's Pawn Game: Colle System": {
+        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R b KQkq - 1 4",
+        "eco": "D05",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3"
+      },
+      "Queen's Pawn Game: Colle System, Anti-Colle": {
+        "fen": "rn1qkb1r/ppp1pppp/5n2/3p1b2/3P4/4PN2/PPP2PPP/RNBQKB1R w KQkq - 1 4",
+        "eco": "D04",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 Bf5"
+      },
+      "Queen's Pawn Game: Colle System, Gr\u00fcnfeld Formation": {
+        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R w KQkq - 2 5",
+        "eco": "D04",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 g6 4. Bd3 Bg7"
+      },
+      "Queen's Pawn Game: Colle System, Traditional Colle": {
+        "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/2PBPN2/PP3PPP/RNBQK2R b KQkq - 0 5",
+        "eco": "D05",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. e3 c5 4. Bd3 d5 5. c3"
       }
     }
   },
@@ -7248,6 +7429,25 @@
         "fen": "rnbqkbnr/pppp2pp/5p2/4N3/4P3/8/PPPP1PPP/RNBQKB1R b KQkq - 0 3",
         "eco": "C40",
         "moves": "1. e4 e5 2. Nf3 f6 3. Nxe5"
+      }
+    }
+  },
+  "Damiano Defense": {
+    "lines": {
+      "King's Pawn Game: Damiano Defense": {
+        "fen": "rnbqkbnr/pppp2pp/5p2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 f6"
+      },
+      "King's Pawn Game: Damiano Defense, Damiano Gambit": {
+        "fen": "rnb1kbnQ/ppppq2p/6p1/8/4P3/8/PPPP1PPP/RNB1KB1R b KQq - 0 6",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 f6 3. Nxe5 fxe5 4. Qh5+ g6 5. Qxe5+ Qe7 6. Qxh8"
+      },
+      "King's Pawn Game: Damiano Defense, Damiano Gambit, Chigorin Gambit": {
+        "fen": "rnb1kbnr/ppp1q1pp/5p2/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 5",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 f6 3. Nxe5 Qe7 4. Nf3 d5"
       }
     }
   },
@@ -7316,7 +7516,7 @@
   },
   "Danish Gambit Declined": {
     "lines": {
-      "Danish Gambit Declined: S\u00c3\u00b6rensen Defense": {
+      "Danish Gambit Declined: S\u00f6rensen Defense": {
         "fen": "rnbqkbnr/ppp2ppp/8/3p4/3pP3/2P5/PP3PPP/RNBQKBNR w KQkq - 0 4",
         "eco": "C21",
         "moves": "1. e4 e5 2. d4 exd4 3. c3 d5"
@@ -7422,6 +7622,11 @@
         "fen": "r1bqkb1r/pppp1ppp/2n2n2/4N3/2P1P3/8/PP1P1PPP/RNBQKB1R b KQkq - 0 4",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. c4 Nf6 4. Nxe5"
+      },
+      "King's Pawn Game: Dresden Opening": {
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2P1P3/5N2/PP1P1PPP/RNBQKB1R b KQkq - 0 3",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. c4"
       }
     }
   },
@@ -8966,9 +9171,9 @@
       }
     }
   },
-  "D\u00c3\u00b6ry Defense": {
+  "D\u00f6ry Defense": {
     "lines": {
-      "D\u00c3\u00b6ry Defense": {
+      "D\u00f6ry Defense": {
         "fen": "rnbqkb1r/pppppppp/8/8/3Pn3/5N2/PPP1PPPP/RNBQKB1R w KQkq - 3 3",
         "eco": "A46",
         "moves": "1. d4 Nf6 2. Nf3 Ne4"
@@ -9015,7 +9220,7 @@
         "eco": "C40",
         "moves": "1. e4  e5 2. Nf3  d5 3. exd5  Qxd5 "
       },
-      "Elephant Gambit: Mar\u00c3\u00b3czy Gambit": {
+      "Elephant Gambit: Mar\u00f3czy Gambit": {
         "fen": "rnbqk1nr/ppp2ppp/3b4/3Pp3/8/5N2/PPPP1PPP/RNBQKB1R w KQkq - 1 4",
         "eco": "C40",
         "moves": "1. e4 e5 2. Nf3 d5 3. exd5 Bd6"
@@ -9849,6 +10054,11 @@
         "eco": "A13",
         "moves": "1. c4 e6 2. Nf3 d5 3. g3 c6 4. Qc2"
       },
+      "English: London Defence": {
+        "fen": "rn1qkb1r/pp3ppp/2p1pn2/3p1b2/2P5/1P3NP1/PB1PPPBP/RN1QK2R b KQkq - 1 6",
+        "eco": "A12",
+        "moves": "1. c4 c6 2. Nf3 d5 3. b3 Nf6 4. g3 Bf5 5. Bg2 e6 6. Bb2"
+      },
       "English: Lukin Variation": {
         "fen": "rnbqkbnr/ppp3pp/3p4/4pp2/2P5/2N2N2/PP1PPPPP/R1BQKB1R w KQkq - 0 4",
         "eco": "A21",
@@ -10073,6 +10283,11 @@
         "fen": "rnbqkb1r/pp3ppp/2p1pn2/3p4/2P5/1P3NP1/P2PPPBP/RNBQK2R b KQkq - 0 5",
         "eco": "A13",
         "moves": "1. c4 e6 2. Nf3 d5 3. g3 Nf6 4. Bg2 c6 5. b3"
+      },
+      "English: New York/London Defence": {
+        "fen": "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2P5/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 3 5",
+        "eco": "A12",
+        "moves": "1. c4 c6 2. Nf3 d5 3. b3 Nf6 4. Bb2 Bf5"
       },
       "English: Nimzo-English, 4.Qc2": {
         "fen": "rnbqk2r/pppp1ppp/4pn2/8/1bP5/2N2N2/PPQPPPPP/R1B1KB1R b KQkq - 3 4",
@@ -11287,12 +11502,12 @@
         "eco": "A10",
         "moves": "1. c4 f5 2. Nc3 Nf6 3. e4"
       },
-      "English Opening: Anglo-Gr\u00c3\u00bcnfeld Defense": {
+      "English Opening: Anglo-Gr\u00fcnfeld Defense": {
         "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq - 0 3",
         "eco": "A16",
         "moves": "1. c4 Nf6 2. Nc3 d5"
       },
-      "English Opening: Anglo-Gr\u00c3\u00bcnfeld Defense, Korchnoi Variation": {
+      "English Opening: Anglo-Gr\u00fcnfeld Defense, Korchnoi Variation": {
         "fen": "rnbqk2r/ppp2pbp/6p1/3np3/8/2N2NP1/PP1PPPBP/R1BQK2R w KQkq - 0 7",
         "eco": "A16",
         "moves": "1. Nf3 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. g3 Bg7 6. Bg2 e5"
@@ -11302,12 +11517,12 @@
         "eco": "A17",
         "moves": "1. c4 Nf6 2. Nc3 d5 3. cxd5 Nxd5 4. Nf3 c5 5. e3 e6"
       },
-      "English Opening: Anglo-Indian Defense, Anglo-Gr\u00c3\u00bcnfeld Variation": {
+      "English Opening: Anglo-Indian Defense, Anglo-Gr\u00fcnfeld Variation": {
         "fen": "rnbqkb1r/ppp1pp1p/6p1/8/8/2n3P1/PP1PPPBP/R1BQK1NR w KQkq - 0 6",
         "eco": "A16",
         "moves": "1. c4 Nf6 2. Nc3 d5 3. cxd5 Nxd5 4. g3 g6 5. Bg2 Nxc3"
       },
-      "English Opening: Anglo-Indian Defense, Anti-Anti-Gr\u00c3\u00bcnfeld": {
+      "English Opening: Anglo-Indian Defense, Anti-Anti-Gr\u00fcnfeld": {
         "fen": "rnbqk2r/ppppppbp/5np1/8/2P1P3/2N2N2/PP1P1PPP/R1BQKB1R b KQkq - 0 4",
         "eco": "A15",
         "moves": "1. Nf3 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4"
@@ -11322,7 +11537,7 @@
         "eco": "A15",
         "moves": "1. g3 d5 2. Nf3 g6 3. c4 Nf6"
       },
-      "English Opening: Anglo-Indian Defense, Gr\u00c3\u00bcnfeld Formation": {
+      "English Opening: Anglo-Indian Defense, Gr\u00fcnfeld Formation": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2P5/5NP1/PP1PPP1P/RNBQKB1R w KQkq - 0 4",
         "eco": "A15",
         "moves": "1. c4 Nf6 2. Nf3 g6 3. g3 d5"
@@ -11412,7 +11627,7 @@
         "eco": "A10",
         "moves": "1. c4 d5"
       },
-      "English Opening: Anglo-Scandinavian Defense, L\u00c3\u00b6hn Gambit": {
+      "English Opening: Anglo-Scandinavian Defense, L\u00f6hn Gambit": {
         "fen": "rnbqkbnr/ppp2ppp/4p3/3P4/8/8/PP1PPPPP/RNBQKBNR w KQkq - 0 3",
         "eco": "A10",
         "moves": "1. c4 d5 2. cxd5 e6"
@@ -11916,6 +12131,11 @@
         "fen": "r1bqkb1r/ppppnppp/2n5/4P3/8/5N2/PPP1PPPP/RNBQKB1R w KQkq - 3 4",
         "eco": "A40",
         "moves": "1. d4 e5 2. dxe5 Nc6 3. Nf3 Nge7"
+      },
+      "Queen's Pawn Game: Englund Gambit": {
+        "fen": "r1b1kb1r/ppppq1pp/2n2n2/3Q4/8/5N2/PPP1PPPP/RNB1KB1R w KQkq - 0 6",
+        "eco": "A40",
+        "moves": "1. d4 e5 2. dxe5 Nc6 3. Nf3 Qe7 4. Qd5 f6 5. exf6 Nxf6"
       }
     }
   },
@@ -12511,7 +12731,7 @@
         "eco": "C48",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Nd4 5. Nxe5 Bc5 6. O-O O-O"
       },
-      "Four Knights Game: Spanish Variation, Rubinstein Variation, Mar\u00c3\u00b3czy Variation": {
+      "Four Knights Game: Spanish Variation, Rubinstein Variation, Mar\u00f3czy Variation": {
         "fen": "r1bq1rk1/ppp2ppp/1b1p1n2/4p3/N3P3/3P1B2/PPP2PPP/R1BQ1RK1 w - - 2 10",
         "eco": "C48",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Nd4 5. Be2 Nxf3+ 6. Bxf3 Bc5 7. O-O O-O 8. d3 d6 9. Na4 Bb6"
@@ -14237,7 +14457,7 @@
         "eco": "C02",
         "moves": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. Bd3 cxd4 7. cxd4 Bd7 8. O-O"
       },
-      "French Defense: Advance Variation, Milner-Barry Gambit, S\u00c3\u00b8rensen Variation": {
+      "French Defense: Advance Variation, Milner-Barry Gambit, S\u00f8rensen Variation": {
         "fen": "r3kbnr/pp1b1ppp/1q2p3/3pP1N1/3n4/3B4/PP3PPP/RNBQ1RK1 b kq - 1 9",
         "eco": "C02",
         "moves": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. Bd3 cxd4 7. cxd4 Bd7 8. O-O Nxd4 9. Ng5"
@@ -14297,7 +14517,7 @@
         "eco": "C13",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Be7 5. e5 Nfd7 6. h4 c5"
       },
-      "French Defense: Alekhine-Chatard Attack, Mar\u00c3\u00b3czy Variation": {
+      "French Defense: Alekhine-Chatard Attack, Mar\u00f3czy Variation": {
         "fen": "rnbqk2r/1ppnbppp/p3p3/3pP1B1/3P3P/2N5/PPP2PP1/R2QKBNR w KQkq - 0 7",
         "eco": "C13",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Be7 5. e5 Nfd7 6. h4 a6"
@@ -14482,7 +14702,7 @@
         "eco": "C03",
         "moves": "1. e4 e6 2. d4 d5 3. Nd2 Nc6 4. c3 dxe4 5. Nxe4 e5"
       },
-      "French Defense: Hecht-Reefschl\u00c3\u00a4ger Variation": {
+      "French Defense: Hecht-Reefschl\u00e4ger Variation": {
         "fen": "r1bqkbnr/ppp2ppp/2n1p3/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
         "eco": "C10",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Nc6"
@@ -14687,7 +14907,7 @@
         "eco": "C10",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Qd5"
       },
-      "French Defense: R\u00c3\u00a9ti-Spielmann Attack": {
+      "French Defense: R\u00e9ti-Spielmann Attack": {
         "fen": "rnbqkbnr/pppp1ppp/4p3/8/4P3/6P1/PPPP1P1P/RNBQKBNR b KQkq - 0 2",
         "eco": "C00",
         "moves": "1. e4 e6 2. g3"
@@ -14847,7 +15067,7 @@
         "eco": "C07",
         "moves": "1. e4 e6 2. d4 d5 3. Nd2 c5 4. exd5 Nf6"
       },
-      "French Defense: Tarrasch Variation, Open System, S\u00c3\u00bcchting Line": {
+      "French Defense: Tarrasch Variation, Open System, S\u00fcchting Line": {
         "fen": "rnbqkbnr/pp3ppp/4p3/2pp4/3PP3/2P5/PP1N1PPP/R1BQKBNR b KQkq - 0 4",
         "eco": "C07",
         "moves": "1. e4 e6 2. d4 d5 3. Nd2 c5 4. c3"
@@ -14892,7 +15112,7 @@
         "eco": "C15",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Ne2 dxe4 5. a3 Bxc3+ 6. Nxc3 Nc6"
       },
-      "French Defense: Winawer Variation, Alekhine-Mar\u00c3\u00b3czy Gambit": {
+      "French Defense: Winawer Variation, Alekhine-Mar\u00f3czy Gambit": {
         "fen": "rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP1NPPP/R1BQKB1R b KQkq - 3 4",
         "eco": "C15",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Ne2"
@@ -14952,7 +15172,7 @@
         "eco": "C15",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. Bd3 c5 5. exd5 Qxd5 6. Bd2"
       },
-      "French Defense: Winawer Variation, Mar\u00c3\u00b3czy-Wallis Variation": {
+      "French Defense: Winawer Variation, Mar\u00f3czy-Wallis Variation": {
         "fen": "rnbqk1nr/pp3ppp/4p3/3pP3/1P6/2p5/1PP2PPP/R1BQKBNR w KQkq - 0 7",
         "eco": "C17",
         "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 cxd4 6. axb4 dxc3"
@@ -15302,6 +15522,11 @@
         "fen": "rnbqk2r/pp2nppp/2pb4/3p4/2PPp1P1/2N4P/PP2PPB1/R1BQK1NR w KQkq - 3 7",
         "eco": "A00",
         "moves": "1. g4 d5 2. h3 e5 3. Bg2 c6 4. d4 e4 5. c4 Bd6 6. Nc3 Ne7"
+      },
+      "Grob Opening: London Defense": {
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/6P1/7P/PPPPPP2/RNBQKBNR w KQkq - 1 3",
+        "eco": "A00",
+        "moves": "1. g4 e5 2. h3 Nc6"
       },
       "Grob Opening: Romford Countergambit": {
         "fen": "rn1qkbnr/ppp1pppp/8/8/2Pp2b1/8/PP1PPPBP/RNBQK1NR w KQkq - 0 4",
@@ -16531,259 +16756,259 @@
       }
     }
   },
-  "Gr\u00c3\u00bcnfeld Defense": {
+  "Gr\u00fcnfeld Defense": {
     "lines": {
-      "Gr\u00c3\u00bcnfeld Defense": {
+      "Gr\u00fcnfeld Defense": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 0 4",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Botvinnik Variation": {
+      "Gr\u00fcnfeld Defense: Botvinnik Variation": {
         "fen": "rnbq1rk1/ppp2pbp/4pnp1/3p4/2PP4/1QN1PN2/PP3PPP/R1B1KB1R w KQ - 0 7",
         "eco": "D95",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3 e6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP1B2/2N5/PP2PPPP/R2QKBNR b KQkq - 1 4",
         "eco": "D82",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack, Gr\u00c3\u00bcnfeld Gambit": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack, Gr\u00fcnfeld Gambit": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1P3/PP3PPP/R2QKBNR w KQ - 1 6",
         "eco": "D83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack, Gr\u00c3\u00bcnfeld Gambit Accepted": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack, Gr\u00fcnfeld Gambit Accepted": {
         "fen": "rnb2rk1/ppB1ppbp/6p1/3q4/3P4/4P3/PP3PPP/R2QKBNR b KQ - 0 8",
         "eco": "D84",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. cxd5 Nxd5 7. Nxd5 Qxd5 8. Bxc7"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack, Gr\u00c3\u00bcnfeld Gambit, Botvinnik Variation": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack, Gr\u00fcnfeld Gambit, Botvinnik Variation": {
         "fen": "rn1q1rk1/pp2ppbp/4bnp1/2Pp4/2P2B2/2N1P3/PP3PPP/2RQKBNR w K - 1 8",
         "eco": "D83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. Rc1 c5 7. dxc5 Be6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack, Gr\u00c3\u00bcnfeld Gambit, Capablanca Variation": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack, Gr\u00fcnfeld Gambit, Capablanca Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1P3/PP3PPP/2RQKBNR b K - 2 6",
         "eco": "D83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. Rc1"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Brinckmann Attack, Reshevsky Gambit": {
+      "Gr\u00fcnfeld Defense: Brinckmann Attack, Reshevsky Gambit": {
         "fen": "rnb2rk1/pp2ppbp/5np1/q1Pp4/2P2B2/2N1P3/PP3PPP/2RQKBNR w K - 1 8",
         "eco": "D83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bf4 Bg7 5. Rc1 O-O 6. e3 c5 7. dxc5 Qa5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Counterthrust Variation": {
+      "Gr\u00fcnfeld Defense: Counterthrust Variation": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/6P1/PP2PPBP/RNBQK1NR w KQkq - 0 5",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. g3 Bg7 4. Bg2 d5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation": {
         "fen": "rnbqkb1r/ppp1pp1p/6p1/3n4/3P4/2N5/PP2PPPP/R1BQKBNR w KQkq - 0 5",
         "eco": "D85",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Classical Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Classical Variation": {
         "fen": "rnbqk2r/ppp1ppbp/6p1/8/2BPP3/2P5/P4PPP/R1BQK1NR b KQkq - 2 7",
         "eco": "D86",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Larsen Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Larsen Variation": {
         "fen": "rnb2rk1/p1pqppbp/1p4p1/8/2BPP3/2P5/P3NPPP/R1BQ1RK1 w - - 0 10",
         "eco": "D86",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 O-O 8. Ne2 Qd7 9. O-O b6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Modern Exchange Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Modern Exchange Variation": {
         "fen": "rnbqk2r/pp2ppbp/6p1/2p5/3PP3/2P2N2/P4PPP/1RBQKB1R b Kkq - 1 8",
         "eco": "D85",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Nf3 c5 8. Rb1"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Modern Exchange Variation, Kramnik's Line": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Modern Exchange Variation, Kramnik's Line": {
         "fen": "rnbqk2r/pp2ppbp/6p1/2p5/3PP3/2P2N1P/P4PP1/R1BQKB1R b KQkq - 0 8",
         "eco": "D85",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. c4 Bg7 4. Nc3 d5 5. cxd5 Nxd5 6. e4 Nxc3 7. bxc3 c5 8. h3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Modern Exchange Variation, Pawn Grab Line": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Modern Exchange Variation, Pawn Grab Line": {
         "fen": "r1bq1rk1/pp2pp1p/2n3p1/2pP4/4P3/2b2N2/P3BPPP/1RBQK2R w K - 0 11",
         "eco": "D85",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Nf3 c5 8. Rb1 O-O 9. Be2 Nc6 10. d5 Bxc3+"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Nadanian Attack": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Nadanian Attack": {
         "fen": "rnbqkb1r/ppp1pp1p/6p1/3n4/N2P4/8/PP2PPPP/R1BQKBNR b KQkq - 1 5",
         "eco": "D85",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. Na4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Seville Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Seville Variation": {
         "fen": "r2q1rk1/pp2pBbp/6p1/n1p5/3PP1b1/2P1BP2/P3N1PP/R2Q1RK1 b - - 0 12",
         "eco": "D87",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 c5 8. Ne2 Nc6 9. Be3 O-O 10. O-O Bg4 11. f3 Na5 12. Bxf7+"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Simagin's Improved Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Simagin's Improved Variation": {
         "fen": "r1bq1rk1/ppp1ppbp/2n3p1/8/2BPP3/2P5/P3NPPP/R1BQK2R w KQ - 5 9",
         "eco": "D86",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 O-O 8. Ne2 Nc6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Simagin's Lesser Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Simagin's Lesser Variation": {
         "fen": "rnbq1rk1/p1p1ppbp/1p4p1/8/2BPP3/2P5/P3NPPP/R1BQK2R w KQ - 0 9",
         "eco": "D86",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 O-O 8. Ne2 b6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Sokolsky Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Sokolsky Variation": {
         "fen": "r2q1rk1/pp2ppbp/4b1p1/n2P4/4P3/3BBP2/P3N1PP/R2Q1RK1 b - - 0 14",
         "eco": "D89",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 c5 8. Ne2 O-O 9. O-O Nc6 10. Be3 Bg4 11. f3 Na5 12. Bd3 cxd4 13. cxd4 Be6 14. d5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Exchange Variation, Spassky Variation": {
+      "Gr\u00fcnfeld Defense: Exchange Variation, Spassky Variation": {
         "fen": "r2q1rk1/pp2ppbp/4b1p1/n7/3PP3/3BBP2/P3N1PP/R2Q1RK1 w - - 1 14",
         "eco": "D89",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bc4 c5 8. Ne2 Nc6 9. Be3 O-O 10. O-O Bg4 11. f3 Na5 12. Bd3 cxd4 13. cxd4 Be6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Flohr Defense": {
+      "Gr\u00fcnfeld Defense: Flohr Defense": {
         "fen": "rn1q1rk1/pp2ppbp/2p2np1/3p1b2/2PP4/2NBPN2/PP3PPP/R1BQ1RK1 w - - 6 8",
         "eco": "D94",
         "moves": "1. d4 d5 2. c4 c6 3. Nc3 Nf6 4. e3 g6 5. Nf3 Bg7 6. Bd3 O-O 7. O-O Bf5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Flohr Variation": {
+      "Gr\u00fcnfeld Defense: Flohr Variation": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/Q1PP4/2N2N2/PP2PPPP/R1B1KB1R b KQkq - 3 5",
         "eco": "D90",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qa4+"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Gibbon Gambit": {
+      "Gr\u00fcnfeld Defense: Gibbon Gambit": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP2P1/2N5/PP2PP1P/R1BQKBNR b KQkq - 0 4",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. g4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Lundin Variation": {
+      "Gr\u00fcnfeld Defense: Lundin Variation": {
         "fen": "rnbqkb1r/pp2pp1p/6p1/2p3B1/2PPp3/8/PP1QPPPP/R3KBNR w KQkq - 0 7",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bg5 Ne4 5. Nxe4 dxe4 6. Qd2 c5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Lutikov Variation": {
+      "Gr\u00fcnfeld Defense: Lutikov Variation": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N2P2/PP2P1PP/R1BQKBNR b KQkq - 0 4",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. f3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Lutikov Variation, Murrey Attack": {
+      "Gr\u00fcnfeld Defense: Lutikov Variation, Murrey Attack": {
         "fen": "rnbqkb1r/pp2pp1p/6p1/2pn4/N2P4/5P2/PP2P1PP/R1BQKBNR b KQkq - 1 6",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. f3 c5 5. cxd5 Nxd5 6. Na4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Makogonov Variation": {
+      "Gr\u00fcnfeld Defense: Makogonov Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/1PPP4/2N1PN2/P4PPP/R1BQKB1R b KQ - 0 6",
         "eco": "D94",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. b4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Opocensky Variation": {
+      "Gr\u00fcnfeld Defense: Opocensky Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/2N1PN2/PP1B1PPP/R2QKB1R b KQ - 2 6",
         "eco": "D94",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Bd2"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Pachman Variation": {
+      "Gr\u00fcnfeld Defense: Pachman Variation": {
         "fen": "r1bq1rk1/pppnppbp/5np1/6N1/2BP4/1QN1P3/PP3PPP/R1B1K2R b KQ - 4 8",
         "eco": "D95",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. e3 Bg7 5. Qb3 dxc4 6. Bxc4 O-O 7. Nf3 Nbd7 8. Ng5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R b KQ - 0 7",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Accelerated Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Accelerated Variation": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/1QN5/PP2PPPP/R1B1KBNR b KQkq - 1 4",
         "eco": "D81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Qb3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Byrne Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Byrne Variation": {
         "fen": "r1bq1rk1/ppp1ppbp/2n2np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ - 1 8",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 Nc6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Hungarian Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Hungarian Variation": {
         "fen": "rnbq1rk1/1pp1ppbp/p4np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ - 0 8",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 a6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Keres Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Keres Variation": {
         "fen": "r2q1rk1/ppp1ppbp/1nn3p1/8/3PP1b1/2NQBN2/PP2BPPP/2KR3R b - - 8 11",
         "eco": "D98",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 Bg4 8. Be3 Nfd7 9. Be2 Nb6 10. Qd3 Nc6 11. O-O-O"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Levenfish Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Levenfish Variation": {
         "fen": "rnbq1rk1/p1p1ppbp/1p3np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ - 0 8",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 b6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Prins Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Prins Variation": {
         "fen": "r1bq1rk1/ppp1ppbp/n4np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ - 1 8",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 Na6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Smyslov Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Smyslov Variation": {
         "fen": "rn1q1rk1/pppnppbp/6p1/8/3PP1b1/1QN1BN2/PP3PPP/R3KB1R b KQ - 4 9",
         "eco": "D99",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 Bg4 8. Be3 Nfd7 9. Qb3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Szabo Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Szabo Variation": {
         "fen": "rnbq1rk1/pp2ppbp/2p2np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ - 0 8",
         "eco": "D97",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 c6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Russian Variation, Yugoslav Variation": {
+      "Gr\u00fcnfeld Defense: Russian Variation, Yugoslav Variation": {
         "fen": "rn1q1rk1/pp1nppbp/6p1/2p5/3PP1b1/1QN1BN2/PP3PPP/R3KB1R w KQ - 0 10",
         "eco": "D99",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Qb3 dxc4 6. Qxc4 O-O 7. e4 Bg4 8. Be3 Nfd7 9. Qb3 c5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Smyslov Defense": {
+      "Gr\u00fcnfeld Defense: Smyslov Defense": {
         "fen": "rn1q1rk1/pp2ppbp/2p2np1/3p4/2PP2b1/2NBPN2/PP3PPP/R1BQ1RK1 w - - 6 8",
         "eco": "D94",
         "moves": "1. d4 d5 2. c4 c6 3. Nc3 Nf6 4. e3 g6 5. Nf3 Bg7 6. Bd3 O-O 7. O-O Bg4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Stockholm Variation": {
+      "Gr\u00fcnfeld Defense: Stockholm Variation": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq - 1 4",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Bg5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 2 5",
         "eco": "D90",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Burille Variation": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Burille Variation": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq - 0 5",
         "eco": "D94",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Burille Variation, Reversed Tarrasch": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Burille Variation, Reversed Tarrasch": {
         "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/2PP4/2N2N2/PP2BPPP/R1BQ1RK1 w - - 2 9",
         "eco": "A56",
         "moves": "1. d4 Nf6 2. c4 c5 3. e3 g6 4. Nc3 Bg7 5. Nf3 O-O 6. Be2 cxd4 7. exd4 d5 8. O-O Nc6"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Hungarian Attack": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Hungarian Attack": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/2PP1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq - 3 5",
         "eco": "D92",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bf4"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Hungarian Variation": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Hungarian Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R b KQ - 0 6",
         "eco": "D93",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bf4 O-O 6. e3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Paris Variation": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Paris Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R b KQ - 2 6",
         "eco": "D94",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Bd3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Petrosian System": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Petrosian System": {
         "fen": "rnbqk2r/ppp1ppbp/5np1/3p2B1/2PP4/2N2N2/PP2PPPP/R2QKB1R b KQkq - 3 5",
         "eco": "D91",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bg5"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Three Knights Variation, Vienna Variation": {
+      "Gr\u00fcnfeld Defense: Three Knights Variation, Vienna Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/1QN1PN2/PP3PPP/R1B1KB1R b KQ - 2 6",
         "eco": "D95",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. e3 O-O 6. Qb3"
       },
-      "Gr\u00c3\u00bcnfeld Defense: Zaitsev Gambit": {
+      "Gr\u00fcnfeld Defense: Zaitsev Gambit": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP3P/2N5/PP2PPP1/R1BQKBNR b KQkq - 0 4",
         "eco": "D80",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. h4"
@@ -16805,6 +17030,11 @@
         "fen": "rnb1kbnr/ppppqppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
         "eco": "C40",
         "moves": "1. e4 e5 2. Nf3 Qe7"
+      },
+      "King's Pawn Game: Gunderam Defense, Gunderam Gambit": {
+        "fen": "rnb1kbnr/ppppq1pp/8/4pp2/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 Qe7 3. Bc4 f5"
       }
     }
   },
@@ -16824,6 +17054,21 @@
         "fen": "rnbqkbnr/pp1p1ppp/2p5/4p3/4P3/5NP1/PPPP1P1P/RNBQKB1R b KQkq - 0 3",
         "eco": "C40",
         "moves": "1. e4  e5 2. Nf3  c6 3. g3 "
+      },
+      "King's Knight Opening: Gunderam Gambit, Bishop Attack": {
+        "fen": "rnb1k2r/pp1p1ppp/2p2n2/4q3/1b2P3/2NP4/PPP1BPPP/R1BQK2R w KQkq - 2 7",
+        "eco": "C40",
+        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 6. Be2  Bb4 "
+      },
+      "King's Knight Opening: Gunderam Gambit, Bishop Attack, Main Line": {
+        "fen": "rnb1k2r/pp1p1ppp/2p2n2/4q3/4P3/2bP4/PPP1BPPP/R1BQ1RK1 w kq - 0 8",
+        "eco": "C40",
+        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 6. Be2  Bb4 7. O-O  Bxc3 "
+      },
+      "King's Pawn Game: Gunderam Gambit": {
+        "fen": "rnb1kb1r/pp1p1ppp/2p2n2/4q3/4P3/2NP4/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+        "eco": "C40",
+        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 "
       }
     }
   },
@@ -16961,7 +17206,7 @@
         "eco": "A00",
         "moves": "1. g3 e5 2. a3 d5 3. Nf3 e4 4. Nh4 Be7 5. d3"
       },
-      "Hungarian Opening: B\u00c3\u00bccker Gambit": {
+      "Hungarian Opening: B\u00fccker Gambit": {
         "fen": "rnbqkbnr/ppp2ppp/8/3pp3/1P6/6P1/P1PPPPBP/RNBQK1NR b KQkq - 0 3",
         "eco": "A00",
         "moves": "1. g3 d5 2. Bg2 e5 3. b4"
@@ -17045,6 +17290,15 @@
         "fen": "rnbqkbnr/ppp2ppp/8/4p3/2p5/1P4P1/P2PPPBP/RNBQK1NR b KQkq - 0 4",
         "eco": "A00",
         "moves": "1. g3 d5 2. Bg2 e5 3. c4 dxc4 4. b3"
+      }
+    }
+  },
+  "H\u00fcbsch Gambit": {
+    "lines": {
+      "Queen's Pawn Game: H\u00fcbsch Gambit": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b KQkq - 0 3",
+        "eco": "D00",
+        "moves": "1. d4 Nf6 2. Nc3 d5 3. e4"
       }
     }
   },
@@ -17220,6 +17474,26 @@
         "eco": "A45",
         "moves": "1. d4 Nf6 2. e4 Nxe4 3. Bd3 Nf6 4. Nf3"
       },
+      "Indian: London, 3...c5": {
+        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/5N2/PPP1PPPP/RN1QKB1R w KQkq - 0 4",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5"
+      },
+      "Indian: London, 3...c5 4.c3": {
+        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/2P2N2/PP2PPPP/RN1QKB1R b KQkq - 0 4",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. c3"
+      },
+      "Indian: London, 3...c5 4.e3": {
+        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/4PN2/PPP2PPP/RN1QKB1R b KQkq - 0 4",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. e3"
+      },
+      "Indian: London, 3...c5 4.e3 Qb6": {
+        "fen": "rnb1kb1r/pp1p1ppp/1q2pn2/2p5/3P1B2/4PN2/PPP2PPP/RN1QKB1R w KQkq - 1 5",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. e3 Qb6"
+      },
       "Indian: Mexican Defence, 3.Nc3": {
         "fen": "r1bqkb1r/pppppppp/2n2n2/8/2PP4/2N5/PP2PPPP/R1BQKBNR b KQkq - 2 3",
         "eco": "A50",
@@ -17292,27 +17566,27 @@
         "eco": "E00",
         "moves": "1. d4 Nf6 2. c4 e6 3. Qb3"
       },
-      "Indian Defense: Anti-Gr\u00c3\u00bcnfeld, Adorjan Gambit": {
+      "Indian Defense: Anti-Gr\u00fcnfeld, Adorjan Gambit": {
         "fen": "rnbqkb1r/p1pppp1p/5np1/1p1P4/2P5/8/PP2PPPP/RNBQKBNR w KQkq - 0 4",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. d5 b5"
       },
-      "Indian Defense: Anti-Gr\u00c3\u00bcnfeld, Advance Variation": {
+      "Indian Defense: Anti-Gr\u00fcnfeld, Advance Variation": {
         "fen": "rnbqkb1r/pppppp1p/5np1/3P4/2P5/8/PP2PPPP/RNBQKBNR b KQkq - 0 3",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. d5"
       },
-      "Indian Defense: Anti-Gr\u00c3\u00bcnfeld, Alekhine Variation": {
+      "Indian Defense: Anti-Gr\u00fcnfeld, Alekhine Variation": {
         "fen": "rnbqkb1r/pppppp1p/5np1/8/2PP4/5P2/PP2P1PP/RNBQKBNR b KQkq - 0 3",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. f3"
       },
-      "Indian Defense: Anti-Gr\u00c3\u00bcnfeld, Alekhine Variation, Leko Gambit": {
+      "Indian Defense: Anti-Gr\u00fcnfeld, Alekhine Variation, Leko Gambit": {
         "fen": "rnbqkb1r/pppp1p1p/5np1/4p3/2PP4/5P2/PP2P1PP/RNBQKBNR w KQkq - 0 4",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. f3 e5"
       },
-      "Indian Defense: Anti-Gr\u00c3\u00bcnfeld, Basman-Williams Attack": {
+      "Indian Defense: Anti-Gr\u00fcnfeld, Basman-Williams Attack": {
         "fen": "rnbqkb1r/pppppp1p/5np1/8/2PP3P/8/PP2PPP1/RNBQKBNR b KQkq - 0 3",
         "eco": "E60",
         "moves": "1. d4 Nf6 2. c4 g6 3. h4"
@@ -17387,7 +17661,7 @@
         "eco": "E10",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 a6"
       },
-      "Indian Defense: D\u00c3\u00b6ry Indian": {
+      "Indian Defense: D\u00f6ry Indian": {
         "fen": "rnbqkb1r/pppp1ppp/4p3/8/2PPn3/5N2/PP2PPPP/RNBQKB1R w KQkq - 2 4",
         "eco": "E10",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 Ne4"
@@ -17441,6 +17715,11 @@
         "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/3P4/8/PPPNPPPP/R1BQKBNR w KQkq - 0 3",
         "eco": "A45",
         "moves": "1. d4 Nf6 2. Nd2 e5"
+      },
+      "Indian Defense: London System": {
+        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 1 3",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4"
       },
       "Indian Defense: Maddigan Gambit": {
         "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
@@ -17568,7 +17847,7 @@
         "eco": "A00",
         "moves": "1.a3 g6 2.g4"
       },
-      "Irregular Openings: K\u00c3\u00a1das Gambit with 3.c3": {
+      "Irregular Openings: K\u00e1das Gambit with 3.c3": {
         "fen": "rnbqkbnr/pp1p1ppp/8/2p5/1P1p3P/2P5/P3PPP1/RNBQKBNR b KQkq - 0 4",
         "eco": "A00",
         "moves": "1.h4 c5 2.b4 e5 2.d4 exd4 3.c3"
@@ -17631,7 +17910,7 @@
         "eco": "C53",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. b4"
       },
-      "Italian Game: Blackburne-Kosti\u00c4\u2021 Gambit": {
+      "Italian Game: Blackburne-Kosti\u0107 Gambit": {
         "fen": "r1b1kbnr/pppp1Npp/8/8/3nq3/8/PPPPBP1P/RNBQKR2 b Qkq - 1 7",
         "eco": "C50",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nd4 4. Nxe5 Qg5 5. Nxf7 Qxg2 6. Rf1 Qxe4+ 7. Be2"
@@ -17876,7 +18155,7 @@
         "eco": "C51",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bxb4 5. c3 Bc5 6. d4 exd4 7. O-O d6 8. cxd4 Bb6 9. Nc3 Bg4 10. Qa4 Bd7 11. Qb3 Na5 12. Bxf7+ Kf8 13. Qc2"
       },
-      "Italian Game: Evans Gambit, G\u00c3\u00b6ring Attack": {
+      "Italian Game: Evans Gambit, G\u00f6ring Attack": {
         "fen": "r1bqk1nr/ppp2ppp/1b1p4/n5B1/2BPP3/2N2N2/P4PPP/R2Q1RK1 b kq - 4 10",
         "eco": "C51",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bxb4 5. c3 Bc5 6. d4 exd4 7. O-O d6 8. cxd4 Bb6 9. Nc3 Na5 10. Bg5"
@@ -18266,7 +18545,7 @@
         "eco": "C57",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. d4"
       },
-      "Italian Game: Two Knights Defense, Mar\u00c3\u00b3czy Variation": {
+      "Italian Game: Two Knights Defense, Mar\u00f3czy Variation": {
         "fen": "r1bqk2r/ppp1bpp1/5n1p/3P4/2P1p3/5N2/PPP1QPPP/RNB1K2R w KQkq - 1 10",
         "eco": "C58",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. d3 h6 7. Nf3 e4 8. Qe2 Nxc4 9. dxc4 Be7"
@@ -18336,7 +18615,7 @@
         "eco": "C58",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ c6 7. dxc6 bxc6 8. Qf3"
       },
-      "Italian Game: Two Knights Defense, Polerio Defense, G\u00c3\u00b6ring Variation": {
+      "Italian Game: Two Knights Defense, Polerio Defense, G\u00f6ring Variation": {
         "fen": "r1b1kb1r/p1q2pp1/2p2n1p/n3N3/4p3/8/PPPPBPPP/RNBQK2R w KQkq - 2 11",
         "eco": "C59",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ c6 7. dxc6 bxc6 8. Be2 h6 9. Nf3 e4 10. Ne5 Qc7"
@@ -19294,7 +19573,7 @@
         "eco": "C37",
         "moves": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. d4 g4 5. Ne5 Qh4+ 6. g3"
       },
-      "King's Gambit Accepted: Rosentreter Gambit, S\u00c3\u00b6rensen Gambit": {
+      "King's Gambit Accepted: Rosentreter Gambit, S\u00f6rensen Gambit": {
         "fen": "rnbqkbnr/pppp1p1p/8/8/3PPpp1/2N2N2/PPP3PP/R1BQKB1R b KQkq - 1 5",
         "eco": "C37",
         "moves": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. d4 g4 5. Nc3"
@@ -19364,7 +19643,7 @@
         "eco": "C33",
         "moves": "1. e4 e5 2. f4 exf4 3. h4"
       },
-      "King's Gambit Accepted: S\u00c3\u00b6rensen Gambit": {
+      "King's Gambit Accepted: S\u00f6rensen Gambit": {
         "fen": "rnbqkbnr/pppp1p1p/8/4N3/3PPpp1/8/PPP3PP/RNBQKB1R b KQkq - 1 5",
         "eco": "C37",
         "moves": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. d4 g4 5. Ne5"
@@ -19438,7 +19717,7 @@
         "eco": "C30",
         "moves": "1. e4 e5 2. f4 Bc5 3. Nf3 d6 4. Nc3 Nd7"
       },
-      "King's Gambit Declined: Classical, R\u00c3\u00a9ti Variation": {
+      "King's Gambit Declined: Classical, R\u00e9ti Variation": {
         "fen": "rnbqk1nr/ppp3pp/8/2b2p2/2BpP3/2P2N2/PP4PP/RNBQK2R b KQkq - 1 7",
         "eco": "C30",
         "moves": "1. e4 e5 2. f4 Bc5 3. Nf3 d6 4. c3 f5 5. fxe5 dxe5 6. d4 exd4 7. Bc4"
@@ -19588,7 +19867,7 @@
         "eco": "C30",
         "moves": "1. e4 e5 2. f4 Qf6"
       },
-      "King's Gambit Declined: Norwalde Variation, B\u00c3\u00bccker Gambit": {
+      "King's Gambit Declined: Norwalde Variation, B\u00fccker Gambit": {
         "fen": "rnb1k1nr/pppp1ppp/8/4p3/1bB1Pq2/2N2N2/PPPP2PP/R1BQK2R b KQkq - 3 5",
         "eco": "C30",
         "moves": "1. e4 e5 2. f4 Qf6 3. Nc3 Qxf4 4. Nf3 Bb4 5. Bc4"
@@ -19657,6 +19936,15 @@
         "fen": "r1bqkbnr/pppp1p1p/2n5/4p1p1/4PP2/5N2/PPPP2PP/RNBQKB1R w KQkq - 0 4",
         "eco": "C30",
         "moves": "1. e4 e5 2. f4 Nc6 3. Nf3 g5"
+      }
+    }
+  },
+  "King's Head Opening": {
+    "lines": {
+      "King's Pawn Game: King's Head Opening": {
+        "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2P2/PPPP2PP/R1BQKBNR b KQkq - 2 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. f3 Nf6 3. Nc3"
       }
     }
   },
@@ -23354,77 +23642,77 @@
         "eco": "E81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Bg5"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation": {
+      "King's Indian Defense: S\u00e4misch Variation": {
         "fen": "rnbq1rk1/pp3pbp/2pp1np1/4p3/2PPP3/2N1BP2/PP2N1PP/R2QKB1R w KQ - 0 8",
         "eco": "E86",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. Nge2 c6"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Bobotsov-Korchnoi-Petrosian Variation": {
+      "King's Indian Defense: S\u00e4misch Variation, Bobotsov-Korchnoi-Petrosian Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPP3/2N2P2/PP2N1PP/R1BQKB1R b KQ - 2 6",
         "eco": "E81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Nge2"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Bronstein Defense": {
+      "King's Indian Defense: S\u00e4misch Variation, Bronstein Defense": {
         "fen": "rnb2rk1/ppp2pbp/3p2p1/3Pp3/2P1P2Q/2N1nP2/PP2K2P/R5NR b - - 1 12",
         "eco": "E87",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nh5 8. Qd2 Qh4+ 9. g3 Nxg3 10. Qf2 Nxf1 11. Qxh4 Nxe3 12. Ke2"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Byrne Defense": {
+      "King's Indian Defense: S\u00e4misch Variation, Byrne Defense": {
         "fen": "rnbq1rk1/1p2ppbp/p1pp1np1/8/2PPP3/2NBBP2/PP4PP/R2QK1NR w KQ - 0 8",
         "eco": "E81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 c6 7. Bd3 a6"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Closed Variation": {
+      "King's Indian Defense: S\u00e4misch Variation, Closed Variation": {
         "fen": "rnbq1rk1/ppp2pbp/3p1np1/3Pp3/2P1P3/2N1BP2/PP4PP/R2QKBNR b KQ - 0 7",
         "eco": "E87",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Closed Variation, Main Line": {
+      "King's Indian Defense: S\u00e4misch Variation, Closed Variation, Main Line": {
         "fen": "rnbq1rk1/pp3pbp/3p1np1/3pp3/2P1P3/2N1BP2/PP2N1PP/R2QKB1R w KQ - 0 9",
         "eco": "E89",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. Nge2 c6 8. d5 cxd5"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Double Fianchetto": {
+      "King's Indian Defense: S\u00e4misch Variation, Double Fianchetto": {
         "fen": "rnbq1rk1/p1p1ppbp/1p1p1np1/8/2PPP3/2N1BP2/PP4PP/R2QKBNR w KQ - 0 7",
         "eco": "E82",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 b6"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Normal Defense": {
+      "King's Indian Defense: S\u00e4misch Variation, Normal Defense": {
         "fen": "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPP3/2N2P2/PP4PP/R1BQKBNR w KQ - 1 6",
         "eco": "E81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Orthodox Variation": {
+      "King's Indian Defense: S\u00e4misch Variation, Orthodox Variation": {
         "fen": "rnbq1rk1/ppp2pbp/3p1np1/4p3/2PPP3/2N1BP2/PP4PP/R2QKBNR w KQ - 0 7",
         "eco": "E85",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Orthodox Variation, Bronstein Variation": {
+      "King's Indian Defense: S\u00e4misch Variation, Orthodox Variation, Bronstein Variation": {
         "fen": "rnb2rk1/ppp2pbp/3p2p1/3Pp3/2n1P2Q/2N2P2/PP2K2P/R5NR w - - 0 13",
         "eco": "E87",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 e5 7. d5 Nh5 8. Qd2 Qh4+ 9. g3 Nxg3 10. Qf2 Nxf1 11. Qxh4 Nxe3 12. Ke2 Nxc4"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Panno Formation": {
+      "King's Indian Defense: S\u00e4misch Variation, Panno Formation": {
         "fen": "r1bq1rk1/1pp1ppbp/p1np1np1/8/2PPP3/2N1BP2/PP2N1PP/R2QKB1R w KQ - 0 8",
         "eco": "E83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 Nc6 7. Nge2 a6"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Panno Main Line": {
+      "King's Indian Defense: S\u00e4misch Variation, Panno Main Line": {
         "fen": "1rbq1rk1/1pp1ppbp/p1np1np1/8/2PPP3/2N1BP2/PP1QN1PP/R3KB1R w KQ - 2 9",
         "eco": "E84",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 Nc6 7. Nge2 a6 8. Qd2 Rb8"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Ruban Variation": {
+      "King's Indian Defense: S\u00e4misch Variation, Ruban Variation": {
         "fen": "1rbq1rk1/ppp1ppbp/2np1np1/8/2PPP3/2N1BP2/PP2N1PP/R2QKB1R w KQ - 5 8",
         "eco": "E83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 Nc6 7. Nge2 Rb8"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, S\u00c3\u00a4misch Gambit": {
+      "King's Indian Defense: S\u00e4misch Variation, S\u00e4misch Gambit": {
         "fen": "rnbq1rk1/pp2ppbp/3p1np1/2p5/2PPP3/2N1BP2/PP4PP/R2QKBNR w KQ - 0 7",
         "eco": "E81",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 c5"
       },
-      "King's Indian Defense: S\u00c3\u00a4misch Variation, Yates Defense": {
+      "King's Indian Defense: S\u00e4misch Variation, Yates Defense": {
         "fen": "r1bq1rk1/ppp1ppbp/2np1np1/8/2PPP3/2N1BP2/PP4PP/R2QKBNR w KQ - 3 7",
         "eco": "E83",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 Nc6"
@@ -23442,21 +23730,6 @@
         "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2",
         "eco": "C40",
         "moves": "1. e4 e5 2. Nf3"
-      },
-      "King's Knight Opening: Gunderam Gambit, Bishop Attack": {
-        "fen": "rnb1k2r/pp1p1ppp/2p2n2/4q3/1b2P3/2NP4/PPP1BPPP/R1BQK2R w KQkq - 2 7",
-        "eco": "C40",
-        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 6. Be2  Bb4 "
-      },
-      "King's Knight Opening: Gunderam Gambit, Bishop Attack, Main Line": {
-        "fen": "rnb1k2r/pp1p1ppp/2p2n2/4q3/4P3/2bP4/PPP1BPPP/R1BQ1RK1 w kq - 0 8",
-        "eco": "C40",
-        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 6. Be2  Bb4 7. O-O  Bxc3 "
-      },
-      "King's Knight Opening: Konstantinopolsky": {
-        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5NP1/PPPP1P1P/RNBQKB1R b KQkq - 0 3",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. g3"
       },
       "King's Knight Opening: Normal Variation": {
         "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
@@ -23476,181 +23749,6 @@
         "fen": "rnbqkb1r/pppp1ppp/5n2/4Q3/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 0 3",
         "eco": "C20",
         "moves": "1. e4  e5 2. Qh5  Nf6 3. Qxe5 "
-      },
-      "King's Pawn Game: Alapin Opening": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPPNPPP/RNBQKB1R b KQkq - 1 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Ne2"
-      },
-      "King's Pawn Game: Bavarian Gambit": {
-        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/2P1P3/8/PP1P1PPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. c4 d5"
-      },
-      "King's Pawn Game: Beyer Gambit": {
-        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d4 d5"
-      },
-      "King's Pawn Game: Busch-Gass Gambit": {
-        "fen": "rnbqk1nr/pppp1ppp/8/2b1p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 Bc5"
-      },
-      "King's Pawn Game: Busch-Gass Gambit, Chiodini Gambit": {
-        "fen": "r1bqk1nr/pppp1ppp/2n5/2b1N3/4P3/8/PPPP1PPP/RNBQKB1R w KQkq - 1 4",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 Bc5 3. Nxe5 Nc6"
-      },
-      "King's Pawn Game: Clam Variation, King's Gambit Reversed": {
-        "fen": "rnbqkbnr/pppp2pp/8/4pp2/4P3/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d3 f5"
-      },
-      "King's Pawn Game: Clam Variation, Radisch Gambit": {
-        "fen": "rnbqk2r/pppp1ppp/5n2/2b1p3/4PP2/3P4/PPP3PP/RNBQKBNR w KQkq - 1 4",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d3 Nf6 3. f4 Bc5"
-      },
-      "King's Pawn Game: Damiano Defense": {
-        "fen": "rnbqkbnr/pppp2pp/5p2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 f6"
-      },
-      "King's Pawn Game: Damiano Defense, Damiano Gambit": {
-        "fen": "rnb1kbnQ/ppppq2p/6p1/8/4P3/8/PPPP1PPP/RNB1KB1R b KQq - 0 6",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 f6 3. Nxe5 fxe5 4. Qh5+ g6 5. Qxe5+ Qe7 6. Qxh8"
-      },
-      "King's Pawn Game: Damiano Defense, Damiano Gambit, Chigorin Gambit": {
-        "fen": "rnb1kbnr/ppp1q1pp/5p2/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 5",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 f6 3. Nxe5 Qe7 4. Nf3 d5"
-      },
-      "King's Pawn Game: Dresden Opening": {
-        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2P1P3/5N2/PP1P1PPP/RNBQKB1R b KQkq - 0 3",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. c4"
-      },
-      "King's Pawn Game: Gunderam Defense, Gunderam Gambit": {
-        "fen": "rnb1kbnr/ppppq1pp/8/4pp2/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 Qe7 3. Bc4 f5"
-      },
-      "King's Pawn Game: Gunderam Gambit": {
-        "fen": "rnb1kb1r/pp1p1ppp/2p2n2/4q3/4P3/2NP4/PPP2PPP/R1BQKB1R w KQkq - 0 6",
-        "eco": "C40",
-        "moves": "1. e4  e5 2. Nf3  c6 3. Nxe5  Nf6 4. d3  Qa5 5. Nc3  Qxe5 "
-      },
-      "King's Pawn Game: King's Head Opening": {
-        "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N2P2/PPPP2PP/R1BQKBNR b KQkq - 2 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. f3 Nf6 3. Nc3"
-      },
-      "King's Pawn Game: La Bourdonnais Gambit": {
-        "fen": "rnb1kbnr/pppp1ppp/6q1/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 Qf6 3. Bc4 Qg6 4. O-O"
-      },
-      "King's Pawn Game: Leonardis Variation": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d3"
-      },
-      "King's Pawn Game: MacLeod Attack": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/2P5/PP1P1PPP/RNBQKBNR b KQkq - 0 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. c3"
-      },
-      "King's Pawn Game: MacLeod Attack, Lasa Gambit": {
-        "fen": "rnbqkbnr/pppp2pp/8/4pp2/4P3/2P5/PP1P1PPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. c3 f5"
-      },
-      "King's Pawn Game: MacLeod Attack, Norwalde Gambit": {
-        "fen": "rnbqk1nr/ppp2ppp/3b4/3pp2Q/4P3/2P5/PP1P1PPP/RNB1KBNR w KQkq - 2 4",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. c3 d5 3. Qh5 Bd6"
-      },
-      "King's Pawn Game: Mar\u00c3\u00b3czy Defense": {
-        "fen": "rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "B07",
-        "moves": "1. e4 d6 2. d4 e5"
-      },
-      "King's Pawn Game: McConnell Defense": {
-        "fen": "rnb1kbnr/pppp1ppp/5q2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
-        "eco": "C40",
-        "moves": "1. e4 e5 2. Nf3 Qf6"
-      },
-      "King's Pawn Game: Mengarini's Opening": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/P7/1PPP1PPP/RNBQKBNR b KQkq - 0 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. a3"
-      },
-      "King's Pawn Game: Napoleon Attack": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5Q2/PPPP1PPP/RNB1KBNR b KQkq - 1 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Qf3"
-      },
-      "King's Pawn Game: Nimzowitsch Defense: Wheeler Gambit": {
-        "fen": "r1bqkbnr/pppppppp/2n5/8/3PP3/2P5/P4PPP/RNBQKBNR b KQkq - 0 4",
-        "eco": "B00",
-        "moves": "1. e4 Nc6 2. b4 Nxb4 3. c3 Nc6 4. d4"
-      },
-      "King's Pawn Game: Pachman Wing Gambit": {
-        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/1P2P3/5N2/P1PP1PPP/RNBQKB1R b KQkq - 0 3",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. b4"
-      },
-      "King's Pawn Game: Philidor Gambit": {
-        "fen": "rn1qkbnr/pppb1ppp/3p4/4P3/4P3/8/PPP2PPP/RNBQKBNR w KQkq - 1 4",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d4 d6 3. dxe5 Bd7"
-      },
-      "King's Pawn Game: Schulze-M\u00c3\u00bcller Gambit": {
-        "fen": "r1bqkbnr/pppp1ppp/8/4n3/3PP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. d4"
-      },
-      "King's Pawn Game: Tayler Opening": {
-        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/3PP3/5N2/PPP1BPPP/RNBQK2R b KQkq - 0 4",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d4"
-      },
-      "King's Pawn Game: Tayler Opening, Basman Gambit": {
-        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4P3/3p4/5N2/PPP1BPPP/RNBQK2R b KQkq - 0 5",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d4 exd4 5. e5"
-      },
-      "King's Pawn Game: Tayler Opening, Inverted Hanham": {
-        "fen": "r1bqkb1r/ppp2ppp/2n2n2/3pp3/4P3/3P1N2/PPPNBPPP/R1BQK2R b KQkq - 1 5",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d3 d5 5. Nbd2"
-      },
-      "King's Pawn Game: Tortoise Opening": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/3B4/PPPP1PPP/RNBQK1NR b KQkq - 1 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Bd3"
-      },
-      "King's Pawn Game: Wayward Queen Attack": {
-        "fen": "rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Qh5"
-      },
-      "King's Pawn Game: Wayward Queen Attack, Kiddie Countergambit": {
-        "fen": "rnbqkb1r/pppp1ppp/5n2/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Qh5 Nf6"
-      },
-      "King's Pawn Game: Wayward Queen Attack, Mellon Gambit": {
-        "fen": "r1bqkb1r/ppp4p/2n2ppn/3pp3/2B1P3/3P1Q2/PPP1NPPP/RNB1K2R w KQkq - 0 7",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nh6 4. d3 g6 5. Qf3 f6 6. Ne2 d5"
-      },
-      "King's Pawn Game: Weber Gambit": {
-        "fen": "r1bqkbnr/pp3ppp/2n5/4p3/8/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 5",
-        "eco": "C20",
-        "moves": "1. e4 e5 2. d3 d5 3. exd5 c6 4. dxc6 Nxc6"
       }
     }
   },
@@ -23670,6 +23768,15 @@
         "fen": "r1bqk2r/pppp1ppp/5n2/2b5/3nP3/5N2/PP2QPPP/RNB1KB1R w KQkq - 0 7",
         "eco": "C20",
         "moves": "1. e4 e5 2. Qe2 Nc6 3. c3 Nf6 4. Nf3 Bc5 5. d4 exd4 6. cxd4 Nxd4"
+      }
+    }
+  },
+  "Konstantinopolsky": {
+    "lines": {
+      "King's Knight Opening: Konstantinopolsky": {
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5NP1/PPPP1P1P/RNBQKB1R b KQkq - 0 3",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. g3"
       }
     }
   },
@@ -23705,6 +23812,15 @@
       }
     }
   },
+  "Krause Variation": {
+    "lines": {
+      "Queen's Pawn Game: Krause Variation": {
+        "fen": "r1bqkbnr/pp2pppp/2n5/2pp4/3P4/5NP1/PPP1PPBP/RNBQK2R b KQkq - 2 4",
+        "eco": "D02",
+        "moves": "1. d4  d5 2. Nf3  c5 3. g3  Nc6 4. Bg2 "
+      }
+    }
+  },
   "Krazy Kat": {
     "lines": {
       "Krazy Kat": {
@@ -23714,42 +23830,51 @@
       }
     }
   },
-  "K\u00c3\u00a1das Opening": {
+  "K\u00e1das Opening": {
     "lines": {
-      "K\u00c3\u00a1das Opening": {
+      "K\u00e1das Opening": {
         "fen": "rnbqkbnr/pppp1ppp/8/4p3/3P3P/8/PPP1PPP1/RNBQKBNR b KQkq - 0 2",
         "eco": "A00",
         "moves": "1. h4 e5 2. d4"
       },
-      "K\u00c3\u00a1das Opening: Beginner's Trap": {
+      "K\u00e1das Opening: Beginner's Trap": {
         "fen": "rnbqkbnr/ppp1pppp/8/3p4/7P/7R/PPPPPPP1/RNBQKBN1 b Qkq - 1 2",
         "eco": "A00",
         "moves": "1. h4 d5 2. Rh3"
       },
-      "K\u00c3\u00a1das Opening: Koola-Koola Variation": {
+      "K\u00e1das Opening: Koola-Koola Variation": {
         "fen": "rnbqkbnr/1ppppppp/8/p7/7P/8/PPPPPPP1/RNBQKBNR w KQkq - 0 2",
         "eco": "A00",
         "moves": "1.h4 a5"
       },
-      "K\u00c3\u00a1das Opening: K\u00c3\u00a1das Gambit": {
+      "K\u00e1das Opening: K\u00e1das Gambit": {
         "fen": "rnbqkbnr/pp2pppp/8/3p4/3p3P/2P2N2/PP2PPP1/RNBQKB1R b KQkq - 0 4",
         "eco": "A00",
         "moves": "1. h4 d5 2. d4 c5 3. Nf3 cxd4 4. c3"
       },
-      "K\u00c3\u00a1das Opening: Myers Variation": {
+      "K\u00e1das Opening: Myers Variation": {
         "fen": "rnbqkbnr/pp2pppp/8/2pp4/3PP2P/8/PPP2PP1/RNBQKBNR b KQkq - 0 3",
         "eco": "A00",
         "moves": "1. h4 d5 2. d4 c5 3. e4"
       },
-      "K\u00c3\u00a1das Opening: Schneider Gambit": {
+      "K\u00e1das Opening: Schneider Gambit": {
         "fen": "rnbqkbnr/pppppp1p/8/6p1/7P/8/PPPPPPP1/RNBQKBNR w KQkq - 0 2",
         "eco": "A00",
         "moves": "1. h4 g5"
       },
-      "K\u00c3\u00a1das Opening: Steinbok Gambit": {
+      "K\u00e1das Opening: Steinbok Gambit": {
         "fen": "rnbqkbnr/ppppp1pp/8/8/4p2P/3P4/PPP2PP1/RNBQKBNR b KQkq - 0 3",
         "eco": "A00",
         "moves": "1. h4 f5 2. e4 fxe4 3. d3"
+      }
+    }
+  },
+  "La Bourdonnais Gambit": {
+    "lines": {
+      "King's Pawn Game: La Bourdonnais Gambit": {
+        "fen": "rnb1kbnr/pppp1ppp/6q1/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 Qf6 3. Bc4 Qg6 4. O-O"
       }
     }
   },
@@ -23992,12 +24117,49 @@
       }
     }
   },
+  "Leonardis Variation": {
+    "lines": {
+      "King's Pawn Game: Leonardis Variation": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d3"
+      }
+    }
+  },
   "Leonhardt Variation": {
     "lines": {
       "Leonhardt Variation, Ruy Lopez": {
         "fen": "r1bn1rk1/2qpbp1p/p4n2/1ppPp1p1/4P3/2P2N1P/PPBN1PP1/R1BQR1K1 w - - 0 14",
         "eco": "C90",
         "moves": "1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 O-O 8.c3 Na5 9.Bc2 c5 10.d4 Qc7 11.h3 Nc6 12.d5 Nd8 13.Nbd2 g5 "
+      }
+    }
+  },
+  "Levitsky Attack": {
+    "lines": {
+      "Queen's Pawn Game: Levitsky Attack": {
+        "fen": "rnbqkbnr/ppp1pppp/8/3p2B1/3P4/8/PPP1PPPP/RN1QKBNR b KQkq - 1 2",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bg5"
+      },
+      "Queen's Pawn Game: Levitsky Attack, Euwe Variation, Modern Line": {
+        "fen": "rnb1kbnr/pp2ppp1/1qp4p/3p4/3P3B/5N2/PPP1PPPP/RN1QKB1R w KQkq - 2 5",
+        "eco": "D02",
+        "moves": "1. d4 d5 2. Nf3 c6 3. Bg5 h6 4. Bh4 Qb6"
+      },
+      "Queen's Pawn Game: Levitsky Attack, Welling Variation": {
+        "fen": "rn1qkbnr/ppp1pppp/8/3p2B1/3P2b1/8/PPP1PPPP/RN1QKBNR w KQkq - 2 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. Bg5 Bg4"
+      }
+    }
+  },
+  "Liedmann Gambit": {
+    "lines": {
+      "Queen's Pawn Game: Liedmann Gambit": {
+        "fen": "rnbqkbnr/pp1ppppp/8/8/2Pp4/4P3/PP3PPP/RNBQKBNR b KQkq - 0 3",
+        "eco": "A43",
+        "moves": "1. d4 c5 2. c4 cxd4 3. e3"
       }
     }
   },
@@ -24059,120 +24221,15 @@
   },
   "London System": {
     "lines": {
-      "English: London Defence": {
-        "fen": "rn1qkb1r/pp3ppp/2p1pn2/3p1b2/2P5/1P3NP1/PB1PPPBP/RN1QK2R b KQkq - 1 6",
-        "eco": "A12",
-        "moves": "1. c4 c6 2. Nf3 d5 3. b3 Nf6 4. g3 Bf5 5. Bg2 e6 6. Bb2"
-      },
-      "English: New York/London Defence": {
-        "fen": "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2P5/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 3 5",
-        "eco": "A12",
-        "moves": "1. c4 c6 2. Nf3 d5 3. b3 Nf6 4. Bb2 Bf5"
-      },
-      "Grob Opening: London Defense": {
-        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/6P1/7P/PPPPPP2/RNBQKBNR w KQkq - 1 3",
-        "eco": "A00",
-        "moves": "1. g4 e5 2. h3 Nc6"
-      },
-      "Indian Defense: London System": {
-        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 1 3",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4"
-      },
-      "Indian: London, 3...c5": {
-        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/5N2/PPP1PPPP/RN1QKB1R w KQkq - 0 4",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5"
-      },
-      "Indian: London, 3...c5 4.c3": {
-        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/2P2N2/PP2PPPP/RN1QKB1R b KQkq - 0 4",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. c3"
-      },
-      "Indian: London, 3...c5 4.e3": {
-        "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P1B2/4PN2/PPP2PPP/RN1QKB1R b KQkq - 0 4",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. e3"
-      },
-      "Indian: London, 3...c5 4.e3 Qb6": {
-        "fen": "rnb1kb1r/pp1p1ppp/1q2pn2/2p5/3P1B2/4PN2/PPP2PPP/RN1QKB1R w KQkq - 1 5",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bf4 c5 4. e3 Qb6"
-      },
       "London System": {
         "fen": "rnbqkb1r/pppppp1p/5np1/8/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 1 3",
         "eco": "A48",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. Bf4"
       },
-      "London System Indian Setup with 2. Bf4 e6": {
-        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/4P3/PPP2PPP/RN1QKBNR b KQkq - 0 3",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3 "
-      },
-      "London System Indian Setup with early Bf4 and Black ...e6": {
-        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  e6 "
-      },
-      "London System Main Base Position with ...d5": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  d5 "
-      },
-      "London System Main Line - Pyramidal Structure c3-d4-e3": {
-        "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3P1B2/2P1P3/PP1N1PPP/R2QKBNR b KQkq - 0 5",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 4. Nd2  c5 5. c3 "
-      },
-      "London System Main Line with ...d5": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/4P3/PPP2PPP/RN1QKBNR b KQkq - 0 3",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  d5 3. e3 "
-      },
-      "London System Main Line with 3. ...e6": {
-        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P1B2/4P3/PPP2PPP/RN1QKBNR w KQkq - 0 4",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 "
-      },
-      "London System Main Line with Black ...e6 and ...c5": {
-        "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1P3/PP1N1PPP/R2QKBNR w KQkq - 1 6",
-        "eco": "A45",
-        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 4. Nd2  c5 5. c3  Nc6 "
-      },
       "London System: Poisoned Pawn Variation": {
         "fen": "rnb1kb1r/pp2pppp/1q3n2/2pp4/3P1B2/2N1PN2/PPP2PPP/R2QKB1R b KQkq - 2 5",
         "eco": "D02",
         "moves": "1. d4 Nf6 2. Nf3 d5 3. Bf4 c5 4. e3 Qb6 5. Nc3"
-      },
-      "Neo-King's Indian: London System": {
-        "fen": "rnbq1rk1/ppp1ppbp/3p1np1/8/3P1B2/4PN1P/PPP1BPP1/RN1QK2R b KQ - 0 6",
-        "eco": "A48",
-        "moves": "1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 O-O 5. Be2 d6 6. h3"
-      },
-      "Queen's Pawn Game: Accelerated London System": {
-        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR b KQkq - 1 2",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bf4"
-      },
-      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit": {
-        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bf4 c5"
-      },
-      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit Accepted": {
-        "fen": "rnbqkbnr/pp2pppp/8/2Pp4/5B2/8/PPP1PPPP/RN1QKBNR b KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bf4 c5 3. dxc5"
-      },
-      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit": {
-        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3PPB2/8/PPP2PPP/RN1QKBNR b KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bf4 c5 3. e4"
-      },
-      "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit, Morris Countergambit Accepted": {
-        "fen": "rnbqkbnr/pp2pppp/8/2p5/3PpB2/8/PPP2PPP/RN1QKBNR w KQkq - 0 4",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bf4 c5 3. e4 dxe4"
       },
       "Queen's Pawn Game: London System": {
         "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 3 3",
@@ -24188,26 +24245,88 @@
         "fen": "rnbqkbnr/ppp2ppp/4p3/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 1 3",
         "eco": "D02",
         "moves": "1. d4 d5 2. Nf3 e6 3. Bf4"
+      }
+    }
+  },
+  "London System Indian Setup with 2. Bf4 e6": {
+    "lines": {
+      "London System Indian Setup with 2. Bf4 e6": {
+        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/4P3/PPP2PPP/RN1QKBNR b KQkq - 0 3",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3 "
+      }
+    }
+  },
+  "London System Indian Setup with early Bf4 and Black ...e6": {
+    "lines": {
+      "London System Indian Setup with early Bf4 and Black ...e6": {
+        "fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  e6 "
+      }
+    }
+  },
+  "London System Main Base Position with ...d5": {
+    "lines": {
+      "London System Main Base Position with ...d5": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq - 0 3",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  d5 "
+      }
+    }
+  },
+  "London System Main Line - Pyramidal Structure c3-d4-e3": {
+    "lines": {
+      "London System Main Line - Pyramidal Structure c3-d4-e3": {
+        "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3P1B2/2P1P3/PP1N1PPP/R2QKBNR b KQkq - 0 5",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 4. Nd2  c5 5. c3 "
+      }
+    }
+  },
+  "London System Main Line with ...d5": {
+    "lines": {
+      "London System Main Line with ...d5": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/4P3/PPP2PPP/RN1QKBNR b KQkq - 0 3",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  d5 3. e3 "
+      }
+    }
+  },
+  "London System Main Line with 3. ...e6": {
+    "lines": {
+      "London System Main Line with 3. ...e6": {
+        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P1B2/4P3/PPP2PPP/RN1QKBNR w KQkq - 0 4",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 "
+      }
+    }
+  },
+  "London System Main Line with Black ...e6 and ...c5": {
+    "lines": {
+      "London System Main Line with Black ...e6 and ...c5": {
+        "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1P3/PP1N1PPP/R2QKBNR w KQkq - 1 6",
+        "eco": "A45",
+        "moves": "1. d4  Nf6 2. Bf4  e6 3. e3  d5 4. Nd2  c5 5. c3  Nc6 "
+      }
+    }
+  },
+  "MacLeod Attack": {
+    "lines": {
+      "King's Pawn Game: MacLeod Attack": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/2P5/PP1P1PPP/RNBQKBNR b KQkq - 0 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. c3"
       },
-      "Queen's Pawn: London": {
-        "fen": "r1bqk2r/pp3ppp/2nbpn2/2pp4/3P1B2/2PBPN2/PP3PPP/RN1QK2R w KQkq - 3 7",
-        "eco": "D02",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3 Nc6 6. Bd3 Bd6"
+      "King's Pawn Game: MacLeod Attack, Lasa Gambit": {
+        "fen": "rnbqkbnr/pppp2pp/8/4pp2/4P3/2P5/PP1P1PPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. c3 f5"
       },
-      "Queen's Pawn: London, Alapin Variation": {
-        "fen": "rnb1kbnr/pp2pppp/1qp5/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R w KQkq - 2 4",
-        "eco": "D02",
-        "moves": "1. d4 d5 2. Nf3 c6 3. Bf4 Qb6"
-      },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, London Defensive System": {
-        "fen": "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2P5/1P3NP1/P2PPP1P/RNBQKB1R w KQkq - 1 5",
-        "eco": "A12",
-        "moves": "1. c4 Nf6 2. g3 c6 3. Nf3 d5 4. b3 Bf5"
-      },
-      "Scotch Game: Scotch Gambit, London Defense": {
-        "fen": "r1bqk1nr/pppp1ppp/2n5/8/1bBpP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 5",
-        "eco": "C44",
-        "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Bb4+"
+      "King's Pawn Game: MacLeod Attack, Norwalde Gambit": {
+        "fen": "rnbqk1nr/ppp2ppp/3b4/3pp2Q/4P3/2P5/PP1P1PPP/RNB1KBNR w KQkq - 2 4",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. c3 d5 3. Qh5 Bd6"
       }
     }
   },
@@ -24252,12 +24371,48 @@
       }
     }
   },
+  "Mar\u00f3czy Defense": {
+    "lines": {
+      "King's Pawn Game: Mar\u00f3czy Defense": {
+        "fen": "rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+        "eco": "B07",
+        "moves": "1. e4 d6 2. d4 e5"
+      }
+    }
+  },
+  "Mason Attack": {
+    "lines": {
+      "Queen's Pawn Game: Mason Attack": {
+        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P1P2/8/PPP1P1PP/RNBQKBNR b KQkq - 0 2",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. f4"
+      }
+    }
+  },
   "Matovinsky Gambit Accepted": {
     "lines": {
       "Matovinsky Gambit Accepted": {
         "fen": "rn1qkbnr/p1ppp1pp/1p6/5P2/3P4/3B4/PPP2PbP/RNBQK1NR w KQkq - 0 5",
         "eco": "B00",
         "moves": "1. e4 b6 2. d4 Bb7 3. Bd3 f5 4. exf5 Bxg2"
+      }
+    }
+  },
+  "McConnell Defense": {
+    "lines": {
+      "King's Pawn Game: McConnell Defense": {
+        "fen": "rnb1kbnr/pppp1ppp/5q2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+        "eco": "C40",
+        "moves": "1. e4 e5 2. Nf3 Qf6"
+      }
+    }
+  },
+  "Mengarini's Opening": {
+    "lines": {
+      "King's Pawn Game: Mengarini's Opening": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/P7/1PPP1PPP/RNBQKBNR b KQkq - 0 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. a3"
       }
     }
   },
@@ -24582,7 +24737,7 @@
         "eco": "A42",
         "moves": "1. d4 g6 2. c4 Bg7 3. Nc3 d6 4. e4"
       },
-      "Modern Defense: Averbakh Variation, Pseudo-S\u00c3\u00a4misch": {
+      "Modern Defense: Averbakh Variation, Pseudo-S\u00e4misch": {
         "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/4BP2/PP4PP/RN1QKBNR b KQkq - 0 5",
         "eco": "A42",
         "moves": "1. d4 g6 2. c4 Bg7 3. e4 d6 4. Be3 Nf6 5. f3"
@@ -24597,7 +24752,7 @@
         "eco": "B06",
         "moves": "1. e4 g6 2. d4 Bg7 3. Bc4"
       },
-      "Modern Defense: Bishop Attack, B\u00c3\u00bccker Gambit": {
+      "Modern Defense: Bishop Attack, B\u00fccker Gambit": {
         "fen": "rnbqk1nr/p1ppppbp/6p1/1p6/2BPP3/8/PPP2PPP/RNBQK1NR w KQkq - 0 4",
         "eco": "B06",
         "moves": "1. e4 g6 2. d4 Bg7 3. Bc4 b5"
@@ -24751,6 +24906,11 @@
         "fen": "rnbqk1nr/ppppppbp/6p1/8/3PP3/3B4/PPP2PPP/RNBQK1NR b KQkq - 2 3",
         "eco": "B06",
         "moves": "1. e4 g6 2. d4 Bg7 3. Bd3"
+      },
+      "Queen's Pawn Game: Modern Defense": {
+        "fen": "rnbqkbnr/pppppp1p/6p1/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+        "eco": "A40",
+        "moves": "1. d4 g6"
       }
     }
   },
@@ -24787,6 +24947,15 @@
         "fen": "rn1qkb1r/1p3ppp/p2pbn2/4p3/4P3/1NN1B3/PPP2PPP/R2QKB1R w KQkq - 2 8",
         "eco": "B90",
         "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5 7. Nb3 Be6"
+      }
+    }
+  },
+  "Napoleon Attack": {
+    "lines": {
+      "King's Pawn Game: Napoleon Attack": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5Q2/PPPP1PPP/RNB1KBNR b KQkq - 1 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Qf3"
       }
     }
   },
@@ -25386,54 +25555,54 @@
       }
     }
   },
-  "Neo-Gr\u00c3\u00bcnfeld Defense": {
+  "Neo-Gr\u00fcnfeld Defense": {
     "lines": {
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Classical Variation": {
+      "Neo-Gr\u00fcnfeld Defense: Classical Variation": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 b - - 0 6",
         "eco": "D77",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. g3 Bg7 4. Bg2 O-O 5. O-O d5 6. c4"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Classical Variation, Modern Defense": {
+      "Neo-Gr\u00fcnfeld Defense: Classical Variation, Modern Defense": {
         "fen": "rnbq1rk1/ppp1ppbp/5np1/8/2pP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 0 7",
         "eco": "D77",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. g3 Bg7 4. Bg2 O-O 5. O-O d5 6. c4 dxc4"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Classical Variation, Original Defense": {
+      "Neo-Gr\u00fcnfeld Defense: Classical Variation, Original Defense": {
         "fen": "rnbq1rk1/pp2ppbp/2p2np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 0 7",
         "eco": "D78",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nf3 Bg7 4. g3 O-O 5. Bg2 c6 6. O-O d5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Classical Variation, Polgar Variation": {
+      "Neo-Gr\u00fcnfeld Defense: Classical Variation, Polgar Variation": {
         "fen": "r1bq1rk1/ppp1ppbp/2n2np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 1 7",
         "eco": "D77",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. g3 Bg7 4. Bg2 O-O 5. O-O d5 6. c4 Nc6"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Delayed Exchange Variation": {
+      "Neo-Gr\u00fcnfeld Defense: Delayed Exchange Variation": {
         "fen": "rnbq1rk1/pp2ppbp/6p1/2Pn4/8/5NP1/PP2PPBP/RNBQ1RK1 b - - 0 8",
         "eco": "D75",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. c4 Bg7 4. g3 O-O 5. Bg2 d5 6. cxd5 Nxd5 7. O-O c5 8. dxc5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Exchange Variation": {
+      "Neo-Gr\u00fcnfeld Defense: Exchange Variation": {
         "fen": "rnbqk2r/ppp1ppbp/6p1/3n4/3P4/6P1/PP2PPBP/RNBQK1NR w KQkq - 0 6",
         "eco": "D71",
         "moves": "1. d4 Nf6 2. c4 g6 3. g3 Bg7 4. Bg2 d5 5. cxd5 Nxd5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Goglidze Attack": {
+      "Neo-Gr\u00fcnfeld Defense: Goglidze Attack": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/5P2/PP2P1PP/RNBQKBNR w KQkq - 0 4",
         "eco": "D70",
         "moves": "1. d4 Nf6 2. c4 g6 3. f3 d5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: Ultra-Delayed Exchange Variation": {
+      "Neo-Gr\u00fcnfeld Defense: Ultra-Delayed Exchange Variation": {
         "fen": "rnbq1rk1/pp2ppbp/5np1/3p4/3P4/5NP1/PP2PPBP/RNBQ1RK1 w - - 0 8",
         "eco": "D79",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nf3 Bg7 4. g3 O-O 5. Bg2 c6 6. O-O d5 7. cxd5 cxd5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: with Nf3": {
+      "Neo-Gr\u00fcnfeld Defense: with Nf3": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4",
         "eco": "D70",
         "moves": "1. d4 Nf6 2. c4 g6 3. Nf3 d5"
       },
-      "Neo-Gr\u00c3\u00bcnfeld Defense: with g3": {
+      "Neo-Gr\u00fcnfeld Defense: with g3": {
         "fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w KQkq - 0 4",
         "eco": "D70",
         "moves": "1. d4 Nf6 2. c4 g6 3. g3 d5"
@@ -25495,6 +25664,11 @@
         "fen": "rnbq1rk1/ppp1ppbp/3p1np1/8/3P4/5NP1/PPP1PPBP/RNBQ1RK1 w - - 0 6",
         "eco": "A49",
         "moves": "1. d4 Nf6 2. Nf3 g6 3. g3 Bg7 4. Bg2 O-O 5. O-O d6"
+      },
+      "Neo-King's Indian: London System": {
+        "fen": "rnbq1rk1/ppp1ppbp/3p1np1/8/3P1B2/4PN1P/PPP1BPP1/RN1QK2R b KQ - 0 6",
+        "eco": "A48",
+        "moves": "1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 O-O 5. Be2 d6 6. h3"
       },
       "Neo-King's Indian: Torre Attack": {
         "fen": "rnbq1rk1/pp2ppbp/3p1np1/2p3B1/3PP3/2P2N2/PP1N1PPP/R2QKB1R w KQ - 0 7",
@@ -25717,7 +25891,7 @@
   },
   "Nimzo-Indian": {
     "lines": {
-      "Nimzo-Indian, S\u00c3\u00a4misch Variation": {
+      "Nimzo-Indian, S\u00e4misch Variation": {
         "fen": "rnbqk2r/pppp1ppp/1b2pn2/8/1PPP4/P1N5/4PPPP/R1BQKBNR w KQkq - 1 6",
         "eco": "E24",
         "moves": "1. d4  Nf6 2. c4  e6 3. Nc3  Bb4 4. a3  Ba5 5. b4  Bb6 "
@@ -27277,7 +27451,7 @@
         "eco": "E22",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qb3 c5 5. e3"
       },
-      "Nimzo-Indian: S\u00c3\u00a4misch Variation": {
+      "Nimzo-Indian: S\u00e4misch Variation": {
         "fen": "rnbqk2r/pppp1ppp/1b2pn2/2P5/1P1P4/P1N5/4PPPP/R1BQKBNR b KQkq - 0 6",
         "eco": "E24",
         "moves": "1. d4  Nf6 2. c4  e6 3. Nc3  Bb4 4. a3  Ba5 5. b4  Bb6 6. c5 "
@@ -27316,7 +27490,7 @@
   },
   "Nimzo-Indian Defence": {
     "lines": {
-      "Nimzo-Indian Defence, S\u00c3\u00a4misch Variation": {
+      "Nimzo-Indian Defence, S\u00e4misch Variation": {
         "fen": "rnbqk2r/pppp1ppp/4pn2/8/2PP4/P1b5/1P2PPPP/R1BQKBNR w KQkq - 0 5",
         "eco": "E24",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+"
@@ -27515,7 +27689,7 @@
         "eco": "E54",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3 d5 6. Nf3 c5 7. O-O dxc4 8. Bxc4 Qe7"
       },
-      "Nimzo-Indian Defense: Normal Variation, H\u00c3\u00bcbner Deferred": {
+      "Nimzo-Indian Defense: Normal Variation, H\u00fcbner Deferred": {
         "fen": "rnbq1rk1/pp1p1ppp/4pn2/2p5/1bPP4/2N1PN2/PP3PPP/R1BQKB1R w KQ - 2 6",
         "eco": "E41",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5 5. Nf3 O-O"
@@ -27530,7 +27704,7 @@
         "eco": "E52",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 b6 5. Bd3 Bb7 6. Nf3 O-O 7. O-O d5"
       },
-      "Nimzo-Indian Defense: Normal Variation, S\u00c3\u00a4misch Deferred": {
+      "Nimzo-Indian Defense: Normal Variation, S\u00e4misch Deferred": {
         "fen": "rnbq1rk1/ppp2ppp/4pn2/3p4/1bPP4/P1N1PN2/1P3PPP/R1BQKB1R b KQ - 0 6",
         "eco": "E51",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Nf3 d5 6. a3"
@@ -27565,7 +27739,7 @@
         "eco": "E41",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5"
       },
-      "Nimzo-Indian Defense: Rubinstein System, H\u00c3\u00bcbner Variation": {
+      "Nimzo-Indian Defense: Rubinstein System, H\u00fcbner Variation": {
         "fen": "r1bq1rk1/pp3ppp/2nppn2/2p5/2PP4/2PBPN2/P4PPP/R1BQ1RK1 w - - 2 9",
         "eco": "E41",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5 5. Bd3 Nc6 6. Nf3 Bxc3+ 7. bxc3 d6 8. O-O O-O"
@@ -27630,7 +27804,7 @@
         "eco": "E45",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 b6 5. Ne2 Ba6"
       },
-      "Nimzo-Indian Defense: St. Petersburg Variation, Romanishin\u00e2\u20ac\u201cPsakhis Variation": {
+      "Nimzo-Indian Defense: St. Petersburg Variation, Romanishin\u2013Psakhis Variation": {
         "fen": "rnbqk2r/p2p1ppp/1p2pn2/b1p5/2PP4/P1N1P3/1P2NPPP/R1BQKB1R w KQkq - 1 7",
         "eco": "E44",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 b6 5. Ne2 c5 6. a3 Ba5"
@@ -27640,37 +27814,37 @@
         "eco": "E43",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 b6 5. Nf3 Bb7 6. Bd3 Ne4"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation": {
         "fen": "r1bq1rk1/pp1p1ppp/2n1pn2/2p5/2PP4/P1PBP3/5PPP/R1BQK1NR w KQ - 1 8",
         "eco": "E29",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5 5. Bd3 Nc6 6. a3 Bxc3+ 7. bxc3 O-O"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, Accelerated": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, Accelerated": {
         "fen": "rnbqk2r/pppp1ppp/4pn2/8/2PP4/P1P5/4PPPP/R1BQKBNR b KQkq - 0 5",
         "eco": "E24",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, Botvinnik Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, Botvinnik Variation": {
         "fen": "rnbq1rk1/pp3ppp/4p3/2pn4/3P4/P1P1PP2/6PP/R1BQKBNR w KQ - 0 9",
         "eco": "E24",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. f3 d5 5. a3 Bxc3+ 6. bxc3 c5 7. e3 O-O 8. cxd5 Nxd5"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, Capablanca Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, Capablanca Variation": {
         "fen": "r1bqnrk1/p2p1ppp/1pn1p3/2p5/2PPP3/P1PB4/4NPPP/R1BQK2R w KQ - 1 10",
         "eco": "E29",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 c5 5. Bd3 Nc6 6. a3 Bxc3+ 7. bxc3 O-O 8. Ne2 b6 9. e4 Ne8"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, Keres Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, Keres Variation": {
         "fen": "rnbqk2r/pp3ppp/4p3/2Pn4/8/P1P2P2/4P1PP/R1BQKBNR b KQkq - 0 8",
         "eco": "E25",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. f3 d5 5. a3 Bxc3+ 6. bxc3 c5 7. cxd5 Nxd5 8. dxc5"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, O'Kelly Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, O'Kelly Variation": {
         "fen": "rnbqk2r/p2p1ppp/1p2pn2/2p5/2PP4/P1P1P3/5PPP/R1BQKBNR w KQkq - 0 7",
         "eco": "E26",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 c5 6. e3 b6"
       },
-      "Nimzo-Indian Defense: S\u00c3\u00a4misch Variation, Romanovsky Variation": {
+      "Nimzo-Indian Defense: S\u00e4misch Variation, Romanovsky Variation": {
         "fen": "rnbqk2r/pp4pp/4p3/2Pn1p2/8/P1P2P2/4P1PP/R1BQKBNR w KQkq - 0 9",
         "eco": "E25",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. f3 d5 5. a3 Bxc3+ 6. bxc3 c5 7. cxd5 Nxd5 8. dxc5 f5"
@@ -27877,6 +28051,11 @@
   },
   "Nimzowitsch Defense": {
     "lines": {
+      "King's Pawn Game: Nimzowitsch Defense: Wheeler Gambit": {
+        "fen": "r1bqkbnr/pppppppp/2n5/8/3PP3/2P5/P4PPP/RNBQKBNR b KQkq - 0 4",
+        "eco": "B00",
+        "moves": "1. e4 Nc6 2. b4 Nxb4 3. c3 Nc6 4. d4"
+      },
       "Nimzowitsch Defense": {
         "fen": "r1bqkbnr/pppppppp/2n5/8/3PP3/8/PPP2PPP/RNBQKBNR b KQkq - 0 2",
         "eco": "B00",
@@ -29108,6 +29287,15 @@
       }
     }
   },
+  "Pachman Wing Gambit": {
+    "lines": {
+      "King's Pawn Game: Pachman Wing Gambit": {
+        "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/1P2P3/5N2/P1PP1PPP/RNBQKB1R b KQkq - 0 3",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. b4"
+      }
+    }
+  },
   "Paleface Attack": {
     "lines": {
       "Paleface Attack": {
@@ -29206,7 +29394,7 @@
         "eco": "C42",
         "moves": "1. e4  e5 2. Nf3  Nf6 3. Nxe5  Nxe4 4. Qe2  Qe7 5. Qxe4  d6 "
       },
-      "Petrov's Defence, Italian Variation, Tr\u00c3\u00a9buchet Gambit": {
+      "Petrov's Defence, Italian Variation, Tr\u00e9buchet Gambit": {
         "fen": "rnbqkb1r/pppp1Bpp/8/4p3/4n3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 4",
         "eco": "C42",
         "moves": "1. e4  e5 2. Nf3  Nf6 3. Bc4  Nxe4 4. Bxf7 "
@@ -29285,7 +29473,7 @@
         "eco": "C42",
         "moves": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 d5 6. Bd3 Bd6 7. O-O O-O 8. c4 c6 9. Re1 Bg4"
       },
-      "Petrov's Defense: Classical Attack, Mar\u00c3\u00b3czy Variation": {
+      "Petrov's Defense: Classical Attack, Mar\u00f3czy Variation": {
         "fen": "r2qk2r/ppp3pp/2n5/3p1p2/2PPn1bb/3B1N2/PP3PPP/RNBQR1K1 w kq - 1 11",
         "eco": "C42",
         "moves": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 d5 6. Bd3 Be7 7. O-O Nc6 8. Re1 Bg4 9. c3 f5 10. c4 Bh4"
@@ -29811,6 +29999,15 @@
         "fen": "rnbqk1nr/ppp1bppp/3p4/4p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4",
         "eco": "C41",
         "moves": "1. e4 e5 2. Nf3 d6 3. Bc4 Be7 4. c3"
+      }
+    }
+  },
+  "Philidor Gambit": {
+    "lines": {
+      "King's Pawn Game: Philidor Gambit": {
+        "fen": "rn1qkbnr/pppb1ppp/3p4/4P3/4P3/8/PPP2PPP/RNBQKBNR w KQkq - 1 4",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d4 d6 3. dxe5 Bd7"
       }
     }
   },
@@ -30718,7 +30915,7 @@
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. c3 Be7"
       },
-      "Ponziani Opening: R\u00c3\u00a9ti Variation": {
+      "Ponziani Opening: R\u00e9ti Variation": {
         "fen": "r1bqkb1r/ppppnppp/2n5/4p3/4P3/2P2N2/PP1P1PPP/RNBQKB1R w KQkq - 1 4",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. c3 Nge7"
@@ -35261,7 +35458,7 @@
         "eco": "D36",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 d5 4. cxd5 exd5 5. Bg5 c6 6. Qc2"
       },
-      "Queen's Gambit Declined: Exchange Variation, S\u00c3\u00a4misch Variation": {
+      "Queen's Gambit Declined: Exchange Variation, S\u00e4misch Variation": {
         "fen": "r1bqkb1r/pppn1ppp/5n2/3p4/3P1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq - 1 6",
         "eco": "D35",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 d5 4. Nc3 Nbd7 5. cxd5 exd5 6. Bf4"
@@ -36977,7 +37174,7 @@
         "eco": "E15",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 c5 6. d5 exd5 7. Nh4"
       },
-      "Queen's Indian Defense: Fianchetto Variation, S\u00c3\u00a4misch Variation": {
+      "Queen's Indian Defense: Fianchetto Variation, S\u00e4misch Variation": {
         "fen": "rn1qkb1r/pb1p1ppp/1p2pn2/2p5/2PP4/5NP1/PP2PPBP/RNBQK2R w KQkq - 0 6",
         "eco": "E15",
         "moves": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 c5"
@@ -37116,141 +37313,6 @@
         "eco": "D03",
         "moves": "1. d4  Nf6 2. Nf3  d5 3. Bg5  c5 "
       },
-      "Queen's Pawn Game: Anglo-Slav Opening": {
-        "fen": "rnbqkbnr/pp2pppp/2pp4/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3",
-        "eco": "A40",
-        "moves": "1. d4 c6 2. c4 d6"
-      },
-      "Queen's Pawn Game: Anti-Torre": {
-        "fen": "rn1qkbnr/ppp1pppp/8/3p4/3P2b1/5N2/PPP1PPPP/RNBQKB1R w KQkq - 1 3",
-        "eco": "D02",
-        "moves": "1. Nf3 d5 2. d4 Bg4"
-      },
-      "Queen's Pawn Game: Barry Attack": {
-        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P1B2/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
-        "eco": "A48",
-        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7"
-      },
-      "Queen's Pawn Game: Barry Attack, Gr\u00c3\u00bcnfeld Variation": {
-        "fen": "rnbq1rk1/ppp1ppbp/5np1/3p4/3P1B2/2N1PN2/PPP1BPPP/R2QK2R b KQ - 2 6",
-        "eco": "A48",
-        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7 5. e3 O-O 6. Be2"
-      },
-      "Queen's Pawn Game: Barry Attack, Tarzan Attack": {
-        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P1B2/2N2N2/PPPQPPPP/R3KB1R b KQkq - 3 5",
-        "eco": "A48",
-        "moves": "1. d4 Nf6 2. Nf3 g6 3. Nc3 d5 4. Bf4 Bg7 5. Qd2"
-      },
-      "Queen's Pawn Game: Chandler Gambit": {
-        "fen": "rnbqkbnr/pp2pppp/8/3p4/3p4/5NP1/PPP1PPBP/RNBQK2R b KQkq - 1 4",
-        "eco": "D02",
-        "moves": "1. d4 d5 2. Nf3 c5 3. g3 cxd4 4. Bg2"
-      },
-      "Queen's Pawn Game: Chigorin Variation": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
-        "eco": "A45",
-        "moves": "1. d4 Nf6 2. Nc3 d5"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Alburt Defense": {
-        "fen": "rn1qkbnr/ppp1pppp/8/3p1b2/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 2 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Nc3 Bf5"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Anti-Veresov": {
-        "fen": "rn1qkbnr/ppp1pppp/8/3p4/3P2b1/2N5/PPP1PPPP/R1BQKBNR w KQkq - 2 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Nc3 Bg4"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Fianchetto Defense": {
-        "fen": "rnbqk1nr/ppp1ppbp/6p1/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
-        "eco": "D00",
-        "moves": "1. d4 g6 2. Nf3 Bg7 3. Nc3 d5"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Irish Gambit": {
-        "fen": "rnbqkbnr/pp2pppp/8/2pp4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Nc3 c5"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Shaviliuk Gambit": {
-        "fen": "rnbqkbnr/ppp2ppp/8/3pp3/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Nc3 e5"
-      },
-      "Queen's Pawn Game: Chigorin Variation, Shropshire Defense": {
-        "fen": "rnbqkbnr/ppp1ppp1/8/3p3p/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Nc3 h5"
-      },
-      "Queen's Pawn Game: Colle System": {
-        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R b KQkq - 1 4",
-        "eco": "D05",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 e6 4. Bd3"
-      },
-      "Queen's Pawn Game: Colle System, Anti-Colle": {
-        "fen": "rn1qkb1r/ppp1pppp/5n2/3p1b2/3P4/4PN2/PPP2PPP/RNBQKB1R w KQkq - 1 4",
-        "eco": "D04",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 Bf5"
-      },
-      "Queen's Pawn Game: Colle System, Gr\u00c3\u00bcnfeld Formation": {
-        "fen": "rnbqk2r/ppp1ppbp/5np1/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R w KQkq - 2 5",
-        "eco": "D04",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. e3 g6 4. Bd3 Bg7"
-      },
-      "Queen's Pawn Game: Colle System, Traditional Colle": {
-        "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/2PBPN2/PP3PPP/RNBQK2R b KQkq - 0 5",
-        "eco": "D05",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. e3 c5 4. Bd3 d5 5. c3"
-      },
-      "Queen's Pawn Game: Englund Gambit": {
-        "fen": "r1b1kb1r/ppppq1pp/2n2n2/3Q4/8/5N2/PPP1PPPP/RNB1KB1R w KQkq - 0 6",
-        "eco": "A40",
-        "moves": "1. d4 e5 2. dxe5 Nc6 3. Nf3 Qe7 4. Qd5 f6 5. exf6 Nxf6"
-      },
-      "Queen's Pawn Game: H\u00c3\u00bcbsch Gambit": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b KQkq - 0 3",
-        "eco": "D00",
-        "moves": "1. d4 Nf6 2. Nc3 d5 3. e4"
-      },
-      "Queen's Pawn Game: Krause Variation": {
-        "fen": "r1bqkbnr/pp2pppp/2n5/2pp4/3P4/5NP1/PPP1PPBP/RNBQK2R b KQkq - 2 4",
-        "eco": "D02",
-        "moves": "1. d4  d5 2. Nf3  c5 3. g3  Nc6 4. Bg2 "
-      },
-      "Queen's Pawn Game: Levitsky Attack": {
-        "fen": "rnbqkbnr/ppp1pppp/8/3p2B1/3P4/8/PPP1PPPP/RN1QKBNR b KQkq - 1 2",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bg5"
-      },
-      "Queen's Pawn Game: Levitsky Attack, Euwe Variation, Modern Line": {
-        "fen": "rnb1kbnr/pp2ppp1/1qp4p/3p4/3P3B/5N2/PPP1PPPP/RN1QKB1R w KQkq - 2 5",
-        "eco": "D02",
-        "moves": "1. d4 d5 2. Nf3 c6 3. Bg5 h6 4. Bh4 Qb6"
-      },
-      "Queen's Pawn Game: Levitsky Attack, Welling Variation": {
-        "fen": "rn1qkbnr/ppp1pppp/8/3p2B1/3P2b1/8/PPP1PPPP/RN1QKBNR w KQkq - 2 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. Bg5 Bg4"
-      },
-      "Queen's Pawn Game: Liedmann Gambit": {
-        "fen": "rnbqkbnr/pp1ppppp/8/8/2Pp4/4P3/PP3PPP/RNBQKBNR b KQkq - 0 3",
-        "eco": "A43",
-        "moves": "1. d4 c5 2. c4 cxd4 3. e3"
-      },
-      "Queen's Pawn Game: Mason Attack": {
-        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P1P2/8/PPP1P1PP/RNBQKBNR b KQkq - 0 2",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. f4"
-      },
-      "Queen's Pawn Game: Modern Defense": {
-        "fen": "rnbqkbnr/pppppp1p/6p1/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
-        "eco": "A40",
-        "moves": "1. d4 g6"
-      },
-      "Queen's Pawn Game: Stonewall Attack": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/3BP3/PPP2PPP/RNBQK1NR b KQkq - 2 3",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. e3 Nf6 3. Bd3"
-      },
       "Queen's Pawn Game: Symmetrical Variation": {
         "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 2 3",
         "eco": "D02",
@@ -37261,60 +37323,10 @@
         "eco": "D02",
         "moves": "1. d4 d5 2. Nf3 Nf6 3. g3"
       },
-      "Queen's Pawn Game: Torre Attack": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R b KQkq - 3 3",
-        "eco": "D03",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5"
-      },
-      "Queen's Pawn Game: Torre Attack, Breyer Variation": {
-        "fen": "rnb1kb1r/pp3ppp/1q2pn2/2pp2B1/3P4/2P1PN2/PP3PPP/RN1QKB1R w KQkq - 1 6",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bg5 d5 4. e3 c5 5. c3 Qb6"
-      },
-      "Queen's Pawn Game: Torre Attack, Gossip Variation": {
-        "fen": "rnbqkb1r/ppp1pppp/8/3p2B1/3Pn3/5N2/PPP1PPPP/RN1QKB1R w KQkq - 4 4",
-        "eco": "D03",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5 Ne4"
-      },
-      "Queen's Pawn Game: Torre Attack, Gr\u00c3\u00bcnfeld Variation": {
-        "fen": "rnbqkb1r/ppp1pp1p/5np1/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R w KQkq - 0 4",
-        "eco": "D03",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5 g6"
-      },
-      "Queen's Pawn Game: Torre Attack, Gr\u00c3\u00bcnfeld Variation, Main Line": {
-        "fen": "rnbq1rk1/ppp1ppbp/5np1/3p2B1/3P4/4PN2/PPPN1PPP/R2QKB1R w KQ - 1 6",
-        "eco": "A48",
-        "moves": "1. d4 Nf6 2. Nf3 g6 3. Bg5 Bg7 4. Nbd2 d5 5. e3 O-O"
-      },
-      "Queen's Pawn Game: Veresov Attack, Classical Defense": {
-        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
-        "eco": "A46",
-        "moves": "1. d4 Nf6 2. Nf3 e6 3. Nc3 d5 4. Bg5"
-      },
-      "Queen's Pawn Game: Veresov Attack, Dutch System": {
-        "fen": "rnbqkbnr/ppp1p1pp/8/3p1p2/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
-        "eco": "A80",
-        "moves": "1. d4 f5 2. Nc3 d5"
-      },
-      "Queen's Pawn Game: Veresov, Richter Attack": {
-        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2P2/PPP1P1PP/R1BQKBNR b KQkq - 1 3",
-        "eco": "A45",
-        "moves": "1. d4 Nf6 2. f3 d5 3. Nc3"
-      },
-      "Queen's Pawn Game: Zilbermints Countergambit": {
-        "fen": "rnbqkb1r/p1p1pppp/5n2/1p1p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4",
-        "eco": "D02",
-        "moves": "1. d4 d5 2. Nf3 Nf6 3. c4 b5"
-      },
       "Queen's Pawn Game: Zukertort Variation": {
         "fen": "rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/1P2PN2/P1PN1PPP/R1BQKB1R b KQkq - 0 5",
         "eco": "D05",
         "moves": "1. d4 d5 2. Nf3 c5 3. e3 Nf6 4. Nbd2 e6 5. b3"
-      },
-      "Queen's Pawn Game: Zurich Gambit": {
-        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P2P1/8/PPP1PP1P/RNBQKBNR b KQkq - 0 2",
-        "eco": "D00",
-        "moves": "1. d4 d5 2. g4"
       },
       "Queen's Pawn, Mengarini Attack": {
         "fen": "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PPQ1PPPP/RNB1KBNR b KQkq - 1 3",
@@ -37585,6 +37597,16 @@
         "fen": "rnbqkbnr/pp2pppp/8/2pp4/3P4/2P2N2/PP2PPPP/RNBQKB1R b KQkq - 0 3",
         "eco": "D02",
         "moves": "1. d4 d5 2. Nf3 c5 3. c3"
+      },
+      "Queen's Pawn: London": {
+        "fen": "r1bqk2r/pp3ppp/2nbpn2/2pp4/3P1B2/2PBPN2/PP3PPP/RN1QK2R w KQkq - 3 7",
+        "eco": "D02",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3 Nc6 6. Bd3 Bd6"
+      },
+      "Queen's Pawn: London, Alapin Variation": {
+        "fen": "rnb1kbnr/pp2pppp/1qp5/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R w KQkq - 2 4",
+        "eco": "D02",
+        "moves": "1. d4 d5 2. Nf3 c6 3. Bf4 Qb6"
       },
       "Queen's Pawn: Modern": {
         "fen": "rnbqk1nr/pp1pppbp/6p1/2pP4/2P5/2N5/PP2PPPP/R1BQKBNR b KQkq - 0 4",
@@ -38149,7 +38171,7 @@
         "eco": "D01",
         "moves": "1. d4 Nf6 2. Nc3 d5 3. Bg5 Nbd7 4. Nf3"
       },
-      "Richter-Veresov Attack: Two Knights System, Gr\u00c3\u00bcnfeld Defense": {
+      "Richter-Veresov Attack: Two Knights System, Gr\u00fcnfeld Defense": {
         "fen": "r1bqkb1r/pppnpp1p/5np1/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 0 5",
         "eco": "D01",
         "moves": "1. d4 Nf6 2. Nc3 d5 3. Bg5 Nbd7 4. Nf3 g6"
@@ -39197,7 +39219,7 @@
         "eco": "C88",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. d4 Nxd4 9. Nxd4 exd4 10. Qxd4 c5"
       },
-      "Ruy Lopez: N\u00c3\u00bcrnberg Variation": {
+      "Ruy Lopez: N\u00fcrnberg Variation": {
         "fen": "r1bqkbnr/pppp2pp/2n2p2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
         "eco": "C60",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f6"
@@ -39407,22 +39429,22 @@
         "eco": "C63",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f5 4. exf5"
       },
-      "Ruy Lopez: Schliemann Defense, Kosti\u00c4\u2021 Defense": {
+      "Ruy Lopez: Schliemann Defense, Kosti\u0107 Defense": {
         "fen": "r1bqk1nr/ppppb1pp/2n5/1B2p3/4N3/5N2/PPPP1PPP/R1BQK2R w KQkq - 1 6",
         "eco": "C63",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f5 4. Nc3 fxe4 5. Nxe4 Be7"
       },
-      "Ruy Lopez: Schliemann Defense, M\u00c3\u00b6hring Variatio": {
+      "Ruy Lopez: Schliemann Defense, M\u00f6hring Variatio": {
         "fen": "r3kb1r/NppB2pp/5n2/6q1/4p3/8/PPPPQPPP/R1B1K2R b KQkq - 0 10",
         "eco": "C63",
         "moves": "1. e4  e5 2. Nf3  Nc6 3. Bb5  f5 4. Nc3  fxe4 5. Nxe4  d5 6. Nxe5  dxe4 7. Nxc6  Qg5 8. Qe2  Nf6 9. Nxa7  Bd7 10. Bxd7 "
       },
-      "Ruy Lopez: Schliemann Defense, M\u00c3\u00b6hring Variation": {
+      "Ruy Lopez: Schliemann Defense, M\u00f6hring Variation": {
         "fen": "r4bnr/1p1q1k1p/2p3p1/1N6/2PQp3/8/PP1P1PPP/R1B1K2R b KQ - 1 14",
         "eco": "C63",
         "moves": "1. e4  e5 2. Nf3  Nc6 3. Bb5  f5 4. Nc3  fxe4 5. Nxe4  d5 6. Nxe5  dxe4 7. Nxc6  Qd5 8. c4  Qd6 9. Nxa7  Bd7 10. Bxd7  Qxd7 11. Qh5  g6 12. Qe5  Kf7 13. Nb5  c6 14. Qd4 "
       },
-      "Ruy Lopez: Schliemann Defense, Sch\u00c3\u00b6nemann Attack": {
+      "Ruy Lopez: Schliemann Defense, Sch\u00f6nemann Attack": {
         "fen": "r1bqkbnr/pppp2pp/2n5/1B2pp2/3PP3/5N2/PPP2PPP/RNBQK2R b KQkq - 0 4",
         "eco": "C63",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 f5 4. d4"
@@ -39512,7 +39534,7 @@
         "eco": "C60",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Qe7"
       },
-      "Ruy Lopez: Wormald Attack, Gr\u00c3\u00bcnfeld Variation": {
+      "Ruy Lopez: Wormald Attack, Gr\u00fcnfeld Variation": {
         "fen": "r2qk2r/2p1bppp/p1np1n2/1p2p3/3PP1b1/1BP2N2/PP2QPPP/RNB1K2R w KQkq - 1 9",
         "eco": "C77",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. Qe2 b5 6. Bb3 Be7 7. d4 d6 8. c3 Bg4"
@@ -39542,79 +39564,84 @@
       }
     }
   },
-  "R\u00c3\u00a9ti Opening": {
+  "R\u00e9ti Opening": {
     "lines": {
-      "R\u00c3\u00a9ti Opening": {
+      "R\u00e9ti Opening": {
         "fen": "rnbqkbnr/ppp1pppp/8/3p4/2P5/5N2/PP1PPPPP/RNBQKB1R b KQkq - 1 2",
         "eco": "A10",
         "moves": "1. c4  d5 2. Nf3 "
       },
-      "R\u00c3\u00a9ti Opening, proper:Advance Variation, Michel Gambit": {
+      "R\u00e9ti Opening, proper:Advance Variation, Michel Gambit": {
         "fen": "rnbqkbnr/ppp1p1pp/5p2/8/1PPp4/5N2/P2PPPPP/RNBQKB1R w KQkq - 0 4",
         "eco": "A09",
         "moves": "1.Nf3 d5 2.c4 d4 b4 3. f6"
       },
-      "R\u00c3\u00a9ti Opening: Advance Variation": {
+      "R\u00e9ti Opening: Advance Variation": {
         "fen": "rnbqkbnr/ppp1pppp/8/8/2Pp4/5N2/PP1PPPPP/RNBQKB1R w KQkq - 0 3",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 d4"
       },
-      "R\u00c3\u00a9ti Opening: Advance Variation, Michel Gambit": {
+      "R\u00e9ti Opening: Advance Variation, Michel Gambit": {
         "fen": "rnbqkbnr/pp2pppp/8/2p5/1PPp4/5N2/P2PPPPP/RNBQKB1R w KQkq - 0 4",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 d4 3. b4 c5"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, Bled Variation": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, Bled Variation": {
         "fen": "rnbqkb1r/pp2pp1p/2p2np1/3p4/2P5/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 0 5",
         "eco": "A12",
         "moves": "1. Nf3 d5 2. b3 Nf6 3. Bb2 g6 4. c4 c6"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, Bogoljubow Variation": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, Bogoljubow Variation": {
         "fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2P5/1P3N2/PB1PPPPP/RN1QKB1R b KQkq - 1 4",
         "eco": "A12",
         "moves": "1. Nf3 Nf6 2. c4 c6 3. b3 d5 4. Bb2"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, Bogoljubow Variation, Stonewall Line": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, Bogoljubow Variation, Stonewall Line": {
         "fen": "rnbq1rk1/pp2bppp/2p1pn2/3p4/2P5/1P3NP1/PB1PPPBP/RN1Q1RK1 b - - 1 7",
         "eco": "A14",
         "moves": "1. Nf3 d5 2. c4 e6 3. g3 Nf6 4. Bg2 Be7 5. O-O O-O 6. b3 c6 7. Bb2"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, Capablanca Variation": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, Capablanca Variation": {
         "fen": "rn1qkb1r/pp2pppp/2p2n2/3p4/2P3b1/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 2 5",
         "eco": "A12",
         "moves": "1. c4 Nf6 2. Nf3 c6 3. b3 d5 4. Bb2 Bg4"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, New York System": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, London Defensive System": {
+        "fen": "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2P5/1P3NP1/P2PPP1P/RNBQKB1R w KQkq - 1 5",
+        "eco": "A12",
+        "moves": "1. c4 Nf6 2. g3 c6 3. Nf3 d5 4. b3 Bf5"
+      },
+      "R\u00e9ti Opening: Anglo-Slav Variation, New York System": {
         "fen": "rn1qkb1r/pp2pppp/2p2n2/3p1b2/2P5/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 2 5",
         "eco": "A12",
         "moves": "1. Nf3 Nf6 2. c4 c6 3. b3 d5 4. Bb2 Bf5"
       },
-      "R\u00c3\u00a9ti Opening: Anglo-Slav Variation, Torre System": {
+      "R\u00e9ti Opening: Anglo-Slav Variation, Torre System": {
         "fen": "rn1qkb1r/pp2pppp/2p2n2/3p4/2P3b1/1P3NP1/P2PPP1P/RNBQKB1R w KQkq - 1 5",
         "eco": "A12",
         "moves": "1. c4 Nf6 2. g3 c6 3. Nf3 d5 4. b3 Bg4"
       },
-      "R\u00c3\u00a9ti Opening: Penguin Variation": {
+      "R\u00e9ti Opening: Penguin Variation": {
         "fen": "rnbqkbnr/ppp1pppp/8/8/2Pp4/5N2/PP1PPPPP/RNBQKBR1 b Qkq - 1 3",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 d4 3. Rg1"
       },
-      "R\u00c3\u00a9ti Opening: Reversed Blumenfeld Gambit": {
+      "R\u00e9ti Opening: Reversed Blumenfeld Gambit": {
         "fen": "rnbqkbnr/pp2pppp/8/2p5/1PPp4/4PN2/P2P1PPP/RNBQKB1R b KQkq - 0 4",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 d4 3. e3 c5 4. b4"
       },
-      "R\u00c3\u00a9ti Opening: R\u00c3\u00a9ti Accepted": {
+      "R\u00e9ti Opening: R\u00e9ti Accepted": {
         "fen": "rnbqkbnr/ppp1pppp/8/8/2p5/5N2/PP1PPPPP/RNBQKB1R w KQkq - 0 3",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 dxc4"
       },
-      "R\u00c3\u00a9ti Opening: R\u00c3\u00a9ti Gambit, Keres Variation": {
+      "R\u00e9ti Opening: R\u00e9ti Gambit, Keres Variation": {
         "fen": "rn1qkbnr/ppp1pppp/4b3/8/2p5/4PN2/PP1P1PPP/RNBQKB1R w KQkq - 1 4",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 dxc4 3. e3 Be6"
       },
-      "R\u00c3\u00a9ti Opening: Zilbermints Gambit": {
+      "R\u00e9ti Opening: Zilbermints Gambit": {
         "fen": "rnbqkbnr/p1p1pppp/8/1p1p4/2P5/5N2/PP1PPPPP/RNBQKB1R w KQkq - 0 3",
         "eco": "A09",
         "moves": "1. Nf3 d5 2. c4 b5"
@@ -40121,7 +40148,7 @@
         "eco": "B01",
         "moves": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5"
       },
-      "Scandinavian Defense: Gr\u00c3\u00bcnfeld Variation": {
+      "Scandinavian Defense: Gr\u00fcnfeld Variation": {
         "fen": "rn2kb1r/pp2pppp/2p2n2/q3Nb2/3P2P1/2N5/PPP2P1P/R1BQKB1R b KQkq - 0 7",
         "eco": "B01",
         "moves": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bf5 6. Ne5 c6 7. g4"
@@ -40146,7 +40173,7 @@
         "eco": "B01",
         "moves": "1. e4 d5 2. exd5 c6 3. dxc6 e5"
       },
-      "Scandinavian Defense: K\u00c3\u00a1das Gambit": {
+      "Scandinavian Defense: K\u00e1das Gambit": {
         "fen": "rnbqkb1r/pp3ppp/2P2n2/4p3/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 5",
         "eco": "B01",
         "moves": "1. e4 d5 2. exd5 Nf6 3. d4 c6 4. dxc6 e5"
@@ -40294,6 +40321,15 @@
         "fen": "r1bqkb1r/pppp1ppp/2n2n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 5",
         "eco": "C45",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nc3"
+      }
+    }
+  },
+  "Schulze-M\u00fcller Gambit": {
+    "lines": {
+      "King's Pawn Game: Schulze-M\u00fcller Gambit": {
+        "fen": "r1bqkbnr/pppp1ppp/8/4n3/3PP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. d4"
       }
     }
   },
@@ -40632,22 +40668,22 @@
         "eco": "C45",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Bc5 5. Be3 Qf6 6. c3 Nge7 7. Qd2 d5 8. Nb5 Bxe3 9. Qxe3 O-O 10. Nxc7 Rb8 11. Nxd5 Nxd5 12. exd5 Nb4"
       },
-      "Scotch Game: G\u00c3\u00b6ring Gambit": {
+      "Scotch Game: G\u00f6ring Gambit": {
         "fen": "r1bqkbnr/pppp1ppp/2n5/8/3pP3/2P2N2/PP3PPP/RNBQKB1R b KQkq - 0 4",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3"
       },
-      "Scotch Game: G\u00c3\u00b6ring Gambit, Bardeleben Variation": {
+      "Scotch Game: G\u00f6ring Gambit, Bardeleben Variation": {
         "fen": "r1bqk2r/pppp1ppp/2n2n2/8/1bB1P3/2N2N2/PP3PPP/R1BQK2R w KQkq - 1 7",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3 dxc3 5. Bc4 Nf6 6. Nxc3 Bb4"
       },
-      "Scotch Game: G\u00c3\u00b6ring Gambit, Double Pawn Sacrifice": {
+      "Scotch Game: G\u00f6ring Gambit, Double Pawn Sacrifice": {
         "fen": "r1bqkbnr/pppp1ppp/2n5/8/2B1P3/2p2N2/PP3PPP/RNBQK2R b KQkq - 1 5",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3 dxc3 5. Bc4"
       },
-      "Scotch Game: G\u00c3\u00b6ring Gambit, Main Line": {
+      "Scotch Game: G\u00f6ring Gambit, Main Line": {
         "fen": "r1bqk1nr/pppp1ppp/2n5/8/1b2P3/2N2N2/PP3PPP/R1BQKB1R w KQkq - 1 6",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3 dxc3 5. Nxc3 Bb4"
@@ -40767,12 +40803,12 @@
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Bc5 5. O-O d6 6. c3 Bg4"
       },
-      "Scotch Game: Scotch Gambit, Dubois R\u00c3\u00a9ti Defense": {
+      "Scotch Game: Scotch Gambit, Dubois R\u00e9ti Defense": {
         "fen": "r1bqkb1r/pppp1ppp/2n2n2/8/2BpP3/5N2/PPP2PPP/RNBQK2R w KQkq - 0 5",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d4 exd4"
       },
-      "Scotch Game: Scotch Gambit, G\u00c3\u00b6ring Gambit Declined": {
+      "Scotch Game: Scotch Gambit, G\u00f6ring Gambit Declined": {
         "fen": "r1bqkbnr/ppp2ppp/2n5/3p4/3pP3/2P2N2/PP3PPP/RNBQKB1R w KQkq - 0 5",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. c3 d5"
@@ -40781,6 +40817,11 @@
         "fen": "r1bqkb1r/pppp1ppp/2n5/4P3/2Bp2n1/5N2/PPP2PPP/RNBQK2R w KQkq - 1 6",
         "eco": "C44",
         "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d4 exd4 5. e5 Ng4"
+      },
+      "Scotch Game: Scotch Gambit, London Defense": {
+        "fen": "r1bqk1nr/pppp1ppp/2n5/8/1bBpP3/5N2/PPP2PPP/RNBQK2R w KQkq - 2 5",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Bb4+"
       },
       "Scotch Game: Scotch Gambit, Sarratt Variation": {
         "fen": "r1bqk1nr/pppp1ppp/2n5/2b3N1/2BpP3/8/PPP2PPP/RNBQK2R b KQkq - 3 5",
@@ -48445,17 +48486,17 @@
         "eco": "B34",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nxc6"
       },
-      "Sicilian Defense: Accelerated Dragon, Mar\u00c3\u00b3czy Bind": {
+      "Sicilian Defense: Accelerated Dragon, Mar\u00f3czy Bind": {
         "fen": "r1bqk1nr/pp1pppbp/2n3p1/8/2PNP3/4B3/PP3PPP/RN1QKB1R b KQkq - 2 6",
         "eco": "B38",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Be3"
       },
-      "Sicilian Defense: Accelerated Dragon, Mar\u00c3\u00b3czy Bind, Breyer Variation": {
+      "Sicilian Defense: Accelerated Dragon, Mar\u00f3czy Bind, Breyer Variation": {
         "fen": "r1bqk2r/pp1pppbp/2n3p1/8/2PNP1n1/2N1B3/PP3PPP/R2QKB1R w KQkq - 5 8",
         "eco": "B39",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Be3 Nf6 7. Nc3 Ng4"
       },
-      "Sicilian Defense: Accelerated Dragon, Mar\u00c3\u00b3czy Bind, Gurgenidze Variation": {
+      "Sicilian Defense: Accelerated Dragon, Mar\u00f3czy Bind, Gurgenidze Variation": {
         "fen": "r1bqkb1r/pp2pp1p/3p1np1/8/2PQP3/2N5/PP3PPP/R1B1KB1R w KQkq - 0 8",
         "eco": "B36",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Nf6 6. Nc3 Nxd4 7. Qxd4 d6"
@@ -48565,7 +48606,7 @@
         "eco": "B27",
         "moves": "1. e4 c5 2. Nf3 f5"
       },
-      "Sicilian Defense: B\u00c3\u00bccker Variation": {
+      "Sicilian Defense: B\u00fccker Variation": {
         "fen": "rnbqkbnr/pp1pppp1/7p/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
         "eco": "B27",
         "moves": "1. e4 c5 2. Nf3 h6"
@@ -48745,7 +48786,7 @@
         "eco": "B72",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 d6 6. Be2 g6 7. Be3 Bg7 8. Qd2 O-O 9. O-O-O"
       },
-      "Sicilian Defense: Dragon Variation, Classical Variation, Mar\u00c3\u00b3czy Line": {
+      "Sicilian Defense: Dragon Variation, Classical Variation, Mar\u00f3czy Line": {
         "fen": "r2q1rk1/pp2ppbp/3pbnp1/n7/4PP2/1NN1B3/PPP1B1PP/R2Q1RK1 w - - 1 11",
         "eco": "B74",
         "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be2 Bg7 7. O-O O-O 8. Be3 Nc6 9. Nb3 Be6 10. f4 Na5"
@@ -49000,17 +49041,17 @@
         "eco": "B43",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. Nc3"
       },
-      "Sicilian Defense: Kan Variation, Mar\u00c3\u00b3czy Bind, Bronstein Variation": {
+      "Sicilian Defense: Kan Variation, Mar\u00f3czy Bind, Bronstein Variation": {
         "fen": "r1bqk2r/1p1p1ppp/p1n1pn2/8/1bPNP3/2N5/PPB2PPP/R1BQK2R b KQkq - 6 8",
         "eco": "B41",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. c4 Nf6 6. Nc3 Bb4 7. Bd3 Nc6 8. Bc2"
       },
-      "Sicilian Defense: Kan Variation, Mar\u00c3\u00b3czy Bind, Hedgehog Variation": {
+      "Sicilian Defense: Kan Variation, Mar\u00f3czy Bind, Hedgehog Variation": {
         "fen": "rnbqkbnr/1p1p1p1p/p3p1p1/8/2PNP3/8/PP3PPP/RNBQKB1R w KQkq - 0 6",
         "eco": "B41",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. c4 g6"
       },
-      "Sicilian Defense: Kan Variation, Mar\u00c3\u00b3czy Bind, R\u00c3\u00a9ti Variation": {
+      "Sicilian Defense: Kan Variation, Mar\u00f3czy Bind, R\u00e9ti Variation": {
         "fen": "rnbqkbnr/1p1p1ppp/p3p3/8/2PNP3/8/PP3PPP/RNBQKB1R b KQkq - 0 5",
         "eco": "B41",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 5. c4"
@@ -49150,7 +49191,7 @@
         "eco": "B33",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5 6. Ndb5 d6 7. Bg5 a6 8. Na3 b5 9. Bxf6 gxf6 10. Nd5 f5 11. Bxb5"
       },
-      "Sicilian Defense: L\u00c3\u00b6wenthal Variation": {
+      "Sicilian Defense: L\u00f6wenthal Variation": {
         "fen": "r1bqkbnr/pp1p1ppp/2n5/4p3/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 0 5",
         "eco": "B32",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 e5"
@@ -49470,22 +49511,22 @@
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. b3"
       },
-      "Sicilian Defense: O'Kelly Variation, Mar\u00c3\u00b3czy Bind": {
+      "Sicilian Defense: O'Kelly Variation, Mar\u00f3czy Bind": {
         "fen": "rnbqkbnr/1p1ppppp/p7/2p5/2P1P3/5N2/PP1P1PPP/RNBQKB1R b KQkq - 0 3",
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. c4"
       },
-      "Sicilian Defense: O'Kelly Variation, Mar\u00c3\u00b3czy Bind, Geller Line": {
+      "Sicilian Defense: O'Kelly Variation, Mar\u00f3czy Bind, Geller Line": {
         "fen": "r1bqkbnr/1p1p1ppp/p1n5/4p3/2PNP3/8/PP3PPP/RNBQKB1R w KQkq - 0 6",
         "eco": "B32",
         "moves": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 a6 5. c4 e5"
       },
-      "Sicilian Defense: O'Kelly Variation, Mar\u00c3\u00b3czy Bind, Paulsen Line": {
+      "Sicilian Defense: O'Kelly Variation, Mar\u00f3czy Bind, Paulsen Line": {
         "fen": "rnbqkbnr/1p1p1ppp/p3p3/2p5/2P1P3/5N2/PP1P1PPP/RNBQKB1R w KQkq - 0 4",
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. c4 e6"
       },
-      "Sicilian Defense: O'Kelly Variation, Mar\u00c3\u00b3czy Bind, Robatsch Line": {
+      "Sicilian Defense: O'Kelly Variation, Mar\u00f3czy Bind, Robatsch Line": {
         "fen": "rnbqkbnr/1p2pppp/p2p4/2p5/2P1P3/5N2/PP1P1PPP/RNBQKB1R w KQkq - 0 4",
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. c4 d6"
@@ -49520,7 +49561,7 @@
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. d3"
       },
-      "Sicilian Defense: O'Kelly Variation, R\u00c3\u00a9ti System": {
+      "Sicilian Defense: O'Kelly Variation, R\u00e9ti System": {
         "fen": "rnbqkbnr/1p1ppppp/p7/2p5/4P3/5NP1/PPPP1P1P/RNBQKB1R b KQkq - 0 3",
         "eco": "B28",
         "moves": "1. e4 c5 2. Nf3 a6 3. g3"
@@ -49980,7 +50021,7 @@
         "eco": "B45",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3"
       },
-      "Sicilian Defense: Taimanov Variation, Sz\u00c3\u00a9n Variation": {
+      "Sicilian Defense: Taimanov Variation, Sz\u00e9n Variation": {
         "fen": "r1bqkbnr/pp1p1ppp/2n1p3/1N6/4P3/8/PPP2PPP/RNBQKB1R b KQkq - 2 5",
         "eco": "B44",
         "moves": "1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nb5"
@@ -51096,7 +51137,7 @@
         "eco": "D19",
         "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O"
       },
-      "Slav Defense: Czech Variation, Dutch Variation, S\u00c3\u00a4misch Variation": {
+      "Slav Defense: Czech Variation, Dutch Variation, S\u00e4misch Variation": {
         "fen": "rn1q1rk1/pp3ppp/2p1p3/5b2/PbBPn1P1/2N1PN2/1P2QP1P/R1B2RK1 b - - 0 10",
         "eco": "D19",
         "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2 Ne4 10. g4"
@@ -51216,7 +51257,7 @@
         "eco": "D16",
         "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bg4"
       },
-      "Slav Defense: S\u00c3\u00bcchting Variation": {
+      "Slav Defense: S\u00fcchting Variation": {
         "fen": "rnb1kb1r/pp2pppp/1qp2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 4 5",
         "eco": "D15",
         "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 Qb6"
@@ -53795,6 +53836,11 @@
   },
   "Stonewall Attack": {
     "lines": {
+      "Queen's Pawn Game: Stonewall Attack": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/3BP3/PPP2PPP/RNBQK1NR b KQkq - 2 3",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. e3 Nf6 3. Bd3"
+      },
       "Stonewall Attack": {
         "fen": "rnbqkb1r/pp2pppp/5n2/2pp4/3P4/2PBP3/PP3PPP/RNBQK1NR b KQkq - 0 4",
         "eco": "D00",
@@ -53820,9 +53866,9 @@
       }
     }
   },
-  "S\u00c3\u00a4misch Variation": {
+  "S\u00e4misch Variation": {
     "lines": {
-      "S\u00c3\u00a4misch Variation": {
+      "S\u00e4misch Variation": {
         "fen": "rnbqk2r/pppp1ppp/4pn2/b7/1PPP4/P1N5/4PPPP/R1BQKBNR b KQkq - 0 5",
         "eco": "E24",
         "moves": "1. d4  Nf6 2. c4  e6 3. Nc3  Bb4 4. a3  Ba5 5. b4 "
@@ -53881,7 +53927,7 @@
         "eco": "D34",
         "moves": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6 7. Bg2 Be7 8. O-O O-O 9. Bg5 cxd4 10. Nxd4 Re8"
       },
-      "Tarrasch Defense: Classical Variation, R\u00c3\u00a9ti Variation": {
+      "Tarrasch Defense: Classical Variation, R\u00e9ti Variation": {
         "fen": "r1bq1rk1/pp3ppp/2n2n2/2bp4/N7/5NP1/PP2PPBP/R1BQ1RK1 b - - 1 10",
         "eco": "D34",
         "moves": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6 7. Bg2 Be7 8. O-O O-O 9. dxc5 Bxc5 10. Na4"
@@ -53896,7 +53942,7 @@
         "eco": "D33",
         "moves": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6 7. Bg2 cxd4 8. Nxd4 Bc5"
       },
-      "Tarrasch Defense: Gr\u00c3\u00bcnfeld Gambit": {
+      "Tarrasch Defense: Gr\u00fcnfeld Gambit": {
         "fen": "r1bqkbnr/p4ppp/2n5/1pP5/N2p4/5N2/PP2PPPP/R1BQKB1R w KQkq b6 0 8",
         "eco": "D32",
         "moves": "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. dxc5 d4 7. Na4 b5"
@@ -53969,6 +54015,25 @@
         "fen": "r1bqkb1r/ppp1pppp/2n2n2/8/3P4/2N2Q2/PPP3PP/R1B1KBNR w KQkq - 1 6",
         "eco": "D00",
         "moves": "1. d4 d5 2. e4 dxe4 3. Nc3 Nf6 4. f3 exf3 5. Qxf3 Nc6"
+      }
+    }
+  },
+  "Tayler Opening": {
+    "lines": {
+      "King's Pawn Game: Tayler Opening": {
+        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/3PP3/5N2/PPP1BPPP/RNBQK2R b KQkq - 0 4",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d4"
+      },
+      "King's Pawn Game: Tayler Opening, Basman Gambit": {
+        "fen": "r1bqkb1r/pppp1ppp/2n2n2/4P3/3p4/5N2/PPP1BPPP/RNBQK2R b KQkq - 0 5",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d4 exd4 5. e5"
+      },
+      "King's Pawn Game: Tayler Opening, Inverted Hanham": {
+        "fen": "r1bqkb1r/ppp2ppp/2n2n2/3pp3/4P3/3P1N2/PPPNBPPP/R1BQK2R b KQkq - 1 5",
+        "eco": "C44",
+        "moves": "1. e4 e5 2. Nf3 Nc6 3. Be2 Nf6 4. d3 d5 5. Nbd2"
       }
     }
   },
@@ -54112,6 +54177,31 @@
   },
   "Torre Attack": {
     "lines": {
+      "Queen's Pawn Game: Torre Attack": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R b KQkq - 3 3",
+        "eco": "D03",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5"
+      },
+      "Queen's Pawn Game: Torre Attack, Breyer Variation": {
+        "fen": "rnb1kb1r/pp3ppp/1q2pn2/2pp2B1/3P4/2P1PN2/PP3PPP/RN1QKB1R w KQkq - 1 6",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Bg5 d5 4. e3 c5 5. c3 Qb6"
+      },
+      "Queen's Pawn Game: Torre Attack, Gossip Variation": {
+        "fen": "rnbqkb1r/ppp1pppp/8/3p2B1/3Pn3/5N2/PPP1PPPP/RN1QKB1R w KQkq - 4 4",
+        "eco": "D03",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5 Ne4"
+      },
+      "Queen's Pawn Game: Torre Attack, Gr\u00fcnfeld Variation": {
+        "fen": "rnbqkb1r/ppp1pp1p/5np1/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R w KQkq - 0 4",
+        "eco": "D03",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. Bg5 g6"
+      },
+      "Queen's Pawn Game: Torre Attack, Gr\u00fcnfeld Variation, Main Line": {
+        "fen": "rnbq1rk1/ppp1ppbp/5np1/3p2B1/3P4/4PN2/PPPN1PPP/R2QKB1R w KQ - 1 6",
+        "eco": "A48",
+        "moves": "1. d4 Nf6 2. Nf3 g6 3. Bg5 Bg7 4. Nbd2 d5 5. e3 O-O"
+      },
       "Torre Attack": {
         "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/3P4/4PN2/PPP2PPP/RN1QKB1R w KQkq - 1 5",
         "eco": "D03",
@@ -54341,6 +54431,15 @@
         "fen": "rnbqkb1r/pp1p1ppp/4pn2/2p3B1/3PP3/5N2/PPP2PPP/RN1QKB1R b KQkq - 0 4",
         "eco": "A46",
         "moves": "1. d4 Nf6 2. Nf3 e6 3. Bg5 c5 4. e4"
+      }
+    }
+  },
+  "Tortoise Opening": {
+    "lines": {
+      "King's Pawn Game: Tortoise Opening": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/3B4/PPPP1PPP/RNBQK1NR b KQkq - 1 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Bd3"
       }
     }
   },
@@ -55403,7 +55502,7 @@
         "eco": "A00",
         "moves": "1. Nc3 d5 2. e4 dxe4 3. d3"
       },
-      "Van Geet Opening: D\u00c3\u00bcsseldorf Gambit": {
+      "Van Geet Opening: D\u00fcsseldorf Gambit": {
         "fen": "rnbqkbnr/pp1ppppp/8/2p5/1P6/2N5/P1PPPPPP/R1BQKBNR b KQkq - 0 2",
         "eco": "A00",
         "moves": "1. Nc3 c5 2. b4"
@@ -55413,12 +55512,12 @@
         "eco": "A00",
         "moves": "1. Nc3 e5 2. b3 d5 3. e4 dxe4 4. d3"
       },
-      "Van Geet Opening: Gr\u00c3\u00bcnfeld Defense": {
+      "Van Geet Opening: Gr\u00fcnfeld Defense": {
         "fen": "rnbqkbnr/ppp2ppp/8/4p3/4N3/8/PPPP1PPP/R1BQKBNR w KQkq - 0 4",
         "eco": "B01",
         "moves": "1. e4 d5 2. Nc3 dxe4 3. Nxe4 e5"
       },
-      "Van Geet Opening: Gr\u00c3\u00bcnfeld Defense, Steiner Gambit": {
+      "Van Geet Opening: Gr\u00fcnfeld Defense, Steiner Gambit": {
         "fen": "rnbqkbnr/ppp2ppp/8/4p3/4NP2/8/PPPP2PP/R1BQKBNR b KQkq - 0 4",
         "eco": "C31",
         "moves": "1. e4 e5 2. f4 d5 3. Nc3 dxe4 4. Nxe4"
@@ -55518,7 +55617,7 @@
         "eco": "A00",
         "moves": "1. Nc3 c5 2. Rb1"
       },
-      "Van Geet Opening: T\u00c3\u00bcbingen Gambit": {
+      "Van Geet Opening: T\u00fcbingen Gambit": {
         "fen": "rnbqkb1r/pppppppp/5n2/8/6P1/2N5/PPPPPP1P/R1BQKBNR b KQkq - 0 2",
         "eco": "A00",
         "moves": "1. Nc3 Nf6 2. g4"
@@ -55571,6 +55670,29 @@
         "fen": "rnbqkbnr/ppp2ppp/8/3p4/5p2/2N1PN2/PPPP2PP/R1BQKB1R b KQkq - 1 4",
         "eco": "A00",
         "moves": "1. e3 e5 2. Nc3 d5 3. f4 exf4 4. Nf3"
+      }
+    }
+  },
+  "Veresov": {
+    "lines": {
+      "Queen's Pawn Game: Veresov, Richter Attack": {
+        "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2P2/PPP1P1PP/R1BQKBNR b KQkq - 1 3",
+        "eco": "A45",
+        "moves": "1. d4 Nf6 2. f3 d5 3. Nc3"
+      }
+    }
+  },
+  "Veresov Attack": {
+    "lines": {
+      "Queen's Pawn Game: Veresov Attack, Classical Defense": {
+        "fen": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
+        "eco": "A46",
+        "moves": "1. d4 Nf6 2. Nf3 e6 3. Nc3 d5 4. Bg5"
+      },
+      "Queen's Pawn Game: Veresov Attack, Dutch System": {
+        "fen": "rnbqkbnr/ppp1p1pp/8/3p1p2/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+        "eco": "A80",
+        "moves": "1. d4 f5 2. Nc3 d5"
       }
     }
   },
@@ -55910,7 +56032,7 @@
         "eco": "C25",
         "moves": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. d4 Qh4+ 5. Ke2 d6"
       },
-      "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, S\u00c3\u00b6rensen Defense": {
+      "Vienna Gambit, with Max Lange Defense: Steinitz Gambit, S\u00f6rensen Defense": {
         "fen": "r1b1kbnr/pppp1p1p/2n5/6p1/3PPp1q/2N5/PPP1K1PP/R1BQ1BNR w kq - 0 6",
         "eco": "C25",
         "moves": "1. e4 e5 2. Nc3 Nc6 3. f4 exf4 4. d4 Qh4+ 5. Ke2 g5"
@@ -56034,7 +56156,7 @@
         "eco": "C25",
         "moves": "1. e4  Nc6 2. Nc3  e5 "
       },
-      "Vienna Game, W\u00c3\u00bcrzburger Trap": {
+      "Vienna Game, W\u00fcrzburger Trap": {
         "fen": "rnb1kb1r/ppp2ppp/8/3pP3/4n2q/2NP4/PPP3PP/R1BQKBNR w KQkq - 1 6",
         "eco": "C29",
         "moves": "1. e4 e5 2. Nc3 Nf6 3. f4 d5 4. fxe5 Nxe4 5. d3 Qh4+"
@@ -56349,6 +56471,34 @@
       }
     }
   },
+  "Wayward Queen Attack": {
+    "lines": {
+      "King's Pawn Game: Wayward Queen Attack": {
+        "fen": "rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Qh5"
+      },
+      "King's Pawn Game: Wayward Queen Attack, Kiddie Countergambit": {
+        "fen": "rnbqkb1r/pppp1ppp/5n2/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Qh5 Nf6"
+      },
+      "King's Pawn Game: Wayward Queen Attack, Mellon Gambit": {
+        "fen": "r1bqkb1r/ppp4p/2n2ppn/3pp3/2B1P3/3P1Q2/PPP1NPPP/RNB1K2R w KQkq - 0 7",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nh6 4. d3 g6 5. Qf3 f6 6. Ne2 d5"
+      }
+    }
+  },
+  "Weber Gambit": {
+    "lines": {
+      "King's Pawn Game: Weber Gambit": {
+        "fen": "r1bqkbnr/pp3ppp/2n5/4p3/8/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 5",
+        "eco": "C20",
+        "moves": "1. e4 e5 2. d3 d5 3. exd5 c6 4. dxc6 Nxc6"
+      }
+    }
+  },
   "Webster Gambit": {
     "lines": {
       "Webster Gambit": {
@@ -56409,6 +56559,15 @@
         "fen": "rnbqkbnr/ppp1pppp/8/8/3P4/2N2Q2/PPP3PP/R1B1KBNR w KQkq - 1 6",
         "eco": "D00",
         "moves": "1. d4 d5 2. e4 dxe4 3. Nc3 Bf5 4. f3 exf3 5. Qxf3 Bc8"
+      }
+    }
+  },
+  "Zilbermints Countergambit": {
+    "lines": {
+      "Queen's Pawn Game: Zilbermints Countergambit": {
+        "fen": "rnbqkb1r/p1p1pppp/5n2/1p1p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4",
+        "eco": "D02",
+        "moves": "1. d4 d5 2. Nf3 Nf6 3. c4 b5"
       }
     }
   },
@@ -56557,7 +56716,7 @@
         "eco": "A06",
         "moves": "1. Nf3 d5 2. b3 c5 3. c4 dxc4 4. Nc3"
       },
-      "Zukertort Opening: Reversed Gr\u00c3\u00bcnfeld": {
+      "Zukertort Opening: Reversed Gr\u00fcnfeld": {
         "fen": "r1bqkb1r/pp2pppp/2n2n2/2pp4/3P4/5NP1/PPP1PPBP/RNBQ1RK1 b kq - 2 5",
         "eco": "A08",
         "moves": "1. Nf3 d5 2. g3 c5 3. Bg2 Nc6 4. d4 Nf6 5. O-O"
@@ -56641,6 +56800,15 @@
         "fen": "rnbqkbnr/1ppppppp/8/p7/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 0 2",
         "eco": "A04",
         "moves": "1. Nf3 a5"
+      }
+    }
+  },
+  "Zurich Gambit": {
+    "lines": {
+      "Queen's Pawn Game: Zurich Gambit": {
+        "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P2P1/8/PPP1PP1P/RNBQKBNR b KQkq - 0 2",
+        "eco": "D00",
+        "moves": "1. d4 d5 2. g4"
       }
     }
   },

@@ -145,6 +145,7 @@ def get_fen_matches(board):
 # A number of openings such as Scotch Game, Scandinavian, The London, Italian etc can only be
 # matched if we ignore that these games are also "King's Pawn Game" or "Queen's Pawn Game."
 TOO_BROAD_FAMILY_NAMES = {"King's Pawn Game", "Queen's Pawn Game", "King's Knight Opening"}
+TOO_GENERIC_NAMES = {"Normal Variation", "Symmetrical Variation", "Zukertort Variation"}
 
 def classify_opening(fen_matches):
     """Classify a game's opening using the FEN match chain.
@@ -171,7 +172,7 @@ def classify_opening(fen_matches):
     # Skip families that are too broad to be useful in analysis.
     for match in fen_matches:
         family = name_to_family.get(match["name"])
-        if family and family not in TOO_BROAD_FAMILY_NAMES:
+        if family and family not in TOO_BROAD_FAMILY_NAMES and family not in TOO_GENERIC_NAMES:
             opening_family = family
             break
 

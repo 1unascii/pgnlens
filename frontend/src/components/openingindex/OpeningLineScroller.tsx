@@ -53,8 +53,7 @@ function OpeningLineScroller({ lines, onLineClick }: OpeningLineScrollerProps) {
                                 showNotation: false,
                             }} />
                         </div>
-                        <p className="text-xs font-bold truncate">{lineName}</p>
-                        <p className="text-xs text-gray-400">{line.eco}</p>
+                        <p className="text-xs font-bold">{lineName}</p>
                     </div>
                 ))}
             </div>

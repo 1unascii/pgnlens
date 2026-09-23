@@ -39,9 +39,17 @@ TOO_BROAD_FAMILY_NAMES = {
     "King's Knight Opening",
 }
 
-FAMILY_KEYWORDS = {
-    "London": "London System",
+# Generic variation names that aren't real opening families
+TOO_GENERIC_NAMES = {
+    "Normal Variation",
+    "Symmetrical Variation",
+    "Zukertort Variation",
 }
+
+# FAMILY_KEYWORDS = {
+#     "London": "London System",
+# }
+FAMILY_KEYWORDS = {}
 
 FAMILY_ALIASES = {
     "QGD": "Queen's Gambit Declined",
@@ -61,10 +69,14 @@ def get_family(name):
     # Split on colon then comma to get the base name
     family = name.split(":")[0].split(",")[0].strip()
 
-    # Skip too-broad names — use the full name instead
-    # (these will still group under the broad name, but
-    # that's correct for the opening browser since there's
-    # no match chain to walk like in pgn_parser)
+    # If the base name is too broad (e.g. "Queen's Pawn Game"),
+    # use the part after the colon instead — it's more specific.
+    # e.g. "Queen's Pawn Game: London System" -> "London System"
+    # But keep the broad name if the stripped result is also too generic.
+    if family in TOO_BROAD_FAMILY_NAMES and ":" in name:
+        after_colon = name.split(":")[1].split(",")[0].strip()
+        if after_colon not in TOO_GENERIC_NAMES:
+            family = after_colon
 
     # Apply aliases
     family = FAMILY_ALIASES.get(family, family)

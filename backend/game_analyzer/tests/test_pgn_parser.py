@@ -216,7 +216,7 @@ def test_london_accelerated():
     fen_matches = get_fen_matches(board)
     result = classify_opening(fen_matches)
     print_result(fen_matches, result)
-    assert result["opening_family"] == "London System"
+    assert result["opening_family"] == "Accelerated London System"
     assert result["opening_line"] == "Queen's Pawn Game: Accelerated London System"
     assert result["eco_code"] == "D00"
 
