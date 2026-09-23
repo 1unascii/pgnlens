@@ -1,206 +1,111 @@
-# PGNLens
+# PGN Lens
 
-A chess game analysis tool. Upload PGN files, generate
-reports on your opening performance, and review
-individual games with board replay.
+A chess analysis and practice tool. Upload PGN files to analyze your opening repertoire, practice openings against book moves and Stockfish, review games with move-by-move evaluation, and play live games against friends.
 
-Built with Django REST Framework (backend) and
-React + TypeScript (frontend).
+Live site: https://pgnlens.com
+
+## Stack
+
+**Backend:** Django, Django REST Framework, PostgreSQL, python-chess, Stockfish, Django Channels, Daphne, Redis
+
+**Frontend:** React 19, TypeScript, Vite, Tailwind CSS, react-chessboard, chess.js, Stockfish WASM, Recharts
 
 ## Prerequisites
 
-- Python 3.14+
+- Python 3.12+
 - Node.js 18+
-- PostgreSQL 17+
-- pipenv (`pip install pipenv`)
+- PostgreSQL
+- Redis
+- Stockfish (installed or on PATH)
+- WSL required on Windows (Daphne and Redis don't run natively)
 
 ## Setup
 
-### 1. Clone the repo
+### 1. Clone and create .env
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/1unascii/pgnlens.git
 cd pgnlens
 ```
-
-### 2. Create the .env file
 
 Create a `.env` file in the project root:
 
 ```
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=postgres://postgres:YOUR_PASSWORD@localhost:5432/pgnlens
-RESEND_API_KEY=re_your_api_key_here
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/pgnlens
+STOCKFISH_PATH=stockfish
+RESEND_API_KEY=your-resend-key
 DEFAULT_FROM_EMAIL=noreply@yourdomain.com
 EMAIL_HOST_USER=resend
+LICHESS_TOKEN=your-lichess-token
 ```
 
-The Resend settings are for email verification. If you
-don't have a Resend account, switch to the console
-backend in `backend/backend/settings.py`:
-
-```python
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-```
-
-and comment out the SMTP settings below it.
-Verification links will print to the terminal instead
-of being emailed.
-
-Generate a secret key with:
-
-```bash
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-```
-
-### 3. Create the database
-
-```bash
-psql -U postgres -c "CREATE DATABASE pgnlens;"
-```
-
-### 4. Install backend dependencies
+### 2. Backend
 
 ```bash
 cd backend
-pipenv install --dev
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
 ```
 
-### 5. Run migrations
+### 3. Frontend
 
 ```bash
-pipenv run python manage.py migrate
-```
-
-### 6. Create a superuser
-
-```bash
-pipenv run python manage.py createsuperuser
-```
-
-### 7. Install frontend dependencies
-
-```bash
-cd ../frontend
+cd frontend
 npm install
 ```
 
-## Running the dev servers
+### 4. Run
 
-Start both servers in separate terminals:
-
-**Backend** (port 8002):
+Start Redis and PostgreSQL, then in separate terminals:
 
 ```bash
+# Backend (WSL on Windows)
 cd backend
-pipenv run python manage.py runserver 8002
-```
+source venv/bin/activate
+daphne -b 0.0.0.0 -p 8002 backend.asgi:application
 
-**Frontend** (port 5173):
-
-```bash
+# Frontend
 cd frontend
 npm run dev
 ```
 
-Open http://localhost:5173 in the browser. The Vite
-dev server proxies `/api/*` requests to Django on
-port 8002.
-
-## Running tests
-
-**Backend:**
+Or use the start scripts:
 
 ```bash
-cd backend
-pipenv run pytest
+./backend/start-server.sh
+./frontend/start-server.sh
 ```
 
-**Frontend:**
+Open http://localhost:5173
 
-```bash
-cd frontend
-npm test
-```
+## Scripts
 
-## Batch files (Windows)
+| Script | Description |
+|--------|-------------|
+| `backend/start-server.sh` | Start the backend (daphne) |
+| `frontend/start-server.sh` | Start the frontend (vite) |
+| `run-tests.sh` | Run backend and frontend tests |
+| `deploy.sh` | Deploy to production (pull, build, migrate, restart, smoke test) |
 
-The `batch_files/` folder has shortcuts that open
-a Git Bash window for common tasks:
-
-| File | What it does |
-|------|-------------|
-| `start-backend.bat` | Starts the Django dev server |
-| `start-frontend.bat` | Starts the Vite dev server |
-| `test-backend.bat` | Runs backend pytest suite |
-| `test-frontend.bat` | Runs frontend Vitest suite |
-| `migrate.bat` | Runs Django migrations |
-
-## Project structure
-
-```
-pgnlens/
-    .env
-    backend/
-        backend/
-            settings.py
-            urls.py
-        game_analyzer/
-            models.py
-            views.py
-            serializers.py
-            pgn_parser.py
-            adapter.py
-            tests/
-        eco/
-    frontend/
-        public/
-            data/
-                eco.json
-            piece/
-            sound/
-        src/
-            components/
-            pages/
-            utils/
-            types.ts
-            App.tsx
-        vite.config.ts
-        package.json
-```
-
-## API endpoints
+## API Endpoints
 
 | Method | URL | Description |
 |--------|-----|-------------|
-| GET | /api/games/ | List all games |
-| GET | /api/games/?report=ID | List games for a report |
+| GET | /api/games/ | List games |
+| GET | /api/games/?report=ID | Games for a report |
 | GET | /api/games/ID/ | Game detail with moves |
-| GET | /api/reports/ | List user's reports |
+| GET | /api/reports/ | List reports (auth required) |
 | POST | /api/reports/ | Upload PGN + create report |
 | DELETE | /api/reports/ID/ | Delete a report |
+| GET | /api/games/ID/analyze/ | Run Stockfish analysis |
+| GET | /api/lichess-explorer/ | Lichess opening book proxy |
 | POST | /api/auth/login/ | Login |
-| POST | /api/auth/logout/ | Logout |
 | POST | /api/auth/registration/ | Register |
 | POST | /api/auth/verify-email/ | Verify email |
-| GET | /api/auth/user/ | Current user info |
-
-## Authentication
-
-Uses dj-rest-auth with django-allauth. Token-based
-authentication. Login accepts username or email.
-Email verification is mandatory.
-
-Reports are scoped to the authenticated user.
-Games are public.
-
-## Stack
-
-- Django + Django REST Framework
-- React + TypeScript (Vite)
-- Tailwind CSS
-- PostgreSQL
-- Token authentication (dj-rest-auth + django-allauth)
-- Resend (email verification)
-- Vitest (frontend tests)
-- pytest (backend tests)
+| POST | /api/auth/resend-verification/ | Resend verification email |
+| POST | /api/live-games/ | Create a live game |
+| GET | /api/live-games/ID/ | Live game state |
