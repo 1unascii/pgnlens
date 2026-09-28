@@ -2,7 +2,6 @@ import chess.pgn  # PGN parsing from python-chess library
 import io          # TextIOWrapper converts binary file to text mode
 import json
 import os
-from collections import Counter
 from .models import Game
 
 # Load all ECO JSON files into one lookup dictionary keyed by FEN.

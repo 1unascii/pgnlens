@@ -16,6 +16,6 @@ class ResendHTTPBackend(BaseEmailBackend):
                     "html": message.body,
                 })
                 count += 1
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"Error sending email: {e}")
         return count

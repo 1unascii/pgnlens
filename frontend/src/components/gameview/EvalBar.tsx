@@ -63,4 +63,4 @@ function EvalBar({ centipawns, orientation }: EvalBarProps) {
     )
 }
 
-export default React.memo(EvalBar)
+export default (EvalBar)

@@ -13,8 +13,7 @@ from .stockfish_analyzer import analyze_all_moves
 from django.db import transaction
 from django.contrib.auth.models import User
 from allauth.account.models import EmailConfirmation, EmailAddress
-
-
+import threading
 
 # ModelViewSet gives you full CRUD at /api/games/ automatically:
 # GET /api/games/       — list all games
@@ -144,7 +143,6 @@ class ReportViewSet(viewsets.ModelViewSet):
         # Override create to handle PGN file upload instead of normal JSON create.
         # Wrapped in a transaction so if validation fails, all games are rolled back
         # automatically — no orphan games left in the database.
-
         file = request.FILES['file']
         player_name = request.data.get('player_name', '').strip()
 
@@ -220,8 +218,6 @@ def verify_email(request):
 
     confirmation.confirm(request)
     return Response({'detail': 'Email verified successfully.'}, status=status.HTTP_200_OK)
-
-import threading
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

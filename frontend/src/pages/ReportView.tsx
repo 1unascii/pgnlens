@@ -98,7 +98,6 @@ function ReportView() {
 
     const [colorFilter, setColorFilter] = useState<'all' | 'white' | 'black'>('all')
 
-    // Show loading text until the API responses arrive
     // Show loading text until the API response arrives
     if (!report) return <div>Loading...</div>
 
