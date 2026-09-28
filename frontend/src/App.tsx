@@ -3,7 +3,6 @@ import Navbar from './components/shared/Navbar'
 import ReportIndex from './pages/ReportIndex'
 import ReportView from './pages/ReportView'
 import ReportCreate from './pages/ReportCreate'
-import GameIndex from './pages/GameIndex'
 import GameView from './pages/GameView'
 import GameLobby from './pages/GameLobby'
 import Login from './pages/Login'
@@ -34,7 +33,6 @@ function App() {
                     <Route path="/reports" element={<ReportIndex />} />
                     <Route path="/reports/:id" element={<ReportView />} />
                     <Route path="/reports/create" element={<ReportCreate />} />
-                    <Route path="/games" element={<GameIndex />} />
                     <Route path="/games/:id" element={<GameView />} />
                     <Route path="/play" element={<GameLobby />} />
                     <Route path="/practice" element={<OpeningIndex />} />
